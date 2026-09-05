@@ -210,6 +210,16 @@ class HostTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     directory.read_response(response, 16)
 
+    def test_redirect_count_is_total_not_just_distinct_destinations(self):
+        handler = directory.RestrictedRedirect()
+        req = directory.urllib.request.Request(directory.DIRECTORY_URL)
+        for _ in range(5):
+            req = handler.redirect_request(req, io.BytesIO(), 302, "Found", {}, directory.DIRECTORY_URL)
+        response = io.BytesIO()
+        with self.assertRaisesRegex(ValueError, "five redirects"):
+            handler.redirect_request(req, response, 302, "Found", {}, directory.DIRECTORY_URL)
+        self.assertTrue(response.closed)
+
     def test_total_deadline_interrupts_a_stalled_body(self):
         import time
         class SlowResponse(io.BytesIO):

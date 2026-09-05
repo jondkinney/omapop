@@ -113,7 +113,14 @@ class RestrictedRedirect(urllib.request.HTTPRedirectHandler):
         if not host_allowed(newurl):
             fp.close()
             raise ValueError("refusing an unsafe redirect from popclip.app")
-        return super().redirect_request(req, fp, code, msg, headers, newurl)
+        hops = getattr(req, "omapop_redirects", 0)
+        if hops >= 5:
+            fp.close()
+            raise ValueError("response exceeded five redirects")
+        redirected = super().redirect_request(req, fp, code, msg, headers, newurl)
+        if redirected is not None:
+            redirected.omapop_redirects = hops + 1
+        return redirected
 
 
 @contextlib.contextmanager
