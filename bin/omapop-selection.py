@@ -29,6 +29,10 @@ TEXT_TYPES = ("text/plain;charset=utf-8", "text/plain", "UTF8_STRING", "STRING",
 HTML_TYPES = ("text/html", "text/html;charset=utf-8")
 SNIPPET_LIMIT = 5000
 SENSITIVE_HINT = "x-kde-passwordmanagerhint"
+MAX_URLS = 200
+MAX_NON_HTTP_URLS = 50
+MAX_EMAILS = 200
+MAX_PATHS = 50
 
 # Schemes Open Link recognises besides http(s), for input.data.nonHttpUrls.
 NON_HTTP_SCHEMES = ("bluesky", "craftdocs", "evernote", "ftp", "hook", "message", "omnifocus", "spotify", "x-devonthink-item")
@@ -124,42 +128,59 @@ PATH_TOKEN_RE = re.compile(r"(?:(?<=\s)|^)(~?/[^\s\"'`<>|]+)")
 
 
 def strip_trailing(url):
-    while url and url[-1] in ".,;:!?)":
-        url = url[:-1]
-    return url
+    return url.rstrip(".,;:!?)")
 
 
 def detect(text):
     urls = []
     seen = set()
+    # Enforce the output limits while collecting, not after scanning every
+    # match. In particular, bare-URL suffix checks must never walk an unbounded
+    # list. Explicit URLs still take priority over bare domains in the output.
     for m in URL_RE.finditer(text):
         u = strip_trailing(m.group(1))
-        if u and u.lower() not in seen:
-            seen.add(u.lower())
+        key = u.lower()
+        if u and key not in seen:
+            seen.add(key)
             urls.append(u)
-    for m in BARE_URL_RE.finditer(text):
-        whole = strip_trailing(m.group(1))
-        tld = m.group(2).lower()
-        host = whole.split("/")[0].split(":")[0]
-        if "." not in host or tld not in TLDS or host.lower().startswith("www.") and host.count(".") < 2:
-            continue
-        # skip things that are clearly file names or version numbers
-        if re.fullmatch(r"[\d.]+", host):
-            continue
-        candidate = "https://" + whole
-        if candidate.lower() not in seen and not any(candidate.lower().endswith(u.lower()[len(u) - len(whole):]) and whole.lower() in u.lower() for u in urls):
-            seen.add(candidate.lower())
-            urls.append(candidate)
+            if len(urls) == MAX_URLS:
+                break
+    if len(urls) < MAX_URLS:
+        for m in BARE_URL_RE.finditer(text):
+            whole = strip_trailing(m.group(1))
+            tld = m.group(2).lower()
+            host = whole.split("/")[0].split(":")[0]
+            if "." not in host or tld not in TLDS or host.lower().startswith("www.") and host.count(".") < 2:
+                continue
+            # skip things that are clearly file names or version numbers
+            if re.fullmatch(r"[\d.]+", host):
+                continue
+            candidate = "https://" + whole
+            key = candidate.lower()
+            whole_key = whole.lower()
+            if key not in seen and not any(key.endswith(u.lower()[len(u) - len(whole):]) and whole_key in u.lower() for u in urls):
+                seen.add(key)
+                urls.append(candidate)
+                if len(urls) == MAX_URLS:
+                    break
     non_http = []
+    seen_non_http = set()
     for m in NON_HTTP_RE.finditer(text):
         u = strip_trailing(m.group(1))
-        if u not in non_http:
+        if u not in seen_non_http:
+            seen_non_http.add(u)
             non_http.append(u)
+            if len(non_http) == MAX_NON_HTTP_URLS:
+                break
     emails = []
+    seen_emails = set()
     for m in EMAIL_RE.finditer(text):
         e = m.group(1)
-        if e not in emails:
+        if e not in seen_emails:
+            seen_emails.add(e)
             emails.append(e)
+            if len(emails) == MAX_EMAILS:
+                break
     paths = []
     candidates = []
     stripped = text.strip()
@@ -168,7 +189,9 @@ def detect(text):
     if len(text) <= 65536:
         for m in PATH_TOKEN_RE.finditer(text):
             candidates.append(m.group(1))
-    for c in candidates[:64]:
+            if len(candidates) == 64:
+                break
+    for c in candidates:
         c = c.rstrip(".,;:")
         if not (c.startswith("/") or c.startswith("~/") or c == "~"):
             continue
@@ -178,13 +201,15 @@ def detect(text):
                 normalized = os.path.normpath(expanded)
                 if normalized not in paths:
                     paths.append(normalized)
+                    if len(paths) == MAX_PATHS:
+                        break
         except (OSError, ValueError):
             continue
     is_url = False
     if urls and len(urls) == 1 and stripped:
         only = strip_trailing(stripped)
         is_url = only.lower() == urls[0].lower() or ("https://" + only).lower() == urls[0].lower()
-    return {"urls": urls[:200], "nonHttpUrls": non_http[:50], "emails": emails[:200], "paths": paths[:50]}, is_url
+    return {"urls": urls, "nonHttpUrls": non_http, "emails": emails, "paths": paths}, is_url
 
 
 SNIPPET_HEAD_RE = re.compile(r"^\s*(?:(//|--|#)\s*)?#\s?popclip\b", re.IGNORECASE)

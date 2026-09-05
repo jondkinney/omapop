@@ -64,6 +64,67 @@ class DetectTests(unittest.TestCase):
         self.assertEqual(data["urls"], ["https://example.com"])
         self.assertEqual(data["paths"], [])
 
+    def test_url_deduplication_preserves_order_and_suffix_coverage(self):
+        data, is_url = selection.detect(
+            "first.example.com HTTP://Example.COM/a https://sub.example.org/path "
+            "http://example.com/a example.com/a example.org/path example.net "
+            "https://SUB.example.org/path FIRST.example.com")
+        self.assertEqual(data["urls"], [
+            "HTTP://Example.COM/a", "https://sub.example.org/path",
+            "https://first.example.com", "https://example.net",
+        ])
+        self.assertFalse(is_url)
+
+    def test_explicit_urls_keep_priority_at_the_result_limit(self):
+        urls = ["https://item%d.example.com" % i for i in range(205)]
+        text = "bare.example.org " + (urls[0] + " ") * 300 + " ".join(urls)
+        data, is_url = selection.detect(text)
+        self.assertEqual(data["urls"], urls[:200])
+        self.assertFalse(is_url)
+
+    def test_repeated_matches_do_not_hide_later_distinct_results(self):
+        data, is_url = selection.detect(
+            "example.com person@example.org spotify:track:first " * 300
+            + "second.example.com other@example.org spotify:track:second")
+        self.assertEqual(data["urls"], ["https://example.com", "https://second.example.com"])
+        self.assertEqual(data["emails"], ["person@example.org", "other@example.org"])
+        self.assertEqual(data["nonHttpUrls"], ["spotify:track:first", "spotify:track:second"])
+        self.assertFalse(is_url)
+
+    def test_email_and_non_http_deduplication_remains_case_sensitive(self):
+        data, _ = selection.detect(
+            "Person@example.org Person@example.org person@example.org "
+            "spotify:track:ABC spotify:track:ABC spotify:track:abc")
+        self.assertEqual(data["emails"], ["Person@example.org", "person@example.org"])
+        self.assertEqual(data["nonHttpUrls"], ["spotify:track:ABC", "spotify:track:abc"])
+
+    def test_dense_selection_finishes_with_capped_results(self):
+        # A full default-sized selection of distinct matches previously spent
+        # seconds scanning growing result lists. Keep a generous process deadline
+        # so a regression fails without hanging the suite; no clipboard access.
+        code = """import json, runpy, sys
+helper = runpy.run_path(sys.argv[1])
+print(json.dumps(helper['detect'](sys.stdin.read())))
+"""
+        for field, template, prefix, limit in (
+            ("urls", "item%d.example.com", "https://", 200),
+            ("emails", "person%d@example.org", "", 200),
+            ("nonHttpUrls", "spotify:track:item%d", "", 50),
+        ):
+            with self.subTest(field=field):
+                text = " ".join(template % i for i in range(20000))[:262144]
+                try:
+                    result = subprocess.run(
+                        [sys.executable, "-I", "-c", code, selection.__file__],
+                        input=text, text=True, capture_output=True, timeout=3, check=True)
+                except subprocess.TimeoutExpired:
+                    self.fail("selection detection exceeded 3 seconds")
+                data, is_url = json.loads(result.stdout)
+                expected = {"urls": [], "emails": [], "nonHttpUrls": [], "paths": []}
+                expected[field] = [prefix + template % i for i in range(limit)]
+                self.assertEqual(data, expected)
+                self.assertFalse(is_url)
+
 
 class SnippetInfoTests(unittest.TestCase):
     def test_plain_snippet(self):
