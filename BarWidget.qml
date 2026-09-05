@@ -41,7 +41,13 @@ Panel {
         id: button
         anchors.fill: parent
         bar: root.bar
-        text: root.paused ? "\u{F0E55}" : "\u{F0192}"
+        iconComponent: Component {
+            BarIcon {
+                anchors.fill: parent
+                color: button.foreground
+                paused: root.paused
+            }
+        }
         foreground: root.paused || !root.engineReady ? Qt.darker(root.barForeground, 1.55) : root.barForeground
         tooltipText: (root.paused ? "Omapop is paused" : root.engineReady ? "Omapop: select text to act on it" : "Omapop: waiting for Hyprland")
             + "\nClick for extensions, right click to " + (root.paused ? "resume" : "pause")
