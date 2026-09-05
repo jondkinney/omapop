@@ -219,6 +219,81 @@ class SnippetParseTests(unittest.TestCase):
             extensions.parse_snippet("#popclip\n- just\n- a list\n")
 
 
+class PlistTests(unittest.TestCase):
+    """Config.plist packages: the format's original config file, read with plistlib."""
+
+    PLIST = """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>Extension Name</key><string>Translate It</string>
+  <key>Extension Identifier</key><string>test.translate</string>
+  <key>Extension Description</key><string>Open a translator.</string>
+  <key>Required Software Version</key><integer>4688</integer>
+  <key>Built</key><date>2024-05-28T10:00:00Z</date>
+  <key>Blob</key><data>AAEC</data>
+  <key>Actions</key><array><dict>
+    <key>URL</key><string>https://{popclip option site}/?text={popclip text}</string>
+    <key>Image File</key><string>icon.png</string>
+    <key>Title</key><string>Translate</string>
+    <key>Regular Expression</key><string>(?s)^.{1,1900}$</string>
+  </dict></array>
+  <key>Options</key><array><dict>
+    <key>Option Identifier</key><string>site</string>
+    <key>Option Label</key><dict><key>en</key><string>Site</string></dict>
+    <key>Option Type</key><string>multiple</string>
+    <key>Option Values</key><array><string>a.example</string><string>b.example</string></array>
+  </dict></array>
+</dict></plist>
+"""
+
+    def package(self, files):
+        d = tempfile.mkdtemp(prefix="omapop-plist-")
+        self.addCleanup(shutil.rmtree, d, True)
+        pkg = os.path.join(d, "T.popclipext")
+        os.makedirs(pkg)
+        for name, data in files.items():
+            with open(os.path.join(pkg, name), "wb") as fh:
+                fh.write(data if isinstance(data, bytes) else data.encode("utf-8"))
+        return pkg
+
+    def test_plist_package_loads_like_yaml(self):
+        pkg = self.package({"Config.plist": self.PLIST, "icon.png": b"\x89PNG"})
+        warnings = []
+        ext = extensions.load_package(pkg, "user", warnings)
+        self.assertEqual(warnings, [])
+        self.assertEqual((ext["name"], ext["identifier"], ext["requiredVersion"]), ("Translate It", "test.translate", "4688"))
+        action = ext["actions"][0]
+        self.assertEqual(action["type"], "url")
+        self.assertIn("{popclip option site}", action["url"])
+        self.assertEqual(action["regex"], "(?s)^.{1,1900}$")
+        self.assertTrue(action["iconPath"].endswith("icon.png"))
+        option = ext["options"][0]
+        self.assertEqual((option["type"], option["label"], option["values"], option["defaultValue"]),
+                         ("multiple", "Site", ["a.example", "b.example"], "a.example"))
+        # <data> and <date> have no YAML shape: flattened, never leaked as repr() text.
+        self.assertEqual(ext["static"]["blob"], "")
+        self.assertEqual(ext["static"]["built"], "2024-05-28T10:00:00")
+        json.dumps(ext)
+
+    def test_binary_plist_and_precedence(self):
+        import plistlib
+        binary = plistlib.dumps({"Extension Name": "Bin", "URL": "https://x/?q=***"}, fmt=plistlib.FMT_BINARY)
+        ext = extensions.load_package(self.package({"Config.plist": binary}), "user", [])
+        self.assertEqual((ext["name"], ext["actions"][0]["type"]), ("Bin", "url"))
+        # A package carrying a modern config beside the server's stub plist uses the modern one.
+        pkg = self.package({"Config.plist": self.PLIST, "Config.json": '{"name": "Modern", "url": "https://x/?q=***"}'})
+        ext = extensions.load_package(pkg, "user", [])
+        self.assertEqual(ext["name"], "Modern")
+        self.assertTrue(ext["configFile"].endswith("Config.json"))
+
+    def test_bad_plists_are_errors_not_crashes(self):
+        for body in ("<plist version=\"1.0\"><array><string>x</string></array></plist>",
+                     "<?xml version=\"1.0\"?><plist><dict><key>Extension Name</key><string>Unclosed",
+                     "not a plist at all"):
+            with self.assertRaises(ValueError):
+                extensions.load_package(self.package({"Config.plist": body}), "user", [])
+
+
 class CliTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.mkdtemp(prefix="omapop-test-")

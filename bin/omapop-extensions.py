@@ -8,12 +8,15 @@ usage:
 
 Everything under the extension directories is user-installed but still treated
 as untrusted input: each Config file is read through one descriptor with a hard
-byte limit, parsed with PyYAML's safe loader, normalised to a small fixed
-schema, and every string is capped before it is emitted. The shell caps the
-helper's output again before JSON.parse.
+byte limit, parsed with PyYAML's safe loader (or the stdlib plist reader for
+the format's original Config.plist), normalised to a small fixed schema, and
+every string is capped before it is emitted. The shell caps the helper's
+output again before JSON.parse.
 """
+import datetime
 import json
 import os
+import plistlib
 import re
 import stat
 import sys
@@ -219,6 +222,38 @@ def parse_config_text(text, kind):
     if yaml is None:
         raise ValueError("PyYAML is not installed")
     return yaml.safe_load(text)
+
+
+def parse_plist(data):
+    """Config.plist, the format's original config file, read with the stdlib.
+
+    Same keys as the YAML form ("Extension Name", "Actions", "Option Values"),
+    just as an XML (or binary) property list, and many older directory
+    packages have nothing else. The two value types YAML and JSON lack are
+    flattened so the normaliser sees the shapes it already handles: <data>
+    becomes an empty string and <date> its ISO text.
+    """
+    try:
+        parsed = plistlib.loads(data)
+    except Exception as exc:  # noqa: BLE001 - expat, InvalidFileException, ValueError...
+        raise ValueError("Config.plist: %s" % (clean_text(str(exc), 200) or exc.__class__.__name__))
+    return plist_plain(parsed)
+
+
+def plist_plain(value, depth=0):
+    if depth > 32:
+        return None
+    if isinstance(value, dict):
+        return {str(k): plist_plain(v, depth + 1) for k, v in value.items()}
+    if isinstance(value, list):
+        return [plist_plain(v, depth + 1) for v in value]
+    if isinstance(value, (bytes, bytearray)):
+        return ""
+    if isinstance(value, datetime.datetime):
+        return value.isoformat()
+    if isinstance(value, plistlib.UID):
+        return int(value.data)
+    return value
 
 
 def norm_option(raw):
@@ -711,8 +746,6 @@ def load_package(pkg_dir, source, warnings):
             kind = "snippet"
     if config_path is None:
         raise ValueError("no Config file")
-    if kind == "plist":
-        raise ValueError("Config.plist is not supported; convert it to Config.yaml or Config.json")
     data, err = bounded_read(config_path, MAX_CONFIG_BYTES)
     if err:
         raise ValueError(err)
@@ -737,6 +770,8 @@ def load_package(pkg_dir, source, warnings):
         config = parse_config_text(text, "yaml")
     elif kind == "json":
         config = parse_config_text(text, "json")
+    elif kind == "plist":
+        config = parse_plist(data)
     else:
         config, body, body_kind = parse_snippet(text) if re.match(r"^\s*(//|--|#)", text) else (parse_config_text(text, "yaml"), None, None)
         if body is not None:
