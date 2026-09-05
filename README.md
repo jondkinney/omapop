@@ -7,6 +7,8 @@ and Omapop is compatible with extensions from the PopClip Extensions Directory
 (https://www.popclip.app/extensions/): download a package there, drop it into
 `~/.config/omapop/extensions/`, and it shows up in the bar.
 
+![Omapop selection-action example and live extensions panel](preview.jpg)
+
 Omapop is a pure Quickshell/QML plugin for the Omarchy shell. The part that
 notices "you just finished selecting something" runs inside Hyprland as a small
 Lua engine, because the compositor is the only thing on Wayland that sees mouse
