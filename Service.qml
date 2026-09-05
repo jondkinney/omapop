@@ -44,7 +44,7 @@ Item {
     readonly property string runnerPath: pluginDir + "/bin/omapop-runner.mjs"
     readonly property string contextHelper: pluginDir + "/bin/omapop-context.py"
     readonly property string directoryHelper: pluginDir + "/bin/omapop-directory.py"
-    readonly property int engineVersion: 2
+    readonly property int engineVersion: 3
 
     // Children get only what they need to reach the compositor and the display.
     readonly property var childEnv: ({
@@ -565,8 +565,9 @@ Item {
             ctx.wasLongPress = f[17] === "1"
             onRelease(ctx)
         } else if (kind === "longpress") {
-            if (longPressEnabled && !paused)
-                trigger(parseContext(f, 1), "longpress")
+            var longCtx = parseContext(f, 1)
+            if (longPressEnabled && !paused && ((longCtx.mods | lastPressMods) & 64) === 0)
+                trigger(longCtx, "longpress")
         } else if (kind === "shortcut") {
             trigger(parseContext(f, 1), "shortcut")
         } else if (kind === "key") {
@@ -601,7 +602,7 @@ Item {
         if (paused)
             return
         // Holding Super while selecting suppresses the bar.
-        if ((ctx.mods & 64) !== 0)
+        if (((ctx.mods | lastPressMods) & 64) !== 0)
             return
         ctx.dragged = dragged
         ctx.clicks = clickCount

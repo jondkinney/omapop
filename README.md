@@ -53,7 +53,8 @@ reloads its configuration (`hyprctl reload`), or immediately with
 
 - **Select text** by dragging, double-clicking a word or triple-clicking a
   line. The bar appears above the pointer (below when the drag went downwards,
-  so it never covers what you selected).
+  so it never covers what you selected). In terminal apps that capture mouse
+  input, hold **Shift** while selecting.
 - **Hover** a button to see its name. **Click** to run it. Hold **Shift**,
   **Ctrl**, **Alt** or **Super** while clicking for an action's alternate
   behaviour (Alt on Search means an exact-phrase search, Alt on Open Link
@@ -421,6 +422,7 @@ omarchy plugin validate .
 qmllint -I /usr/share/omarchy/shell *.qml
 python3 -m unittest discover -s tests -p 'test_*.py'   # helpers, directory
 node tests/actions.test.mjs
+lua tests/engine.test.lua                          # modified mouse input and engine reloads
 QT_QUICK_BACKEND=rhi QSG_RHI_BACKEND=opengl /usr/lib/qt6/bin/qmltestrunner -platform offscreen -input tests
 omarchy restart shell
 omarchy-shell io.github.jondkinney.omapop status

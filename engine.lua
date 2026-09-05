@@ -1,4 +1,4 @@
-local ENGINE_VERSION = 2
+local ENGINE_VERSION = 3
 local BIND_KEYS = { "mouse:272", "mouse:273", "mouse:274", "mouse_up", "mouse_down" }
 
 local previous = rawget(_G, "__omapop")
@@ -19,6 +19,7 @@ if type(previous) == "table" and type(previous.configure) == "function" then
   if previous.key_handle then pcall(function() previous.key_handle:remove() end) end
   previous.generation = (previous.generation or 0) + 1
   previous.armed = false
+  previous.press = nil
 end
 
 -- Omapop's Hyprland engine.
@@ -206,6 +207,9 @@ local function on_release()
 end
 
 local function bind(keys, fn, opts)
+  -- Terminals use Shift to select while an application has mouse reporting
+  -- enabled. Observe modified mouse events too, without consuming them.
+  opts.ignore_mods = true
   local ok, handle = pcall(hl.bind, keys, fn, opts)
   if ok and handle then E.handles[#E.handles + 1] = handle end
   return ok
