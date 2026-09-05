@@ -4,6 +4,7 @@ import Quickshell.Io
 import Quickshell.Hyprland
 import qs.Commons
 import "Actions.js" as Actions
+import "OutputBuffer.js" as OutputBuffer
 
 // Omapop: select text, get a bar of actions beside the pointer.
 //
@@ -159,10 +160,8 @@ Item {
     component Task: QtObject {
         id: task
         property var spec: ({})
-        property string stdoutText: ""
-        property string stderrText: ""
-        property string lineBuffer: ""
-        property int bytes: 0
+        property var stdoutBuffer: OutputBuffer.create(spec.limit || 65536, spec.lineMode === true)
+        property var stderrBuffer: OutputBuffer.create(16384, false)
         property bool truncated: false
         property bool timedOut: false
         property bool startedOk: false
@@ -176,7 +175,7 @@ Item {
             workingDirectory: task.spec.cwd ? task.spec.cwd : root.home
             stdinEnabled: task.spec.stdin !== undefined && task.spec.stdin !== null
             stdout: SplitParser {
-                splitMarker: task.spec.lineMode ? "\n" : ""
+                splitMarker: ""
                 onRead: function (data) { task.onStdout(String(data)) }
             }
             stderr: SplitParser {
@@ -220,26 +219,17 @@ Item {
         }
 
         function onStdout(data) {
-            var limit = spec.limit || 65536
-            bytes += data.length
-            if (bytes > limit) {
-                if (!truncated) {
-                    truncated = true
-                    proc.signal(9)
-                }
-                return
-            }
-            if (spec.lineMode) {
-                if (typeof spec.onLine === "function")
-                    spec.onLine(data)
-            } else {
-                stdoutText += data
+            if (!truncated && !OutputBuffer.append(stdoutBuffer, data, spec.onLine)) {
+                truncated = true
+                proc.signal(9)
             }
         }
 
         function onStderr(data) {
-            if (stderrText.length < 16384)
-                stderrText += data.slice(0, 16384 - stderrText.length)
+            if (!truncated && !OutputBuffer.append(stderrBuffer, data)) {
+                truncated = true
+                proc.signal(9)
+            }
         }
 
         function complete(code, status) {
@@ -248,12 +238,14 @@ Item {
             done = true
             deadline.stop()
             startGuard.stop()
+            if (!truncated && !timedOut)
+                OutputBuffer.finish(stdoutBuffer, spec.onLine)
             finished({
                 code: code,
                 status: status,
                 ok: code === 0 && status === 0 && !truncated && !timedOut,
-                stdout: stdoutText,
-                stderr: stderrText,
+                stdout: stdoutBuffer.text,
+                stderr: stderrBuffer.text,
                 truncated: truncated,
                 timedOut: timedOut,
                 failedToStart: !startedOk
