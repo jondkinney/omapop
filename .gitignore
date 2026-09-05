@@ -1,2 +1,5 @@
 __pycache__/
 *.pyc
+
+# The scraped catalogue is a local per-user cache, not a mirror we republish.
+directory.json

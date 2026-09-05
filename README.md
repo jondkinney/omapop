@@ -81,6 +81,7 @@ Settings live in the widget's settings form:
 | Excluded apps | Window classes where the bar never appears. |
 | Terminal window classes | Windows that paste with Ctrl+Shift+V and cannot cut. |
 | Extensions' `command` key maps to | Ctrl (right for nearly every Linux app) or Super, for key combos written for macOS. |
+| Keep the extension catalogue up to date | Fetch the published-extension list weekly for **Available extensions**. Contacts popclip.app. Off means the catalogue only changes when you press Update. |
 | Keyboard shortcut | A Hyprland bind that shows the bar for the current selection. |
 | Show icon in the bar | Hide the icon if you only want the popup. Settings stay reachable through `omarchy-shell`. |
 
@@ -139,37 +140,68 @@ the screen width spill into a "More" page.
 ## Extensions
 
 Extensions live in `~/.config/omapop/extensions/`. Each one is either a
-`Name.popclipext/` folder holding a `Config.yaml`, `Config.json`, `Config.js`
-or `Config.ts` plus any icons and scripts it needs, or a `Name.popcliptxt`
-snippet file. Four bundled examples ship in the plugin's `extensions/` folder
+`Name.popclipext/` folder holding a `Config.yaml`, `Config.json`, `Config.js`,
+`Config.ts` or `Config.plist` (the format's original XML form, which many older
+directory packages still use) plus any icons and scripts it needs, or a
+`Name.popcliptxt` snippet file. Four bundled examples ship in the plugin's `extensions/` folder
 (Word Count, Wikipedia, Uppercase, Reverse) and show a shell script, a URL, an
 inline JavaScript action and a module-based extension.
 
 ### From the directory
 
-Every entry in the PopClip Extensions Directory
-(https://www.popclip.app/extensions/) offers a download, a zip archive with the
-`.popclipextz` suffix. Unzip it into the extensions folder and the extension is
-picked up at once:
+Click the bar icon and use **Available extensions**: the whole published
+catalogue is listed, type to filter it, press **Install**, and the extension is
+downloaded, unpacked and live in the bar. No terminal, no unzipping, no file
+paths. The arrow beside each entry opens that extension's own page on the
+directory (screenshots, readme, license), and the one next to **Update** opens
+the directory itself; those are the only two links Omapop will open from here.
+
+Some directory extensions can only run on macOS. Each entry's page on the
+directory states its action type, and after a refresh Omapop looks those pages
+up (once per extension, in the background) and leaves out the ones whose every
+action is AppleScript or a macOS Service; the count line says how many are
+hidden, and **Show macOS-only** lists them anyway, marked. Install one of those
+and Omapop says so plainly -- "Installed Alfred, but it needs macOS (applescript
+actions are macOS-only), so it stays disabled" -- and the installed list shows
+the same note in place of its description, dimmed, with its switch locked off.
+An extension that merely drives a Mac app through a `url` scheme cannot be told
+apart from one that opens a website; it installs and simply has nothing to talk
+to.
+
+The same thing from a terminal, which also works with the shell stopped:
 
 ```bash
-mkdir -p ~/.config/omapop/extensions
+cd ~/.config/omarchy/plugins/io.github.jondkinney.omapop
+python3 bin/omapop-directory.py search markdown      # find one
+python3 bin/omapop-directory.py install 09a521       # install it
+python3 bin/omapop-directory.py refresh              # update the catalogue
+```
+
+`install` takes a shortcode (`09a521`), an extension page link, or a direct
+package link; `search --all` includes the macOS-only entries and `classify`
+looks up any pages not yet checked. `omarchy-shell io.github.jondkinney.omapop
+dirsearch <query>`, `dirresults`, `dirinstall <shortcode>`, `dirshowmac <0|1>`
+and `dirrefresh` drive the same code from a script.
+
+The catalogue is a local index of what the directory publishes: name,
+description, author, shortcode and action type. It is built on first use and
+refreshed weekly (setting: **Keep the extension catalogue up to date**), and it
+is cached under `~/.config/omapop/`, never shipped with the plugin. Search works
+offline against whatever was last fetched.
+
+Installing by hand still works if you prefer: every directory entry offers a
+`.popclipextz` download, which is a zip.
+
+```bash
 unzip -d ~/.config/omapop/extensions ~/Downloads/Underscore.popclipextz
 ```
 
-The archive unpacks to a folder such as
+Either way the archive unpacks to a folder such as
 `@09a521.com.pilotmoon.popclip.extension.underscore.popclipext/`; the leading
-`@shortcode.` is fine. Underscore
-(https://www.popclip.app/extensions/x/09a521), a module extension with the
-`dynamic` entitlement, an icon file and a bundled JavaScript module, is the
-one used to test this path: select `hello big world`, click its button, and
-`hello_big_world` is pasted in its place (or copied, when the field cannot be
-edited).
-
-Extensions that need macOS itself (AppleScript, Services, Shortcuts, the
-dictionary and spelling APIs) are listed with an error and stay disabled.
-Packages whose only config is `Config.plist` are not read; convert it to
-`Config.yaml` or `Config.json`.
+`@shortcode.` is fine. Underscore is the extension used to test this path: a
+module extension with the `dynamic` entitlement, an icon file and a bundled
+JavaScript module. Select `hello big world`, click its button, and
+`hello_big_world` replaces it (or is copied, when the field cannot be edited).
 
 ### From a snippet
 
@@ -293,8 +325,11 @@ all. The boundaries, and the contract at each:
   and emitted as JSON the shell caps again. Package-relative file references
   that escape the package are rejected (`realpath` compared against the
   package root); icon files must be regular files of at most 1 MiB before the
-  shell's image decoders see them; symlinked packages and config files are
-  skipped; at most 200 packages per folder.
+  shell's image decoders see them; a package containing any symlink whose
+  target escapes the package is rejected outright and never run, because
+  both JavaScript runtimes authorise reads by the lexical path and would
+  otherwise follow such a symlink out of the sandbox; at most 200 packages
+  per folder.
 - **Snippet installs** always confirm, and say when the snippet carries code.
   The package is staged as 0600 files in a 0700 directory and published by
   `rename`, so a half-written extension is never scanned.
@@ -310,12 +345,24 @@ all. The boundaries, and the contract at each:
   `--allow-net` is added only for extensions that declare the `network`
   entitlement, so the runtime itself enforces it (verified: without the
   entitlement `fetch` and `node:net` fail with a permission error under both).
-  No write, run, env or FFI permission is ever granted. Effects come back over
+  No write, run, env or FFI permission is ever granted. The read sandbox is
+  confined to the package directory; because both runtimes follow a symlink
+  out of a permitted path, packages carrying an escaping symlink are refused
+  at scan time (above) rather than relied on to stay inside it. Effects come back over
   a JSON line protocol and the shell performs them after validation: URLs are
   checked against a scheme allowlist (`javascript:`, `data:` and `vbscript:`
   never open), key combos are parsed into known modifiers and keysyms, paths
   to reveal must be absolute, and every result string is capped and sanitised
   before display.
+- **The extension directory** is read by `omapop-directory.py`, never by the
+  shell: it fetches only `https://` URLs on popclip.app hosts (re-checked after
+  redirects), with bounded reads and a 20-second deadline, and hands the shell
+  JSON it caps again. Besides the listing it reads each extension's own page
+  once, for the action type, pausing between pages. Downloaded archives are expanded in a staging directory
+  that refuses absolute paths, entries escaping the package, symlink entries,
+  oversized members and anything that is not a single `.popclipext` folder, then
+  published with one rename. An installed package still has to pass the scan
+  above before the shell will load it.
 - **The engine** is Lua pushed into Hyprland with `hyprctl eval`. The only
   values injected are clamped integers and one escaped string (the shortcut).
   Its events percent-encode every field with a 240-byte cap per field, and the
@@ -344,7 +391,7 @@ a URL, or a network-entitled extension sends it.
 ln -s "$PWD" ~/.config/omarchy/plugins/io.github.jondkinney.omapop
 omarchy plugin validate .
 qmllint -I /usr/share/omarchy/shell *.qml
-python3 -m unittest discover -s tests -p 'test_*.py'
+python3 -m unittest discover -s tests -p 'test_*.py'   # helpers, directory
 node tests/actions.test.mjs
 QT_QUICK_BACKEND=rhi QSG_RHI_BACKEND=opengl /usr/lib/qt6/bin/qmltestrunner -platform offscreen -input tests
 omarchy restart shell
@@ -355,15 +402,26 @@ omarchy-shell io.github.jondkinney.omapop status
 selection; `hide`, `pause`, `resume`, `toggle` and `rescan` do what they say;
 `click <index> <modmask>` activates a visible button as a click would;
 `debug` dumps the current state. To exercise the bar without touching the
-mouse, put text on the primary selection and send the engine's release event
-yourself:
+mouse, put text on the primary selection and send the engine's long-press
+event yourself, at the pointer's real position (the engine dismisses a bar the
+pointer is far from) and with a window class that is not a terminal so the
+click below copies instead of pasting:
 
 ```bash
 wl-copy --primary "hello big world"
-hyprctl eval 'hl.dispatch(hl.dsp.event("omapop|release|800|600|0|DP-1|0|0|2560|1440|1|chromium|Page|0x0|0|800|600|0|0"))'
-omarchy-shell io.github.jondkinney.omapop status
+read -r x y < <(hyprctl -j cursorpos | jq -r '"\(.x) \(.y)"')
+hyprctl eval "hl.dispatch(hl.dsp.event(\"omapop|longpress|$x|$y|0|DP-1|0|0|2560|1440|1|chromium|Page|0x0|0\"))"
+omarchy-shell io.github.jondkinney.omapop status     # lists the visible buttons
+omarchy-shell io.github.jondkinney.omapop click 4 0  # runs the fifth one
 ```
 
 ## License
 
 MIT, see `LICENSE`.
+
+Omapop is not affiliated with, authorised by, or endorsed by Pilotmoon Software.
+PopClip is a product of Nicholas Moore / Pilotmoon Software. Omapop implements
+the extension format from the publicly published PopClip developer
+documentation (https://www.popclip.app/dev/), which is licensed CC BY-SA 4.0;
+this repository carries no text from it. Extensions in the directory are the
+work of their own authors and carry their own licenses.

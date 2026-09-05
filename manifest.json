@@ -40,7 +40,8 @@
       "showBarIcon": true,
       "position": "auto",
       "assumeEditable": false,
-      "accessibilityProbe": true
+      "accessibilityProbe": true,
+      "directoryRefresh": true
     },
     "schema": [
       {
@@ -155,6 +156,13 @@
           "super"
         ],
         "description": "Extensions written for macOS press 'command'. Ctrl is right for nearly every Linux app."
+      },
+      {
+        "key": "directoryRefresh",
+        "type": "boolean",
+        "label": "Keep the extension catalogue up to date",
+        "defaultValue": true,
+        "description": "Once a week, fetch the list of published extensions shown under 'Available extensions' and look up which new ones need macOS. This contacts popclip.app. Turn it off to browse only the catalogue you already have; Update still works by hand."
       },
       {
         "key": "shortcut",

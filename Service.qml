@@ -42,6 +42,7 @@ Item {
     readonly property string clipboardHelper: pluginDir + "/bin/omapop-clipboard.py"
     readonly property string runnerPath: pluginDir + "/bin/omapop-runner.mjs"
     readonly property string contextHelper: pluginDir + "/bin/omapop-context.py"
+    readonly property string directoryHelper: pluginDir + "/bin/omapop-directory.py"
     readonly property int engineVersion: 2
 
     // Children get only what they need to reach the compositor and the display.
@@ -106,6 +107,7 @@ Item {
     }
     readonly property bool assumeEditable: setting("assumeEditable", false) === true
     readonly property bool accessibilityProbe: setting("accessibilityProbe", true) !== false
+    readonly property bool directoryRefresh: setting("directoryRefresh", true) !== false
     readonly property string searchTemplate: {
         var engine = String(setting("searchEngine", "google") || "google")
         if (engine === "other") {
@@ -120,6 +122,7 @@ Item {
     property bool paused: false
     property bool engineReady: false
     property string runtimeName: ""
+    property bool runtimeProbed: false
     property string lastError: ""
     property var extensions: []
     property var moduleActions: ({})
@@ -1834,6 +1837,186 @@ Item {
         onLoadFailed: function () { }
     }
 
+    // ------------------------------------------------------------ extension directory
+
+    // Browsing and installing published extensions. All of it happens in
+    // bin/omapop-directory.py: the shell only asks for JSON and renders it, so
+    // no HTML parsing, no network and no archive handling runs in this process.
+    property var directoryResults: []
+    property string directoryQuery: ""
+    property bool directoryBusy: false
+    property string directoryStatus: ""
+    property string directoryFetched: ""
+    property int directoryTotal: 0
+    property var directoryTask: null
+    property var directoryInstalling: ({})
+    property bool directoryAutoFetched: false
+    // The listing does not say what an extension does; each entry's own page
+    // does. After a refresh the helper looks the new ones up, once each, so
+    // the entries that can only ever run on macOS are left out of the list.
+    property int directoryHidden: 0          // macOS-only entries the last search left out
+    property int directoryPending: 0         // entries whose page has not been looked up yet
+    property bool directoryShowMac: false
+    property bool directoryClassifying: false
+    property bool directoryWantsClassify: false
+    property int directoryClassifyRuns: 0
+
+    function directoryArgv(rest) {
+        return ["/usr/bin/python3", "-I", directoryHelper].concat(rest)
+    }
+
+    function searchDirectory(query) {
+        directoryQuery = String(query === undefined || query === null ? "" : query).slice(0, 120)
+        if (directoryTask)
+            directoryTask.cancel()
+        directoryBusy = true
+        directoryStatus = ""
+        var rest = ["search", "--json", "--limit", "400"]
+        if (directoryShowMac)
+            rest.push("--all")
+        if (directoryQuery.trim().length)
+            rest.push(directoryQuery.trim())
+        directoryTask = spawn({ command: directoryArgv(rest), limit: 2097152, deadline: 15000 }, function (result) {
+            directoryTask = null
+            directoryBusy = false
+            var parsed = parseJson(result.stdout, 2097152)
+            if (!parsed || parsed.ok !== true) {
+                directoryResults = []
+                directoryStatus = parsed && parsed.error ? Actions.oneLine(parsed.error, 200) : "the catalogue could not be read"
+                return
+            }
+            var items = Array.isArray(parsed.extensions) ? parsed.extensions : []
+            var list = []
+            for (var i = 0; i < items.length && list.length < 400; i++) {
+                var e = items[i]
+                if (!e || typeof e !== "object" || typeof e.shortcode !== "string")
+                    continue
+                list.push({
+                    shortcode: Actions.oneLine(e.shortcode, 32),
+                    name: Actions.oneLine(e.name || e.shortcode, 80),
+                    description: Actions.oneLine(e.description || "", 240),
+                    author: Actions.oneLine(e.author || "", 60),
+                    page: Actions.oneLine(e.page || "", 200),
+                    needsMac: e.needsMac === true
+                })
+            }
+            directoryResults = list
+            directoryTotal = Number(parsed.total) || list.length
+            directoryHidden = Math.max(0, Number(parsed.hidden) || 0)
+            directoryPending = Math.max(0, Number(parsed.pending) || 0)
+            directoryFetched = Actions.oneLine(parsed.fetched || "", 40)
+            if (!list.length)
+                directoryStatus = directoryTotal
+                    ? "Nothing matched that." + (directoryHidden ? " " + directoryHidden + " hidden (need macOS)." : "")
+                    : "No catalogue yet."
+            // First run (or a build with no snapshot): fetch one, once.
+            if (directoryTotal === 0 && directoryRefresh && !directoryAutoFetched) {
+                directoryAutoFetched = true
+                directoryStatus = "Fetching the catalogue\u2026"
+                refreshDirectory(7)
+            } else if (directoryWantsClassify && directoryPending > 0) {
+                classifyDirectory()
+            }
+        })
+    }
+
+    // Look up the pages of entries not yet classified; runs once after each
+    // refresh. The helper checkpoints every few pages, so a run cut short by
+    // the deadline keeps its progress and the next refresh finishes the job.
+    function classifyDirectory() {
+        if (directoryClassifying || directoryClassifyRuns >= 4)
+            return
+        directoryWantsClassify = false
+        directoryClassifying = true
+        directoryClassifyRuns++
+        spawn({ command: directoryArgv(["classify", "--json", "--limit", "400"]), limit: 65536, deadline: 300000 }, function (result) {
+            directoryClassifying = false
+            var parsed = parseJson(result.stdout, 65536)
+            if (!parsed || parsed.ok !== true)
+                log("directory classify failed: " + Actions.oneLine((parsed && parsed.error) || result.stderr || "", 200))
+            // Cut short by the deadline (no answer) or by --limit while still
+            // making progress: go again, a bounded number of times per session.
+            if (!parsed || (parsed.ok === true && parsed.pending > 0 && parsed.classified > 0))
+                directoryWantsClassify = true
+            searchDirectory(directoryQuery)
+        })
+    }
+
+    function setDirectoryShowMac(show) {
+        directoryShowMac = !!show
+        searchDirectory(directoryQuery)
+    }
+
+    // Open an extension's own page. Constrained to the directory rather than
+    // handed to openUrl blindly, so a bad catalogue entry cannot aim the browser.
+    function openDirectoryPage(url) {
+        var u = String(url || "")
+        if (!/^https:\/\/www\.popclip\.app\/extensions\//.test(u))
+            return "refused"
+        openUrl(u)
+        return "ok"
+    }
+
+    function installFromDirectory(shortcode) {
+        var code = String(shortcode || "").replace(/[^A-Za-z0-9]/g, "").slice(0, 16)
+        if (!code || directoryInstalling[code])
+            return
+        var pending = directoryInstalling
+        pending[code] = true
+        directoryInstalling = pending
+        directoryStatus = ""
+        spawn({ command: directoryArgv(["install", code, "--json"]), limit: 65536, deadline: 90000 }, function (result) {
+            var done = directoryInstalling
+            delete done[code]
+            directoryInstalling = done
+            var parsed = parseJson(result.stdout, 65536)
+            if (parsed && parsed.ok === true) {
+                // The helper ran the scanner over the unpacked package; say what it found.
+                var name = Actions.oneLine(parsed.name || code, 60)
+                var platform = parsed.platform && typeof parsed.platform === "object" ? parsed.platform : {}
+                if (platform.error)
+                    directoryStatus = "Installed " + name + ", but it could not be read: " + Actions.oneLine(platform.error, 120)
+                else if (platform.usable === false)
+                    directoryStatus = "Installed " + name + ", but it " + Actions.oneLine(platform.note || "cannot run here", 160) + ", so it stays disabled."
+                else if (platform.note)
+                    directoryStatus = "Installed " + name + "; " + Actions.oneLine(platform.note, 160) + "."
+                else
+                    directoryStatus = "Installed " + name
+                rescanExtensions()
+            } else {
+                directoryStatus = "Could not install: " + Actions.oneLine((parsed && parsed.error) || result.stderr || "the download failed", 160)
+            }
+        })
+    }
+
+    // maxAgeDays > 0 makes this a no-op when the catalogue is still fresh, which
+    // is how the quiet background update avoids refetching on every start.
+    function refreshDirectory(maxAgeDays) {
+        if (directoryBusy)
+            return
+        directoryBusy = true
+        directoryWantsClassify = true
+        directoryClassifyRuns = 0
+        // --full tops up the pages the listing does not render. It only fetches
+        // shortcodes missing from the index, so it is expensive once and free after.
+        var rest = ["refresh", "--json", "--full"]
+        if (maxAgeDays > 0)
+            rest = rest.concat(["--max-age-days", String(maxAgeDays)])
+        spawn({ command: directoryArgv(rest), limit: 65536, deadline: 300000 }, function (result) {
+            directoryBusy = false
+            var parsed = parseJson(result.stdout, 65536)
+            if (parsed && parsed.ok === true) {
+                // "skipped" (still fresh) and "unchanged" (server said 304) carry
+                // no count, so only a real re-index reports one.
+                if (parsed.skipped !== true && parsed.unchanged !== true)
+                    directoryStatus = "Catalogue updated: " + (Number(parsed.count) || 0) + " extensions"
+                searchDirectory(directoryQuery)
+            } else {
+                directoryStatus = "Could not update the catalogue: " + Actions.oneLine((parsed && parsed.error) || "no answer", 160)
+            }
+        })
+    }
+
     // ------------------------------------------------------------ manual triggers
 
     function showForCurrentSelection() {
@@ -1885,6 +2068,19 @@ Item {
         function resume(): string { root.paused = false; return "ok" }
         function toggle(): string { root.paused = !root.paused; return root.paused ? "paused" : "resumed" }
         function rescan(): string { root.rescanExtensions(); return "ok" }
+        // The extension directory, same calls the widget's Browse section makes.
+        function dirsearch(query: string): string { root.searchDirectory(query); return "ok" }
+        function dirrefresh(): string { root.refreshDirectory(0); return "ok" }
+        function diropen(url: string): string { return root.openDirectoryPage(url) }
+        function dirinstall(shortcode: string): string { root.installFromDirectory(shortcode); return "ok" }
+        function dirshowmac(flag: string): string { root.setDirectoryShowMac(flag === "1" || flag === "true"); return root.directoryShowMac ? "shown" : "hidden" }
+        function dirresults(): string {
+            return JSON.stringify({
+                busy: root.directoryBusy, status: root.directoryStatus, total: root.directoryTotal,
+                hidden: root.directoryHidden, pending: root.directoryPending, showMac: root.directoryShowMac,
+                classifying: root.directoryClassifying, fetched: root.directoryFetched, results: root.directoryResults
+            })
+        }
         function status(): string { return root.ipcStatus() }
         // Activate the n-th visible button (0-based), as a click would; `mods` is a
         // Hyprland modmask (1 shift, 4 ctrl, 8 alt, 64 super).
@@ -1932,10 +2128,12 @@ Item {
         spawn({ command: ["/usr/bin/deno", "--version"], limit: 4096, deadline: 8000 }, function (result) {
             if (result.ok) {
                 runtimeName = "deno"
+                runtimeProbed = true
                 populateModules()
                 return
             }
             spawn({ command: ["/usr/bin/node", "--version"], limit: 4096, deadline: 8000 }, function (nres) {
+                runtimeProbed = true
                 if (nres.ok) {
                     runtimeName = "node"
                     populateModules()
@@ -1954,6 +2152,8 @@ Item {
         installSoon.restart()
         probeRuntimes()
         rescanExtensions()
+        if (directoryRefresh)
+            delay(15000, function () { root.refreshDirectory(7) })
     }
 
     Component.onDestruction: {
