@@ -218,10 +218,10 @@ def safe_relpath(base, rel):
 
 def parse_config_text(text, kind):
     if kind == "json":
-        return json.loads(text)
+        return plist_plain(json.loads(text))
     if yaml is None:
         raise ValueError("PyYAML is not installed")
-    return yaml.safe_load(text)
+    return plist_plain(yaml.safe_load(text))
 
 
 def parse_plist(data):
@@ -240,19 +240,30 @@ def parse_plist(data):
     return plist_plain(parsed)
 
 
-def plist_plain(value, depth=0):
+def plist_plain(value, depth=0, budget=None):
+    # Binary plists and YAML can alias the same container many times. A byte/depth cap
+    # alone does not bound the expanded tree (including self-referential lists).
+    if budget is None:
+        budget = [8192, MAX_CONFIG_BYTES * 4]
+    budget[0] -= 1
+    if budget[0] < 0:
+        raise ValueError("extension config expands beyond 8192 values")
     if depth > 32:
-        return None
+        raise ValueError("extension config exceeds 32 nested levels")
     if isinstance(value, dict):
-        return {str(k): plist_plain(v, depth + 1) for k, v in value.items()}
+        return {plist_plain(str(k), depth + 1, budget): plist_plain(v, depth + 1, budget) for k, v in value.items()}
     if isinstance(value, list):
-        return [plist_plain(v, depth + 1) for v in value]
+        return [plist_plain(v, depth + 1, budget) for v in value]
     if isinstance(value, (bytes, bytearray)):
         return ""
     if isinstance(value, datetime.datetime):
         return value.isoformat()
     if isinstance(value, plistlib.UID):
         return int(value.data)
+    if isinstance(value, str):
+        budget[1] -= len(value.encode("utf-8", "replace"))
+        if budget[1] < 0:
+            raise ValueError("extension config expands beyond its string-byte limit")
     return value
 
 

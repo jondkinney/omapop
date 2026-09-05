@@ -300,6 +300,26 @@ class PlistTests(unittest.TestCase):
         self.assertEqual(ext["name"], "Modern")
         self.assertTrue(ext["configFile"].endswith("Config.json"))
 
+    def test_aliased_binary_plist_has_an_expansion_budget(self):
+        import plistlib
+        value = ["leaf"]
+        for _ in range(16):
+            value = [value, value]
+        data = plistlib.dumps({"name": "Repeated", "values": value}, fmt=plistlib.FMT_BINARY)
+        self.assertLess(len(data), 1024)
+        with self.assertRaisesRegex(ValueError, "8192 values"):
+            extensions.parse_plist(data)
+        self.assertEqual(len(extensions.plist_plain([0] * 8191)), 8191)
+        with self.assertRaises(ValueError):
+            extensions.plist_plain([0] * 8192)
+
+    def test_yaml_alias_expansion_and_cycles_are_bounded_too(self):
+        with self.assertRaisesRegex(ValueError, "nested levels"):
+            extensions.parse_config_text("a: &cycle [*cycle]", "yaml")
+        text = "a: &text " + "x" * 20000 + "\nb: [" + ", ".join(["*text"] * 60) + "]"
+        with self.assertRaisesRegex(ValueError, "string-byte limit"):
+            extensions.parse_config_text(text, "yaml")
+
     def test_bad_plists_are_errors_not_crashes(self):
         for body in ("<plist version=\"1.0\"><array><string>x</string></array></plist>",
                      "<?xml version=\"1.0\"?><plist><dict><key>Extension Name</key><string>Unclosed",
