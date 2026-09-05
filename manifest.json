@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.jondkinney.omapop",
+  "name": "Omapop",
+  "version": "0.3.0",
+  "author": "Jon Kinney",
+  "license": "MIT",
+  "description": "Select text with the mouse and a small bar of actions appears beside it: cut, copy, paste, search, open links, reveal paths, and extensions written as YAML snippets, shell scripts or JavaScript. Compatible with extensions from the PopClip Extensions Directory (https://www.popclip.app/extensions/).",
+  "kinds": [
+    "service",
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "service": "Service.qml",
+    "barWidget": "BarWidget.qml"
+  },
+  "service": {
+    "displayName": "Omapop",
+    "description": "Watches for mouse text selections through a small Hyprland Lua engine, reads the Wayland primary selection, and shows the action bar. The compositor is the only place that sees mouse-button releases and the cursor, so the trigger has to live there.",
+    "defaults": {},
+    "schema": []
+  },
+  "barWidget": {
+    "displayName": "Omapop",
+    "description": "Manage extensions and settings; right click to pause or resume the selection bar.",
+    "category": "Utilities",
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "searchEngine": "google",
+      "searchUrl": "",
+      "dragThreshold": 6,
+      "hideDistance": 220,
+      "longPress": true,
+      "maxSelectionKiB": 256,
+      "excludedApps": "",
+      "terminalClasses": "Alacritty,kitty,foot,footclient,com.mitchellh.ghostty,Ghostty,org.wezfurlong.wezterm,xterm,konsole,org.kde.konsole,org.gnome.Terminal,gnome-terminal-server,Terminal,st-256color,tilix,wezterm",
+      "commandKey": "ctrl",
+      "shortcut": "",
+      "showBarIcon": true,
+      "position": "auto",
+      "assumeEditable": false,
+      "accessibilityProbe": true
+    },
+    "schema": [
+      {
+        "key": "searchEngine",
+        "type": "enum",
+        "label": "Search engine",
+        "defaultValue": "google",
+        "options": [
+          "google",
+          "duckduckgo",
+          "bing",
+          "brave",
+          "kagi",
+          "startpage",
+          "ecosia",
+          "yahoo",
+          "yandex",
+          "baidu",
+          "naver",
+          "other"
+        ],
+        "description": "Used by the built-in Search action. Choose 'other' to use the custom URL below."
+      },
+      {
+        "key": "searchUrl",
+        "type": "string",
+        "label": "Custom search URL",
+        "defaultValue": "",
+        "description": "Used when the engine is 'other'. Put *** where the selected text goes, e.g. https://example.com/search?q=***"
+      },
+      {
+        "key": "dragThreshold",
+        "type": "integer",
+        "label": "Drag threshold (px)",
+        "defaultValue": 6,
+        "min": 1,
+        "max": 100,
+        "description": "How far the pointer must move between press and release for the gesture to count as a drag selection."
+      },
+      {
+        "key": "position",
+        "type": "enum",
+        "label": "Bar position",
+        "defaultValue": "auto",
+        "options": [
+          "auto",
+          "above",
+          "below"
+        ],
+        "description": "Auto puts the bar above the pointer, or below it when the drag went downwards, so it never covers the selection."
+      },
+      {
+        "key": "assumeEditable",
+        "type": "boolean",
+        "label": "Assume unknown fields are editable",
+        "defaultValue": false,
+        "description": "When neither the accessibility bus nor the window class says whether the selection is in an editable field, treat it as editable anyway. Off by default, so page text in a browser never offers Cut, Paste or text-replacing actions. Browsers report their fields once they are restarted with accessibility on (see the README)."
+      },
+      {
+        "key": "accessibilityProbe",
+        "type": "boolean",
+        "label": "Detect editable fields via accessibility",
+        "defaultValue": true,
+        "description": "Keeps a small AT-SPI helper running and turns on the session accessibility flag so GTK, Qt and (after a restart) Chromium, Electron and Firefox report whether the focused field is editable."
+      },
+      {
+        "key": "hideDistance",
+        "type": "integer",
+        "label": "Hide when pointer moves away (px)",
+        "defaultValue": 220,
+        "min": 40,
+        "max": 2000,
+        "description": "The bar disappears once the pointer is this far from it."
+      },
+      {
+        "key": "longPress",
+        "type": "boolean",
+        "label": "Show on long press",
+        "defaultValue": true,
+        "description": "Hold the left button for half a second without moving to show the bar with no selection, e.g. to paste."
+      },
+      {
+        "key": "maxSelectionKiB",
+        "type": "integer",
+        "label": "Largest selection read (KiB)",
+        "defaultValue": 256,
+        "min": 4,
+        "max": 4096,
+        "description": "Selections larger than this are ignored."
+      },
+      {
+        "key": "excludedApps",
+        "type": "string",
+        "label": "Excluded apps",
+        "defaultValue": "",
+        "description": "Comma-separated window classes where the bar never appears (see hyprctl clients)."
+      },
+      {
+        "key": "terminalClasses",
+        "type": "string",
+        "label": "Terminal window classes",
+        "defaultValue": "Alacritty,kitty,foot,footclient,com.mitchellh.ghostty,Ghostty,org.wezfurlong.wezterm,xterm,konsole,org.kde.konsole,org.gnome.Terminal,gnome-terminal-server,Terminal,st-256color,tilix,wezterm",
+        "description": "Windows whose paste shortcut is Ctrl+Shift+V and which cannot cut."
+      },
+      {
+        "key": "commandKey",
+        "type": "enum",
+        "label": "Extensions' 'command' key maps to",
+        "defaultValue": "ctrl",
+        "options": [
+          "ctrl",
+          "super"
+        ],
+        "description": "Extensions written for macOS press 'command'. Ctrl is right for nearly every Linux app."
+      },
+      {
+        "key": "shortcut",
+        "type": "string",
+        "label": "Keyboard shortcut",
+        "defaultValue": "",
+        "description": "Optional Hyprland bind that shows the bar for the current selection, e.g. SUPER + SHIFT + P. Leave empty for none."
+      },
+      {
+        "key": "showBarIcon",
+        "type": "boolean",
+        "label": "Show icon in the bar",
+        "defaultValue": true,
+        "description": "Hide the bar icon if you only want the popup. Settings stay reachable through omarchy-shell."
+      }
+    ]
+  }
+}

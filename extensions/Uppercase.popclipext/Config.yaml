@@ -1,0 +1,9 @@
+#popclip
+name: Uppercase
+identifier: io.github.jondkinney.omapop.uppercase
+description: Replace the selection with its uppercase form. Shift-click for lowercase.
+icon: square AB
+after: paste-result
+javascript: |
+  const text = popclip.input.text
+  return popclip.modifiers.shift ? text.toLowerCase() : text.toUpperCase()

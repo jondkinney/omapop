@@ -1,0 +1,12 @@
+#popclip
+name: Word Count
+identifier: io.github.jondkinney.omapop.wordcount
+description: Show the number of words and characters in the selection.
+icon: square filled WC
+after: show-result
+interpreter: bash
+shell mode: none
+shell script: |
+  words=$(printf '%s' "$POPCLIP_TEXT" | wc -w)
+  chars=$(printf '%s' "$POPCLIP_TEXT" | wc -m)
+  printf '%s words, %s characters' "$words" "$chars"

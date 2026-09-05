@@ -1,0 +1,7 @@
+#popclip
+name: Wikipedia
+identifier: io.github.jondkinney.omapop.wikipedia
+description: Look the selection up on Wikipedia.
+icon: circle W
+url: https://en.wikipedia.org/w/index.php?search=***
+clean query: true
