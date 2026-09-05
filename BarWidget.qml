@@ -22,6 +22,7 @@ Panel {
     readonly property bool engineReady: service ? service.engineReady : false
     readonly property var extensions: service ? service.extensions : []
     readonly property string fontFamily: bar ? bar.fontFamily : Style.font.family
+    readonly property color secondaryText: Qt.rgba(Color.popups.text.r, Color.popups.text.g, Color.popups.text.b, Color.popups.text.a * 0.68)
     readonly property bool showIcon: setting("showBarIcon", true) !== false
     property string expandedId: ""
     property bool directorySeeded: false
@@ -30,6 +31,42 @@ Panel {
         Layout.fillWidth: true
         implicitHeight: 1
         color: Qt.rgba(Color.popups.text.r, Color.popups.text.g, Color.popups.text.b, Color.popups.text.a * 0.12)
+    }
+
+    component SectionHeading: RowLayout {
+        id: heading
+        required property string title
+        property int count: -1
+        Layout.fillWidth: true
+        Layout.topMargin: Style.spacing.xxl
+        Layout.bottomMargin: Style.spacing.xs
+        spacing: Style.spacing.lg
+
+        Text {
+            Layout.fillWidth: true
+            text: heading.title
+            textFormat: Text.PlainText
+            color: Color.popups.text
+            font.family: root.fontFamily
+            font.pixelSize: Style.font.title
+            font.weight: Font.DemiBold
+        }
+        Rectangle {
+            visible: heading.count >= 0
+            implicitWidth: countLabel.implicitWidth + Style.spacing.xxl
+            implicitHeight: countLabel.implicitHeight + Style.spacing.md
+            radius: height / 2
+            color: Qt.rgba(Color.popups.text.r, Color.popups.text.g, Color.popups.text.b, Color.popups.text.a * 0.07)
+            Text {
+                id: countLabel
+                anchors.centerIn: parent
+                text: String(heading.count)
+                textFormat: Text.PlainText
+                color: root.secondaryText
+                font.family: root.fontFamily
+                font.pixelSize: Style.font.caption
+            }
+        }
     }
 
     // The scanner's notes are lower-case clauses ("needs macOS (...)"); start a caption with one.
@@ -91,26 +128,65 @@ Panel {
             anchors.fill: parent
             spacing: Style.space(6)
 
-            PanelSectionHeader {
-                Layout.fillWidth: true
-                text: "Omapop"
-            }
-
             RowLayout {
                 Layout.fillWidth: true
-                spacing: Style.spacing.md
+                Layout.bottomMargin: Style.spacing.xs
+                spacing: Style.spacing.xl
+
+                BarIcon {
+                    Layout.preferredWidth: Math.round(Style.space(24))
+                    Layout.preferredHeight: Math.round(Style.space(24))
+                    color: root.paused ? root.secondaryText : Color.accent
+                    paused: root.paused
+                }
                 Text {
                     Layout.fillWidth: true
-                    text: root.paused ? "Paused: the bar stays hidden until resumed." : root.engineReady ? "Active: select text with the mouse to show the bar." : "Waiting for the Hyprland engine to install."
+                    text: "Omapop"
                     textFormat: Text.PlainText
-                    wrapMode: Text.WordWrap
                     color: Color.popups.text
                     font.family: root.fontFamily
-                    font.pixelSize: Style.font.bodySmall
+                    font.pixelSize: Math.round(Style.font.heading * 1.25)
+                    font.weight: Font.DemiBold
                 }
                 ToggleSwitch {
                     checked: !root.paused
                     onToggled: if (root.service) root.service.paused = !root.service.paused
+                }
+            }
+
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: Style.spacing.lg
+
+                Rectangle {
+                    Layout.alignment: Qt.AlignTop
+                    Layout.topMargin: Math.round(Style.space(4))
+                    implicitWidth: Math.round(Style.space(6))
+                    implicitHeight: implicitWidth
+                    radius: width / 2
+                    color: root.paused || !root.engineReady ? root.secondaryText : Color.accent
+                }
+                ColumnLayout {
+                    Layout.fillWidth: true
+                    spacing: Style.spacing.xxs
+                    Text {
+                        Layout.fillWidth: true
+                        text: root.paused ? "Paused" : root.engineReady ? "Ready for selection" : "Connecting to Hyprland"
+                        textFormat: Text.PlainText
+                        color: Color.popups.text
+                        font.family: root.fontFamily
+                        font.pixelSize: Style.font.bodySmall
+                        font.weight: Font.Medium
+                    }
+                    Text {
+                        Layout.fillWidth: true
+                        text: root.paused ? "Turn on to bring back the action bar." : root.engineReady ? "Select text with the mouse to show the action bar." : "Waiting for the selection engine to start."
+                        textFormat: Text.PlainText
+                        wrapMode: Text.WordWrap
+                        color: root.secondaryText
+                        font.family: root.fontFamily
+                        font.pixelSize: Style.font.caption
+                    }
                 }
             }
 
@@ -139,10 +215,9 @@ Panel {
                 font.pixelSize: Style.font.caption
             }
 
-            PanelSectionHeader {
-                Layout.fillWidth: true
-                Layout.topMargin: Style.spacing.sm
-                text: "Installed extensions"
+            SectionHeading {
+                title: "Installed extensions"
+                count: root.extensions.length
             }
 
             Text {
@@ -151,7 +226,7 @@ Panel {
                 text: "Nothing installed yet. Pick one from Available extensions below, or select a #popclip snippet anywhere and click Install."
                 textFormat: Text.PlainText
                 wrapMode: Text.WordWrap
-                color: Qt.darker(Color.popups.text, 1.4)
+                color: root.secondaryText
                 font.family: root.fontFamily
                 font.pixelSize: Style.font.caption
             }
@@ -160,7 +235,7 @@ Panel {
                 id: installedList
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.preferredHeight: Math.min(contentHeight, Math.round(panel.screenH * 0.30))
+                Layout.preferredHeight: Math.min(contentHeight, Math.round(panel.screenH * 0.40))
                 Layout.minimumHeight: count ? Math.round(Style.space(64)) : 0
                 visible: count > 0
                 clip: true
@@ -197,16 +272,17 @@ Panel {
 
                         ColumnLayout {
                             Layout.fillWidth: true
-                            spacing: 0
+                            spacing: Style.spacing.xxs
                             Text {
                                 Layout.fillWidth: true
                                 text: Actions.oneLine(modelData.name || modelData.identifier || "?", 200)
                                 textFormat: Text.PlainText
                                 wrapMode: Text.WordWrap
                                 // Unusable here (every action needs macOS): present, but dimmed.
-                                color: modelData.usable === false ? Qt.darker(Color.popups.text, 1.4) : Color.popups.text
+                                color: modelData.usable === false ? root.secondaryText : Color.popups.text
                                 font.family: root.fontFamily
                                 font.pixelSize: Style.font.body
+                                font.weight: Font.DemiBold
                             }
                             Text {
                                 Layout.fillWidth: true
@@ -222,7 +298,7 @@ Panel {
                                 }
                                 textFormat: Text.PlainText
                                 wrapMode: Text.WordWrap
-                                color: modelData.error ? Color.urgent : Qt.darker(Color.popups.text, 1.4)
+                                color: modelData.error ? Color.urgent : root.secondaryText
                                 font.family: root.fontFamily
                                 font.pixelSize: Style.font.caption
                             }
@@ -279,7 +355,7 @@ Panel {
                                     text: Actions.oneLine(modelData.description || "", 400)
                                     textFormat: Text.PlainText
                                     wrapMode: Text.WordWrap
-                                    color: Qt.darker(Color.popups.text, 1.4)
+                color: root.secondaryText
                                     font.family: root.fontFamily
                                     font.pixelSize: Style.font.caption
                                 }
@@ -326,10 +402,9 @@ Panel {
 
             // Browse and install published extensions. The service shells out
             // to bin/omapop-directory.py; this only renders what comes back.
-            PanelSectionHeader {
-                Layout.fillWidth: true
-                Layout.topMargin: Style.spacing.sm
-                text: "Available extensions"
+            SectionHeading {
+                title: "Available extensions"
+                count: root.service ? root.service.directoryTotal : -1
             }
 
             Timer {
@@ -344,7 +419,7 @@ Panel {
                 TextField {
                     id: searchField
                     Layout.fillWidth: true
-                    placeholderText: "Search published extensions"
+                    placeholderText: "Search extensions"
                     onTextChanged: searchDebounce.restart()
                 }
                 Button {
@@ -373,13 +448,13 @@ Panel {
                         if (root.service.directoryStatus !== "")
                             return root.service.directoryStatus
                         if (root.service.directoryBusy)
-                            return "Working\u2026"
+                            return "Loading catalogue\u2026"
                         if (root.service.directoryTotal > 0) {
-                            var s = root.service.directoryResults.length + " of " + root.service.directoryTotal + " extensions"
+                            var s = root.service.directoryResults.length + " shown"
                             if (root.service.directoryShowMac)
-                                s += ", macOS-only included"
+                                s += " \u00b7 macOS-only included"
                             else if (root.service.directoryHidden > 0)
-                                s += ", " + root.service.directoryHidden + " hidden (need macOS)"
+                                s += " \u00b7 " + root.service.directoryHidden + " macOS-only hidden"
                             if (root.service.directoryClassifying)
                                 s += " \u00b7 checking which need macOS\u2026"
                             return s
@@ -388,7 +463,7 @@ Panel {
                     }
                     textFormat: Text.PlainText
                     wrapMode: Text.WordWrap
-                    color: Qt.darker(Color.popups.text, 1.4)
+                color: root.secondaryText
                     font.family: root.fontFamily
                     font.pixelSize: Style.font.caption
                 }
@@ -440,15 +515,16 @@ Panel {
 
                         ColumnLayout {
                             Layout.fillWidth: true
-                            spacing: 0
+                            spacing: Style.spacing.xxs
                             Text {
                                 Layout.fillWidth: true
                                 text: modelData.name
                                 textFormat: Text.PlainText
                                 wrapMode: Text.WordWrap
-                                color: modelData.needsMac ? Qt.darker(Color.popups.text, 1.4) : Color.popups.text
+                                color: modelData.needsMac ? root.secondaryText : Color.popups.text
                                 font.family: root.fontFamily
                                 font.pixelSize: Style.font.body
+                                font.weight: Font.DemiBold
                             }
                             Text {
                                 Layout.fillWidth: true
@@ -456,7 +532,7 @@ Panel {
                                 text: (modelData.needsMac ? "Needs macOS. " : "") + modelData.description + (modelData.author ? "  \u2014 " + modelData.author : "")
                                 textFormat: Text.PlainText
                                 wrapMode: Text.WordWrap
-                                color: Qt.darker(Color.popups.text, 1.4)
+                color: root.secondaryText
                                 font.family: root.fontFamily
                                 font.pixelSize: Style.font.caption
                             }
