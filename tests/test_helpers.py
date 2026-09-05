@@ -153,6 +153,20 @@ class ExtensionBuildTests(unittest.TestCase):
     def test_mac_only_actions_are_unsupported(self):
         ext, _ = self.build({"name": "Svc", "service name": "Make Sticky"})
         self.assertEqual(ext["actions"][0]["type"], "unsupported")
+        self.assertFalse(ext["usable"])
+        self.assertEqual(ext["platformNote"], "needs macOS (service actions are macOS-only)")
+
+    def test_platform_note_counts_leaf_actions(self):
+        ext, _ = self.build({"name": "Mixed", "actions": [{"service name": "S"}, {"url": "https://x/?q=***"}, {"shortcut name": "K"}]})
+        self.assertTrue(ext["usable"])
+        self.assertEqual(ext["platformNote"], "2 of 3 actions need macOS (service actions are macOS-only; shortcut actions are macOS-only)")
+        ext, _ = self.build({"name": "Folder", "submenu": [{"applescript": "a"}, {"applescript": "b"}]})
+        self.assertFalse(ext["usable"])
+        self.assertEqual(ext["platformNote"], "needs macOS (applescript actions are macOS-only)")
+        ext, _ = self.build({"name": "Broken", "shell script file": "gone.sh"})
+        self.assertEqual((ext["usable"], ext["platformNote"]), (False, "cannot run here (shell script file missing)"))
+        ext, _ = self.build({"name": "Fine", "url": "https://x/?q=***"})
+        self.assertEqual((ext["usable"], ext["platformNote"]), (True, ""))
 
     def test_path_escape_is_rejected(self):
         with tempfile.TemporaryDirectory() as d:
@@ -360,6 +374,44 @@ class CliTests(unittest.TestCase):
         for e in out["extensions"]:
             if e["identifier"].startswith("Scalar"):
                 self.assertTrue(e.get("error"))
+
+    def test_unusable_extension_is_disabled_without_a_settings_entry(self):
+        pkg = os.path.join(self.user, "Alfred.popclipext")
+        os.makedirs(pkg)
+        with open(os.path.join(pkg, "Config.yaml"), "w") as fh:
+            fh.write("#popclip\nname: Alfred\nidentifier: test.alfred\napplescript: tell app\n")
+        code, out = self.run_helper("scan", "--settings", self.settings, "--user", self.user)
+        self.assertEqual(code, 0)
+        alfred = next(e for e in out["extensions"] if e["identifier"] == "test.alfred")
+        self.assertFalse(alfred["enabled"])
+        self.assertFalse(alfred["usable"])
+        self.assertIsNone(alfred.get("error"))
+        self.assertEqual(alfred["platformNote"], "needs macOS (applescript actions are macOS-only)")
+        self.assertEqual(out["settings"]["disabled"], [])
+
+    def test_escaping_symlink_package_is_rejected(self):
+        # A downloaded package that ships a symlink pointing outside itself must
+        # be refused, so the runner's read sandbox cannot be escaped through it.
+        pkg = os.path.join(self.user, "Exfil.popclipext")
+        os.makedirs(pkg)
+        with open(os.path.join(pkg, "Config.yaml"), "w") as fh:
+            fh.write("#popclip\nname: Exfil\nidentifier: test.exfil\nurl: https://x/?q=***\n")
+        os.symlink("/etc/hostname", os.path.join(pkg, "stash"))
+        ok = os.path.join(self.user, "Ok.popclipext")
+        os.makedirs(ok)
+        with open(os.path.join(ok, "real.txt"), "w") as fh:
+            fh.write("x")
+        os.symlink("real.txt", os.path.join(ok, "alias"))  # points inside: allowed
+        with open(os.path.join(ok, "Config.yaml"), "w") as fh:
+            fh.write("#popclip\nname: Ok\nidentifier: test.ok\nurl: https://x/?q=***\n")
+        code, out = self.run_helper("scan", "--settings", self.settings, "--user", self.user)
+        self.assertEqual(code, 0)
+        by_id = {e["identifier"]: e for e in out["extensions"]}
+        # A package rejected before its config is parsed is keyed by its folder stem.
+        self.assertIn("symlink", by_id["Exfil"]["error"])
+        self.assertFalse(by_id["Exfil"]["enabled"])
+        self.assertIsNone(by_id["test.ok"].get("error"))
+        self.assertTrue(by_id["test.ok"]["enabled"])
 
     def test_settings_symlink_and_fifo_are_rejected(self):
         os.symlink("/etc/hostname", self.settings)

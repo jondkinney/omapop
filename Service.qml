@@ -1768,7 +1768,9 @@ Item {
             if (!ext)
                 continue
             var isOff = ext.identifier === identifier ? !enabled : !ext.enabled
-            if (isOff && !ext.error)
+            // Broken or unusable (every action needs macOS) is the scanner's
+            // verdict, not a choice, so it is not recorded as one.
+            if (isOff && !ext.error && ext.usable !== false)
                 disabled.push(ext.identifier)
             if (ext.optionValues && Object.keys(ext.optionValues).length)
                 options[ext.identifier] = ext.optionValues
@@ -1784,7 +1786,7 @@ Item {
             var ext = extensions[i]
             if (!ext)
                 continue
-            if (!ext.enabled && !ext.error)
+            if (!ext.enabled && !ext.error && ext.usable !== false)
                 disabled.push(ext.identifier)
             var current = {}
             var have = ext.optionValues || {}

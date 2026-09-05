@@ -501,7 +501,44 @@ def build_extension(config, ext_dir, source, config_file, warnings):
         if a.get("type") == "none" and not a.get("submenu"):
             a["type"] = "unsupported"
             a["unsupportedReason"] = "action has no behaviour"
+    ext["usable"], ext["platformNote"] = platform_summary(ext["actions"])
     return ext
+
+
+def platform_summary(actions):
+    """(usable, note) for a finished action list.
+
+    Leaf actions are counted (a folder is only its children). An extension
+    whose every action is unsupported cannot do anything on this machine, so
+    it is not usable and the scanner leaves it disabled. The note says why in
+    the scanner's own words, so the panel, the CLI and the install message all
+    agree: "needs macOS (applescript actions are macOS-only)", or for a
+    partial one "2 of 3 actions need macOS (...)". Empty when everything runs.
+    """
+    total = 0
+    reasons = []
+
+    def walk(items, depth):
+        nonlocal total
+        for a in items:
+            if not isinstance(a, dict) or a.get("separator"):
+                continue
+            if a.get("submenu") and depth < 3:
+                walk(a["submenu"], depth + 1)
+                continue
+            total += 1
+            if a.get("type") == "unsupported":
+                reasons.append(a.get("unsupportedReason") or "unsupported action")
+
+    walk(actions, 0)
+    if not reasons:
+        return True, ""
+    unique = sorted(set(reasons))
+    mac = all("macOS" in r for r in unique)
+    detail = "; ".join(unique)[:200]
+    if len(reasons) >= total:
+        return False, ("needs macOS (%s)" if mac else "cannot run here (%s)") % detail
+    return True, ("%d of %d actions need macOS (%s)" if mac else "%d of %d actions cannot run here (%s)") % (len(reasons), total, detail)
 
 
 SNIPPET_MARK = re.compile(r"^\s*#\s?popclip\b", re.IGNORECASE)
@@ -727,10 +764,54 @@ def scan_dir(root, source, results, warnings_out):
                 "entitlements": [],
                 "error": clean_text(str(exc), 512),
                 "warnings": warnings,
+                "usable": False,
+                "platformNote": "",
             })
 
 
+def escaping_symlink(pkg_dir):
+    """Path of the first symlink in the package whose target leaves it, else None.
+
+    The JavaScript runner confines a downloaded extension to its own directory
+    with the runtime's read sandbox (Deno --allow-read, Node --allow-fs-read),
+    but both runtimes authorise by the lexical path and then follow a symlink
+    out to its target. A package that ships `stash -> ../../.ssh/id_rsa` could
+    read it despite the sandbox, so a package with any escaping symlink is
+    refused here and never handed to the runner.
+    """
+    try:
+        root = os.path.realpath(pkg_dir)
+    except OSError:
+        return pkg_dir
+    budget = 5000
+    stack = [pkg_dir]
+    while stack:
+        current = stack.pop()
+        try:
+            scan = os.scandir(current)
+        except OSError:
+            continue
+        with scan:
+            for entry in scan:
+                budget -= 1
+                if budget <= 0:
+                    return entry.path  # too many entries to vet; refuse the package
+                if entry.is_symlink():
+                    try:
+                        target = os.path.realpath(entry.path)
+                    except OSError:
+                        return entry.path
+                    if target != root and not target.startswith(root + os.sep):
+                        return entry.path
+                elif entry.is_dir(follow_symlinks=False):
+                    stack.append(entry.path)
+    return None
+
+
 def load_package(pkg_dir, source, warnings):
+    leak = escaping_symlink(pkg_dir)
+    if leak is not None:
+        raise ValueError("package contains a symlink pointing outside itself: %s" % os.path.basename(leak.rstrip("/"))[:120])
     config_path = None
     kind = None
     for fname in ("Config.yaml", "Config.yml", "Config.json", "Config.js", "Config.ts", "Config.plist", "Config"):
@@ -806,7 +887,10 @@ def cmd_scan(args):
             seen[key] = ext
     extensions = [e for e in extensions if not e.get("shadowed")]
     for ext in extensions:
-        ext["enabled"] = ext.get("identifier") not in settings["disabled"] and not ext.get("error")
+        # Not usable (every action needs macOS, or a file is missing) is not a
+        # choice the toggle can override, so it is not written to the disabled
+        # list either: fix the package and it comes back on by itself.
+        ext["enabled"] = ext.get("identifier") not in settings["disabled"] and not ext.get("error") and ext.get("usable") is not False
         ext["optionValues"] = settings["options"].get(ext.get("identifier", ""), {})
     out = {"ok": True, "extensions": extensions, "settings": settings, "warnings": warnings}
     sys.stdout.write(json.dumps(out, ensure_ascii=False) + "\n")
