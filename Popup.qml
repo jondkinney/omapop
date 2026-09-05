@@ -26,6 +26,7 @@ PanelWindow {
     property string confirmAccept: "Install"
     property string hoveredTitle: ""
     property real shownAt: 0
+    property bool selectionUpdating: false
     // Index of the button centred over the pointer (wants primary display).
     property int primaryIndex: -1
     property real primaryCenter: -1
@@ -111,6 +112,7 @@ PanelWindow {
     }
 
     function present(targetScreen, ax, ay, wantAbove, list, keyboard, primary) {
+        var opening = !visible || (targetScreen && screen !== targetScreen)
         if (targetScreen && screen !== targetScreen)
             screen = targetScreen
         anchorX = ax
@@ -125,9 +127,11 @@ PanelWindow {
         mode = "buttons"
         keyboardMode = !!keyboard
         highlight = keyboard ? 0 : -1
-        shownAt = Date.now()
         visible = true
-        entrance.restart()
+        if (opening) {
+            shownAt = Date.now()
+            entrance.restart()
+        }
         if (keyboardMode)
             keyCatcher.forceActiveFocus()
         Qt.callLater(function () {
@@ -229,6 +233,7 @@ PanelWindow {
     Item {
         id: content
         anchors.fill: parent
+        enabled: !win.selectionUpdating
         opacity: 0
         scale: 0.94
         transformOrigin: win.above ? Item.Bottom : Item.Top

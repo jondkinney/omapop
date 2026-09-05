@@ -131,6 +131,7 @@ Item {
 
     // Current presentation.
     property var current: null      // { input, context, trigger, screenName, monitor, buttons }
+    property bool selectionUpdating: false
     property bool busy: false
     property var busyTask: null
 
@@ -141,6 +142,8 @@ Item {
     property var pendingRelease: null
     property var lastReleaseInfo: null
     property int clickCount: 0
+    readonly property int multiClickInterval: 450
+    readonly property int clickSettleInterval: 80
 
     function log(message) {
         console.log("omapop:", message)
@@ -501,6 +504,7 @@ Item {
             } else if (name === "configreloaded") {
                 installSoon.restart()
             } else if (name === "workspace" || name === "workspacev2" || name === "focusedmon" || name === "focusedmonv2") {
+                root.cancelSelection()
                 if (popup.visible)
                     root.hidePopup()
             }
@@ -510,6 +514,7 @@ Item {
     Connections {
         target: Hyprland
         function onActiveToplevelChanged() {
+            root.cancelSelection()
             if (popup.visible && Date.now() - popup.shownAt > 300)
                 root.hidePopup()
         }
@@ -571,46 +576,75 @@ Item {
         } else if (kind === "shortcut") {
             trigger(parseContext(f, 1), "shortcut")
         } else if (kind === "key") {
+            cancelSelection()
             if (popup.visible && !busy && !popup.keyboardMode)
                 hidePopup()
         } else if (kind === "far" || kind === "scroll") {
+            cancelSelection()
             if (popup.visible && !busy)
                 hidePopup()
         }
     }
 
+    function isClickContinuation(x, y, now) {
+        return lastReleaseInfo && !lastReleaseInfo.dragged && now - lastReleaseInfo.t < multiClickInterval
+            && Math.abs(x - lastReleaseInfo.x) < 8 && Math.abs(y - lastReleaseInfo.y) < 8
+    }
+
     function onPress(x, y, button, mods, inside) {
+        var continuing = button === 272 && !inside && (mods & 64) === 0 && !busy
+            && popup.visible && popup.mode === "buttons" && !popup.keyboardMode
+            && current && current.trigger === "selection" && isClickContinuation(x, y, Date.now())
+            && current.ctx.app.address === lastReleaseInfo.address
+        // A click on the bar must not cancel an update still reading the new
+        // selection. Its actions stay disabled until that update completes.
+        if (!inside)
+            cancelSelection()
         lastPressAt = Date.now()
         lastPressMods = mods
-        if (popup.visible && !inside && Date.now() - popup.shownAt > 120) {
+        if (button !== 272 || inside) {
+            lastReleaseInfo = null
+            clickCount = 0
+        }
+        if (continuing) {
+            selectionUpdating = true
+        } else if (popup.visible && !inside && (selectionUpdating || Date.now() - popup.shownAt > 120)) {
             hidePopup()
         }
     }
 
     function onRelease(ctx) {
         var now = Date.now()
-        if (ctx.pressInside || ctx.wasLongPress)
+        // Super suppresses selection, including its contribution to a later
+        // multi-click sequence after the modifier has been released.
+        if (ctx.pressInside || ctx.wasLongPress || paused || ((ctx.mods | lastPressMods) & 64) !== 0) {
+            if (selectionUpdating && !ctx.pressInside)
+                hidePopup()
+            lastReleaseInfo = null
+            clickCount = 0
             return
+        }
         var dx = ctx.x - ctx.pressX
         var dy = ctx.y - ctx.pressY
         var dragged = Math.sqrt(dx * dx + dy * dy) >= dragThreshold
-        if (lastReleaseInfo && now - lastReleaseInfo.t < 450 && Math.abs(ctx.x - lastReleaseInfo.x) < 8 && Math.abs(ctx.y - lastReleaseInfo.y) < 8)
+        var address = ctx.app ? ctx.app.address : ""
+        if (!dragged && isClickContinuation(ctx.x, ctx.y, now) && lastReleaseInfo.address === address)
             clickCount += 1
         else
             clickCount = 1
-        lastReleaseInfo = { t: now, x: ctx.x, y: ctx.y }
-        if (paused)
-            return
-        // Holding Super while selecting suppresses the bar.
-        if (((ctx.mods | lastPressMods) & 64) !== 0)
-            return
+        lastReleaseInfo = { t: now, x: ctx.x, y: ctx.y, dragged: dragged, address: address }
+        if (selectionUpdating && (dragged || clickCount === 1))
+            hidePopup()
         ctx.dragged = dragged
         ctx.clicks = clickCount
         ctx.time = now
         ctx.downward = ctx.y > ctx.pressY + 4
         pendingRelease = ctx
-        if (selectionChangedAt >= lastPressAt - 300 && selectionChangedAt <= now + 1) {
-            readSoon.restart()
+        // A completed drag or multi-click can reselect the same primary text
+        // without another watcher notification. Plain clicks need a change
+        // belonging to this press, rather than one from an earlier selection.
+        if (dragged || clickCount >= 2 || (selectionChangedAt >= lastPressAt && selectionChangedAt <= now + 1)) {
+            scheduleSelectionRead()
         } else {
             pendingExpiry.restart()
         }
@@ -620,9 +654,26 @@ Item {
         var now = Date.now()
         selectionChangedAt = now
         if (pendingRelease && now - pendingRelease.time <= 500) {
-            pendingExpiry.stop()
-            readSoon.restart()
+            scheduleSelectionRead()
         }
+    }
+
+    function scheduleSelectionRead() {
+        if (!pendingRelease)
+            return
+        pendingExpiry.stop()
+        // Read promptly. A later click in the same sequence updates the visible
+        // bar in place, so this need not wait for the full multi-click interval.
+        readSoon.interval = pendingRelease.dragged ? 40 : clickSettleInterval
+        readSoon.restart()
+    }
+
+    function takePendingSelection() {
+        var ctx = pendingRelease
+        pendingRelease = null
+        pendingExpiry.stop()
+        if (ctx)
+            trigger(ctx, "selection")
     }
 
     Timer {
@@ -634,35 +685,49 @@ Item {
     Timer {
         id: readSoon
         interval: 40
-        onTriggered: {
-            var ctx = root.pendingRelease
-            root.pendingRelease = null
-            if (ctx)
-                root.trigger(ctx, "selection")
-        }
+        onTriggered: root.takePendingSelection()
     }
 
     // ------------------------------------------------------------ reading the selection
 
     property var readTask: null
+    property int readGeneration: 0
+
+    function cancelSelection() {
+        readGeneration += 1
+        readSoon.stop()
+        pendingExpiry.stop()
+        pendingRelease = null
+        if (readTask) {
+            var task = readTask
+            readTask = null
+            task.cancel()
+        }
+    }
 
     function trigger(ctx, kind) {
-        if (paused)
+        cancelSelection()
+        if (paused || (excludedApps.length && Actions.classMatches(excludedApps, ctx.app.appClass))) {
+            if (selectionUpdating)
+                hidePopup()
             return
-        if (excludedApps.length && Actions.classMatches(excludedApps, ctx.app.appClass))
-            return
-        if (readTask)
-            readTask.cancel()
+        }
+        var generation = readGeneration
+        var discard = function () {
+            if (generation === readGeneration && selectionUpdating)
+                hidePopup()
+        }
         var wantHtml = extensionsWantHtml()
         var argv = ["/usr/bin/python3", "-I", selectionHelper, "--max-bytes", String(maxSelectionBytes), "--clipboard-text"]
         if (wantHtml)
             argv.push("--html")
         // The accessibility probe runs alongside the selection read; whichever
         // finishes last presents the bar.
-        var join = { probe: undefined, probeDone: false, read: null, readDone: false }
+        var join = { probe: undefined, probeDone: false, read: null, readDone: false, presented: false }
         var finish = function () {
-            if (!join.probeDone || !join.readDone || !join.read)
+            if (generation !== readGeneration || paused || join.presented || !join.probeDone || !join.readDone || !join.read)
                 return
+            join.presented = true
             var r = join.read
             var input = buildInput(r.text, r.parsed)
             var context = buildContext(ctx, r.parsed, join.probe)
@@ -678,22 +743,30 @@ Item {
             limit: maxSelectionBytes * 3 + 262144,
             deadline: 6000
         }, function (result) {
+            if (generation !== readGeneration)
+                return
             readTask = null
             if (!result.ok) {
+                discard()
                 if (kind === "longpress" || kind === "shortcut")
                     log("selection read failed: " + (result.stderr || "").slice(0, 200))
                 return
             }
             var parsed = parseJson(result.stdout, maxSelectionBytes * 3 + 262144)
             if (!parsed || typeof parsed !== "object") {
+                discard()
                 warn("selection helper returned nothing usable")
                 return
             }
             var text = parsed.ok === true && typeof parsed.text === "string" ? parsed.text : ""
-            if (kind === "selection" && text.trim().length === 0)
+            if (kind === "selection" && text.trim().length === 0) {
+                discard()
                 return
-            if (kind !== "longpress" && parsed.ok !== true && parsed.reason !== "empty")
+            }
+            if (kind !== "longpress" && parsed.ok !== true && parsed.reason !== "empty") {
+                discard()
                 return
+            }
             join.read = { text: text, parsed: parsed }
             join.readDone = true
             finish()
@@ -917,12 +990,17 @@ Item {
     function present(ctx, input, context, kind) {
         var buttons = builtinButtons(input, context).concat(extensionButtons(input, context))
         if (!buttons.length) {
+            if (selectionUpdating)
+                hidePopup()
             log("nothing to show for this selection")
             return
         }
         var screen = screenForName(ctx.monitor.name)
-        if (!screen)
+        if (!screen) {
+            if (selectionUpdating)
+                hidePopup()
             return
+        }
         var perPage = Math.max(4, Math.min(12, Math.floor((ctx.monitor.w * 0.55) / 34)))
         buttons = paginate(buttons, perPage)
         var primary = -1
@@ -934,6 +1012,7 @@ Item {
                 initial = buttons[i]
         }
         current = { input: input, context: context, trigger: kind, ctx: ctx, screenName: ctx.monitor.name }
+        selectionUpdating = false
         busy = false
         var localX = Math.round(ctx.x - ctx.monitor.x)
         var localY = Math.round(ctx.y - ctx.monitor.y)
@@ -946,6 +1025,7 @@ Item {
     Popup {
         id: popup
         fontFamily: Style.font.family
+        selectionUpdating: root.selectionUpdating
         onGeometryReady: root.armEngine()
         onButtonClicked: function (button, qtModifiers) { root.handleClick(button, qtModifiers) }
         onResultClicked: root.handleResultClick()
@@ -986,6 +1066,8 @@ Item {
     }
 
     function hidePopup() {
+        cancelSelection()
+        selectionUpdating = false
         if (busyTask)
             busyTask.cancel()
         busy = false
@@ -1032,7 +1114,7 @@ Item {
     }
 
     function handleClick(button, qtModifiers) {
-        if (!current || busy)
+        if (!current || busy || selectionUpdating)
             return
         var mods = clickModifiers(qtModifiers)
         if (button.submenu && button.submenu.length && (button.isFolder || mods.rightClick || !button.action || (!button.action.hasCode && button.action.type === "folder"))) {
@@ -2083,6 +2165,8 @@ Item {
                 busy: root.busy, hasCurrent: !!root.current, reading: !!root.readTask, pending: !!root.pendingRelease,
                 mode: popup.mode, visible: popup.visible, screen: popup.screen ? String(popup.screen.name) : "",
                 keyboard: popup.keyboardMode, probeRunning: contextProc.running,
+                gesture: { clicks: root.clickCount, settleMs: root.clickSettleInterval, multiClickMs: root.multiClickInterval,
+                    readDelayMs: readSoon.interval, generation: root.readGeneration, updating: root.selectionUpdating },
                 context: root.current ? { app: root.current.context.appIdentifier, editable: root.current.context.editable, source: root.current.context.editSource, canPaste: root.current.context.canPaste, canReplace: root.current.context.canReplace } : null,
                 tasks: root.activeTasks.length, modules: Object.keys(root.moduleActions)
             })
@@ -2113,7 +2197,7 @@ Item {
         return "ok"
     }
 
-    onPausedChanged: if (paused && popup.visible) hidePopup()
+    onPausedChanged: if (paused) hidePopup()
 
     // ------------------------------------------------------------ startup
 
