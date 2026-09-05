@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
+import QtQuick.Shapes
 import qs.Commons
 import "Actions.js" as Actions
 
@@ -78,6 +79,31 @@ PanelWindow {
     }
     implicitWidth: totalWidth
     implicitHeight: totalHeight
+
+    // Card plus pointer as a single closed path, in card coordinates. Drawing
+    // them as one shape is what keeps the outline continuous; a separate nub
+    // behind a bordered rectangle always leaves a seam across its mouth.
+    readonly property string cardPath: {
+        var w = Math.round(card.implicitWidth)
+        var h = Math.round(card.implicitHeight)
+        var r = radius
+        var half = nubSize
+        var depth = nubSize
+        var lo = r + half + 1
+        var hi = w - r - half - 1
+        var wanted = anchorX - clampedLeft - cardLeft
+        var cx = lo > hi ? Math.round(w / 2) : Math.round(Math.max(lo, Math.min(hi, wanted)))
+        var d = "M " + r + " 0 "
+        if (!above)
+            d += "H " + (cx - half) + " L " + cx + " " + (-depth) + " L " + (cx + half) + " 0 "
+        d += "H " + (w - r) + " A " + r + " " + r + " 0 0 1 " + w + " " + r + " "
+        d += "V " + (h - r) + " A " + r + " " + r + " 0 0 1 " + (w - r) + " " + h + " "
+        if (above)
+            d += "H " + (cx + half) + " L " + cx + " " + (h + depth) + " L " + (cx - half) + " " + h + " "
+        d += "H " + r + " A " + r + " " + r + " 0 0 1 0 " + (h - r) + " "
+        d += "V " + r + " A " + r + " " + r + " 0 0 1 " + r + " 0 Z"
+        return d
+    }
 
     // Bar rectangle in this window's coordinates, for the compositor-side hit test.
     function cardRect() {
@@ -286,22 +312,7 @@ PanelWindow {
             }
         }
 
-        // Nub pointing at the selection.
-        Rectangle {
-            id: nub
-            width: win.nubSize + 2
-            height: win.nubSize + 2
-            x: win.nubX - 1
-            y: win.above ? win.labelHeight + win.nubSize + card.implicitHeight - height / 2 - 1 : win.labelHeight + win.nubSize - height / 2 + 1
-            rotation: 45
-            color: win.bg
-            border.color: win.borderColor
-            border.width: 1
-            antialiasing: true
-            z: 0
-        }
-
-        Rectangle {
+        Item {
             id: card
             x: win.cardLeft
             y: win.labelHeight + win.nubSize
@@ -309,19 +320,22 @@ PanelWindow {
             implicitHeight: win.buttonSize + Style.spacing.xs * 2
             width: implicitWidth
             height: implicitHeight
-            radius: win.radius
-            color: win.bg
-            border.color: win.borderColor
-            border.width: 1
-            antialiasing: true
             z: 1
 
-            // Hides the nub's inner half so the card looks like one shape.
-            Rectangle {
+            // One fill, one stroke, pointer included. The path overflows the item
+            // downwards (or upwards) by nubSize; nothing here clips.
+            Shape {
                 anchors.fill: parent
-                anchors.margins: 1
-                radius: Math.max(0, win.radius - 1)
-                color: win.bg
+                preferredRendererType: Shape.CurveRenderer
+                antialiasing: true
+                z: -1
+                ShapePath {
+                    fillColor: win.bg
+                    strokeColor: win.borderColor
+                    strokeWidth: 1
+                    joinStyle: ShapePath.RoundJoin
+                    PathSvg { path: win.cardPath }
+                }
             }
 
             Item {
