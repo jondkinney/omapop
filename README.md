@@ -183,6 +183,10 @@ looks up any pages not yet checked. `omarchy-shell io.github.jondkinney.omapop
 dirsearch <query>`, `dirresults`, `dirinstall <shortcode>`, `dirshowmac <0|1>`
 and `dirrefresh` drive the same code from a script.
 
+Installation never overwrites an existing package, including an empty folder or
+symlink. To reinstall, explicitly move the previous `.popclipext` folder out of
+the extensions directory first; keep that backup if you have made local edits.
+
 The catalogue is a local index of what the directory publishes: name,
 description, author, shortcode and action type. It is built on first use and
 refreshed weekly (setting: **Keep the extension catalogue up to date**), and it
@@ -321,7 +325,8 @@ all. The boundaries, and the contract at each:
   `pasteboard.text`; Paste still works because the app receives Ctrl+V.
 - **Extension configs** are read by `omapop-extensions.py` through a single
   `O_NOFOLLOW` descriptor with a 256 KiB limit, parsed with PyYAML's safe
-  loader, normalised to a fixed schema with capped strings, counts and depth,
+  loader (or the standard-library plist reader), normalised to a fixed schema
+  with capped strings, counts and depth,
   and emitted as JSON the shell caps again. Package-relative file references
   that escape the package are rejected (`realpath` compared against the
   package root); icon files must be regular files of at most 1 MiB before the
@@ -329,14 +334,18 @@ all. The boundaries, and the contract at each:
   target escapes the package is rejected outright and never run, because
   both JavaScript runtimes authorise reads by the lexical path and would
   otherwise follow such a symlink out of the sandbox; at most 200 packages
-  per folder.
+  per folder. YAML/plist aliases are expanded under an 8192-value, 1 MiB
+  string-byte budget; cyclic or excessively nested configurations are rejected.
 - **Snippet installs** always confirm, and say when the snippet carries code.
   The package is staged as 0600 files in a 0700 directory and published by
   `rename`, so a half-written extension is never scanned.
 - **Every child process** has a fixed argv with an absolute executable, a
   private environment (only what is needed to reach the compositor and the
   display), a retained-output limit and a deadline; output is drained while the
-  child runs and the child is killed at the limit. Extension shell scripts get
+  child runs and the child is killed at the limit. Limits count UTF-8 bytes,
+  including line delimiters, before buffering or dispatching protocol lines;
+  an unterminated line cannot bypass them. Stderr is separately limited to
+  16 KiB. Extension shell scripts get
   the environment the extension format defines, a 256 KiB output cap and a
   120 s deadline, and are killed when you click the spinner.
 - **Extension JavaScript** never runs in the shell. Under Deno the runner
@@ -355,14 +364,25 @@ all. The boundaries, and the contract at each:
   to reveal must be absolute, and every result string is capped and sanitised
   before display.
 - **The extension directory** is read by `omapop-directory.py`, never by the
-  shell: it fetches only `https://` URLs on popclip.app hosts (re-checked after
-  redirects), with bounded reads and a 20-second deadline, and hands the shell
+  shell: it fetches only `https://` URLs on four explicit popclip.app hosts,
+  port 443, without URL credentials. Every redirect is checked **before** it
+  is followed (at most five), with bounded reads and a 20-second total deadline
+  across DNS, redirects and the body, and hands the shell
   JSON it caps again. Besides the listing it reads each extension's own page
-  once, for the action type, pausing between pages. Downloaded archives are expanded in a staging directory
-  that refuses absolute paths, entries escaping the package, symlink entries,
-  oversized members and anything that is not a single `.popclipext` folder, then
-  published with one rename. An installed package still has to pass the scan
-  above before the shell will load it.
+  once, for the action type, pausing between pages. HTML and catalogue files
+  are limited to 4 MiB, catalogues to 500 entries with a fixed display schema.
+  Cache files are read through a regular-file, owner-checked, no-follow
+  descriptor; writes use private staging and a pinned parent directory.
+  Archive downloads are capped at 20 MiB. All entries are checked before any
+  decompression: no absolute/traversing/duplicate paths, links, special files
+  or encrypted members; at most 500 entries, 16 path levels, 1024 path bytes,
+  8 MiB per member and 32 MiB expanded in total. Extraction streams under the
+  same limits into private staging. Linux `renameat2(RENAME_NOREPLACE)` publishes
+  the package relative to the pinned destination, never replacing an existing
+  package. Cleanup is descriptor-relative. An installed package still has to
+  pass the scan above before the shell will load it. Directory packages are
+  third-party code fetched over HTTPS, not independently signed or certified
+  by Omapop; review the publisher before installing.
 - **The engine** is Lua pushed into Hyprland with `hyprctl eval`. The only
   values injected are clamped integers and one escaped string (the shortcut).
   Its events percent-encode every field with a 240-byte cap per field, and the

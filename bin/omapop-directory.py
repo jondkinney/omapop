@@ -32,12 +32,17 @@ absolute paths, entries escaping the package, and symlink entries, then the
 package is published with a single rename.
 """
 import importlib.util
+import contextlib
+import ctypes
+import io
 import json
 import os
 import re
+import secrets
 import shutil
+import signal
+import stat
 import sys
-import tempfile
 import time
 import urllib.error
 import urllib.request
@@ -59,6 +64,10 @@ MAX_MEMBER_BYTES = 8 * 1024 * 1024
 MAX_TOTAL_BYTES = 32 * 1024 * 1024
 MAX_STR = 512
 MAX_TOPUP_PAGES = 400
+MAX_INDEX_BYTES = 4 * 1024 * 1024
+MAX_INDEX_ENTRIES = 500
+MAX_PATH_BYTES = 1024
+MAX_PATH_DEPTH = 16
 TOPUP_PAUSE_S = 0.15
 
 SHORTCODE_RE = re.compile(r"^[A-Za-z0-9]{4,16}$")
@@ -76,7 +85,7 @@ def die(message, as_json=False, code=1):
 
 def clean(value, limit=MAX_STR):
     s = unescape(str(value if value is not None else "")).strip()
-    s = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f]", "", s)
+    s = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f\u202a-\u202e\u2066-\u2069]", "", s)
     s = re.sub(r"\s+", " ", s)
     return s[:limit]
 
@@ -85,11 +94,65 @@ def clean(value, limit=MAX_STR):
 
 
 def host_allowed(url):
+    """Validate the complete origin, including every redirect before it is sent."""
+    if not isinstance(url, str) or len(url) > 2048 or re.search(r"[\s\x00-\x1f\x7f\\]", url):
+        return False
     try:
-        host = (urlparse(url).hostname or "").lower()
+        parsed = urlparse(url)
+        return (parsed.scheme == "https" and parsed.hostname in ALLOWED_HOSTS
+                and parsed.port in (None, 443) and parsed.username is None and parsed.password is None)
     except ValueError:
         return False
-    return host in ALLOWED_HOSTS
+
+
+class RestrictedRedirect(urllib.request.HTTPRedirectHandler):
+    max_redirections = 5
+    max_repeats = 2
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        if not host_allowed(newurl):
+            fp.close()
+            raise ValueError("refusing an unsafe redirect from popclip.app")
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+@contextlib.contextmanager
+def request_deadline():
+    """The Linux CLI is single-threaded; bound DNS, redirects and body together."""
+    previous = signal.getsignal(signal.SIGALRM)
+    def expired(signum, frame):
+        raise TimeoutError("request exceeded its total deadline")
+    signal.signal(signal.SIGALRM, expired)
+    signal.setitimer(signal.ITIMER_REAL, TIMEOUT_S)
+    try:
+        yield
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, previous)
+
+
+def read_response(response, limit):
+    length = response.headers.get("Content-Length")
+    expected = None
+    if length is not None:
+        if not re.fullmatch(r"[0-9]{1,20}", length):
+            raise ValueError("invalid response length")
+        expected = int(length)
+        if expected > limit:
+            raise ValueError("response is larger than %d bytes" % limit)
+    chunks, size = [], 0
+    read = getattr(response, "read1", response.read)
+    while True:
+        chunk = read(min(65536, limit + 1 - size))
+        if not chunk:
+            break
+        size += len(chunk)
+        if size > limit:
+            raise ValueError("response is larger than %d bytes" % limit)
+        chunks.append(chunk)
+    if expected is not None and size != expected:
+        raise ValueError("truncated response")
+    return b"".join(chunks)
 
 
 def fetch_conditional(url, limit, etag=None):
@@ -98,45 +161,36 @@ def fetch_conditional(url, limit, etag=None):
     The weekly background refresh sends the catalogue's ETag so an unchanged
     listing costs one small request instead of a re-download.
     """
-    if not url.lower().startswith("https://") or not host_allowed(url):
+    if not host_allowed(url):
         raise ValueError("refusing to fetch a non-popclip.app URL: %s" % url[:120])
     headers = {"User-Agent": USER_AGENT, "Accept": "*/*"}
     if etag:
-        headers["If-None-Match"] = etag
+        headers["If-None-Match"] = clean(etag, 200)
     request = urllib.request.Request(url, headers=headers)
     try:
-        with urllib.request.urlopen(request, timeout=TIMEOUT_S) as response:
+        opener = urllib.request.build_opener(RestrictedRedirect())
+        with request_deadline(), opener.open(request, timeout=TIMEOUT_S) as response:
             if not host_allowed(response.geturl()):
                 raise ValueError("redirected off popclip.app: %s" % response.geturl()[:120])
-            data = response.read(limit + 1)
-            fresh_etag = response.headers.get("ETag") or ""
+            data = read_response(response, limit)
+            fresh_etag = clean(response.headers.get("ETag"), 200)
     except urllib.error.HTTPError as exc:
+        exc.close()
         if exc.code == 304:
             return None, etag or "", True
         raise ValueError("could not fetch %s (HTTP %s)" % (url[:80], exc.code))
     except urllib.error.URLError as exc:
         raise ValueError("could not fetch %s (%s)" % (url[:80], getattr(exc, "reason", exc)))
-    if len(data) > limit:
-        raise ValueError("response from %s is larger than %d bytes" % (url[:80], limit))
+    except TimeoutError:
+        raise ValueError("request exceeded its %s-second deadline" % TIMEOUT_S)
     return data, fresh_etag, False
 
 
 def fetch(url, limit):
     """GET url, returning at most `limit` bytes. Only popclip.app hosts, https only."""
-    if not url.lower().startswith("https://") or not host_allowed(url):
-        raise ValueError("refusing to fetch a non-popclip.app URL: %s" % url[:120])
-    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "*/*"})
-    try:
-        with urllib.request.urlopen(request, timeout=TIMEOUT_S) as response:
-            # A redirect must not walk us off the allowed hosts.
-            final = response.geturl()
-            if not host_allowed(final):
-                raise ValueError("redirected off popclip.app: %s" % final[:120])
-            data = response.read(limit + 1)
-    except urllib.error.URLError as exc:
-        raise ValueError("could not fetch %s (%s)" % (url[:80], getattr(exc, "reason", exc)))
-    if len(data) > limit:
-        raise ValueError("response from %s is larger than %d bytes" % (url[:80], limit))
+    data, _, unchanged = fetch_conditional(url, limit)
+    if unchanged:
+        raise ValueError("unexpected 304 response without a cached body")
     return data
 
 
@@ -208,7 +262,7 @@ def parse_listing(html):
                 "page": PAGE_URL % code_match.group(1),
             })
     entries.sort(key=lambda e: e["name"].lower())
-    return entries
+    return entries[:MAX_INDEX_ENTRIES]
 
 
 OG_TITLE_RE = re.compile(r'<meta property="og:title" content="([^"]{1,200})"')
@@ -295,7 +349,7 @@ def top_up(entries, warn=None):
         if warn is not None:
             warn.append(str(exc)[:200])
         return entries, 0
-    missing = [c for c in codes if c not in have][:MAX_TOPUP_PAGES]
+    missing = [c for c in codes if c not in have and SHORTCODE_RE.fullmatch(c)][:min(MAX_TOPUP_PAGES, max(0, MAX_INDEX_ENTRIES - len(entries)))]
     added = 0
     for code in missing:
         page = PAGE_URL % code
@@ -345,12 +399,7 @@ def cmd_refresh(args):
             else:
                 sys.stdout.write("Catalogue is %.1f days old; not refetching.\n" % (age / 86400))
             return
-    previous_etag = ""
-    try:
-        with open(out, encoding="utf-8") as handle:
-            previous_etag = str(json.load(handle).get("etag") or "")[:200]
-    except (OSError, ValueError):
-        previous_etag = ""
+    _, previous_etag = load_index_at(out)
     full = "--full" in args
     data, etag, unchanged = fetch_conditional(DIRECTORY_URL, MAX_HTML_BYTES, previous_etag)
     if unchanged and full:
@@ -362,7 +411,11 @@ def cmd_refresh(args):
             report_refresh(as_json, len(entries), out, added=added)
             return
     if unchanged:
-        os.utime(out, None)  # still current: reset the age gate without rewriting
+        # Publish the validated cache again; never touch a followed pathname.
+        existing, _ = load_index_at(out)
+        if not existing:
+            raise ValueError("cached catalogue disappeared during refresh; retry")
+        write_index(out, existing, previous_etag)
         if as_json:
             sys.stdout.write(json.dumps({"ok": True, "unchanged": True, "path": out}) + "\n")
         else:
@@ -437,13 +490,8 @@ def report_refresh(as_json, count, path, added=0, pending=0):
 
 def load_index_at(path):
     """Entries already in `path`, or an empty list. Never raises."""
-    try:
-        with open(path, encoding="utf-8") as handle:
-            data = json.load(handle)
-    except (OSError, ValueError):
-        return [], ""
-    entries = data.get("extensions")
-    return (entries if isinstance(entries, list) else []), str(data.get("etag") or "")
+    data = read_index(path)
+    return (data["extensions"], data["etag"]) if data else ([], "")
 
 
 # ------------------------------------------------------------------ the index
@@ -465,38 +513,112 @@ def bundled_path():
     return os.path.join(plugin_dir(), "directory.json")
 
 
-def write_json(path, obj):
-    directory = os.path.dirname(path) or "."
-    os.makedirs(directory, mode=0o700, exist_ok=True)
-    if os.path.islink(path):
-        raise ValueError("refusing to write through a symlink: %s" % path)
-    fd, staging = tempfile.mkstemp(prefix=".directory-", dir=directory)
+@contextlib.contextmanager
+def pinned_directory(path, create=False):
+    """Walk without following any directory symlinks; retain final authority."""
+    flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC
+    fd = os.open("/", flags)
     try:
-        os.fchmod(fd, 0o600)
-        with os.fdopen(fd, "w", encoding="utf-8") as handle:
-            json.dump(obj, handle, ensure_ascii=False, indent=1)
-            handle.write("\n")
-        os.rename(staging, path)
-    except Exception:
+        for part in os.path.abspath(path).split(os.sep)[1:]:
+            if not part:
+                continue
+            if create:
+                try:
+                    os.mkdir(part, 0o700, dir_fd=fd)
+                except FileExistsError:
+                    pass
+            child = os.open(part, flags, dir_fd=fd)
+            os.close(fd)
+            fd = child
+        st = os.fstat(fd)
+        if st.st_uid != os.getuid() or st.st_mode & 0o022:
+            raise ValueError("catalogue/package directory must be owned by you and not writable by others")
+        yield fd
+    finally:
+        os.close(fd)
+
+
+def file_revision(parent, name):
+    try:
+        st = os.stat(name, dir_fd=parent, follow_symlinks=False)
+    except FileNotFoundError:
+        return None
+    if not stat.S_ISREG(st.st_mode) or st.st_uid != os.getuid() or st.st_mode & 0o022:
+        raise ValueError("refusing an unsafe catalogue file")
+    return st.st_dev, st.st_ino, st.st_size, st.st_mtime_ns
+
+
+def write_json(path, obj):
+    data = (json.dumps(obj, ensure_ascii=False, indent=1) + "\n").encode("utf-8")
+    if len(data) > MAX_INDEX_BYTES:
+        raise ValueError("catalogue is too large")
+    with pinned_directory(os.path.dirname(path) or ".", create=True) as parent:
+        name = os.path.basename(path)
+        before = file_revision(parent, name)
+        staging = ".directory-" + secrets.token_hex(12)
+        fd = os.open(staging, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW | os.O_CLOEXEC,
+                     0o600, dir_fd=parent)
         try:
-            os.unlink(staging)
-        except OSError:
-            pass
-        raise
+            with os.fdopen(fd, "wb") as handle:
+                handle.write(data)
+                handle.flush()
+                os.fsync(handle.fileno())
+            if file_revision(parent, name) != before:
+                raise ValueError("catalogue changed during publication; retry")
+            os.replace(staging, name, src_dir_fd=parent, dst_dir_fd=parent)
+        finally:
+            try:
+                os.unlink(staging, dir_fd=parent)
+            except FileNotFoundError:
+                pass
+
+
+def read_index(path):
+    """Bound before parsing, then allow only the catalogue's display schema."""
+    try:
+        with pinned_directory(os.path.dirname(path) or ".") as parent:
+            fd = os.open(os.path.basename(path), os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK | os.O_CLOEXEC,
+                         dir_fd=parent)
+            with os.fdopen(fd, "rb") as handle:
+                st = os.fstat(handle.fileno())
+                if (not stat.S_ISREG(st.st_mode) or st.st_uid != os.getuid()
+                        or st.st_mode & 0o022 or st.st_size > MAX_INDEX_BYTES):
+                    return None
+                raw = handle.read(MAX_INDEX_BYTES + 1)
+                if len(raw) > MAX_INDEX_BYTES:
+                    return None
+        data = json.loads(raw)
+        if not isinstance(data, dict) or not isinstance(data.get("extensions"), list):
+            return None
+        if len(data["extensions"]) > MAX_INDEX_ENTRIES:
+            return None
+        entries = []
+        for entry in data["extensions"]:
+            if not isinstance(entry, dict) or not isinstance(entry.get("shortcode"), str):
+                continue
+            code = entry["shortcode"]
+            if not SHORTCODE_RE.fullmatch(code):
+                continue
+            fields = {"name": 200, "description": 600, "author": 120, "icon": 400,
+                      "actionType": 80, "identifier": 200}
+            if any(key in entry and not isinstance(entry[key], str) for key in fields):
+                continue
+            normalized = {key: clean(entry[key], cap) for key, cap in fields.items() if key in entry}
+            normalized.update(shortcode=code, page=PAGE_URL % code)
+            for key in ("name", "description", "author"):
+                normalized.setdefault(key, "")
+            entries.append(normalized)
+        return {"extensions": entries, "count": len(entries), "fetched": clean(data.get("fetched"), 80),
+                "etag": clean(data.get("etag"), 200)}
+    except (OSError, ValueError, RecursionError):
+        return None
 
 
 def load_index():
     """The refreshed per-user cache when there is one, else a local directory.json if present."""
     for path in (cache_path(), bundled_path()):
-        if not path or not os.path.isfile(path) or os.path.islink(path):
-            continue
-        try:
-            with open(path, encoding="utf-8") as handle:
-                data = json.load(handle)
-        except (OSError, ValueError):
-            continue
-        entries = data.get("extensions")
-        if isinstance(entries, list) and entries:
+        data = read_index(path) if path else None
+        if data and data["extensions"]:
             return data, path
     return {"extensions": [], "fetched": "", "count": 0}, None
 
@@ -624,6 +746,7 @@ def safe_members(archive):
     """Yield ZipInfos that are safe to write, refusing escapes and symlinks."""
     total = 0
     count = 0
+    destinations = set()
     for info in archive.infolist():
         count += 1
         if count > MAX_ENTRIES:
@@ -632,11 +755,19 @@ def safe_members(archive):
         if not name or name.startswith("/") or "\\" in name or "\x00" in name:
             raise ValueError("archive entry has an unsafe name")
         parts = [p for p in name.split("/") if p not in ("", ".")]
-        if any(p == ".." for p in parts):
+        if not parts or any(p == ".." for p in parts):
             raise ValueError("archive entry escapes the package: %s" % name[:80])
+        if len(name.encode("utf-8")) > MAX_PATH_BYTES or len(parts) > MAX_PATH_DEPTH:
+            raise ValueError("archive entry path is too long or deeply nested")
+        destination = "/".join(parts)
+        if destination in destinations:
+            raise ValueError("archive has duplicate destinations")
+        destinations.add(destination)
         mode = (info.external_attr >> 16) & 0o170000
-        if mode == 0o120000:
-            raise ValueError("archive contains a symlink: %s" % name[:80])
+        if mode not in (0, stat.S_IFREG, stat.S_IFDIR) or (mode == stat.S_IFDIR and not info.is_dir()):
+            raise ValueError("archive contains a link or special entry: %s" % name[:80])
+        if info.flag_bits & 1:
+            raise ValueError("encrypted archives are not supported")
         if info.file_size > MAX_MEMBER_BYTES:
             raise ValueError("archive entry is larger than %d bytes" % MAX_MEMBER_BYTES)
         total += info.file_size
@@ -647,33 +778,54 @@ def safe_members(archive):
 
 def extract_package(data, staging):
     """Expand the archive into `staging`; return the single *.popclipext directory."""
-    tmp_zip = os.path.join(staging, ".download.zip")
-    with open(tmp_zip, "wb") as handle:
-        handle.write(data)
+    if len(data) > MAX_ARCHIVE_BYTES:
+        raise ValueError("download is too large")
     root = os.path.join(staging, "unpacked")
     os.makedirs(root, mode=0o700)
-    real_root = os.path.realpath(root)
     try:
-        with zipfile.ZipFile(tmp_zip) as archive:
-            if archive.testzip() is not None:
-                raise ValueError("the archive is corrupt")
-            for info in safe_members(archive):
-                target = os.path.realpath(os.path.join(root, info.filename))
-                if target != real_root and not target.startswith(real_root + os.sep):
-                    raise ValueError("archive entry escapes the package: %s" % info.filename[:80])
-                archive.extract(info, root)
+        with zipfile.ZipFile(io.BytesIO(data)) as archive:
+            # Preflight EVERYTHING before decompressing even the first member.
+            members = list(safe_members(archive))
+            total = 0
+            for info in members:
+                # Keep the pinned /proc/self/fd parent, not its mutable realpath.
+                target = os.path.join(root, *[p for p in info.filename.split("/") if p not in ("", ".")])
+                if info.is_dir():
+                    os.makedirs(target, mode=0o700, exist_ok=True)
+                    continue
+                os.makedirs(os.path.dirname(target), mode=0o700, exist_ok=True)
+                fd = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW | os.O_CLOEXEC, 0o600)
+                size = 0
+                with os.fdopen(fd, "wb") as output, archive.open(info) as member:
+                    while True:
+                        chunk = member.read(min(65536, MAX_MEMBER_BYTES + 1 - size))
+                        if not chunk:
+                            break
+                        size += len(chunk)
+                        total += len(chunk)
+                        if size > MAX_MEMBER_BYTES or total > MAX_TOTAL_BYTES:
+                            raise ValueError("archive expands beyond its limit")
+                        output.write(chunk)
+                if size != info.file_size:
+                    raise ValueError("truncated archive member")
     except zipfile.BadZipFile:
         raise ValueError("the download is not a zip archive")
-    finally:
-        try:
-            os.unlink(tmp_zip)
-        except OSError:
-            pass
     packages = [name for name in os.listdir(root)
                 if name.lower().endswith(".popclipext") and os.path.isdir(os.path.join(root, name))]
     if len(packages) != 1:
         raise ValueError("expected one .popclipext folder in the archive, found %d" % len(packages))
     return os.path.join(root, packages[0])
+
+
+def publish_package(parent, source, destination):
+    """Linux atomic no-replace publication, relative to the pinned destination."""
+    libc = ctypes.CDLL(None, use_errno=True)
+    rename = libc.renameat2
+    rename.argtypes = (ctypes.c_int, ctypes.c_char_p, ctypes.c_int, ctypes.c_char_p, ctypes.c_uint)
+    rename.restype = ctypes.c_int
+    if rename(parent, os.fsencode(source), parent, os.fsencode(destination), 1) != 0:  # RENAME_NOREPLACE
+        error = ctypes.get_errno()
+        raise OSError(error, os.strerror(error), destination)
 
 
 def platform_report(package_dir):
@@ -705,24 +857,24 @@ def cmd_install(args):
         die("install needs a shortcode or link", as_json)
     info = resolve_target(targets[0])
     data = fetch(info["package"], MAX_ARCHIVE_BYTES)
-    os.makedirs(dest, mode=0o700, exist_ok=True)
-    staging = tempfile.mkdtemp(prefix=".omapop-download-", dir=dest)
-    try:
-        package = extract_package(data, staging)
-        final = os.path.join(dest, os.path.basename(package))
-        replaced = False
-        if os.path.lexists(final):
-            if os.path.islink(final) or not os.path.isdir(final):
-                raise ValueError("a non-directory already exists at %s" % final)
-            shutil.rmtree(final)
-            replaced = True
-        os.rename(package, final)
-        os.chmod(final, 0o700)
-    finally:
-        shutil.rmtree(staging, ignore_errors=True)
-    platform = platform_report(final)
+    with pinned_directory(dest, create=True) as parent:
+        stage_name = ".omapop-download-" + secrets.token_hex(12)
+        os.mkdir(stage_name, 0o700, dir_fd=parent)
+        staging = "/proc/self/fd/%d/%s" % (parent, stage_name)
+        try:
+            package = extract_package(data, staging)
+            name = os.path.basename(package)
+            final = os.path.join(dest, name)
+            os.chmod(package, 0o700)
+            platform = platform_report(package)
+            try:
+                publish_package(parent, stage_name + "/unpacked/" + name, name)
+            except FileExistsError:
+                raise ValueError("already installed: %s; remove the old package explicitly before reinstalling" % name)
+        finally:
+            shutil.rmtree(stage_name, dir_fd=parent)
     result = {"ok": True, "name": info["name"] or os.path.basename(final), "shortcode": info["shortcode"],
-              "dir": final, "replaced": replaced, "bytes": len(data), "platform": platform}
+              "dir": final, "replaced": False, "bytes": len(data), "platform": platform}
     if as_json:
         sys.stdout.write(json.dumps(result) + "\n")
     else:

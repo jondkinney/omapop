@@ -16,6 +16,7 @@ import shutil
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 import zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -169,11 +170,61 @@ class HostTests(unittest.TestCase):
         self.assertFalse(directory.host_allowed("https://popclip.app.evil.example.com/x"))
 
     def test_plain_http_and_foreign_hosts_are_refused(self):
-        for url in ("http://www.popclip.app/x", "https://evil.example.com/x", "ftp://www.popclip.app/x"):
+        for url in ("http://www.popclip.app/x", "https://evil.example.com/x", "ftp://www.popclip.app/x",
+                    "https://www.popclip.app:444/x", "https://user@www.popclip.app/x",
+                    "https://www.popclip.app:bad/x", "https://www.popclip.app/\nx"):
+            self.assertFalse(directory.host_allowed(url))
             with self.assertRaises(ValueError):
                 directory.fetch(url, 16)
             with self.assertRaises(ValueError):
                 directory.fetch_conditional(url, 16, "etag")
+
+    def test_redirects_are_rejected_before_another_request(self):
+        import urllib.response
+        from email.message import Message
+        for target in ("http://www.popclip.app/x", "https://evil.example/x", "https://www.popclip.app:444/x"):
+            visited = []
+            class Transport(directory.urllib.request.HTTPSHandler):
+                def https_open(self, req):
+                    visited.append(req.full_url)
+                    headers = Message()
+                    headers["Location"] = target
+                    response = urllib.response.addinfourl(io.BytesIO(b""), headers, req.full_url, 302)
+                    response.msg = "Found"
+                    return response
+            opener = directory.urllib.request.build_opener(Transport(), directory.RestrictedRedirect())
+            with patch.object(directory.urllib.request, "build_opener", return_value=opener):
+                with self.assertRaises(ValueError):
+                    directory.fetch(directory.DIRECTORY_URL, 16)
+            self.assertEqual(visited, [directory.DIRECTORY_URL])
+
+    def test_response_exact_limit_overflow_and_truncation(self):
+        for body, headers, okay in ((b"x" * 16, {}, True), (b"x" * 17, {}, False),
+                                   (b"x", {"Content-Length": "17"}, False),
+                                   (b"x", {"Content-Length": "2"}, False)):
+            response = io.BytesIO(body)
+            response.headers = headers
+            if okay:
+                self.assertEqual(directory.read_response(response, 16), body)
+            else:
+                with self.assertRaises(ValueError):
+                    directory.read_response(response, 16)
+
+    def test_total_deadline_interrupts_a_stalled_body(self):
+        import time
+        class SlowResponse(io.BytesIO):
+            headers = {}
+            def geturl(self):
+                return directory.DIRECTORY_URL
+            def read1(self, n):
+                time.sleep(2)
+                return b""
+        with patch.object(directory, "TIMEOUT_S", 0.03), patch.object(directory.urllib.request, "build_opener") as build:
+            build.return_value.open.return_value = SlowResponse()
+            started = time.monotonic()
+            with self.assertRaisesRegex(ValueError, "deadline"):
+                directory.fetch(directory.DIRECTORY_URL, 16)
+            self.assertLess(time.monotonic() - started, 1)
 
 
 class ArgumentTests(unittest.TestCase):
@@ -231,6 +282,45 @@ class ArchiveTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.extract(b"this is not a zip file")
 
+    def test_preflight_precedes_decompression(self):
+        data = build_zip(GOOD)
+        with patch.object(directory, "MAX_MEMBER_BYTES", 2), patch.object(zipfile.ZipFile, "open") as opened:
+            with self.assertRaises(ValueError):
+                self.extract(data)
+            opened.assert_not_called()
+
+    def test_duplicate_special_and_deep_entries_are_refused(self):
+        special = zipfile.ZipInfo("Ok.popclipext/pipe")
+        special.create_system = 3
+        special.external_attr = (0o010600 << 16)
+        for entries in (GOOD + [("Ok.popclipext/./Config.yaml", "duplicate")],
+                        GOOD + [(special, "")],
+                        GOOD + [("Ok.popclipext/" + "a/" * 17 + "file", "")]):
+            with self.assertRaises(ValueError):
+                self.extract(build_zip(entries))
+
+    def test_member_and_total_expansion_limits(self):
+        data = build_zip([("Ok.popclipext/Config.yaml", "1234")])
+        with patch.object(directory, "MAX_MEMBER_BYTES", 4), patch.object(directory, "MAX_TOTAL_BYTES", 4):
+            self.assertEqual(self.extract(data), "Ok.popclipext")
+        for constant in ("MAX_MEMBER_BYTES", "MAX_TOTAL_BYTES"):
+            with patch.object(directory, constant, 3):
+                with self.assertRaises(ValueError):
+                    self.extract(data)
+
+    def test_publication_never_replaces_a_directory_or_symlink(self):
+        with tempfile.TemporaryDirectory() as dest, directory.pinned_directory(dest) as parent:
+            os.mkdir(os.path.join(dest, "staging"))
+            os.mkdir(os.path.join(dest, "existing"))
+            os.symlink("existing", os.path.join(dest, "link"))
+            for name in ("existing", "link"):
+                with self.assertRaises(FileExistsError):
+                    directory.publish_package(parent, "staging", name)
+                self.assertTrue(os.path.isdir(os.path.join(dest, "staging")))
+            directory.publish_package(parent, "staging", "new")
+            self.assertTrue(os.path.isdir(os.path.join(dest, "new")))
+            self.assertTrue(os.path.islink(os.path.join(dest, "link")))
+
 
 class PlatformReportTests(unittest.TestCase):
     """The install report reuses the scanner; a package it cannot read is not called fine."""
@@ -277,7 +367,7 @@ class IndexTests(unittest.TestCase):
     def write(self, path, names):
         with open(path, "w", encoding="utf-8") as fh:
             json.dump({"fetched": "now", "count": len(names),
-                       "extensions": [{"shortcode": n, "name": n, "description": "", "author": ""} for n in names]}, fh)
+                       "extensions": [{"shortcode": n + "0000", "name": n, "description": "", "author": ""} for n in names]}, fh)
 
     def test_cache_wins_over_the_bundled_snapshot(self):
         self.write(self.bundled, ["old"])
@@ -307,10 +397,10 @@ class IndexTests(unittest.TestCase):
     def test_search_hides_mac_only_entries_unless_asked(self):
         with open(self.cache, "w", encoding="utf-8") as fh:
             json.dump({"fetched": "now", "count": 4, "extensions": [
-                {"shortcode": "a1", "name": "Alfred", "description": "launcher", "author": "", "actionType": "AppleScript"},
-                {"shortcode": "b2", "name": "Yoink", "description": "shelf", "author": "", "actionType": "Service"},
-                {"shortcode": "c3", "name": "Wikipedia", "description": "look it up", "author": "", "actionType": "Open URL"},
-                {"shortcode": "d4", "name": "Newcomer", "description": "not looked up yet", "author": ""},
+                {"shortcode": "aaa111", "name": "Alfred", "description": "launcher", "author": "", "actionType": "AppleScript"},
+                {"shortcode": "bbb222", "name": "Yoink", "description": "shelf", "author": "", "actionType": "Service"},
+                {"shortcode": "ccc333", "name": "Wikipedia", "description": "look it up", "author": "", "actionType": "Open URL"},
+                {"shortcode": "ddd444", "name": "Newcomer", "description": "not looked up yet", "author": ""},
             ]}, fh)
         result = self.search("--json")  # no query: catalogue order, which refresh writes name-sorted
         self.assertEqual([e["name"] for e in result["extensions"]], ["Wikipedia", "Newcomer"])
@@ -328,6 +418,46 @@ class IndexTests(unittest.TestCase):
         self.assertIn("1 more needs macOS", text)
         self.assertIn("--all", text)
         self.assertIn("(needs macOS)", self.search("--all", "alfred"))
+
+    def test_index_rejects_links_fifos_invalid_schema_and_oversized_files(self):
+        self.write(self.bundled, ["valid"])
+        os.symlink(self.bundled, self.cache)
+        self.assertIsNone(directory.read_index(self.cache))
+        with self.assertRaises(ValueError):
+            directory.write_json(self.cache, {})
+        os.unlink(self.cache)
+        os.mkfifo(self.cache)
+        self.assertIsNone(directory.read_index(self.cache))
+        os.unlink(self.cache)
+        for obj in ([], {"extensions": "bad"}, {"extensions": [None] * 501}):
+            with open(self.cache, "w") as handle:
+                json.dump(obj, handle)
+            self.assertIsNone(directory.read_index(self.cache))
+        self.write(self.cache, ["valid"])
+        with patch.object(directory, "MAX_INDEX_BYTES", 4):
+            self.assertIsNone(directory.read_index(self.cache))
+
+    def test_index_normalizes_display_fields_and_drops_unknown_keys(self):
+        directory.write_json(self.cache, {"extensions": [{"shortcode": "good01", "name": "a\u202eb" * 100,
+                                                         "extra": {"ignored": True}, "page": "https://evil.example"}]})
+        entry = directory.read_index(self.cache)["extensions"][0]
+        self.assertEqual(entry["name"], "ab" * 100)
+        self.assertNotIn("extra", entry)
+        self.assertEqual(entry["page"], directory.PAGE_URL % "good01")
+
+    def test_parent_symlinks_are_refused_and_open_parent_is_pinned(self):
+        actual = os.path.join(self.tmp, "actual")
+        os.mkdir(actual)
+        os.symlink(actual, os.path.join(self.tmp, "link"))
+        with self.assertRaises(OSError):
+            directory.write_json(os.path.join(self.tmp, "link", "cache.json"), {})
+        with directory.pinned_directory(actual) as parent:
+            os.rename(actual, actual + "-old")
+            os.mkdir(actual)
+            os.mkdir("stage", dir_fd=parent)
+            directory.publish_package(parent, "stage", "published")
+        self.assertTrue(os.path.isdir(os.path.join(actual + "-old", "published")))
+        self.assertEqual(os.listdir(actual), [])
 
 
 if __name__ == "__main__":
