@@ -31,6 +31,12 @@ configuration API), Quickshell, `wl-clipboard`, `python3` with PyYAML, `jq`.
 JavaScript extensions additionally need `deno` (preferred) or `nodejs`; without
 one of them they are listed but disabled.
 
+The standard runtime helpers also use Bash/coreutils, `xdg-utils`, `util-linux`
+(`setpriv`), D-Bus, and GLib's `gdbus`. Editable-field detection additionally
+uses `python-gobject` and `at-spi2-core`; if those optional bindings are missing,
+the accessibility helper reports unknown editability and the usual fallback
+rules apply. Omapop never installs these dependencies automatically.
+
 ## Remove
 
 ```bash
