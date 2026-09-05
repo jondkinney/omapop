@@ -25,14 +25,6 @@ Panel {
     readonly property bool showIcon: setting("showBarIcon", true) !== false
     property string expandedId: ""
     property bool directorySeeded: false
-    readonly property var expandedExtension: {
-        if (!expandedId)
-            return null
-        for (var i = 0; i < extensions.length; i++)
-            if (extensions[i] && extensions[i].identifier === expandedId)
-                return extensions[i]
-        return null
-    }
 
     // The scanner's notes are lower-case clauses ("needs macOS (...)"); start a caption with one.
     function sentence(text) {
@@ -172,145 +164,152 @@ Panel {
                 interactive: contentHeight > height
                 ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded }
                 model: root.extensions
-                delegate: RowLayout {
+                delegate: ColumnLayout {
                     id: extRow
                     required property var modelData
                     width: installedList.width
                     height: implicitHeight
-                    spacing: Style.spacing.md
+                    spacing: Style.spacing.sm
 
-                    ActionIcon {
-                        Layout.alignment: Qt.AlignVCenter
-                        size: Math.round(Style.space(20))
-                        spec: modelData.icon || ""
-                        filePath: modelData.iconPath || ""
-                        fallbackText: modelData.name || ""
-                        color: modelData.error ? Color.urgent : Color.popups.text
-                        background: Color.popups.background
-                        fontFamily: root.fontFamily
-                    }
-
-                    ColumnLayout {
+                    RowLayout {
+                        id: extensionHeader
                         Layout.fillWidth: true
-                        spacing: 0
-                        Text {
-                            Layout.fillWidth: true
-                            text: Actions.oneLine(modelData.name || modelData.identifier || "?", 200)
-                            textFormat: Text.PlainText
-                            wrapMode: Text.WordWrap
-                            // Unusable here (every action needs macOS): present, but dimmed.
-                            color: modelData.usable === false ? Qt.darker(Color.popups.text, 1.4) : Color.popups.text
-                            font.family: root.fontFamily
-                            font.pixelSize: Style.font.body
+                        spacing: Style.spacing.md
+
+                        ActionIcon {
+                            id: extensionIcon
+                            Layout.alignment: Qt.AlignVCenter
+                            size: Math.round(Style.space(20))
+                            spec: modelData.icon || ""
+                            filePath: modelData.iconPath || ""
+                            fallbackText: modelData.name || ""
+                            color: modelData.error ? Color.urgent : Color.popups.text
+                            background: Color.popups.background
+                            fontFamily: root.fontFamily
                         }
-                        Text {
+
+                        ColumnLayout {
                             Layout.fillWidth: true
-                            visible: text !== ""
-                            text: {
-                                if (modelData.error)
-                                    return "Error: " + Actions.oneLine(modelData.error, 400)
-                                var note = root.sentence(modelData.platformNote)
-                                if (modelData.usable === false)
-                                    return Actions.oneLine(note || "Cannot run here", 400)
-                                var description = modelData.description || (modelData.source === "bundled" ? "Bundled example" : "")
-                                return Actions.oneLine(note ? (description ? description + " " : "") + note + "." : description, 400)
+                            spacing: 0
+                            Text {
+                                Layout.fillWidth: true
+                                text: Actions.oneLine(modelData.name || modelData.identifier || "?", 200)
+                                textFormat: Text.PlainText
+                                wrapMode: Text.WordWrap
+                                // Unusable here (every action needs macOS): present, but dimmed.
+                                color: modelData.usable === false ? Qt.darker(Color.popups.text, 1.4) : Color.popups.text
+                                font.family: root.fontFamily
+                                font.pixelSize: Style.font.body
                             }
-                            textFormat: Text.PlainText
-                            wrapMode: Text.WordWrap
-                            color: modelData.error ? Color.urgent : Qt.darker(Color.popups.text, 1.4)
-                            font.family: root.fontFamily
-                            font.pixelSize: Style.font.caption
-                        }
-                    }
-
-                    PanelActionButton {
-                        Layout.alignment: Qt.AlignVCenter
-                        visible: !!(modelData.options && modelData.options.length)
-                        iconText: root.expandedId === modelData.identifier ? "\u{F0143}" : "\u{F0493}"
-                        tooltipText: "Settings"
-                        onClicked: root.expandedId = root.expandedId === modelData.identifier ? "" : modelData.identifier
-                    }
-
-                    ToggleSwitch {
-                        Layout.alignment: Qt.AlignVCenter
-                        interactive: !modelData.error && modelData.usable !== false
-                        checked: !!modelData.enabled
-                        onToggled: if (root.service) root.service.setExtensionEnabled(modelData.identifier, !modelData.enabled)
-                    }
-                }
-            }
-
-            // Options of the expanded extension, its per-action settings.
-            ColumnLayout {
-                Layout.fillWidth: true
-                Layout.leftMargin: Style.spacing.xl
-                visible: root.expandedExtension !== null
-                spacing: Style.spacing.sm
-
-                Repeater {
-                    model: root.expandedExtension ? root.expandedExtension.options : []
-                    delegate: ColumnLayout {
-                        required property var modelData
-                        readonly property var ext: root.expandedExtension
-                        readonly property var currentValue: ext && ext.optionValues && ext.optionValues[modelData.identifier] !== undefined
-                            ? ext.optionValues[modelData.identifier] : modelData.defaultValue
-                        Layout.fillWidth: true
-                        visible: !modelData.hidden
-                        spacing: Style.spacing.xxs
-
-                        Text {
-                            Layout.fillWidth: true
-                            text: Actions.oneLine(modelData.label || modelData.identifier || "", 200)
-                            textFormat: Text.PlainText
-                            wrapMode: Text.WordWrap
-                            color: Color.popups.text
-                            font.family: root.fontFamily
-                            font.pixelSize: modelData.type === "heading" ? Style.font.subtitle : Style.font.bodySmall
-                            font.bold: modelData.type === "heading"
+                            Text {
+                                Layout.fillWidth: true
+                                visible: text !== ""
+                                text: {
+                                    if (modelData.error)
+                                        return "Error: " + Actions.oneLine(modelData.error, 400)
+                                    var note = root.sentence(modelData.platformNote)
+                                    if (modelData.usable === false)
+                                        return Actions.oneLine(note || "Cannot run here", 400)
+                                    var description = modelData.description || (modelData.source === "bundled" ? "Bundled example" : "")
+                                    return Actions.oneLine(note ? (description ? description + " " : "") + note + "." : description, 400)
+                                }
+                                textFormat: Text.PlainText
+                                wrapMode: Text.WordWrap
+                                color: modelData.error ? Color.urgent : Qt.darker(Color.popups.text, 1.4)
+                                font.family: root.fontFamily
+                                font.pixelSize: Style.font.caption
+                            }
                         }
 
-                        Text {
-                            Layout.fillWidth: true
-                            visible: (modelData.description || "") !== ""
-                            text: Actions.oneLine(modelData.description || "", 400)
-                            textFormat: Text.PlainText
-                            wrapMode: Text.WordWrap
-                            color: Qt.darker(Color.popups.text, 1.4)
-                            font.family: root.fontFamily
-                            font.pixelSize: Style.font.caption
+                        PanelActionButton {
+                            Layout.alignment: Qt.AlignVCenter
+                            visible: !!(modelData.options && modelData.options.length)
+                            iconText: root.expandedId === modelData.identifier ? "\u{F0143}" : "\u{F0493}"
+                            tooltipText: "Settings"
+                            onClicked: root.expandedId = root.expandedId === modelData.identifier ? "" : modelData.identifier
                         }
 
                         ToggleSwitch {
-                            visible: modelData.type === "boolean"
-                            checked: currentValue === true || currentValue === "1" || currentValue === "true"
-                            onToggled: if (root.service) root.service.setExtensionOption(ext.identifier, modelData.identifier, !checked)
+                            Layout.alignment: Qt.AlignVCenter
+                            interactive: !modelData.error && modelData.usable !== false
+                            checked: !!modelData.enabled
+                            onToggled: if (root.service) root.service.setExtensionEnabled(modelData.identifier, !modelData.enabled)
                         }
+                    }
 
-                        Dropdown {
-                            Layout.fillWidth: true
-                            visible: modelData.type === "multiple"
-                            showLabel: false
-                            options: {
-                                var list = []
-                                var values = modelData.values || []
-                                var labels = modelData.valueLabels || []
-                                if (modelData.allowNone)
-                                    list.push({ value: "", label: "None" })
-                                for (var i = 0; i < values.length; i++)
-                                    list.push({ value: values[i], label: labels[i] || values[i] })
-                                return list
+                    // The options belong to this delegate and scroll with its row.
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        Layout.leftMargin: extensionIcon.width + extensionHeader.spacing
+                        visible: root.expandedId === extRow.modelData.identifier
+                        spacing: Style.spacing.sm
+
+                        Repeater {
+                            model: root.expandedId === extRow.modelData.identifier ? (extRow.modelData.options || []) : []
+                            delegate: ColumnLayout {
+                                required property var modelData
+                                readonly property var ext: extRow.modelData
+                                readonly property var currentValue: ext && ext.optionValues && ext.optionValues[modelData.identifier] !== undefined
+                                    ? ext.optionValues[modelData.identifier] : modelData.defaultValue
+                                Layout.fillWidth: true
+                                visible: !modelData.hidden
+                                spacing: Style.spacing.xxs
+
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: Actions.oneLine(modelData.label || modelData.identifier || "", 200)
+                                    textFormat: Text.PlainText
+                                    wrapMode: Text.WordWrap
+                                    color: Color.popups.text
+                                    font.family: root.fontFamily
+                                    font.pixelSize: modelData.type === "heading" ? Style.font.subtitle : Style.font.bodySmall
+                                    font.bold: modelData.type === "heading"
+                                }
+
+                                Text {
+                                    Layout.fillWidth: true
+                                    visible: (modelData.description || "") !== ""
+                                    text: Actions.oneLine(modelData.description || "", 400)
+                                    textFormat: Text.PlainText
+                                    wrapMode: Text.WordWrap
+                                    color: Qt.darker(Color.popups.text, 1.4)
+                                    font.family: root.fontFamily
+                                    font.pixelSize: Style.font.caption
+                                }
+
+                                ToggleSwitch {
+                                    visible: modelData.type === "boolean"
+                                    checked: currentValue === true || currentValue === "1" || currentValue === "true"
+                                    onToggled: if (root.service) root.service.setExtensionOption(ext.identifier, modelData.identifier, !checked)
+                                }
+
+                                Dropdown {
+                                    Layout.fillWidth: true
+                                    visible: modelData.type === "multiple"
+                                    showLabel: false
+                                    options: {
+                                        var list = []
+                                        var values = modelData.values || []
+                                        var labels = modelData.valueLabels || []
+                                        if (modelData.allowNone)
+                                            list.push({ value: "", label: "None" })
+                                        for (var i = 0; i < values.length; i++)
+                                            list.push({ value: values[i], label: labels[i] || values[i] })
+                                        return list
+                                    }
+                                    value: String(currentValue === undefined || currentValue === null ? "" : currentValue)
+                                    onChanged: function (v) { if (root.service) root.service.setExtensionOption(ext.identifier, modelData.identifier, v) }
+                                }
+
+                                TextField {
+                                    Layout.fillWidth: true
+                                    visible: modelData.type === "string" || modelData.type === "secret" || modelData.type === "password"
+                                    password: modelData.type === "secret" || modelData.type === "password"
+                                    text: String(currentValue === undefined || currentValue === null ? "" : currentValue)
+                                    placeholderText: modelData.type === "secret" ? "Secret" : ""
+                                    onEditingFinished: if (root.service && text !== String(currentValue === undefined ? "" : currentValue)) root.service.setExtensionOption(ext.identifier, modelData.identifier, text)
+                                }
                             }
-                            value: String(currentValue === undefined || currentValue === null ? "" : currentValue)
-                            onChanged: function (v) { if (root.service) root.service.setExtensionOption(ext.identifier, modelData.identifier, v) }
-                        }
-
-                        TextField {
-                            Layout.fillWidth: true
-                            visible: modelData.type === "string" || modelData.type === "secret" || modelData.type === "password"
-                            password: modelData.type === "secret" || modelData.type === "password"
-                            text: String(currentValue === undefined || currentValue === null ? "" : currentValue)
-                            placeholderText: modelData.type === "secret" ? "Secret" : ""
-                            onEditingFinished: if (root.service && text !== String(currentValue === undefined ? "" : currentValue)) root.service.setExtensionOption(ext.identifier, modelData.identifier, text)
                         }
                     }
                 }
