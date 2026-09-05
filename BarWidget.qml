@@ -26,6 +26,12 @@ Panel {
     property string expandedId: ""
     property bool directorySeeded: false
 
+    component RowSeparator: Rectangle {
+        Layout.fillWidth: true
+        implicitHeight: 1
+        color: Qt.rgba(Color.popups.text.r, Color.popups.text.g, Color.popups.text.b, Color.popups.text.a * 0.12)
+    }
+
     // The scanner's notes are lower-case clauses ("needs macOS (...)"); start a caption with one.
     function sentence(text) {
         var s = String(text || "")
@@ -167,6 +173,7 @@ Panel {
                 delegate: ColumnLayout {
                     id: extRow
                     required property var modelData
+                    required property int index
                     width: installedList.width
                     height: implicitHeight
                     spacing: Style.spacing.sm
@@ -312,6 +319,8 @@ Panel {
                             }
                         }
                     }
+
+                    RowSeparator { visible: extRow.index < installedList.count - 1 }
                 }
             }
 
@@ -416,53 +425,61 @@ Panel {
                 interactive: contentHeight > height
                 ScrollBar.vertical: ScrollBar { policy: ScrollBar.AsNeeded }
 
-                delegate: RowLayout {
+                delegate: ColumnLayout {
                     id: dirRow
                     required property var modelData
+                    required property int index
                     readonly property bool installing: !!(root.service && root.service.directoryInstalling[modelData.shortcode])
                     width: dirList.width
                     height: implicitHeight
-                    spacing: Style.spacing.md
+                    spacing: Style.spacing.sm
 
-                    ColumnLayout {
+                    RowLayout {
                         Layout.fillWidth: true
-                        spacing: 0
-                        Text {
+                        spacing: Style.spacing.md
+
+                        ColumnLayout {
                             Layout.fillWidth: true
-                            text: modelData.name
-                            textFormat: Text.PlainText
-                            wrapMode: Text.WordWrap
-                            color: modelData.needsMac ? Qt.darker(Color.popups.text, 1.4) : Color.popups.text
-                            font.family: root.fontFamily
-                            font.pixelSize: Style.font.body
+                            spacing: 0
+                            Text {
+                                Layout.fillWidth: true
+                                text: modelData.name
+                                textFormat: Text.PlainText
+                                wrapMode: Text.WordWrap
+                                color: modelData.needsMac ? Qt.darker(Color.popups.text, 1.4) : Color.popups.text
+                                font.family: root.fontFamily
+                                font.pixelSize: Style.font.body
+                            }
+                            Text {
+                                Layout.fillWidth: true
+                                visible: text !== ""
+                                text: (modelData.needsMac ? "Needs macOS. " : "") + modelData.description + (modelData.author ? "  \u2014 " + modelData.author : "")
+                                textFormat: Text.PlainText
+                                wrapMode: Text.WordWrap
+                                color: Qt.darker(Color.popups.text, 1.4)
+                                font.family: root.fontFamily
+                                font.pixelSize: Style.font.caption
+                            }
                         }
-                        Text {
-                            Layout.fillWidth: true
-                            visible: text !== ""
-                            text: (modelData.needsMac ? "Needs macOS. " : "") + modelData.description + (modelData.author ? "  \u2014 " + modelData.author : "")
-                            textFormat: Text.PlainText
-                            wrapMode: Text.WordWrap
-                            color: Qt.darker(Color.popups.text, 1.4)
-                            font.family: root.fontFamily
-                            font.pixelSize: Style.font.caption
+
+                        PanelActionButton {
+                            Layout.alignment: Qt.AlignVCenter
+                            visible: modelData.page !== ""
+                            iconText: "\u{F03CC}"
+                            tooltipText: "Open this extension's page on popclip.app"
+                            onClicked: if (root.service) root.service.openDirectoryPage(modelData.page)
+                        }
+
+                        Button {
+                            Layout.alignment: Qt.AlignVCenter
+                            text: dirRow.installing ? "\u2026" : "Install"
+                            enabled: !dirRow.installing
+                            tooltipText: "Download and install " + modelData.name
+                            onClicked: if (root.service) root.service.installFromDirectory(modelData.shortcode)
                         }
                     }
 
-                    PanelActionButton {
-                        Layout.alignment: Qt.AlignVCenter
-                        visible: modelData.page !== ""
-                        iconText: "\u{F03CC}"
-                        tooltipText: "Open this extension's page on popclip.app"
-                        onClicked: if (root.service) root.service.openDirectoryPage(modelData.page)
-                    }
-
-                    Button {
-                        Layout.alignment: Qt.AlignVCenter
-                        text: dirRow.installing ? "\u2026" : "Install"
-                        enabled: !dirRow.installing
-                        tooltipText: "Download and install " + modelData.name
-                        onClicked: if (root.service) root.service.installFromDirectory(modelData.shortcode)
-                    }
+                    RowSeparator { visible: dirRow.index < dirList.count - 1 }
                 }
             }
 
