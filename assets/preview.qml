@@ -103,6 +103,12 @@ Rectangle {
     Copy { x: 72; y: 819; text: "YAML  ·  Shell  ·  JavaScript"; color: "#adb8ca"; font.pixelSize: 20 }
 
     Copy { x: 922; y: 34; text: "YOUR ACTIONS, YOUR WAY"; color: "#88c0d0"; font.pixelSize: 13; font.letterSpacing: 1.5 }
-    Image { x: 922; y: 64; width: 400; height: 775; source: "extensions-panel.png"; smooth: false }
+    Image {
+        x: 922; y: 64; width: 400; height: 775
+        source: "extensions-panel.png"
+        fillMode: Image.PreserveAspectFit
+        horizontalAlignment: Image.AlignLeft
+        smooth: true
+    }
     Copy { x: 922; y: 853; text: "Live extensions panel · Nord theme"; color: "#8492a8"; font.pixelSize: 14 }
 }
