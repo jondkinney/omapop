@@ -1,9 +1,11 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Effects
 import "Actions.js" as Actions
 
 // Renders an extension icon specifier: text icons with square/circle/search
-// enclosures, image files and inline SVG drawn as tinted masks, SF Symbol names
+// enclosures, image files and inline SVG with an alpha-preserving tint, SF Symbol names
 // mapped onto Nerd Font glyphs, and initials as the fallback for anything that
 // needs the network (iconify:) or is unknown.
 Item {
@@ -32,6 +34,8 @@ Item {
         return parsed.text
     }
     readonly property bool emoji: parsed.kind === "text" && Actions.isEmoji(parsed.text)
+    readonly property bool tinted: !textLike && imageSource !== "" && !parsed.preserveColor
+    readonly property color imageTint: parsed.filled && enclosed ? background : color
     readonly property bool isGlyph: parsed.kind === "symbol" && Actions.symbolGlyph(parsed.text) !== ""
     readonly property string imageSource: {
         if (parsed.kind === "file" && filePath)
@@ -112,23 +116,37 @@ Item {
         renderType: Text.NativeRendering
     }
 
+    // Decode SVGs above display resolution, then smoothly downsample. Qt caches
+    // the image by source and size; recoloring never rewrites the source asset.
     Image {
         id: image
         visible: !root.textLike && root.imageSource !== ""
         anchors.fill: parent
         anchors.margins: root.enclosed ? Math.round(root.size * 0.18) : 0
         source: root.imageSource
-        sourceSize.width: root.size * 2
-        sourceSize.height: root.size * 2
-        fillMode: root.parsed.preserveAspect ? Image.PreserveAspectFit : Image.PreserveAspectFit
+        sourceSize.width: Math.ceil(width * Screen.devicePixelRatio * 2 * Math.max(1, root.parsed.scale / 100))
+        sourceSize.height: Math.ceil(height * Screen.devicePixelRatio * 2 * Math.max(1, root.parsed.scale / 100))
+        fillMode: Image.PreserveAspectFit
         smooth: true
         mipmap: true
         asynchronous: true
         cache: true
-        layer.enabled: !root.parsed.preserveColor
+        // A threshold mask turns partially covered edge pixels opaque, making
+        // thin strokes jagged and filling small holes. Flatten RGB to white
+        // before colorization instead: contrast -1 gives 0.5 * alpha, then
+        // brightness 0.5 gives 1 * alpha. Alpha itself is never thresholded.
+        // Apply this to the Image layer so aspect-fit padding is preserved too.
+        layer.enabled: root.tinted
+        layer.smooth: true
         layer.effect: MultiEffect {
-            colorization: 1.0
-            colorizationColor: root.parsed.filled && root.enclosed ? root.background : root.color
+            autoPaddingEnabled: false
+            contrast: -1
+            brightness: 0.5
+            colorization: 1
+            // MultiEffect treats the color's alpha as colorization strength.
+            // Keep that at 1 and apply theme transparency to the result.
+            colorizationColor: Qt.rgba(root.imageTint.r, root.imageTint.g, root.imageTint.b, 1)
+            opacity: root.imageTint.a
         }
     }
 

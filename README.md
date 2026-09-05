@@ -222,6 +222,12 @@ What the format supports here:
 | Script variables | `POPCLIP_TEXT`, `POPCLIP_FULL_TEXT`, `POPCLIP_HTML`, `POPCLIP_URLS`, `POPCLIP_EMAILS`, `POPCLIP_PATHS`, `POPCLIP_MODIFIER_FLAGS`, `POPCLIP_BUNDLE_IDENTIFIER` (the window class), `POPCLIP_APP_NAME`, `POPCLIP_EXTENSION_IDENTIFIER`, `POPCLIP_ACTION_IDENTIFIER`, `POPCLIP_OPTION_*` |
 | JavaScript API | `popclip.input`, `context`, `modifiers`, `options`, `pasteText`, `copyText`, `performCommand`, `showText`, `showSuccess`, `showFailure`, `showSettings`, `appear`, `pressKey(s)`, `openUrl`, `openTemplateUrl`, `revealFile`; `util` (base64, query strings, hashing, uuid, sleep, locale info); `pasteboard.text`; `print`; `sleep`; `XMLHttpRequest` and a small `require("axios")` with the `network` entitlement; `require` of package-relative `.js`/`.json` files |
 
+Image icons use the theme's foreground color while retaining their original
+alpha, including antialiased edges, fine strokes and transparent cut-outs.
+SVGs render above the display's physical resolution and are smoothly
+downsampled; Qt caches the decoded images by source and size. `preserve-color`
+keeps the original colors. There is no tracing step or generated icon cache.
+
 Not available on Linux: AppleScript, macOS Services, Shortcuts, `share()`,
 Dictionary and Spelling. `runShellScript` from JavaScript is not implemented
 yet; use a shell-script action instead.
@@ -340,6 +346,7 @@ omarchy plugin validate .
 qmllint -I /usr/share/omarchy/shell *.qml
 python3 -m unittest discover -s tests -p 'test_*.py'
 node tests/actions.test.mjs
+QT_QUICK_BACKEND=rhi QSG_RHI_BACKEND=opengl /usr/lib/qt6/bin/qmltestrunner -platform offscreen -input tests
 omarchy restart shell
 omarchy-shell io.github.jondkinney.omapop status
 ```
