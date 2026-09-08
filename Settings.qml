@@ -117,7 +117,9 @@ ColumnLayout {
         objectName: "settingsScroll"
         Layout.fillWidth: true
         Layout.fillHeight: true
-        Layout.preferredHeight: Math.min(contentHeight, Style.space(500))
+        // The containing panel applies the same screen-height cap as the
+        // extensions page; let the form use all the space available to it.
+        Layout.preferredHeight: contentHeight
         Layout.minimumHeight: Style.space(80)
         contentWidth: width
         contentHeight: form.implicitHeight
@@ -129,14 +131,14 @@ ColumnLayout {
         ColumnLayout {
             id: form
             width: scroll.width - Style.spacing.lg
-            spacing: Style.spacing.xl
+            spacing: Style.spacing.huge * 2
             Repeater {
                 model: root.groups
                 delegate: ColumnLayout {
                     id: section
                     required property var modelData
                     Layout.fillWidth: true
-                    spacing: Style.spacing.lg
+                    spacing: Style.spacing.huge
                     Text {
                         Layout.fillWidth: true
                         text: section.modelData.title
@@ -179,7 +181,7 @@ ColumnLayout {
 
         Layout.fillWidth: true
         visible: !!field && (key !== "searchUrl" || root.value(root.definition("searchEngine")) === "other")
-        spacing: Style.spacing.xs
+        spacing: Style.spacing.md
 
         function commit() {
             if (!visible) return
