@@ -5,7 +5,7 @@
   "version": "0.3.0",
   "author": "Jon Kinney",
   "license": "MIT",
-  "description": "Select text with the mouse and a small bar of actions appears beside it: cut, copy, paste, search, open links, reveal paths, and extensions written as YAML snippets, shell scripts or JavaScript. Compatible with extensions from the PopClip Extensions Directory (https://www.popclip.app/extensions/).",
+  "description": "Select text with the mouse and a small bar of actions appears beside it: cut, copy, paste, search, open links, reveal paths, and extensions written as YAML snippets, shell scripts or JavaScript. Supports a reviewed subset of the PopClip Extensions Directory (https://www.popclip.app/extensions/).",
   "kinds": [
     "service",
     "bar-widget"
@@ -41,7 +41,8 @@
       "position": "auto",
       "assumeEditable": false,
       "accessibilityProbe": true,
-      "directoryRefresh": true
+      "directoryRefresh": true,
+      "extensionDownloads": false
     },
     "schema": [
       {
@@ -155,14 +156,21 @@
           "ctrl",
           "super"
         ],
-        "description": "Extensions written for macOS press 'command'. Ctrl is right for nearly every Linux app."
+        "description": "Global default for macOS Command shortcuts. Each installed extension can override this from its gear menu."
+      },
+      {
+        "key": "extensionDownloads",
+        "type": "boolean",
+        "label": "Allow extension downloads",
+        "defaultValue": false,
+        "description": "Allow installing the exact extension versions reviewed by Omapop. Every installation asks for confirmation; new extensions start disabled."
       },
       {
         "key": "directoryRefresh",
         "type": "boolean",
         "label": "Keep the extension catalogue up to date",
         "defaultValue": true,
-        "description": "Once a week, fetch the list of published extensions shown under 'Available extensions' and look up which new ones need macOS. This contacts popclip.app. Turn it off to browse only the catalogue you already have; Update still works by hand."
+        "description": "Once a week, fetch the published listing for 'Available extensions'. This contacts popclip.app and cannot change Omapop's approved packages or versions. Update also works by hand."
       },
       {
         "key": "shortcut",

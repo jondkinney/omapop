@@ -50,7 +50,7 @@ function harness(autoComplete = true) {
     longPressEnabled: false, Actions: { sanitizeDisplay: value => value },
     readTask: null, readGeneration: 0, maxSelectionBytes: 262144,
     excludedApps: [], selectionHelper: "unused", busyTask: null, busy: false,
-    current: null, selectionUpdating: false, popup, positionMode: "auto",
+    current: null, selectionUpdating: false, popup, positionMode: "auto", extensions: [], moduleActions: {},
     luaCall() {}, log() {}, warn() {},
     extensionsWantHtml: () => false,
     parseJson: text => JSON.parse(text),
@@ -347,6 +347,35 @@ test("dismissal invalidates a selection whose accessibility reply is still pendi
   h.c.hidePopup();
   h.probes[0](true);
   assert.equal(h.presentations.length, 0);
+});
+
+test("dynamic actions use the new selection and never expose the previous cached buttons", () => {
+  const h = harness();
+  h.c.extensions = [{identifier: "dynamic", enabled: true, module: "Config.js", entitlements: ["dynamic"]}];
+  h.c.moduleActions = {dynamic: [{title: "Old selection"}]};
+  h.c.extensionButtons = () => h.c.moduleActions.dynamic || [];
+  const pending = [];
+  h.c.populateModule = (ext, done, selection) => pending.push({done, selection});
+  h.c.present(h.context(), {text: "New selection"}, {}, "selection");
+  assert(!h.c.popup.buttons.some(button => button.title === "Old selection"));
+  assert.equal(pending[0].selection.input.text, "New selection");
+  h.c.moduleActions = {dynamic: [{title: "New selection"}]};
+  pending[0].done();
+  assert(h.c.popup.buttons.some(button => button.title === "New selection"));
+  assert.equal(h.openings(), 1);
+  assert.equal(h.entrances(), 1);
+});
+
+test("late dynamic population cannot reopen a dismissed popup", () => {
+  const h = harness();
+  h.c.extensions = [{identifier: "dynamic", enabled: true, module: "Config.js", entitlements: ["dynamic"]}];
+  let complete;
+  h.c.populateModule = (ext, done) => { complete = done; };
+  h.c.present(h.context(), {text: "Selection"}, {}, "selection");
+  h.c.hidePopup();
+  complete();
+  assert.equal(h.c.popup.visible, false);
+  assert.equal(h.presentations.length, 1);
 });
 
 console.log(`${passed} gesture test groups passed`);

@@ -156,6 +156,7 @@ Item {
     readonly property bool assumeEditable: setting("assumeEditable", false) === true
     readonly property bool accessibilityProbe: setting("accessibilityProbe", true) !== false
     readonly property bool directoryRefresh: setting("directoryRefresh", true) !== false
+    readonly property bool extensionDownloads: setting("extensionDownloads", false) === true
     readonly property string searchTemplate: {
         var engine = String(setting("searchEngine", "google") || "google")
         if (engine === "other") {
@@ -1034,7 +1035,30 @@ Item {
         return head
     }
 
-    function present(ctx, input, context, kind) {
+    function present(ctx, input, context, kind, dynamicReady) {
+        if (!dynamicReady) {
+            var fresh = Object.assign({}, moduleActions)
+            for (var d = 0; d < extensions.length; d++)
+                if ((extensions[d].entitlements || []).indexOf("dynamic") !== -1)
+                    delete fresh[extensions[d].identifier]
+            moduleActions = fresh
+            present(ctx, input, context, kind, true)
+            var session = current
+            var generation = readGeneration
+            var dynamic = extensions.filter(function (ext) {
+                return ext.enabled && ext.module && (ext.entitlements || []).indexOf("dynamic") !== -1
+            }).slice(0, 16)
+            var next = function () {
+                if (generation !== readGeneration || current !== session || busy) return
+                if (!dynamic.length) {
+                    if (popup.visible) present(ctx, input, context, kind, true)
+                    return
+                }
+                populateModule(dynamic.shift(), next, { input: input, context: context, session: session, generation: generation })
+            }
+            if (dynamic.length) next()
+            return
+        }
         var buttons = builtinButtons(input, context).concat(extensionButtons(input, context))
         if (!buttons.length) {
             if (selectionUpdating)
@@ -1409,7 +1433,31 @@ Item {
         return env
     }
 
+    function verifyExtension(ext, done) {
+        if (ext.source === "bundled") {
+            done(true)
+            return
+        }
+        spawn({ command: ["/usr/bin/python3", "-I", extensionsHelper, "verify", "--package", ext.dir,
+                         "--id", ext.identifier, "--digest", ext.contentSha256 || ""],
+                limit: 4096, deadline: 15000 }, function (result) {
+            if (!result.ok) {
+                warn("Extension changed or approval failed: " + Actions.oneLine(result.stderr || "", 160))
+                rescanSoon.restart()
+            }
+            done(result.ok)
+        })
+    }
+
     function runExtensionAction(button, mods) {
+        var session = current
+        verifyExtension(button.ext, function (valid) {
+            if (valid && current === session)
+                runVerifiedExtensionAction(button, mods)
+        })
+    }
+
+    function runVerifiedExtensionAction(button, mods) {
         var action = button.action
         var type = action.type
         current.lastResult = ""
@@ -1420,7 +1468,7 @@ Item {
         } else if (type === "key") {
             var combos = []
             for (var i = 0; i < (action.keyCombos || []).length; i++) {
-                var parsed = Actions.parseKeyCombo(action.keyCombos[i], commandKey)
+                var parsed = Actions.parseKeyCombo(action.keyCombos[i], Actions.extensionCommandKey(commandKey, button.ext.commandKey))
                 if (!parsed) {
                     showResult("Bad key combo: " + Actions.oneLine(action.keyCombos[i], 40), false)
                     return
@@ -1597,7 +1645,7 @@ Item {
 
     function runtimeCommand(extDir, allowNetwork) {
         if (runtimeName === "deno") {
-            var argv = ["/usr/bin/deno", "run", "--quiet", "--no-prompt", "--no-remote", "--allow-read=" + extDir + "," + pluginDir + "/bin"]
+            var argv = ["/usr/bin/deno", "run", "--quiet", "--no-prompt", "--no-remote", "--no-config", "--allow-read=" + extDir + "," + pluginDir + "/bin"]
             if (allowNetwork)
                 argv.push("--allow-net")
             argv.push(runnerPath)
@@ -1613,9 +1661,9 @@ Item {
         return null
     }
 
-    function runnerRequest(mode, ext, actionSpec, button, mods) {
-        var input = current ? current.input : { text: "", html: "", data: { urls: [], nonHttpUrls: [], emails: [], paths: [] }, isUrl: false }
-        var context = current ? current.context : { appIdentifier: "", appName: "", canCut: true, canCopy: true, canPaste: true, clipboardText: "" }
+    function runnerRequest(mode, ext, actionSpec, button, mods, selection) {
+        var input = selection ? selection.input : current ? current.input : { text: "", html: "", data: { urls: [], nonHttpUrls: [], emails: [], paths: [] }, isUrl: false }
+        var context = selection ? selection.context : current ? current.context : { appIdentifier: "", appName: "", canCut: true, canCopy: true, canPaste: true, clipboardText: "" }
         return JSON.stringify({
             mode: mode,
             runtime: { allowNetwork: (ext.entitlements || []).indexOf("network") !== -1 },
@@ -1660,6 +1708,10 @@ Item {
             language: action.language || ""
         }
         var finishedLine = false
+        var effects = []
+        var effectOverflow = false
+        var actionError = null
+        var session = current
         busy = true
         popup.showBusy()
         rearm.restart()
@@ -1679,55 +1731,73 @@ Item {
                 if (msg.done === true) {
                     finishedLine = true
                     if (msg.error) {
-                        var kind = msg.error.kind || "error"
-                        log("javascript error: " + Actions.oneLine(msg.error.message || "", 200))
-                        scriptFailed(kind === "settings" || kind === "signin" ? ext.name : Actions.oneLine(msg.error.message || "", 160), kind === "settings" || kind === "signin")
+                        actionError = msg.error
                     } else {
-                        current.lastResult = typeof msg.result === "string" ? msg.result : ""
+                        session.lastResult = typeof msg.result === "string" ? msg.result : ""
                     }
                     return
                 }
-                if (typeof msg.call === "string")
-                    handleRunnerCall(msg.call, Array.isArray(msg.args) ? msg.args : [], button)
+                if (typeof msg.call === "string") {
+                    if (effects.length >= 128) effectOverflow = true
+                    else effects.push({ name: msg.call, args: Array.isArray(msg.args) ? msg.args : [] })
+                }
             }
         }, function (result) {
             busyTask = null
-            busy = false
-            if (!current)
+            if (!current || current !== session) {
+                busy = false
                 return
-            if (!finishedLine) {
-                if (result.timedOut)
+            }
+            if (actionError || effectOverflow || !finishedLine || !result.ok) {
+                busy = false
+                if (actionError) {
+                    var kind = actionError.kind || "error"
+                    scriptFailed(kind === "settings" || kind === "signin" ? ext.name : Actions.oneLine(actionError.message || "", 160), kind === "settings" || kind === "signin")
+                } else if (effectOverflow)
+                    scriptFailed("too many script effects", false)
+                else if (result.timedOut)
                     scriptFailed("script timed out", false)
                 else if (result.truncated)
                     scriptFailed("script output too large", false)
                 else
                     scriptFailed(Actions.oneLine(result.stderr || "the script did not finish", 160), false)
+                done()
+                return
             }
-            done()
+            var next = function () {
+                if (current !== session) { busy = false; return }
+                if (!effects.length) { busy = false; done(); return }
+                var effect = effects.shift()
+                handleRunnerCall(effect.name, effect.args, button, next)
+            }
+            next()
         })
     }
 
     // Effects requested by extension JavaScript, performed here in order.
-    function handleRunnerCall(name, args, button) {
+    function handleRunnerCall(name, args, button, done) {
         var context = current ? current.context : null
         var text = args.length ? String(args[0] === undefined || args[0] === null ? "" : args[0]) : ""
         var opts = args.length > 1 && args[1] && typeof args[1] === "object" ? args[1] : {}
         switch (name) {
         case "pasteText":
             if (context && (context.canPaste || context.terminal))
-                pasteText(text, !!opts.restore, function () { })
+                pasteText(text, !!opts.restore, done)
             else
-                copyText(text, function () { })
-            break
+                copyText(text, done)
+            return
         case "copyText":
-            copyText(text, function () { if (opts.notify !== false) { showResult("Copied", false); autoHide.restart() } })
-            break
+            copyText(text, function () { if (opts.notify !== false) { showResult("Copied", false); autoHide.restart() } done() })
+            return
         case "pasteboardWrite":
-            copyText(text, function () { })
-            break
+            copyText(text, done)
+            return
         case "performCommand":
-            performCommand(text, function () { })
-            break
+            if (text === "paste" && opts.transform === "plain" && context)
+                pasteText(context.clipboardText || "", false, done)
+            else
+                performCommand(text, done)
+            return
         case "openUrl":
             openUrl(text)
             break
@@ -1735,18 +1805,15 @@ Item {
             var combos = []
             var list = Array.isArray(args[0]) ? args[0] : [args[0]]
             for (var i = 0; i < list.length; i++) {
-                var parsed = Actions.parseKeyCombo(list[i], commandKey)
+                var parsed = Actions.parseKeyCombo(list[i], Actions.extensionCommandKey(commandKey, button.ext.commandKey))
                 if (parsed)
                     combos.push(parsed)
             }
-            sendKeys(combos, context ? context.windowAddress : "", function () { })
-            break
+            sendKeys(combos, context ? context.windowAddress : "", done)
+            return
         case "showText":
             current.lastResult = text
-            if (opts.preview)
-                copyText(text, function () { showResult(text, true) })
-            else
-                showResult(text, false)
+            showResult(text, !!opts.preview)
             break
         case "showSuccess":
             showStatus(true)
@@ -1769,6 +1836,7 @@ Item {
         default:
             log("ignoring runner call " + Actions.oneLine(name, 40))
         }
+        done()
     }
 
     function cancelBusy() {
@@ -1836,23 +1904,32 @@ Item {
         next()
     }
 
-    function populateModule(ext, done) {
+    function populateModule(ext, done, selection) {
+        verifyExtension(ext, function (valid) {
+            if (valid) populateVerifiedModule(ext, done, selection)
+            else done()
+        })
+    }
+
+    function populateVerifiedModule(ext, done, selection) {
         var argv = runtimeCommand(ext.dir, false)
         if (!argv) {
             done()
             return
         }
         var actions = null
+        var declaredOptions = []
         spawn({
             command: argv,
             cwd: ext.dir,
-            stdin: runnerRequest("populate", ext, { path: [] }, null, null),
+            stdin: runnerRequest(!selection && (ext.entitlements || []).indexOf("dynamic") !== -1 ? "metadata" : "populate", ext, { path: [] }, null, null, selection),
             lineMode: true,
             limit: 4194304,
             deadline: 20000,
             onLine: function (line) {
                 var msg = parseJson(line, 2097152)
                 if (msg && msg.done === true) {
+                    if (Array.isArray(msg.options)) declaredOptions = msg.options.slice(0, 64)
                     if (Array.isArray(msg.actions)) {
                         actions = msg.actions.slice(0, 64)
                         for (var a = 0; a < actions.length; a++)
@@ -1862,13 +1939,33 @@ Item {
                 }
             }
         }, function (result) {
+            if (selection && (current !== selection.session || readGeneration !== selection.generation)) {
+                done()
+                return
+            }
             var ids = populatedIds
             ids[ext.identifier] = true
             populatedIds = ids
-            if (actions) {
+            if (actions && result.ok) {
                 var all = moduleActions
                 all[ext.identifier] = actions
                 moduleActions = all
+                if (declaredOptions.length) {
+                    var updated = extensions.slice()
+                    for (var i = 0; i < updated.length; i++) {
+                        if (updated[i].identifier !== ext.identifier) continue
+                        var copy = Object.assign({}, updated[i])
+                        var merged = (copy.options || []).slice()
+                        for (var o = 0; o < declaredOptions.length; o++) {
+                            var opt = declaredOptions[o]
+                            if (opt && typeof opt.identifier === "string" && !merged.some(function (existing) { return existing.identifier === opt.identifier }))
+                                merged.push(opt)
+                        }
+                        copy.options = merged.slice(0, 64)
+                        updated[i] = copy
+                    }
+                    extensions = updated
+                }
             } else if (!result.ok) {
                 log("module populate failed for " + ext.identifier + ": " + Actions.oneLine(result.stderr || "", 200))
             }
@@ -1900,7 +1997,13 @@ Item {
             if (ext.optionValues && Object.keys(ext.optionValues).length)
                 options[ext.identifier] = ext.optionValues
         }
-        writeSettings({ disabled: disabled, options: options })
+        var extra = extensionPreferences()
+        var target = extensions.find(function (e) { return e.identifier === identifier })
+        if (enabled && target && target.usable !== false && target.contentSha256)
+            extra.enabled[identifier] = target.contentSha256
+        else
+            delete extra.enabled[identifier]
+        writeSettings({ disabled: disabled, options: options, enabled: extra.enabled, commandKeys: extra.commandKeys })
     }
 
     // Called by the widget's options editor. Values are capped like the helper does.
@@ -1926,7 +2029,30 @@ Item {
             if (Object.keys(current).length)
                 options[ext.identifier] = current
         }
-        writeSettings({ disabled: disabled, options: options })
+        var extra = extensionPreferences()
+        writeSettings({ disabled: disabled, options: options, enabled: extra.enabled, commandKeys: extra.commandKeys })
+    }
+
+    function extensionPreferences() {
+        var enabled = {}, commandKeys = {}
+        for (var i = 0; i < extensions.length; i++) {
+            var ext = extensions[i]
+            if (ext.enabled && ext.contentSha256) enabled[ext.identifier] = ext.contentSha256
+            if (ext.commandKey === "ctrl" || ext.commandKey === "super") commandKeys[ext.identifier] = ext.commandKey
+        }
+        return { enabled: enabled, commandKeys: commandKeys }
+    }
+
+    function setExtensionCommandKey(identifier, value) {
+        var extra = extensionPreferences(), disabled = [], options = {}
+        if (value === "ctrl" || value === "super") extra.commandKeys[identifier] = value
+        else delete extra.commandKeys[identifier]
+        for (var i = 0; i < extensions.length; i++) {
+            var ext = extensions[i]
+            if (!ext.enabled && !ext.error && ext.usable !== false) disabled.push(ext.identifier)
+            if (ext.optionValues) options[ext.identifier] = ext.optionValues
+        }
+        writeSettings({ disabled: disabled, options: options, enabled: extra.enabled, commandKeys: extra.commandKeys })
     }
 
     function writeSettings(obj) {
@@ -2019,6 +2145,8 @@ Item {
                     description: Actions.oneLine(e.description || "", 240),
                     author: Actions.oneLine(e.author || "", 60),
                     page: Actions.oneLine(e.page || "", 200),
+                    approved: e.approved === true,
+                    version: Actions.oneLine(e.version || "", 40),
                     needsMac: e.needsMac === true
                 })
             }
@@ -2080,6 +2208,10 @@ Item {
     }
 
     function installFromDirectory(shortcode) {
+        if (!extensionDownloads) {
+            directoryStatus = "Enable extension downloads in Settings first."
+            return
+        }
         var code = String(shortcode || "").replace(/[^A-Za-z0-9]/g, "").slice(0, 16)
         if (!code || directoryInstalling[code])
             return
@@ -2103,7 +2235,7 @@ Item {
                 else if (platform.note)
                     directoryStatus = "Installed " + name + "; " + Actions.oneLine(platform.note, 160) + "."
                 else
-                    directoryStatus = "Installed " + name
+                    directoryStatus = "Installed " + name + ". Enable it in Installed extensions when ready."
                 rescanExtensions()
             } else {
                 directoryStatus = "Could not install: " + Actions.oneLine((parsed && parsed.error) || result.stderr || "the download failed", 160)
@@ -2206,12 +2338,10 @@ Item {
         function pause(): string { root.paused = true; return "ok" }
         function resume(): string { root.paused = false; return "ok" }
         function toggle(): string { root.paused = !root.paused; return root.paused ? "paused" : "resumed" }
-        function rescan(): string { root.rescanExtensions(); return "ok" }
         // The extension directory, same calls the widget's Browse section makes.
         function dirsearch(query: string): string { root.searchDirectory(query); return "ok" }
         function dirrefresh(): string { root.refreshDirectory(0); return "ok" }
         function diropen(url: string): string { return root.openDirectoryPage(url) }
-        function dirinstall(shortcode: string): string { root.installFromDirectory(shortcode); return "ok" }
         function dirshowmac(flag: string): string { root.setDirectoryShowMac(flag === "1" || flag === "true"); return root.directoryShowMac ? "shown" : "hidden" }
         function dirresults(): string {
             return JSON.stringify({
@@ -2221,9 +2351,6 @@ Item {
             })
         }
         function status(): string { return root.ipcStatus() }
-        // Activate the n-th visible button (0-based), as a click would; `mods` is a
-        // Hyprland modmask (1 shift, 4 ctrl, 8 alt, 64 super).
-        function click(index: string, mods: string): string { return root.ipcClick(index, mods) }
         function debug(): string {
             return JSON.stringify({
                 busy: root.busy, hasCurrent: !!root.current, reading: !!root.readTask, pending: !!root.pendingRelease,
@@ -2246,19 +2373,6 @@ Item {
             paused: paused, engineReady: engineReady, runtime: runtimeName,
             extensions: extensions.length, visible: popup.visible, buttons: titles
         })
-    }
-
-    function ipcClick(index, mods) {
-        if (!popup.visible)
-            return "hidden"
-        var i = parseInt(String(index), 10)
-        var list = popup.buttons
-        if (!isFinite(i) || i < 0 || i >= list.length)
-            return "no such button"
-        lastPressAt = Date.now()
-        lastPressMods = parseInt(String(mods), 10) || 0
-        handleClick(list[i], 0)
-        return "ok"
     }
 
     onPausedChanged: if (paused) hidePopup()

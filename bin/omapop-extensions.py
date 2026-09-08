@@ -14,6 +14,7 @@ every string is capped before it is emitted. The shell caps the helper's
 output again before JSON.parse.
 """
 import datetime
+import importlib.util
 import json
 import os
 import plistlib
@@ -21,6 +22,10 @@ import re
 import stat
 import sys
 import tempfile
+
+_catalog_spec = importlib.util.spec_from_file_location('omapop_catalog', os.path.join(os.path.dirname(__file__), 'omapop_catalog.py'))
+catalog = importlib.util.module_from_spec(_catalog_spec)
+_catalog_spec.loader.exec_module(catalog)
 
 try:
     import yaml
@@ -381,7 +386,7 @@ def norm_action(raw, defaults, ext, warnings, depth=0):
         action["spacesAsPlus"] = as_bool(d.get("spaces as plus"))
     elif action["type"] == "key":
         combos = d.get("key combos") if d.get("key combos") is not None else d.get("key combo")
-        action["keyCombos"] = [cap(c, 64) for c in as_list(combos)[:32]]
+        action["keyCombos"] = [normalize_key_combo(c) for c in as_list(combos)[:32]]
         action["keyComboTarget"] = clean_text(d.get("key combo target"), 16).lower()
     elif action["type"] == "shell":
         action["interpreter"] = clean_text(d.get("interpreter"), 256)
@@ -430,6 +435,20 @@ def norm_action(raw, defaults, ext, warnings, depth=0):
     if not action["type"]:
         action["type"] = "none"
     return action
+
+
+def normalize_key_combo(value):
+    if type(value) is int and 0 <= value <= 255:
+        return '0x%x' % value
+    if isinstance(value, dict):
+        item = norm_dict(value)
+        key, mask = item.get('key code'), item.get('modifiers', 0)
+        if type(key) is int and 0 <= key <= 255 and type(mask) is int and mask >= 0 and not mask & ~0x1e0000:
+            names = [name for bit, name in [(0x20000, 'shift'), (0x40000, 'control'),
+                                          (0x80000, 'option'), (0x100000, 'command')] if mask & bit]
+            return ' '.join(names + ['0x%x' % key])
+        raise ValueError('invalid legacy key-combo object')
+    return cap(value, 64)
 
 
 def build_extension(config, ext_dir, source, config_file, warnings):
@@ -689,19 +708,19 @@ def _rmtree_bounded(path, depth=0, budget=None):
 
 def load_settings(path):
     if not path or not os.path.lexists(path):
-        return {"disabled": [], "options": {}, "order": []}, None
+        return sanitize_settings({}), None
     data, err = bounded_read(path, MAX_SETTINGS_BYTES)
     if err:
-        return {"disabled": [], "options": {}, "order": []}, err
+        return sanitize_settings({}), err
     try:
         parsed = json.loads(data.decode("utf-8", "replace"))
     except ValueError as exc:
-        return {"disabled": [], "options": {}, "order": []}, "settings: %s" % exc
+        return sanitize_settings({}), "settings: %s" % exc
     return sanitize_settings(parsed), None
 
 
 def sanitize_settings(parsed):
-    out = {"disabled": [], "options": {}, "order": []}
+    out = {"disabled": [], "options": {}, "order": [], "enabled": {}, "commandKeys": {}}
     if not isinstance(parsed, dict):
         return out
     for item in as_list(parsed.get("disabled"))[:1000]:
@@ -710,6 +729,14 @@ def sanitize_settings(parsed):
     for item in as_list(parsed.get("order"))[:1000]:
         if isinstance(item, str) and 0 < len(item) <= 256:
             out["order"].append(item)
+    for key in ('enabled', 'commandKeys'):
+        values = parsed.get(key)
+        if isinstance(values, dict):
+            for identifier, value in list(values.items())[:500]:
+                if not isinstance(identifier, str) or not 0 < len(identifier) <= 256 or not isinstance(value, str):
+                    continue
+                if (key == 'enabled' and catalog.HEX.fullmatch(value)) or (key == 'commandKeys' and value in ('ctrl', 'super')):
+                    out[key][identifier] = value
     options = parsed.get("options")
     if isinstance(options, dict):
         for ext_id, values in list(options.items())[:500]:
@@ -897,11 +924,43 @@ def cmd_scan(args):
         else:
             seen[key] = ext
     extensions = [e for e in extensions if not e.get("shadowed")]
+    approved, approval_error = {}, ''
+    try:
+        approved = {e['id']: e for e in catalog.load_catalog()['extensions']}
+    except (OSError, ValueError, RecursionError) as exc:
+        approval_error = str(exc)
+        warnings.append('Approval catalog: ' + approval_error)
     for ext in extensions:
-        # Not usable (every action needs macOS, or a file is missing) is not a
-        # choice the toggle can override, so it is not written to the disabled
-        # list either: fix the package and it comes back on by itself.
+        # Structural compatibility cannot be overridden by the enable toggle.
+        # User packages additionally need an explicit approval of these bytes.
         ext["enabled"] = ext.get("identifier") not in settings["disabled"] and not ext.get("error") and ext.get("usable") is not False
+        identifier = ext.get('identifier', '')
+        ext['commandKey'] = settings['commandKeys'].get(identifier, 'inherit')
+        ext['recommendedCommandKey'] = approved.get(identifier, {}).get('commandKey', 'inherit')
+        ext['trustStatus'] = 'bundled' if ext.get('source') == 'bundled' else 'manual'
+        ext['contentSha256'] = ''
+        if ext.get('source') != 'bundled' and not ext.get('error'):
+            try:
+                if approval_error:
+                    raise ValueError('Approval catalog unavailable; user extensions disabled')
+                if ext.get('configFile', '').lower().endswith('.popcliptxt'):
+                    raise ValueError('Install this snippet as a .popclipext package to enable it')
+                files = catalog.tree_files(ext['dir'])
+                digest = catalog.content_digest(files)
+                ext['contentSha256'] = digest
+                if identifier in approved:
+                    if files != sorted(approved[identifier]['files'], key=lambda f: f['path']):
+                        raise ValueError('Installed package changed since review; reinstall the approved version')
+                    ext['trustStatus'] = 'approved'
+                    ext['description'] = approved[identifier]['description']
+                # Enabling is an explicit UI choice bound to this content, not
+                # an identifier that a changed/new package can inherit.
+                ext['enabled'] = ext['enabled'] and settings['enabled'].get(identifier) == digest
+            except (OSError, ValueError) as exc:
+                ext['enabled'] = False
+                ext['usable'] = False
+                ext['trustStatus'] = 'blocked'
+                ext['platformNote'] = str(exc)[:200]
         ext["optionValues"] = settings["options"].get(ext.get("identifier", ""), {})
     out = {"ok": True, "extensions": extensions, "settings": settings, "warnings": warnings}
     sys.stdout.write(json.dumps(out, ensure_ascii=False) + "\n")
@@ -918,6 +977,19 @@ def cmd_install_snippet(args):
     config, body, kind = parse_snippet(text)
     result = snippet_to_package(config, body, kind, dest)
     sys.stdout.write(json.dumps(result, ensure_ascii=False) + "\n")
+
+
+def cmd_verify(args):
+    path, identifier, expected = (arg_value(args, k) for k in ('--package', '--id', '--digest'))
+    if not path or not identifier or not expected or not catalog.HEX.fullmatch(expected):
+        raise ValueError('missing extension content approval')
+    approved = {e['id']: e for e in catalog.load_catalog()['extensions']}
+    files = catalog.tree_files(path)
+    if identifier in approved and files != sorted(approved[identifier]['files'], key=lambda f: f['path']):
+        raise ValueError('extension differs from its reviewed package')
+    if catalog.content_digest(files) != expected:
+        raise ValueError('extension changed since it was enabled; review it again')
+    sys.stdout.write('{"ok":true}\n')
 
 
 def cmd_write_settings(args):
@@ -964,6 +1036,8 @@ def main(argv):
     args = argv[2:]
     if command == "scan":
         cmd_scan(args)
+    elif command == "verify":
+        cmd_verify(args)
     elif command == "install-snippet":
         cmd_install_snippet(args)
     elif command == "write-settings":

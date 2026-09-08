@@ -12,19 +12,15 @@ usage:
 TARGET is a directory shortcode (`09a521`), a directory page URL, or a direct
 package URL.
 
-Extensions whose only action type is AppleScript or a macOS Service can do
-nothing on Linux, so `search` leaves them out unless `--all` is given. The
-listing does not say what an extension does; its own page does, so `classify`
-reads each page once and keeps the answer in the catalogue.
+Search defaults to Omapop's signed approval catalog, bundled with the plugin.
+Only exact approved package versions can be installed. `--all` also displays
+unapproved entries from the optional per-user directory cache for inspection.
+`refresh` and `classify` update that cache, never the approval policy.
 
-The catalogue is per-user and is never redistributed: `refresh` scrapes into
-`~/.config/omapop/directory-cache.json` on the user's own machine and search
-reads that. No snapshot ships in this repository, so the directory listing is
-not republished here; with no cache yet the commands say so and ask for a
-refresh. A `directory.json` beside this script is honoured if a user puts one
-there, but it is git-ignored and never distributed. Nothing here runs extension
-code; installed packages are still vetted by omapop-extensions.py before the
-shell will load them.
+Installation verifies the catalog signature and downloaded SHA-256 before
+extraction, then package identity and every staged file before publication.
+Nothing here executes extension code. New user packages start disabled and
+require explicit content-bound enablement in Omapop's installed list.
 
 Every request goes to a popclip.app host over https, with a bounded read and a
 deadline. Archives are expanded through a staging directory that rejects
@@ -37,6 +33,7 @@ import ctypes
 import io
 import json
 import os
+import plistlib
 import re
 import secrets
 import shutil
@@ -49,6 +46,10 @@ import urllib.request
 import zipfile
 from html import unescape
 from urllib.parse import urlparse
+
+_catalog_spec = importlib.util.spec_from_file_location('omapop_catalog', os.path.join(os.path.dirname(__file__), 'omapop_catalog.py'))
+catalog = importlib.util.module_from_spec(_catalog_spec)
+_catalog_spec.loader.exec_module(catalog)
 
 DIRECTORY_URL = "https://www.popclip.app/extensions/"
 SITEMAP_URL = "https://www.popclip.app/sitemap.xml"
@@ -652,33 +653,37 @@ def cmd_search(args):
     limit = int(arg_value(args, "--limit") or 25)
     needle = " ".join(positionals(args)).strip().lower()
     index, path = load_index()
-    entries = index.get("extensions", [])
+    approved = catalog.load_catalog()
+    entries = [dict(shortcode=e['shortcode'], name=e['name'], description=e['description'],
+                    identifier=e['id'], author='', page=PAGE_URL % e['shortcode'],
+                    approved=True, version=e['version'], actionType='Reviewed',
+                    commandKey=e['commandKey']) for e in approved['extensions']]
+    known = {e['shortcode'] for e in entries}
+    others = [dict(e, approved=False) for e in index.get('extensions', []) if e['shortcode'] not in known]
+    if show_all:
+        entries += others
     hits = [e for e in entries if not needle or matches(e, needle)]
-    # macOS-only entries are left out unless asked for; the count says how many.
-    hidden = [e for e in hits if needs_mac(e)]
-    if not show_all:
-        hits = [e for e in hits if not needs_mac(e)]
+    hidden = [e for e in others if not needle or matches(e, needle)]
     if needle:
         hits.sort(key=lambda e: (rank(e, needle), e.get("name", "").lower()))
     hits = hits[:max(1, min(limit, 500))]
     if as_json:
-        sys.stdout.write(json.dumps({"ok": True, "count": len(hits), "fetched": index.get("fetched", ""),
-                                     "total": len(entries), "hidden": 0 if show_all else len(hidden),
-                                     "pending": unclassified(entries),
+        sys.stdout.write(json.dumps({"ok": True, "count": len(hits), "fetched": approved.get("reviewDate", ""),
+                                     "total": len(known) + len(others), "hidden": 0 if show_all else len(hidden),
+                                     "pending": 0,
                                      "extensions": [dict(e, needsMac=needs_mac(e)) for e in hits]}) + "\n")
         return
     if not entries:
-        sys.stdout.write("No catalogue yet. Run: omapop-directory.py refresh\n")
+        sys.stdout.write("No approved extensions in this release.\n")
         return
     note = ""
     if hidden and not show_all:
-        note = " %d more need%s macOS and %s not listed; add --all to see %s." % (
-            len(hidden), "s" if len(hidden) == 1 else "", "is" if len(hidden) == 1 else "are", "it" if len(hidden) == 1 else "them")
+        note = " %d unapproved extensions hidden; add --all to inspect them." % len(hidden)
     if not hits:
         sys.stdout.write("Nothing matched %r among %d extensions.%s\n" % (needle, len(entries), note))
         return
     for entry in hits:
-        flag = "  (needs macOS)" if needs_mac(entry) else ""
+        flag = "  (not approved%s)" % (", needs macOS" if needs_mac(entry) else "") if not entry['approved'] else ""
         line = "  %-10s %-28s %s%s" % (entry["shortcode"], entry["name"][:28], entry.get("description", "")[:64], flag)
         sys.stdout.write(line.rstrip() + "\n")
     sys.stdout.write("\n%d of %d extensions (catalogue from %s).%s\n"
@@ -853,7 +858,8 @@ def platform_report(package_dir):
         ext = module.load_package(package_dir, "user", [])
     except Exception as exc:  # noqa: BLE001 - reported, never raised: the install itself succeeded
         return {"usable": False, "note": "", "error": clean(exc, 200)}
-    return {"usable": ext.get("usable") is not False, "note": clean(ext.get("platformNote"), 240), "error": ""}
+    return {"usable": ext.get("usable") is not False, "note": clean(ext.get("platformNote"), 240), "error": "",
+            "identifier": ext.get('identifier', '')}
 
 
 def cmd_install(args):
@@ -862,26 +868,45 @@ def cmd_install(args):
     targets = positionals(args)
     if not targets:
         die("install needs a shortcode or link", as_json)
-    info = resolve_target(targets[0])
-    data = fetch(info["package"], MAX_ARCHIVE_BYTES)
+    entry = catalog.approved_target(targets[0])
+    # The signed release catalog supplies identity, URL and expected bytes.
+    # Mutable HTML, cached listings and package-provided hashes have no vote.
+    data = fetch(entry['url'], entry['bytes'])
+    catalog.verify_archive(data, entry)
     with pinned_directory(dest, create=True) as parent:
         stage_name = ".omapop-download-" + secrets.token_hex(12)
         os.mkdir(stage_name, 0o700, dir_fd=parent)
         staging = "/proc/self/fd/%d/%s" % (parent, stage_name)
         try:
             package = extract_package(data, staging)
+            package_fd = os.open(stage_name + '/unpacked/' + os.path.basename(package),
+                                 os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC, dir_fd=parent)
+            try:
+                catalog.verify_tree(package_fd, entry)
+            finally:
+                os.close(package_fd)
+            signature = catalog.read_regular(os.path.join(package, '_Signature.plist'), MAX_MEMBER_BYTES)
+            metadata = plistlib.loads(signature).get('Metadata', {})
+            if (metadata.get('identifier') != entry['id'] or str(metadata.get('version')) != entry['version']
+                    or metadata.get('shortcode') != entry['shortcode']):
+                raise ValueError('package identity/version differs from its approval')
             name = os.path.basename(package)
             final = os.path.join(dest, name)
             os.chmod(package, 0o700)
             platform = platform_report(package)
+            if platform.get('error') or platform.get('usable') is False:
+                raise ValueError('reviewed package cannot be loaded: ' + (platform.get('error') or platform.get('note', '')))
+            if platform['identifier'] != entry['id']:
+                raise ValueError('Config identity differs from the reviewed identity')
             try:
                 publish_package(parent, stage_name + "/unpacked/" + name, name)
             except FileExistsError:
                 raise ValueError("already installed: %s; remove the old package explicitly before reinstalling" % name)
         finally:
             shutil.rmtree(stage_name, dir_fd=parent)
-    result = {"ok": True, "name": info["name"] or os.path.basename(final), "shortcode": info["shortcode"],
-              "dir": final, "replaced": False, "bytes": len(data), "platform": platform}
+    result = {"ok": True, "name": entry['name'], "shortcode": entry['shortcode'],
+              "dir": final, "replaced": False, "bytes": len(data), "platform": platform,
+              "approved": True, "sha256": entry['sha256'], "version": entry['version']}
     if as_json:
         sys.stdout.write(json.dumps(result) + "\n")
     else:
@@ -894,7 +919,7 @@ def cmd_install(args):
         elif platform["note"]:
             sys.stdout.write("Note: %s; the rest work.\n" % platform["note"])
         else:
-            sys.stdout.write("It appears in the bar on the next selection.\n")
+            sys.stdout.write("Enable it in Omapop's installed extensions when you are ready.\n")
 
 
 # ------------------------------------------------------------------ plumbing

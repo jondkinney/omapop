@@ -1,0 +1,3162 @@
+{
+  "schemaVersion": 1,
+  "revision": 1,
+  "reviewDate": "2026-09-08",
+  "extensions": [
+    {
+      "id": "com.pilotmoon.popclip.extension.alphagram",
+      "version": "339",
+      "shortcode": "w9stjb",
+      "name": "Alphagram",
+      "description": "Sort or scramble the letters of the selected text.",
+      "url": "https://public.popclip.app/extensions/ext_AcxHGXtyvUZi/file",
+      "sha256": "132c311de2e948cb9b88069dd3c8a2ecb875edf48bcea4e4a8c99be0c40555ac",
+      "bytes": 3500,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 467,
+          "sha256": "67add1abbf1d0228ddd2f9c16b78f599fc04349644fe67328317fb670d68b23e"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 6427,
+          "sha256": "677da2d3771e25d42773eabd26052800c06ccb3734df794d09497823e48fffd1"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 740,
+          "sha256": "3d13ffd0977e3c4b1f5baca07e1b7c23e5888a300d17707edc4988b3cc1ac8c3"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.alternating-case",
+      "version": "100",
+      "shortcode": "8kvc4y",
+      "name": "Alternating Case",
+      "description": "Change the text to AlTeRnAtInG CaSe, with optional randomness.",
+      "url": "https://public.popclip.app/extensions/ext_2vvP0DP5s5IB/file",
+      "sha256": "944933fcff55b2ede0dd0c8c69aeadc75d49f1b92289fb3007a6200f35e7e3ea",
+      "bytes": 4769,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.js",
+          "bytes": 1102,
+          "sha256": "80b7863faba537e26681a41be6a74de4f54586e59cfaca4abf694655d267d6a6"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 481,
+          "sha256": "ed710c2b1ee72b438082fb6bfb387e375adc861815d1835ffaa6bbcc1393a5d7"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 747,
+          "sha256": "991f1f7d9d36eedab8345db9fad4fc4e62a3b807fbe1d1e602082b6c10511bf4"
+        },
+        {
+          "path": "noun_sponge_575115.svg",
+          "bytes": 5634,
+          "sha256": "dddc4ff83702e05834c3fc075c2ddcd930d3c7f942d8ac0a9d44cc3d065e5f74"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.append",
+      "version": "248",
+      "shortcode": "1yw6jd",
+      "name": "Append to Clipboard",
+      "description": "Combine the selected text with the existing clipboard contents.",
+      "url": "https://public.popclip.app/extensions/ext_SjzPJyO4NdjK/file",
+      "sha256": "bd3db6a6604a2be2120bf7e0a35115a68ce80614f65157a39c3354ed9467aa6a",
+      "bytes": 5955,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 474,
+          "sha256": "e4f997ed408ddf8a4165359dfecb80f0bea75dd8ae2777df000db85599aebbbe"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 535,
+          "sha256": "facb77ebf13ecdb782a450b7e56a659938ff127df91f4e4b639aa25b7e251795"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 737,
+          "sha256": "a7f94cf0a4e48b8c1f5a25c2daecec4db3cc5623063c644a1a5b966862f36273"
+        },
+        {
+          "path": "plus.png",
+          "bytes": 6102,
+          "sha256": "89edc7c665bdb5492345faa27204850f1946866ef2b9dd6ec0c91768b9312c73"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.archiveis",
+      "version": "218",
+      "shortcode": "0yehgm",
+      "name": "Archive.today",
+      "description": "Submit the selected URL for archiving by Archive.today (Archive.is)",
+      "url": "https://public.popclip.app/extensions/ext_UpemEbTK2YIv/file",
+      "sha256": "72569796b710a3d44c49eec358fc70f440b4caf300aac38ba9127135cb727d39",
+      "bytes": 1704,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 471,
+          "sha256": "cb7b9aa228d18ca96c5413f6c5b7f3a81cd74e0302a92e2be7a1f18b98cc0dfa"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 359,
+          "sha256": "41d42c6e33df8a5f393f8bc494601dd406734463509031f70693398a1d85bad6"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 740,
+          "sha256": "82ef0c4812269c0b466d774e8e0a8de38c53965eae75102551acac30b4b13f86"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.audible-search",
+      "version": "100",
+      "shortcode": "ezvs1d",
+      "name": "Audible",
+      "description": "Search for audiobooks on Audible.",
+      "url": "https://public.popclip.app/extensions/ext_R6fHcufGYjFS/file",
+      "sha256": "6107a4332cd0aebfb72a043357e948c4b1bfca5c22b20c04304fd406ea3ce9a3",
+      "bytes": 9119,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 1611,
+          "sha256": "b57c65bbb36b2b820588da77cf35b8d4503ac6e9284019950bf17c87ddfb3bca"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 745,
+          "sha256": "36031d867e4c400d26e044538ac4f6744bd4c32e42c21e680967cc8a555e953e"
+        },
+        {
+          "path": "audible.png",
+          "bytes": 7936,
+          "sha256": "70e2eee94fd523a2e4e44075c51217631d2ef1e9cf15279b6da48f0fd196afda"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.base64",
+      "version": "377",
+      "shortcode": "6ymxrg",
+      "name": "Base64",
+      "description": "Encode or decode the selected text as Base64-encoded UTF-8. Supports standard (+/) and URL-safe (-_) Base64 variants.",
+      "url": "https://public.popclip.app/extensions/ext_P9IzZpkn7BkA/file",
+      "sha256": "5d61f0e7b53f0f925c7a46a38a583e800f2c01fb3d22285a5fdd51aec371db09",
+      "bytes": 12314,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "64.png",
+          "bytes": 9429,
+          "sha256": "123b35c270641c2285f12d4d624e360b10f0fea629fcb4853d494b9d2bb278f6"
+        },
+        {
+          "path": "Config.json",
+          "bytes": 714,
+          "sha256": "84e4ea0af92908c69f011cf52646c13180306256cc6e486a60793e944118e7da"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 461,
+          "sha256": "2bcc6642e64a065fe5f0089efad74e93cee6adbc02ed0567bb692ca02c14b8f6"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 737,
+          "sha256": "dd18174655c2fd83b02823657b1040fe12b1a4bf17fa97d279d49a61e821e0a6"
+        },
+        {
+          "path": "base64.js",
+          "bytes": 608,
+          "sha256": "848bab87b2d4ae684c880debb4eb03e8b1b2dcdbcc552f2fa2d6ac147e6a0f2c"
+        },
+        {
+          "path": "base64.ts",
+          "bytes": 482,
+          "sha256": "ae49c7871008d0f31e2995fe70fe47ad73e4fea740901e010e0a1a17517d9bb4"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.bing-translator",
+      "version": "100",
+      "shortcode": "vjmt48",
+      "name": "Bing Translator",
+      "description": "Open Bing Translator in a web browser with the selected text.",
+      "url": "https://public.popclip.app/extensions/ext_O0Ln6XQcIbog/file",
+      "sha256": "f668fbff0ba2b6a29d37724d0a76a9dcd9212e611377703705046fea60c02f1d",
+      "bytes": 12833,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 818,
+          "sha256": "7896a95f406b1745551143f13546cd96f94ad737fa570c7e597f6f68854cebea"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 746,
+          "sha256": "3481575d37b87ac83a54b5069bd9edf75711c6e1b1d8eec7b0b761c5371c9988"
+        },
+        {
+          "path": "btrans.png",
+          "bytes": 12157,
+          "sha256": "0fdf9a7904bc630a2eb936b8ed870434da295060029681b55fbc82f84c6b759f"
+        }
+      ]
+    },
+    {
+      "id": "com.brettterpstra.popclip.extension.blockquote",
+      "version": "2.0.6",
+      "shortcode": "cvvw0q",
+      "name": "Blockquote",
+      "description": "Turn indented text into nested Markdown blockquote.",
+      "url": "https://public.popclip.app/extensions/ext_sy8VZcyHYfB7/file",
+      "sha256": "63b7051d89d6868ea44eb07c691d593a887c9553c1c5b11899e789a51d80c2e3",
+      "bytes": 4849,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 473,
+          "sha256": "d8256ac4bd6f452d3abcea650e529431445292e6935dc5c3ae189768b15b48a4"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 321,
+          "sha256": "05af7b5cc8d41a149772d384584e2348b3d63ebf93f77275da1a0c5774ed21a3"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 747,
+          "sha256": "6e257a07198c854c81cab2ad757acb6133fe063670cb94118cc0aeede8932031"
+        },
+        {
+          "path": "blockquote.png",
+          "bytes": 2521,
+          "sha256": "0c7b546c6f06992ea2d2d31903e0dc3126ab693fd9a17901f385b8440d97b63b"
+        },
+        {
+          "path": "blockquote.ts",
+          "bytes": 2168,
+          "sha256": "f61141d8b392f6a6f5001818a68d882ffe629786d5d121dd24dca74fae21ae61"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.brackets",
+      "version": "316",
+      "shortcode": "awjzhy",
+      "name": "Brackets",
+      "description": "Put brackets around the selected text, choosing from (), [], {}, <> and //.",
+      "url": "https://public.popclip.app/extensions/ext_0FTNIGlhrBwa/file",
+      "sha256": "900918a2b483b95aea6b8e07b183c7cdb94c453efc7b9ffcf8b40e93da3c6c6e",
+      "bytes": 2044,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 465,
+          "sha256": "9f7b49bef413c863daadb1fe7c14c51c9ddee07e5326faa2d35c5089a32cc09a"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 1316,
+          "sha256": "e185516b558fdfaf572f275b067678652933f65be54fa4f414bd367ebfd752c3"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 739,
+          "sha256": "a77492d6cac2b2fa2cc3e816f54751e6da90bd03f463b705ea0bef772e1c245b"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.bundleid",
+      "version": "100",
+      "shortcode": "0p0xhv",
+      "name": "Bundle ID",
+      "description": "Show the bundle identifier of the app. On Linux the identifier is the window class.",
+      "url": "https://public.popclip.app/extensions/ext_at5idE1z9xuI/file",
+      "sha256": "ca9eb1eab39bba3041533aff3fce4761343bcaa51c15d059b760d8e49e3f09fa",
+      "bytes": 1711,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.js",
+          "bytes": 441,
+          "sha256": "802574d08c9d31abc0e94b1cd7e363355e6125ec35304b0145bb3a89af20c714"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 466,
+          "sha256": "f4d6a2495422934bd0c1decf95b482fb917444fad408d60466b20b95ef84cd5d"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 739,
+          "sha256": "d8d6e9e98d6c346eeb4a88a1fff2041f3735a96a72623d731bd733374d4070f0"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.call",
+      "version": "100",
+      "shortcode": "y1e8y0",
+      "name": "Call",
+      "description": "Call the selected phone number using your iPhone, or another call handler. (Set the default call handler in FaceTime preferences.) Requires a configured tel: handler; invoking this action may start a call.",
+      "url": "https://public.popclip.app/extensions/ext_GFMOet8QkpIf/file",
+      "sha256": "eccd31163968bab7ce213bacf2506182dde09d0f3386e9963bceb34bccf75db4",
+      "bytes": 8393,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 973,
+          "sha256": "522355806bc5311768c679e9581e69a8baca68b3494f99b53d4d973bfe018f97"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 735,
+          "sha256": "e017e6edd4af85681642f72857fcfbdd05b867e2348a253925a56e5c5f44f08e"
+        },
+        {
+          "path": "phone.png",
+          "bytes": 6750,
+          "sha256": "99e386c3dd6ce26076676d6ad3734adfc59515b3e588be6d6a88785da688a5a4"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.camelcamelcamel",
+      "version": "376",
+      "shortcode": "9tr4cr",
+      "name": "CamelCamelCamel",
+      "description": "Track the price of the selected Amazon product code or URL, using CamelCamelCamel.",
+      "url": "https://public.popclip.app/extensions/ext_QirYAgC0x213/file",
+      "sha256": "cd9d1f85ede631135083625b2a82a55463d0f11568d53c640e122994d9fb3f59",
+      "bytes": 21849,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 479,
+          "sha256": "c70b7bee7d227b7b8dc25010429291588665e9a41bada3f039dcba5bec3a91bf"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 832,
+          "sha256": "cdccbb811e44326e8d6242b5413c8e278b967714efcfbc752fa31eb1a51946b3"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 746,
+          "sha256": "da8bfa917aa315d03482bcfd58c030925ead9500e1c10ff8a5ea9634e59c4595"
+        },
+        {
+          "path": "camel.png",
+          "bytes": 20341,
+          "sha256": "9a95e71e7efb60b023b758cc021f103e81009124b21eaebef56000788cd95a5e"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.capitalize",
+      "version": "100",
+      "shortcode": "hvg8y3",
+      "name": "Capitalize Words",
+      "description": "Start each selected word with a capital letter.",
+      "url": "https://public.popclip.app/extensions/ext_BBDVbd3lslhJ/file",
+      "sha256": "d8737b48cc5751d86e5a54ccb34713ff77339ed1a839b1847d03494fad9a1cb2",
+      "bytes": 2463,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 254,
+          "sha256": "205e106c212132891f6bbaf5320a7ae4d6d09e83d6fef705860a8971b805af1e"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 475,
+          "sha256": "b9e57a62e22900f18fe4fee7248adb3d181990353787ac9d86d9f6469818080d"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 741,
+          "sha256": "0dae436c44a3a701f0a2770946bf99b31f3a4afeb2d295764b18d7a73f6537e6"
+        },
+        {
+          "path": "capitalize.js",
+          "bytes": 1171,
+          "sha256": "ed7a7df89ad51d3161b0c09e4d0325bccd39a03a08d7b9d55a50e1fbcb4ea98d"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.chatgpt-website",
+      "version": "311",
+      "shortcode": "73pbck",
+      "name": "ChatGPT Website",
+      "description": "Start a new chat on the ChatGPT Website. Uses the website in your browser; sign-in and current service behavior need live verification.",
+      "url": "https://public.popclip.app/extensions/ext_FP6ugwyju69H/file",
+      "sha256": "1bb3db58b27474ef14d0fa46af1b56c9995827668290983559ea5ea1ec4496bb",
+      "bytes": 2399,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 479,
+          "sha256": "660e59dd853be984a61d17747218e6b57859030494fd1337bd06ab9b91be41bc"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 2107,
+          "sha256": "1883575a1960583890501ca3436b3b048711046db803e6c260901c413bfce024"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 746,
+          "sha256": "356ba0a6b91d289fe9335c710ed2b9fe5e73e4572a3f9d441c1382ae5fe66dec"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.claude-website",
+      "version": "340",
+      "shortcode": "69v3ms",
+      "name": "Claude Website",
+      "description": "Start a new chat on the Claude Website. Uses the website in your browser; sign-in and current service behavior need live verification.",
+      "url": "https://public.popclip.app/extensions/ext_ceNvJWza9lEo/file",
+      "sha256": "5cea262cec2b9ce18f5b95f80a9baccb1c5aefa91466fce8a822099a44182838",
+      "bytes": 2099,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 477,
+          "sha256": "2dcf834d27adbb448c74824e0d5e26b8297a3515fec5167bed8d4d59400d08b4"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 1117,
+          "sha256": "c0bc55630e1e001d03f2381a2b2281b8fccccf7eb1112cdc156cf7dd1d6949fe"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 745,
+          "sha256": "bdd90c268690f4cf4a889d42ad02b45accda90c2a9c25d6a5f0db6153bc08fd8"
+        }
+      ]
+    },
+    {
+      "id": "com.brettterpstra.popclip.extension.code",
+      "version": "2.0.6",
+      "shortcode": "sthzh9",
+      "name": "Code",
+      "description": "Convert to Markdown inline code or code block.",
+      "url": "https://public.popclip.app/extensions/ext_HxDehPYI9Wgq/file",
+      "sha256": "4271635b8cb2bf682855562ba6231bc150caa5a5f0c31252034ba62858b0fe4a",
+      "bytes": 5397,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 461,
+          "sha256": "2609ce150cb93f366b215075c38989b798e1fbf8b19bb1c3dbbc67950e1b1007"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 290,
+          "sha256": "03c91a67ea08337bd0ffbf9cf7e8cf2f7c51b12d8816b466285af576f3b126cb"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 741,
+          "sha256": "63e1b0ea3757807892f2229d0cc3c4d99ae401f87d44154c541942b0dcdfa4fd"
+        },
+        {
+          "path": "code.png",
+          "bytes": 3652,
+          "sha256": "8a7ccb102558d09807b683a5494beeb3166082118a99018fd04d11551709d4e4"
+        },
+        {
+          "path": "code.ts",
+          "bytes": 555,
+          "sha256": "23e2756c070aff0986f4eacd215e634a8c1d5ed72a0da561acc7a988b737b03a"
+        }
+      ]
+    },
+    {
+      "id": "xyz.phpz.popclip.extension.rgbhex",
+      "version": "1.6",
+      "shortcode": "x2brcm",
+      "name": "Color Conversion",
+      "description": "RGB to Hex or Hex to RGB",
+      "url": "https://public.popclip.app/extensions/ext_s5FP2eVjZWyh/file",
+      "sha256": "8e0eacc9667faaa6dd21eaf1012903a93a658f0ad0836ab42a21047f7a005851",
+      "bytes": 4590,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 657,
+          "sha256": "16c38dc6320d7398e810cf004c47af6121e1418183ec8b76715653f93da75208"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 1953,
+          "sha256": "dd1d59e9620a44b792f719fbf0be21a5e1f5f1c84e9c5c963b501ebcc7b5b4ae"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 732,
+          "sha256": "5a1565448ea793e49939314f53a947c21ac720d6af778160e5606da9e0593eee"
+        },
+        {
+          "path": "icon.png",
+          "bytes": 2000,
+          "sha256": "901e1ca2608ea858ef9e6a91f56d16351489df441ffc9364dacae92d6d1220b5"
+        }
+      ]
+    },
+    {
+      "id": "com.brettterpstra.popclip.extension.comment",
+      "version": "2.0.6",
+      "shortcode": "a7tvhf",
+      "name": "Comment",
+      "description": "Turn selected text into an HTML/code comment.",
+      "url": "https://public.popclip.app/extensions/ext_JgKcSanw2Q6G/file",
+      "sha256": "fd63a62c4674996dd5ff1d24fa35731b38e8852c1ba59dad9a092e5ceb4ae3f0",
+      "bytes": 4034,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 467,
+          "sha256": "43d7eb44d962ccf093a5eb90a192d964157d234b3c714f4dc1867c3e26ecefbe"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 1754,
+          "sha256": "d11fda241f22156344b6ab869b06691b37dcbdd0aee88a568e65695ca244b4f2"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 744,
+          "sha256": "5e5d07b4eebd483f4d7d10a6048cfc1b7b389d50d4fa35160a595ea82c800cfe"
+        },
+        {
+          "path": "comment.png",
+          "bytes": 2377,
+          "sha256": "0cbab0025fd0fa29db80b757bf76ec4863be1c401ea6770a641326f1526eac59"
+        }
+      ]
+    },
+    {
+      "id": "com.brettterpstra.popclip.extension.copyurls",
+      "version": "2.0.6",
+      "shortcode": "xpcw12",
+      "name": "CopyURLS",
+      "description": "Copies only urls in selection to a list in the clipboard.",
+      "url": "https://public.popclip.app/extensions/ext_0h0ZTUE4AYRh/file",
+      "sha256": "308902ba64dbec63711cc82f7b808da7f39e0f1b0b0e47f44309f645304f9381",
+      "bytes": 9369,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 469,
+          "sha256": "f51c0af0bd2311e25935fc2da1445d9a5a8b05a8044a7009e264cf55d265fcde"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 436,
+          "sha256": "61b195c080d7c7f914e556e1bd6d328c65b95aed5478ec8e091502725b33db62"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 745,
+          "sha256": "f83d5f12049831bae7c5e97eadc68c1e2808b4a1a49980c47c581a3dd3c5320a"
+        },
+        {
+          "path": "icon.png",
+          "bytes": 6872,
+          "sha256": "847a6407a6b6f3bab88e2698114863b80a2326e704fcc78a8eeab04a56375b16"
+        },
+        {
+          "path": "script.ts",
+          "bytes": 975,
+          "sha256": "b6281737d4852abac80978f5adb7bd81fc5f1cfa4aa17614e3f392cdc05c5b68"
+        }
+      ]
+    },
+    {
+      "id": "com.brettterpstra.popclip.extension.criticmarkup",
+      "version": "2.0",
+      "shortcode": "2b88gv",
+      "name": "CriticMarkup",
+      "description": "Insert CriticMarkup",
+      "url": "https://public.popclip.app/extensions/ext_JKMo9HbeP34v/file",
+      "sha256": "6471afde4773af7c91c3c68804931b8f5e507869a85fbcf31cc0527c83668366",
+      "bytes": 5627,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 477,
+          "sha256": "ad3d1d4f9afab569f92e032e22c8d9cb62b23b4ee07743786966110100bef8d6"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 2317,
+          "sha256": "e7262d842691619ef5daa8041b2874ae415f76575d279bc36cfadc526559e83d"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 747,
+          "sha256": "255db9558a41343bd8c0154fedefeefaae18675fd2f375d50c2a5d02c4bfd532"
+        },
+        {
+          "path": "icon.png",
+          "bytes": 3193,
+          "sha256": "e18ffcaa374909e1071ec86a1c3b079f954030279ec05d4fee4d9584445db6d5"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.delete",
+      "version": "100",
+      "shortcode": "7qx7w2",
+      "name": "Delete",
+      "description": "Delete the selected text.",
+      "url": "https://public.popclip.app/extensions/ext_FEdr1OEYXeeo/file",
+      "sha256": "2a240dfb5a86d14b5fe2563d6992a04c40437a7369dad02925eaf9a60388204d",
+      "bytes": 6972,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 1252,
+          "sha256": "c0b8bf639883df0bc87ee08303aaa3d5c17f7e38797f375b9931bce2aa019ed5"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 737,
+          "sha256": "313e8fc48378db912b1b1f753cedbfaca2f7d17d626a5bd7ae5d13fb29500965"
+        },
+        {
+          "path": "delete.png",
+          "bytes": 5959,
+          "sha256": "173e25b9b0ab8ba3497529b1a907cc06b6301afefe167d1ad067621b68a6e651"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.devdocs",
+      "version": "2",
+      "shortcode": "7a4gkr",
+      "name": "DevDocs",
+      "description": "Search devdocs.io",
+      "url": "https://public.popclip.app/extensions/ext_LJmEOeOTziDO/file",
+      "sha256": "bb5c2986c8f5ac3409dadff8dbe2f309fa55cebe2043e96d577e7cf4d01a3173",
+      "bytes": 1623,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 463,
+          "sha256": "87fdb3db7e23a62f5c6ea031dc5e33e7b95c51a2e6365fda002778ea840e6966"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 250,
+          "sha256": "f78aa739e1ddfe6b5c0afc156489b49195103894c5de316e5e2baeda1908f4e2"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 736,
+          "sha256": "247aad5fa7e9c12492e533d984e44f0918ad8ae2e686b596ed46f6d4628a6349"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.duckduckgo",
+      "version": "100",
+      "shortcode": "kdc0qy",
+      "name": "DuckDuckGo",
+      "description": "Search the web using DuckDuckGo.",
+      "url": "https://public.popclip.app/extensions/ext_4gNyJgJn5yoT/file",
+      "sha256": "3a8c3fc0364d01771d57e70a1693ef57d219259ed08a460722f3ffd03ee2b757",
+      "bytes": 14705,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 997,
+          "sha256": "12abd582dba88bdb3e56fb3fbb76b9684cc7f18305c5eb9110a6fb463efdb50d"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 741,
+          "sha256": "3abf1eebbc99c308295642070d6210e4284a39a63d27fdedc746f39274a69735"
+        },
+        {
+          "path": "duck.png",
+          "bytes": 13810,
+          "sha256": "3a6724c393e1e77461ea739ac360e6af378e0dd9ece45dd832136c6c8f0b70bd"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.ecosia",
+      "version": "100",
+      "shortcode": "k0qmqe",
+      "name": "Ecosia",
+      "description": "Search the web using Ecosia.",
+      "url": "https://public.popclip.app/extensions/ext_gVCDdDWXtyIk/file",
+      "sha256": "d5ee71f1cb0acbeda29c7962e8d2be8fc2b14788a946e1a852f65b8a82ab349e",
+      "bytes": 32246,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 1063,
+          "sha256": "4ed8d4c86d5e905647dafb7a76381b0478ea891c5266c46e958900c395c145f4"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 737,
+          "sha256": "4f44e444019f39ea10e743bd4740f31c045e45a72238fe8a68dfaf129c786935"
+        },
+        {
+          "path": "ecosia.png",
+          "bytes": 30957,
+          "sha256": "089c1e73f68d5bba342c997a4266f67a45e07b77b49ab361285e12963bb7007c"
+        }
+      ]
+    },
+    {
+      "id": "com.brettterpstra.popclip.extension.editor",
+      "version": "2.0.6",
+      "shortcode": "4fr6dv",
+      "name": "Editor",
+      "description": "Adds ins, del and mark tags to text",
+      "url": "https://public.popclip.app/extensions/ext_I5iSN6STPHNs/file",
+      "sha256": "e147f5590c4b997903157ba0e73c2216ef4ab633d7c65c9d3a51032fbd2866d8",
+      "bytes": 5000,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 465,
+          "sha256": "8f69cb117ea698a3ca778ebabb57fbfdf19829e97f37dda90d55e3693eb70bcb"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 2671,
+          "sha256": "cbc9cd0385f1e2ad2b294508e8d5577c739da13e70f3f5efec2ecce966f7830d"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 743,
+          "sha256": "28716d09e3b866163080f6d50f94dad6c9097f28811c39cf3163045ebdad2352"
+        },
+        {
+          "path": "icon.png",
+          "bytes": 2386,
+          "sha256": "77e292b53f1aa313619aafecc45bf32a2e4f1ff1594409990d132d39c945e3e2"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.generic-mail",
+      "version": "100",
+      "shortcode": "mjakak",
+      "name": "Email",
+      "description": "Create a new mail message with the selected \"to:\" address, or with the selected text, in the default mail client. Requires a configured Linux mailto handler. Captures plain text; browser source metadata is unavailable.",
+      "url": "https://public.popclip.app/extensions/ext_5GKd9f4DvU2A/file",
+      "sha256": "cb158c95cd2759c1fb36cc355b576ac05684979878d4b97f28cc67042c898325",
+      "bytes": 21708,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 1128,
+          "sha256": "14b1661a71f53e6a336abb95dcbf83aa084c2c48a99f44c1940e7a5d568d7331"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 466,
+          "sha256": "c1ae92e5ec391517e955d0c991cb626e8d8295b0e3373cc0d8673d1b775bd899"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 743,
+          "sha256": "8ca65a560ea34c7c2ae80902b7435ee26252a13485e0fcfe71d85095e5997090"
+        },
+        {
+          "path": "at.png",
+          "bytes": 10176,
+          "sha256": "17b0059e0efef7eea08a5f2fb95d1c1bf3cd47bd419e531575c24579f80b1201"
+        },
+        {
+          "path": "email.js",
+          "bytes": 1410,
+          "sha256": "58d2e18049910f2114fadcd637750e2d39e55d813856287d8f9fd3ac9909e0da"
+        },
+        {
+          "path": "email.ts",
+          "bytes": 1145,
+          "sha256": "30f941f15bd59a694b79e60966d9b2895173f79ba39b603472747b83c3be4794"
+        },
+        {
+          "path": "envelope.png",
+          "bytes": 8171,
+          "sha256": "aa16d88f2903b4170598e606d825c7ea5933f26e77cd550e94970f2902faeb0c"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.etsy",
+      "version": "100",
+      "shortcode": "8eyzkz",
+      "name": "Etsy",
+      "description": "Search for handmade & vintage items on Etsy.",
+      "url": "https://public.popclip.app/extensions/ext_BfzYtPsZOgSe/file",
+      "sha256": "9ae0dcbe6e694f89b35aa0e23ff29782990a2223e1084ab52d2912ba4332e9ad",
+      "bytes": 14159,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 795,
+          "sha256": "aa3feb5caf62e2dba089facb483c3e3ec138e7c02137492cb415d5f9f3208d43"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 735,
+          "sha256": "4cf2017c58a0349acaba3fecd5789e8f7f303dd0863e1190f78b2f064fc54553"
+        },
+        {
+          "path": "etsy.png",
+          "bytes": 13318,
+          "sha256": "95aee5e833c7b2e24aff05fb2ae0a31bfdc25788394f502eac677b92888e65ad"
+        }
+      ]
+    },
+    {
+      "id": "com.brettterpstra.popclip.extension.fixemail",
+      "version": "2.0.6",
+      "shortcode": "r89xtt",
+      "name": "FixPoorlyObscuredEmail",
+      "description": "Fix or open AT DOT obscured email addresses.",
+      "url": "https://public.popclip.app/extensions/ext_o0HlVT6Uzysy/file",
+      "sha256": "ba9db717b188152d6ab347631f530066ee05a73c27092590040f4d000c55355d",
+      "bytes": 2276,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 483,
+          "sha256": "15435005f700180c49dc1baa3c7e4f8dcea18d9dcda4ce50e744a4185d156469"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 329,
+          "sha256": "3c4cbfd9c795bf0027d6d6e32fc744f83817def793df06bd4bb94c4c49fdd2b4"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 745,
+          "sha256": "a33cd899150f68b6294f4804c93b226c92221172b97dd5d963cddbda197585f2"
+        },
+        {
+          "path": "script.ts",
+          "bytes": 551,
+          "sha256": "886bc430b36650dc9d01f155f82e7b16f492fd1cf3853fc50c27559d2ccc5283"
+        }
+      ]
+    },
+    {
+      "id": "xyz.phpz.popclip.extension.format-json",
+      "version": "1.6",
+      "shortcode": "02yq1x",
+      "name": "Format JSON",
+      "description": "Format selected JSON text with configurable indentation.",
+      "url": "https://public.popclip.app/extensions/ext_vR3WDqbV4KMH/file",
+      "sha256": "40c8f07fa7c1eaa90d8fac3e6c49335e9d0e920152d04e490e038676fdfa6638",
+      "bytes": 2019,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 657,
+          "sha256": "a5147998c86460579152206a08d1b1877c30d99c0fab44754bc195919c6da62a"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 953,
+          "sha256": "46b474072062ac8509e6f29bd249a15a3de7ead7d61c22473ea338197bd19ac6"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 737,
+          "sha256": "00ba5170b57753afcbf9c9558675d67fcfe1336a11a79673c979bec8cd8486a6"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.fullhalfwidth",
+      "version": "100",
+      "shortcode": "s16hap",
+      "name": "Full/Half Width",
+      "description": "Convert between full width and half width forms of Chinese, Japanese and Korean characters. For example, convert ヲ to ｦ.",
+      "url": "https://public.popclip.app/extensions/ext_FttC8WgFbzYk/file",
+      "sha256": "0250b78028da939a26946c37fd4be65e643d0fc0fc1be6cdf365f9ab48318656",
+      "bytes": 23339,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 2464,
+          "sha256": "fdc5223c0706034275257aa9e192dcb724716ec557b20b517bbc440be2826d9d"
+        },
+        {
+          "path": "FullHalfWidth.png",
+          "bytes": 6876,
+          "sha256": "ee8bb41666743354c4c5f6388777746ee3d8197e275350f0cd80fd4d917cae1c"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 744,
+          "sha256": "1ea6c8128048b30c283ddcb0a4d32b5863d4a92e8ff29bfa21471677af349aee"
+        },
+        {
+          "path": "full.pl",
+          "bytes": 1123,
+          "sha256": "d2f68bb058fddfa15659bb612de69cf5eb1facd810cf46ac67f7ef096366934f"
+        },
+        {
+          "path": "full.png",
+          "bytes": 5538,
+          "sha256": "212a056dd1607c84f46f5c5c5f7f696dc244a059cafac405eab867607ea36a71"
+        },
+        {
+          "path": "half.pl",
+          "bytes": 1123,
+          "sha256": "0b295fc102ecd2fc08ecda86851d053645f2b96a0cb4e3b27e264ed8b1d5bc12"
+        },
+        {
+          "path": "half.png",
+          "bytes": 6549,
+          "sha256": "4c6c9be2f3aa0baf98b141f0e35bf4ddc4944f5a6d6e00859f33c97f03f3d03c"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.glosbe",
+      "version": "100",
+      "shortcode": "8nsm31",
+      "name": "Glosbe",
+      "description": "Look up the selected text using Glosbe, the global dictionary website.",
+      "url": "https://public.popclip.app/extensions/ext_E1ZueVU13QjD/file",
+      "sha256": "7078d4b24021bf9493c029d2d7b821d770d37763c41a7bcf943d99d3608ab292",
+      "bytes": 3759,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 953,
+          "sha256": "59d8638d5d2f82af2bc4bf7113d21149d6a99d8cc41218dfbd25b822dd742bfb"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 461,
+          "sha256": "b2d05428c49aab4ef8d18af1e9891a25d7b63b6aef6fc91212790e143d284e44"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 737,
+          "sha256": "0065dae78220120f0aaefb833da8f6ee2b2e5092e62d0e6723d186efe8687396"
+        },
+        {
+          "path": "glosbe-bird-outline.svg",
+          "bytes": 3266,
+          "sha256": "2a76a9e9255538b1aee957bac22e0aac40e5863bf448423051fe194fbb073625"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.goodreads",
+      "version": "100",
+      "shortcode": "xy7tjc",
+      "name": "Goodreads",
+      "description": "Open Goodreads in a web browser with the selected text.",
+      "url": "https://public.popclip.app/extensions/ext_IIwk6lWaDICv/file",
+      "sha256": "8b20f62844d8e1593cdde76835f438d9123c823d87fb00e577eab1eb73fbc7a8",
+      "bytes": 17125,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 866,
+          "sha256": "cc5c9f1cc81531a61e3e632e11a5c7e07017eb533e6567eec3a116978e6b512d"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 740,
+          "sha256": "8e44404462ddfc84ca53276728001fbb5772a39548f0d3b271cfbe79c8fbefdf"
+        },
+        {
+          "path": "goodreads.png",
+          "bytes": 16222,
+          "sha256": "aa80f219be829383d5b8cfde5cf8332300ca09933d9726b16c6386e7af7eaa10"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.google-search",
+      "version": "100",
+      "shortcode": "ckrwqw",
+      "name": "Google",
+      "description": "Search the web using Google, with option to choose the country site.",
+      "url": "https://public.popclip.app/extensions/ext_5w7EWXWI3hAi/file",
+      "sha256": "b085a4a5f36a74dca948fb9ef8a769f0e018528db98d596c67cde4df73c0e2af",
+      "bytes": 8953,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 3702,
+          "sha256": "1d869772916e7a36fdbdd298f036990503d9eedf581e394814cc879728eec7ec"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 744,
+          "sha256": "613c576a309e48b5037a907d57369495a5f4e8d11a771498a61e0462438c884e"
+        },
+        {
+          "path": "domains.txt",
+          "bytes": 1095,
+          "sha256": "e464b00aef2275c74015f0188b22f3dd58952e022dbbe48717557d17c1919be1"
+        },
+        {
+          "path": "g.png",
+          "bytes": 6884,
+          "sha256": "d131fed5b48a696240da3438a0c2c49b51a076d37c86feadf20acbfa86a6216c"
+        },
+        {
+          "path": "process.php",
+          "bytes": 304,
+          "sha256": "efba9eed434880ba408c8156f59b56760ca37732441af2fcebedf055f3405acb"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.google-images",
+      "version": "100",
+      "shortcode": "780a6k",
+      "name": "Google Images",
+      "description": "Search for pictures on Google Images.",
+      "url": "https://public.popclip.app/extensions/ext_uF9VOUz5BGqK/file",
+      "sha256": "8f5e6185e7b1ca9bde14e49a9545d864e9cc6c21658df4bfb7771982d2913d20",
+      "bytes": 18127,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 770,
+          "sha256": "fdd87b558f990e07e159d7a7e8c9bca080ae9b1a00285306c3f93993bec0c921"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 744,
+          "sha256": "f8c549a98caaa3d579cd70de6b40cd3f9791fda6704146fd96294f7c2cdaeafc"
+        },
+        {
+          "path": "gimages.png",
+          "bytes": 17228,
+          "sha256": "88b4e0fe2693e0e3fdd175467b20cf572c3883629d582960198ca0da71872344"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.google-maps",
+      "version": "100",
+      "shortcode": "07802r",
+      "name": "Google Maps",
+      "description": "Search Google Maps.",
+      "url": "https://public.popclip.app/extensions/ext_28uMKuLauMCs/file",
+      "sha256": "4d4ac5f615812a5000c00a50b21500c00490f9992d779f5f2d99da1940e824a1",
+      "bytes": 13645,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 3423,
+          "sha256": "52178c958d57db17837541897d0f22e91b4418a12fc3ddcb49ef05afb721d38c"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 742,
+          "sha256": "3097e7c37713d95ce65cd14b29ead3ae693c47cb9df59f7bc1a969f14b158bc1"
+        },
+        {
+          "path": "domains.txt",
+          "bytes": 1622,
+          "sha256": "ec236c836eb128239ad0a4992e87ffeb0939c665f2898ab4bbcd8c6052282ea5"
+        },
+        {
+          "path": "pin.png",
+          "bytes": 11568,
+          "sha256": "682c572eeda55283e34d87da2ea433491b14ec05ac30770a6d6e04af4de9728c"
+        },
+        {
+          "path": "process.php",
+          "bytes": 305,
+          "sha256": "c0435129f953ac26581edcd59fd406c5b8100a33a7e98dfcc604bdedbd78508f"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.google-translate",
+      "version": "100",
+      "shortcode": "d38ynn",
+      "name": "Google Translate",
+      "description": "Open Google Translate in a web browser with the selected text.",
+      "url": "https://public.popclip.app/extensions/ext_w8xGrJEhhhRq/file",
+      "sha256": "1b6c863e406e407e96e960343c9668ea99b59b74a04df277db4cf32b7e23718a",
+      "bytes": 13440,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 4107,
+          "sha256": "8b7698b4a0dc46d1d7d789f00101d0d6393c2660ce2c0d5f9fa982e2faad2b4c"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 747,
+          "sha256": "d9f6b6071d3eabeb06056f7766adc25e9af421cb43735cbd8222189a4bf5ce93"
+        },
+        {
+          "path": "gtrans.png",
+          "bytes": 12422,
+          "sha256": "4fb19d09d9e9651851ad46614b9cda9f68b9a7c88f4d46a6a4f0190e114b8367"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.grok-website",
+      "version": "346",
+      "shortcode": "j2wxmc",
+      "name": "Grok Website",
+      "description": "Start a new chat on the Grok Website. Uses the website in your browser; sign-in and current service behavior need live verification.",
+      "url": "https://public.popclip.app/extensions/ext_3WBT93QafNr6/file",
+      "sha256": "1c905a3de9ac7e2db64779c24d09b89293a18c45416261b4f2b3005d053afd75",
+      "bytes": 2082,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 473,
+          "sha256": "045acd317cc76a2d8fc20cb5fdc293cc8b60061ab40daeeaf5438625f535730d"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 1163,
+          "sha256": "9a6d0f2000c48654f04e0671bfc628611f5dd5a99431df2254570a75077a10e5"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 743,
+          "sha256": "3214a42b8bd8d01325554a144b385ab02046e31dd9579f5077e124f592c0c37a"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.hyphenate",
+      "version": "100",
+      "shortcode": "cyfq5y",
+      "name": "Hyphenate",
+      "description": "Replace spaces between words with hyphens, and vice versa.",
+      "url": "https://public.popclip.app/extensions/ext_S7QdQk8RBLWI/file",
+      "sha256": "751da5357eae1abec2da579c7ffe9b4ec7c15ae1d0b81e7c02c75d277ff0f4ca",
+      "bytes": 8089,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 289,
+          "sha256": "c757d9564d9144b71c119dcb6bc8600a30186fe53cabafe55a8c9504f9aa1051"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 467,
+          "sha256": "a1d102b42911946e105a7cadb2509ca6f6af11fe7bfc0909b000ef9d83c02e4c"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 740,
+          "sha256": "d766ebf9b741bf1e8f006941db8f70368606c19366c8a4f691715ea9daa014e6"
+        },
+        {
+          "path": "build",
+          "bytes": 142,
+          "sha256": "f957485a6dd522fb8ad6eb422623c8e88e618e7631e0af2199c142e088ac3523"
+        },
+        {
+          "path": "hyphen.png",
+          "bytes": 4961,
+          "sha256": "172cc4483d5627f7e4bf142a3c8090b9944e64309d28656eba5fb3ad92b900d5"
+        },
+        {
+          "path": "hyphenate.bundle.js",
+          "bytes": 3778,
+          "sha256": "8aa693bf4413cdfead73d668e24c509933378d2816ce7c3c33d383c8f30cf7fe"
+        },
+        {
+          "path": "hyphenate.js",
+          "bytes": 554,
+          "sha256": "60ccbe0d58bd32113c6682c3579bbd1ffd7e6decc6f84a02062454601a5c09a0"
+        },
+        {
+          "path": "hyphenate.ts",
+          "bytes": 372,
+          "sha256": "5fcc7a8ed0ff6a3bdbf8bfbd7f443cb5080f50f7ead98250224d67693bd422a6"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.iconify",
+      "version": "1",
+      "shortcode": "8m0dm5",
+      "name": "Iconify",
+      "description": "Search icons on Iconify",
+      "url": "https://public.popclip.app/extensions/ext_yzdSrhv7ecnh/file",
+      "sha256": "99550a0b40817e47736ce60dd12d9ce26f85d47e97f8f77b92d8d52ed5d1e4a8",
+      "bytes": 1632,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 463,
+          "sha256": "138e756c565596e13aeef8141cccbe01ea7ec7ac2c1735ba5bc4cb59316907a8"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 286,
+          "sha256": "2c130d24e8b03551d94e81c5e537566c36613c317cb4c61a8b28c5d4ce1e2dd1"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 736,
+          "sha256": "28f6a5b572227d6d03c255ef583f8ab0915293cfbf7ba9dda0e5facbebc008d7"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.join-lines",
+      "version": "100",
+      "shortcode": "01vjf6",
+      "name": "Join Lines",
+      "description": "Replace line breaks with spaces.",
+      "url": "https://public.popclip.app/extensions/ext_G21C1RlDULLk/file",
+      "sha256": "10fccb949f1b5cff11165ae7430d63325d53bb8edd18658e936e3dc5518b80cd",
+      "bytes": 4195,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 250,
+          "sha256": "c314afb5f351e0c826c76741c43b72f94c2c0d125897efcc0084ac8bb31cf8f4"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 469,
+          "sha256": "3e5a138eace0dd0a2cca6ad7fa5548954c8ae0d4d47295e7937e654159004740"
+        },
+        {
+          "path": "JoinLines.svg",
+          "bytes": 1091,
+          "sha256": "1ca269b9ddfcbac57e3b91c58597d0c74a96260611213f0f4468e4c343487adf"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 741,
+          "sha256": "24515ec92b3cd05aaa19a27d9735cb4717d1091d8fdb7858319e0eadf256c5cc"
+        },
+        {
+          "path": "join-lines.js",
+          "bytes": 1305,
+          "sha256": "17e85928a1376a9e7f9d05f31fe32cc9c5f0ce1b44d9cf5cb6b1348157b3e94f"
+        },
+        {
+          "path": "join-lines.ts",
+          "bytes": 1043,
+          "sha256": "243475658bc0a4575d137b28e4e9f8b08fd0be420794c901f979308e5ce1e27c"
+        },
+        {
+          "path": "test.js",
+          "bytes": 108,
+          "sha256": "8bfc167f706bba4e6497c632701bbeb2c71c7a44ad61d34809e80e6c3024b2a4"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.kagi",
+      "version": "100",
+      "shortcode": "z9d8vd",
+      "name": "Kagi",
+      "description": "Search the web using Kagi.",
+      "url": "https://public.popclip.app/extensions/ext_mcszRKURXvqJ/file",
+      "sha256": "0a34e63bf8b4d8361ffc3d83f41b778ad966e8b6629eeb236ea603992066b705",
+      "bytes": 2058,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 266,
+          "sha256": "b1d39b93669adfb0803cf0745a61ccf863cff4c00f216af854a616ddd0f8578d"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 735,
+          "sha256": "f77c6a310c7eb940f0925f337b35ed43b3143ffe6c99b74bde8d85a81ff18e49"
+        },
+        {
+          "path": "kagi.svg",
+          "bytes": 1471,
+          "sha256": "7db79d09ccbf76ef514e0e2d2e8b0c546f167dd4bad37b04e67e6f5a0a74fecf"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.kagi-translate",
+      "version": "269",
+      "shortcode": "ezfkbp",
+      "name": "Kagi Translate",
+      "description": "Translate text or a URL using Kagi Translate.",
+      "url": "https://public.popclip.app/extensions/ext_7cNP2Nsmxwlj/file",
+      "sha256": "cf06197268394383cea5870addbe9e14059cb19fc41fdad6f93079a4fcc174e1",
+      "bytes": 3422,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 477,
+          "sha256": "7601d334574b590b5846e04f862cc3d47cf35a9be60f346b7ecbea975fd8e98b"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 506,
+          "sha256": "e9cc9d0b289c913ad3e2cfb335917e88c3396bf06db89487b78aa9972d7c2eab"
+        },
+        {
+          "path": "KagiTranslate.svg",
+          "bytes": 3034,
+          "sha256": "877fe0fa92a3339c849aca59456f54b12ffc211c5e8a9f4ed44ba8b23694390f"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 745,
+          "sha256": "32454c304a9684153ac6a71afd3d80ffc6a1a2a0b2321a6ece45f64d27671dce"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.large-type",
+      "version": "163",
+      "shortcode": "8xb0vb",
+      "name": "Large Type",
+      "description": "Display the selected text in large, clear type in the middle of the screen. Shows text in the Omapop result panel.",
+      "url": "https://public.popclip.app/extensions/ext_QxB7FJYfprbi/file",
+      "sha256": "2bcafde6fe18950fdf89ca2385ddd2850abf75330e74d8dcb465127e91b7bb49",
+      "bytes": 9705,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 311,
+          "sha256": "c5e8e32a663c5089bd86ae213cb01c8915f4ee1e334000d00947bb340153d9df"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 469,
+          "sha256": "956b0cec408673e1ddf2e0551490885752e4394e3dce4e08714634e6b6530078"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 741,
+          "sha256": "4e9080147ba8dd8b5a9be7702c8a9e578e52621690fdd4cb19b3a251debc9473"
+        },
+        {
+          "path": "large.png",
+          "bytes": 8617,
+          "sha256": "48e05f5698f58d4dfaf205435138b1dd4d99ae6da4b7f94ce2ac7eeabcaee90a"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.letterboxd",
+      "version": "1",
+      "shortcode": "dk2fh0",
+      "name": "Letterboxd",
+      "description": "Search films on Letterboxd",
+      "url": "https://public.popclip.app/extensions/ext_g9b3io1uQsnq/file",
+      "sha256": "48d55a47590ea08e240d62205728b70afa87647ea31a533d65a48b281c52522c",
+      "bytes": 2300,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.yaml",
+          "bytes": 246,
+          "sha256": "983846edef58725cf59d41e6f15f3ee7039ccf4806ae5e037d8491cc1c2faedb"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 739,
+          "sha256": "fc7d6a7a132eb28ecef95874ea3fa9bf6c7ee72259e219b98ddf53223dbcce72"
+        },
+        {
+          "path": "letterboxd-mask.svg",
+          "bytes": 2044,
+          "sha256": "a671c77a5f109ba611c11dbc394c3ea58d8c47526e7a4ad25d29dec95f72c2f6"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.linkedin",
+      "version": "100",
+      "shortcode": "j7ds2s",
+      "name": "LinkedIn",
+      "description": "Search for the selected name on LinkedIn.",
+      "url": "https://public.popclip.app/extensions/ext_z4RcKwBCuDBz/file",
+      "sha256": "8e389fa6a3bdf126f64462336f66fd262a861ff52e615ec9f23f2b08c602f196",
+      "bytes": 10134,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 292,
+          "sha256": "619f65311936117e17334b4be641839f13f3cf33bc03c708663e9e5dd4552937"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 465,
+          "sha256": "620eafecfa2ad7c1d9203c36676b10ae734ee94426b70559a37490c9c67688fe"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 739,
+          "sha256": "8d89e77b2a0f35fb9d4c2f91ebd1f76cd92950b5ad9c37c78680180821e4160c"
+        },
+        {
+          "path": "in.png",
+          "bytes": 9479,
+          "sha256": "3550ab95b0c1344ed8e5a3b27dc44041f19bae543e1daf0e2795145cf7827e42"
+        }
+      ]
+    },
+    {
+      "id": "me.eindex.popclip.extesion.logseq",
+      "version": "123",
+      "shortcode": "a51hz5",
+      "name": "Logseq",
+      "description": "Quick capture the text to Logseq. Requires an installed Linux Logseq protocol handler. Captures plain text.",
+      "url": "https://public.popclip.app/extensions/ext_CHZwb4ne80M9/file",
+      "sha256": "4ab4ff0936c72137dbe4f4f5048c7142c85ec634771cfe7e46cfeeab6605f5d9",
+      "bytes": 25390,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.js",
+          "bytes": 628,
+          "sha256": "7cec86cdc0f2dff3fe1be0365f900db0d0916bbfea8dac86ec9326f235218016"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 456,
+          "sha256": "65c969cd639954fc39c6d28da52928d4c40cd5d268df801388ee701d906f4a65"
+        },
+        {
+          "path": "Logseq.png",
+          "bytes": 23565,
+          "sha256": "478999bc24d35f136ac7e357cd7e4177c7b996b8a25b608d8eb89c69b834d57f"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 732,
+          "sha256": "ab94951a74c22d4ca24d0c6825babeed50c5b983fdb26f2afa150d61421fcc49"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.lowercase",
+      "version": "100",
+      "shortcode": "krvyqd",
+      "name": "Lowercase",
+      "description": "Make the selected text all lowercase.",
+      "url": "https://public.popclip.app/extensions/ext_1G8UNz2Ui9no/file",
+      "sha256": "6bdbb62433d6c71424ec4fee533482702aea981ce47021629c7cef20f1307498",
+      "bytes": 1658,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.js",
+          "bytes": 274,
+          "sha256": "0c46090795ca19ec02c81ffec6d3da28e8d339565148dc9e0b54f95b40ead6fb"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 467,
+          "sha256": "95e0c92eb245c29821ea79db1de7a652f395a81e057659bc0dc670adeab5b465"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 740,
+          "sha256": "3099f540f1443b1ee2c7041f0cb321bcc9f5babb63f96d34071a52184900aa9b"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.mapy",
+      "version": "360",
+      "shortcode": "4ka8r3",
+      "name": "Mapy",
+      "description": "Search Mapy.com",
+      "url": "https://public.popclip.app/extensions/ext_mrfrAGph7oY4/file",
+      "sha256": "1d770dd6f701c682f68a3f71260382347c8a81f087ff8c8a62dc63a823caf4ae",
+      "bytes": 2451,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 457,
+          "sha256": "acc006177398dd071a27d5f9598428a98ebc6f916f94d82d65798ee098959a8f"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 213,
+          "sha256": "596c1686b7f6d2812e7431257da1dd8b339bc93a5be694d505539a423fc88646"
+        },
+        {
+          "path": "Mapy.svg",
+          "bytes": 1250,
+          "sha256": "a57e4501c8480fb82e5af04e9e3f8273eeceac4ca595adf67e3017f1b1363ba1"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 735,
+          "sha256": "b785c0c38f192ccc13f5c21f8409c33289df61c5364d5f11882f3be201b11d0c"
+        }
+      ]
+    },
+    {
+      "id": "xyz.phpz.popclip.extension.markdown-list",
+      "version": "1.6",
+      "shortcode": "sqtny5",
+      "name": "Markdown List",
+      "description": "Convert selected multi-line text into a Markdown list.",
+      "url": "https://public.popclip.app/extensions/ext_r7l1kPlgNbwV/file",
+      "sha256": "fb9689a93786cf41d91c58b2bc9189d800aceb144e42dabf1b5c702e7a9a5c59",
+      "bytes": 2003,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 670,
+          "sha256": "01443da8e24097cdf3fdfba54b0aa86f92db68ab0bbc16c90cc9c70db33d841c"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 989,
+          "sha256": "25ff2e75992d89b4f14e788f3383cf0ce8c3b5174f6ff85ffb3aecd4a3376a6a"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 739,
+          "sha256": "2accd00ce1122b93e8df82d0d6671344a07aa50d8d0c380ed950b4c54080d668"
+        }
+      ]
+    },
+    {
+      "id": "com.brettterpstra.popclip.extension.md2mm",
+      "version": "2.0.6",
+      "shortcode": "1m4m8n",
+      "name": "md2mm",
+      "description": "Convert text/outlines to tab-indented outlines for pasting into mind maps.",
+      "url": "https://public.popclip.app/extensions/ext_uMr1Eg7MjkRr/file",
+      "sha256": "00ac0dc67e3a02d629f14034931e3f7ddcd124d18e1ff50b392077c74bf1a1d2",
+      "bytes": 8652,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 463,
+          "sha256": "efe8633091d297fdc8a328b5c3558f1b2724ee6e6bc5ab317ddf03906db982f4"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 298,
+          "sha256": "4e74cce87245a98e313e7f840bafeedf5db39675600c9c11c58576921ed3aec6"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 742,
+          "sha256": "17af127cfd5a85265173bdfc2bc9034c04822b11763d000f9589b74f776bff42"
+        },
+        {
+          "path": "md2mm.png",
+          "bytes": 5651,
+          "sha256": "77465512731118e5c62f613850124e0137ede79b8155b608c4b5bb66d8a71eaa"
+        },
+        {
+          "path": "md2mm.ts",
+          "bytes": 3492,
+          "sha256": "8f0105f1cd9e04de8f38a38ecb4da7f7ed5cbbdd85ef283d5cda87deee34775c"
+        }
+      ]
+    },
+    {
+      "id": "com.brettterpstra.popclip.extension.mdlist",
+      "version": "2.0.2",
+      "shortcode": "kpqh3r",
+      "name": "MDList",
+      "description": "Turn lines into Markdown bullet or numbered lists, or clear list markers.",
+      "url": "https://public.popclip.app/extensions/ext_GmxQvxss3SIw/file",
+      "sha256": "491d5c61250012e77aab604380951319c3006625bdde6499a615096b92d0ba0a",
+      "bytes": 5910,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 465,
+          "sha256": "4402aed6176b17ac68a7454b88e76f9c98741105809cb72776c9e3bfef642052"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 3383,
+          "sha256": "3ff90a17f09ee0f7a713526fb0863de87f56ac928ecf055e653b8e3c0910d469"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 743,
+          "sha256": "dbd5d468579843b84576df930746d97a553ab02cfb306d20afab3d92e9129e8c"
+        },
+        {
+          "path": "bulletlist.png",
+          "bytes": 4057,
+          "sha256": "57e18bcb4ca096da9e8f3e0cd80223f1cbb8f9264cd2c3b8a448c33061b56b2a"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.mdn",
+      "version": "221",
+      "shortcode": "t65bec",
+      "name": "MDN Web Docs",
+      "description": "Search MDN Web Docs with the selected text.",
+      "url": "https://public.popclip.app/extensions/ext_Q61APUGHH8mS/file",
+      "sha256": "c5da42170b69d3cbb916afc17e6bc0f0fe315f0f884b8a6b2a2b4184b7e8c0cc",
+      "bytes": 1655,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 464,
+          "sha256": "dcb17fce7d2ec1415f89826dd177c29a62cbc3341a7314859e0edb06d8042b38"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 349,
+          "sha256": "cdf79aedb70a764359565c846ca51da36b1244b652bad264d1631c42854a71bb"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 734,
+          "sha256": "fc48f5cf39f9d6cb525db0b1bc568f56e7092253096191868c1033f2553161b3"
+        }
+      ]
+    },
+    {
+      "id": "com.oxxie.popclipextensions.namecolor",
+      "version": "134",
+      "shortcode": "zn9dyt",
+      "name": "Name Color",
+      "description": "Suggests a descriptive name for a hexadecimal color value.",
+      "url": "https://public.popclip.app/extensions/ext_8zC9DlPMEp9O/file",
+      "sha256": "c607bd07fc96eca15f3fc29d92605374dc8a793718f91fbda3e4c6ea32269625",
+      "bytes": 20948,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "ColorPicker.png",
+          "bytes": 1644,
+          "sha256": "30f8b932200fdeab6da38335878b040a4524fab8cb8c90408955e370d67eb05b"
+        },
+        {
+          "path": "Config.json",
+          "bytes": 353,
+          "sha256": "12aa5b9dcad89dab39b43359ff94b53b1bb7542832b603f0b277ec9ad462b0a6"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 736,
+          "sha256": "c6af042957b12b51bf9d56256b308d3638dbed10145e7970629583c62150cff0"
+        },
+        {
+          "path": "colornames.json",
+          "bytes": 43691,
+          "sha256": "3d90453e0cf392763f9196e829d88d482773d60cff4184561083c3457903069e"
+        },
+        {
+          "path": "namecolor.py",
+          "bytes": 3268,
+          "sha256": "d2db597fbce31f8e11873de394fff355eee3bd8cdf882f1f1c2e19bfafb1eb35"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.navermap",
+      "version": "306",
+      "shortcode": "ebp66h",
+      "name": "Naver Map",
+      "description": "Search Naver Map",
+      "url": "https://public.popclip.app/extensions/ext_ycbonVTLbCXI/file",
+      "sha256": "2174eb9111f1036e83d8f5ea7df07fd6650133c6439b3c89c84791e98ccebb2e",
+      "bytes": 2291,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 396,
+          "sha256": "1747c74a60e351a8d00ee1ce02836328dbee10319f63530890200188bd33fe97"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 559,
+          "sha256": "ba9404d36601c8fb10297b297e1f5c8a84ba32afb4ac7c28aa0adef3380181cc"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 739,
+          "sha256": "43945e7acb9767ec999d021c209e6f93b53f3942ddd1b6894db5d2e6c8c34301"
+        },
+        {
+          "path": "navermap.svg",
+          "bytes": 557,
+          "sha256": "8269ef106b250ca4215f2c0e4db72705ad369c125836fa28f77ed76af1c61dde"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.obsidian",
+      "version": "314",
+      "shortcode": "wfhk0x",
+      "name": "Obsidian",
+      "description": "Capture text to Obsidian. Requires Obsidian and its Advanced URI community plugin. Set vaultName in extension options. Captures plain text.",
+      "url": "https://public.popclip.app/extensions/ext_LobXGSViVCss/file",
+      "sha256": "5dfbe66ad1273c02d719428ed4b246be2dcc3ab78b94a90c32f0c0361acf22f3",
+      "bytes": 2647,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 465,
+          "sha256": "34da37f8fd334ffb03cedd5bd1d08fe02565b4ae6deae590593a6b431b6c8ab1"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 3899,
+          "sha256": "21c32843dddab77c6aca6769a053500f4b5f9856f8fe5c084279914d86b0b8ce"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 739,
+          "sha256": "6cb9291c3f2a616a5c8b8d952318e562e9e3504b6d93e2914a748bc8d060715c"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.online-dictionary",
+      "version": "327",
+      "shortcode": "966gax",
+      "name": "Online Dictionary",
+      "description": "Search for the selected word in an online dictionary. Includes Dictionary.com, Merriam Webster Online, Oxford Advanced Learner's Dictionary, Youdao, dict.cn, dict.cc, and more.",
+      "url": "https://public.popclip.app/extensions/ext_2M44MZD0HDeu/file",
+      "sha256": "50069a19afc9d0a35d1f8199ebe6181a3a5c37e38fab78127a04ae5fb8750a5e",
+      "bytes": 3837,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.js",
+          "bytes": 1577,
+          "sha256": "d9d9cc796a520ee57c8a68f43770271d4517cadab35da0690ca121d637c5b3a9"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 483,
+          "sha256": "ffb57e45a466c3feaded0c576391117fe5493b3607d337eb939a13e9aa62f2a6"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 748,
+          "sha256": "6ca866431234b41a9aa27bfac5ab8caf08a9674cd1e3e9af123eb20fb6158593"
+        },
+        {
+          "path": "dictionary.svg",
+          "bytes": 3099,
+          "sha256": "1f439911e1445438ff82da72a42eaac0dd62d42cc20660007054230333da1ee1"
+        }
+      ]
+    },
+    {
+      "id": "org.phpz.popclip.extension.open-github-repo",
+      "version": "1.6",
+      "shortcode": "t7hx1b",
+      "name": "Open GitHub Repo",
+      "description": "Open GitHub Repo in a web browser with the selected text like AUTHOR/REPO.",
+      "url": "https://public.popclip.app/extensions/ext_5co0qUbpFDRh/file",
+      "sha256": "74a03539d79e72e1ff73be1be248005f8bfea684c8d71e0ed6e52fabbb0d736b",
+      "bytes": 4907,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 699,
+          "sha256": "2e782797345ce32a6933bc54934e76b52ed9faac2b79ee20be6e8c963f463a5c"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 642,
+          "sha256": "612a8ef3a809ecd43f51708338631c68be85c986b33054d3383987c025f302aa"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 742,
+          "sha256": "a0e2dc9a45cd1f748a4413578fa14b87d607a6646812d1f3b3a89fe9211315e5"
+        },
+        {
+          "path": "assets/github.svg",
+          "bytes": 1521,
+          "sha256": "41e122ce3e9f3f03cf2debbb29734e196f17c329f47bdbfea9de07f725d96a33"
+        },
+        {
+          "path": "assets/my-github.svg",
+          "bytes": 1975,
+          "sha256": "df0851e03d3b9dcd6f0f34b65a3a04a96ff1560437e7806f479e97f4e90723e9"
+        },
+        {
+          "path": "lib/GitHubRepo.ts",
+          "bytes": 1133,
+          "sha256": "54cc1e2772978f79a07ea8d1e5db54592a0900caa9309718e9a1bf0bdd607b30"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.openstreetmap",
+      "version": "2",
+      "shortcode": "fj4e7p",
+      "name": "OpenStreetMap",
+      "description": "Search OpenStreetMap",
+      "url": "https://public.popclip.app/extensions/ext_c54nnWunisjM/file",
+      "sha256": "8a3e3d720705ff0c0744c5a1c619478d3c4133498d3230a9d85d1781fb0173a4",
+      "bytes": 1696,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 475,
+          "sha256": "40f0f416f1e006a9d217e13b77c4fee9bfbf3f37a533544da918c6969a70d0ea"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 318,
+          "sha256": "11b5d288f9e8f1c6da2f9880ffd29071571ae51c385331663184914f74c27508"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 742,
+          "sha256": "3e2efbe2153584e36a28b8a3c53572c7fec2282d0462136ff1975783c44bdf2e"
+        }
+      ]
+    },
+    {
+      "id": "com.brettterpstra.popclip.extension.outdent",
+      "version": "2.0.6",
+      "shortcode": "nyasgn",
+      "name": "Outdent",
+      "description": "Outdent the selection.",
+      "url": "https://public.popclip.app/extensions/ext_2nI9JfehDUd9/file",
+      "sha256": "4d5b7aff24c733a165d830f801af0e67f9dc0b0045a232f0ba7bd7caa3252ce3",
+      "bytes": 5026,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 467,
+          "sha256": "f360f63a0dd957a28d75517e78cbeffbf315f07864a4267db9330709acbd47ca"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 271,
+          "sha256": "eb3bbc4da5868b85a1d98a8bc1a5056f4606287943d89a79d93da7e4bff04f6a"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 744,
+          "sha256": "43010d283f0fbdc2b2b5ae90ff27a65e56c70f673048ed3971f792877ec6f955"
+        },
+        {
+          "path": "outdent.png",
+          "bytes": 3140,
+          "sha256": "0b29f607a6b78b31d2f67ad87d53524c31f1de7bd4cc4e4230612c9a97c7bdf6"
+        },
+        {
+          "path": "outdent.ts",
+          "bytes": 726,
+          "sha256": "183b331ba3b1db557f57b2c1c9f30081cce11df2d7614a2f593be57de911435e"
+        }
+      ]
+    },
+    {
+      "id": "org.phpz.popclip.extension.password-generator",
+      "version": "1.6",
+      "shortcode": "0jhrd3",
+      "name": "Password Generator",
+      "description": "Generate a random password with configurable character classes.",
+      "url": "https://public.popclip.app/extensions/ext_4cDN2IWJ8AAc/file",
+      "sha256": "5c60b18f40e54033738766747dfedf7faed28f56ff27e2f6c28a122e27f2a46d",
+      "bytes": 5131,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 698,
+          "sha256": "156e41577fc8be30d2d4781dc9ec74297365d9d9152d0e0da7a2bc8c689ad7de"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 4153,
+          "sha256": "f44fdca77d5fad2802e387e42145ca340fe3c10432542651dc7fcb5725d065ea"
+        },
+        {
+          "path": "Main.ts",
+          "bytes": 4130,
+          "sha256": "5c9369860d10cd68e590768d6d68dd51e8b6f99068a2b2d163dc92b1ea2ffcd6"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 744,
+          "sha256": "be5ed575029b6e2be6ae2ff576ab7646a1b0aadc8ad653bb4596c02420a04d62"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.pasteandenter",
+      "version": "361",
+      "shortcode": "b2fbhe",
+      "name": "Paste and Enter",
+      "description": "PopClip will paste, then press the Return (↵) key for you. Invoking this action pastes and presses Return, which can submit the text.",
+      "url": "https://public.popclip.app/extensions/ext_uuQnBHQzsZJO/file",
+      "sha256": "ffc140211ee9840edd4fbaeab12c12c76327d40686ca19a7016b39be09a5dd58",
+      "bytes": 8341,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 477,
+          "sha256": "9d95e0c0d71639c23f5bdce4154a814d680006ab0a88d301e3bb01231f84136e"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 536,
+          "sha256": "a1b68e889ad797a8c0d188edc5d149f4753792d8f871014c2edf3820036dbed1"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 744,
+          "sha256": "af8070763da2c0326b163cefbd2f80472fa2f230a13d366f31e7a6dbc766b32b"
+        },
+        {
+          "path": "paste-enter.png",
+          "bytes": 6302,
+          "sha256": "5bdeabbd976cd0943f83b97f69a250e55faa9b0a5f5586c704265d3a6ea7cfc5"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.pasteplain",
+      "version": "361",
+      "shortcode": "qrcc82",
+      "name": "Paste and Match Style",
+      "description": "Paste as plain text only, without formatting.",
+      "url": "https://public.popclip.app/extensions/ext_ReTQ2qTuN3wc/file",
+      "sha256": "030fb1d8f7c10fd048cf8ad55d1026ecf0cf390b0fa46966bd39744741c999ec",
+      "bytes": 7903,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 480,
+          "sha256": "0f75d2db115dd61e5d50afd919655a7bb0c6b23f3b7450e5e17a33db81393112"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 430,
+          "sha256": "1572d1678e394f9d869abdb6cfb297885a12cfcea431137f2f2e0da82f18950a"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 741,
+          "sha256": "7734a417f3aa749a7e99fb16ed9a7cae4e6c3c43ff6dfb0ceaf5f4417ead4c69"
+        },
+        {
+          "path": "paste-equal.png",
+          "bytes": 6031,
+          "sha256": "7805eaa0adda91649ed29ca6f37dc271d85f0da3f550b1da56f27c75bed85ce9"
+        }
+      ]
+    },
+    {
+      "id": "xyz.phpz.popclip.extension.pinyin",
+      "version": "1.6",
+      "shortcode": "w8757f",
+      "name": "PinYin",
+      "description": "convert Chinese characters to pinyin.",
+      "url": "https://public.popclip.app/extensions/ext_LmzTZNEmITZl/file",
+      "sha256": "4904eb5ee0d597748fe0a4377c73e29c03edec3c994794686c5084fe9a678a31",
+      "bytes": 153825,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 584,
+          "sha256": "7fb98354c2362fa4a98fc88a7a6b27bb6c8a31c2c3f9d8c8565f96fa05e28b0d"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 2664,
+          "sha256": "47a0226972b19838371a36b13edc5e6212f1278929ce9a393b940dc0ed621f5e"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 732,
+          "sha256": "67ba9f638c184509f3ccb3258d3b5512ee7c85803ef06f28b7157b5c57cc632e"
+        },
+        {
+          "path": "pinyin.js",
+          "bytes": 689,
+          "sha256": "a00088f3b5bcb35d28fac847e8fa536c6a9d95327fe1a2895e3b550f521d83a3"
+        },
+        {
+          "path": "pinyin.json",
+          "bytes": 795405,
+          "sha256": "d11394bb0292abae0f4559410a2bff71d164e761e720d57b4180e129bd0427bb"
+        },
+        {
+          "path": "zhuyin.js",
+          "bytes": 1236,
+          "sha256": "aa45fcabc2c7c438fae9ab871f3fa27129082ed249270fe00e4508c66de4eba0"
+        },
+        {
+          "path": "zhuyin.json",
+          "bytes": 1067,
+          "sha256": "e81117daa811338da1ac23d28d63ed9a9d54d227339851e5663565c5032c7cdc"
+        }
+      ]
+    },
+    {
+      "id": "com.brettterpstra.popclip.extension.poortext",
+      "version": "2.0.6",
+      "shortcode": "2f8dfs",
+      "name": "PoorText",
+      "description": "Strip rich text formatting",
+      "url": "https://public.popclip.app/extensions/ext_Wi2XLyaPc72U/file",
+      "sha256": "88b0ba3358fad9151054e55af5e51d57678df659394a80eba075dc113a51b0ff",
+      "bytes": 5319,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 469,
+          "sha256": "ade02fcdde9dd9119ceab79fb8da5dc85cfdb470e197709db125efde46f38765"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 286,
+          "sha256": "e19a9273e8ac5694768045fb62443a64b0459f91c1fbb1daa9bd7b7c67598c53"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 745,
+          "sha256": "3f985f6b6d84c72f32e00dc7081556761df6d58e9f83907e2661e3fcfcdbf7d5"
+        },
+        {
+          "path": "icon.png",
+          "bytes": 3410,
+          "sha256": "d6dce8e18d16348ac8bc22b7b81fbdb3812cda04d66c075d75744b0a91f30c75"
+        },
+        {
+          "path": "script.ts",
+          "bytes": 100,
+          "sha256": "8d626f732aa4737d24801d5852886aa11f043a22a3cd92fc7aa11f2378aec1ab"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.presearch",
+      "version": "137",
+      "shortcode": "w25tea",
+      "name": "Presearch",
+      "description": "Search Presearch, the decentralized search engine.",
+      "url": "https://public.popclip.app/extensions/ext_142DfFp9BsT1/file",
+      "sha256": "546e21ac3c361aba997b6a87ed0b219e3dbabe47a9efcd80c78c8ebe079492ab",
+      "bytes": 3627,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 467,
+          "sha256": "984c9ca44d5f94d88ee4caec69fa251994a947fc4b7e19c6c6e52a780bdc35a4"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 283,
+          "sha256": "67e7eba53fa1a31f350c7c5eda78420f1f0f8ce67834f10c391146cfcaf7682c"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 740,
+          "sha256": "a8db5c1337593a11ec49b7d0e82cfcdb9c9c85ff4c1be3d871bb6dc481345450"
+        },
+        {
+          "path": "presearch.svg",
+          "bytes": 4036,
+          "sha256": "9efcdfdf3436379853d55501a2c139eb90ca525e950aaf83f32a00481df990c0"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.qwant",
+      "version": "301",
+      "shortcode": "v7hgh5",
+      "name": "Qwant",
+      "description": "Search the web using Qwant.",
+      "url": "https://public.popclip.app/extensions/ext_M9q970Nhvkcz/file",
+      "sha256": "b52c70aa22021e6ecc70913bfc437c87e9f20544db12142515d994a084e2404f",
+      "bytes": 2220,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 314,
+          "sha256": "f7586e2d19d494a7643c2538047a94502915e9f56aa83821b6efdbfdd97fb760"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 459,
+          "sha256": "5f1ddc2d0135947ec9f28dabcbb8e8fda08eeb6a10c7f9169a3bed98a60a1d0f"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 736,
+          "sha256": "ee861b8a0bca1c10fe770ba6079f25ae3c23c0f6506b3c1fbc58aa05a299826c"
+        },
+        {
+          "path": "qwant-dark-logo.svg",
+          "bytes": 580,
+          "sha256": "635d6e2362ad3484b90f0616b5c15e4afe45a0e55f145f9dec914dc3cf05bf0c"
+        }
+      ]
+    },
+    {
+      "id": "xyz.phpz.popclip.extension.ray-so",
+      "version": "1.6",
+      "shortcode": "831bpe",
+      "name": "ray.so",
+      "description": "Generate an image from selected code with ray.so.",
+      "url": "https://public.popclip.app/extensions/ext_yVpniTpKRkAb/file",
+      "sha256": "19b8228f0872163b636ea69efc0e10ba1dbe7174764defee78e21bbc3d6b6bff",
+      "bytes": 3406,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 4505,
+          "sha256": "bd0091db6fca0f70977dd7b6d6bdc27f911f59d4129bcc5824e753454b811bc4"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 456,
+          "sha256": "a716ec66f5b9130a18e8976801caccc0c6aa8b20142cb4abfd5478ef4afcd4e8"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 732,
+          "sha256": "580b8b6fed83f5d9cba4896d079d22c17427eb41b8ed368add089f3dc37e7f03"
+        },
+        {
+          "path": "main.ts",
+          "bytes": 724,
+          "sha256": "e16d02c29f2cfee579954e1f1f5e141df69c95f57ad84e4ed347a5255e4f123e"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.remove-spaces",
+      "version": "100",
+      "shortcode": "54cf55",
+      "name": "Remove Spaces",
+      "description": "Remove spaces from the selected text.",
+      "url": "https://public.popclip.app/extensions/ext_Gfke2poqkoTr/file",
+      "sha256": "5d65147b735e2dd9b806354242caac898846e7dd4de4b3f8125015bb72bf18d4",
+      "bytes": 3707,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 255,
+          "sha256": "f89659ffbd3b9cff34cc8bbab6e876f1e57e7f126743f141421412fb2d58a14b"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 744,
+          "sha256": "060805ea1af38672b7e54606d618448072147b12fcf95b277682b84f075ff30b"
+        },
+        {
+          "path": "remspace.png",
+          "bytes": 3544,
+          "sha256": "b6d85cf1c0eb7413bc5a1650c0c658add8fccf8ad13e8419164d263ac0440c2c"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.reverse",
+      "version": "100",
+      "shortcode": "gt0c91",
+      "name": "Reverse",
+      "description": "Reverse the order of the selected lines.",
+      "url": "https://public.popclip.app/extensions/ext_CWYUj9vxYGV9/file",
+      "sha256": "f15ae778ece34c20eb60217463a08c50c0910d1d1d5f95a0c1751d0440f3a6b7",
+      "bytes": 6655,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 266,
+          "sha256": "8401377e83672e640c3b3e9b5499a457f8f0973dad2c877e1710427d638476cc"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 463,
+          "sha256": "2e6c4f7342b3a34ebe33096586b43d8914311b3ef5432e3e4e94f4965ddc1b7a"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 738,
+          "sha256": "4cf44f019e9dab99692a33c1e3c36e3adf2546f88b2eed7992a0df9dd22855ee"
+        },
+        {
+          "path": "reverse.js",
+          "bytes": 104,
+          "sha256": "980c614230db3f37b3adcddd917cce4783a781987a9f3dd23591b222597207be"
+        },
+        {
+          "path": "reverse.png",
+          "bytes": 5824,
+          "sha256": "16fef0582f810f5e4613f995bae77fe24dd6def787a591edb4107304831c78f4"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.sentence-case",
+      "version": "100",
+      "shortcode": "b3yeve",
+      "name": "Sentence Case",
+      "description": "Start each selected sentence with a capital letter.",
+      "url": "https://public.popclip.app/extensions/ext_oB70SnB2JXcB/file",
+      "sha256": "30d9ecbbdfab8e6a9cd1515ca91338680eea990436df1d4ce10d5da6079de0f9",
+      "bytes": 2406,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 260,
+          "sha256": "ceb9fa357a4cd7fe346a497eaf35d7ce180022d981eb4c30721225d8f58846b7"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 475,
+          "sha256": "a08f6b11356dbdb1fdf6da007e18d1c9ac03e498263a0cbe69ddbae6ca979b8a"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 744,
+          "sha256": "95ce4cf1f0671968e9be578d86fc176ea9fde43e565f6cf18b357b4d559c4112"
+        },
+        {
+          "path": "sentence-case.js",
+          "bytes": 901,
+          "sha256": "08dc4b3327db3b8181efbc3c5ebd57f5cffb555b9e6f6f8acb9959d1adce0bf4"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.shuffle",
+      "version": "290",
+      "shortcode": "tss74a",
+      "name": "Shuffle",
+      "description": "Randomize the order of the selected lines.",
+      "url": "https://public.popclip.app/extensions/ext_xfarC2xC8Krv/file",
+      "sha256": "4daf1731ee9e6e7cf90b86d8dd5afc1a001ecb1be9fc7503c34d17d2218007ce",
+      "bytes": 9511,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 463,
+          "sha256": "d8e353d5b99e701cb1fb1ec82aa4d7bd540ca3fc288b376f1a796e18f5a86725"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 2709,
+          "sha256": "33f107fad8d246ae95866be566808583d9f439c65bf0eb769ec097d48cc32ec4"
+        },
+        {
+          "path": "Shuffle.png",
+          "bytes": 8074,
+          "sha256": "0d4740439e0b10d1d35b221fc729443d70f17f19bff21cf11820ecd9e3099972"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 738,
+          "sha256": "40525163d85437c0c5bb19d333f9cae86c1a3044c9f32c8bdb82eb6d06fd4698"
+        }
+      ]
+    },
+    {
+      "id": "com.brettterpstra.popclip.extension.slugify",
+      "version": "2.0.6",
+      "shortcode": "x2p1qt",
+      "name": "Slugify",
+      "description": "Turn selected text into a valid post slug.",
+      "url": "https://public.popclip.app/extensions/ext_UtkqwKieiqSN/file",
+      "sha256": "0c84531a2f0ab592d30de31b84321d2fb961207264d5f444d0f5d52ad48a6f63",
+      "bytes": 5834,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 467,
+          "sha256": "c3a67e54788570c35af95bac7b0621a26c3837081606bc73223fe8c27b11e99f"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 287,
+          "sha256": "44b269671d08bf53cce33450688553509eb95accd7f1532edb16bfcf5bed6c48"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 744,
+          "sha256": "f3710f0fe94e7776082bb502887d4f6da533fb2d36f97abbe6553eca8bca20ea"
+        },
+        {
+          "path": "hyphen.png",
+          "bytes": 4961,
+          "sha256": "172cc4483d5627f7e4bf142a3c8090b9944e64309d28656eba5fb3ad92b900d5"
+        },
+        {
+          "path": "slugger.ts",
+          "bytes": 562,
+          "sha256": "d84259830fe85d25ee03e88557c970133a00c2b2b6f9a8fcb2a0b213f0902093"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.sort",
+      "version": "100",
+      "shortcode": "41mamt",
+      "name": "Sort",
+      "description": "Sort the selected lines alphabetically.",
+      "url": "https://public.popclip.app/extensions/ext_qsDJzlgwvRkt/file",
+      "sha256": "b3c78be90a85a63e597c998458a8e31ce604a96ceb99cddac241759cb451bd86",
+      "bytes": 8400,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 256,
+          "sha256": "e179ad0acbde2ef09981d044a1e1431631284523513e9ee31b5e9ac1e75f8446"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 457,
+          "sha256": "80c26222bcf2bab4c853b4f5aec9f8ac1b788ab1eb208782bbca708eb16d577e"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 735,
+          "sha256": "1a106743f6e9eb5814632c792454dbe3f71362bb87591cb870eb39e83213743c"
+        },
+        {
+          "path": "sort.js",
+          "bytes": 180,
+          "sha256": "90b3ff75f32520727351679e4f885bc3cfc45e7a2c5dfe08790cc6d85572dcf1"
+        },
+        {
+          "path": "sort.png",
+          "bytes": 7942,
+          "sha256": "af48473128e847fb10f4e204dae3eb33f48b90a835abf2b4eb96a38c546ee6f4"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.spotify-search",
+      "version": "100",
+      "shortcode": "fxz1nb",
+      "name": "Spotify",
+      "description": "Search Spotify. Requires an installed Linux Spotify protocol handler.",
+      "url": "https://public.popclip.app/extensions/ext_4WGVmsdnbQin/file",
+      "sha256": "4d628cc7a0e1ed368421b37dbb68ae23ba617435e8d252a4d8bbb6c8b7444b3c",
+      "bytes": 14696,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 382,
+          "sha256": "6d02f1cdd1a09667ca10c83e81c3a78da0a3cfe3d3e8ebe4ac7aa521e7ae06a7"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 470,
+          "sha256": "ec8472e59e6cd60d3b9dc71f1920d5664b32159c2932a0b584892afc3ca84e35"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 745,
+          "sha256": "9c11b867be03baf36a5f32bd2b5053e5d6675263a8e086c19b0a89750f71c653"
+        },
+        {
+          "path": "sifynew.png",
+          "bytes": 13528,
+          "sha256": "abfbb3a4c70e8d2239d0686bdaf2e837f94e9b6a2b8d39447b43fb8337a403a9"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.startpage",
+      "version": "100",
+      "shortcode": "wsqynj",
+      "name": "StartPage",
+      "description": "Search the web using StartPage.",
+      "url": "https://public.popclip.app/extensions/ext_WG01Hr5vLPGj/file",
+      "sha256": "942cf396a813db097d6ef40dd9c82634c4e34009edf38f78a97497f249c2a5d3",
+      "bytes": 11481,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 1005,
+          "sha256": "abd047113bbdbcc7f49201263e7440726d4ae4a008cb6f420f03d7f1e6d71a45"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 740,
+          "sha256": "54c73b6e333620fb6975166a164f441eeb94e593c5837f4d0e761fc06accbc0a"
+        },
+        {
+          "path": "sp.png",
+          "bytes": 10924,
+          "sha256": "7bd1e4e44176fd8e537e6736572b2b90258c068f097e60aeffd8d092a06d64cc"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.straighten-quotes",
+      "version": "17",
+      "shortcode": "7qdy94",
+      "name": "Straighten Quotes",
+      "description": "Convert \"smart\" quotation marks and apostrophes to ASCII quotes.",
+      "url": "https://public.popclip.app/extensions/ext_EoOLtOYU1sg7/file",
+      "sha256": "6dbc561e653c8ea00b1b810ffe0841b4b5715dc26fe26bd35daafb5815c5b46e",
+      "bytes": 2344,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 483,
+          "sha256": "583aa50cacf5170d1cb38054c8b61103eda37b7d0c8ecfa3475f3409d3d7363c"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 1653,
+          "sha256": "541256678b18255b2e4207befde0975b8c78456b7d177ec6190893b3c092bbe9"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 747,
+          "sha256": "7b70b642fb8dec54d31c688d3e44130753dab5cf3cf087471f12d8c293444b75"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.tenor",
+      "version": "1",
+      "shortcode": "ht5xxx",
+      "name": "Tenor",
+      "description": "Search GIFs on Tenor",
+      "url": "https://public.popclip.app/extensions/ext_SO7NZ2n5P96Z/file",
+      "sha256": "f6973cfcacd9f4b41055e695f66a1b08f4a39ba7ffa26aaee43f4f3059a19fba",
+      "bytes": 1609,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 459,
+          "sha256": "62aa68137f0e4d73b0cbdeb3661b0f51000c6c0bbd215e04c9c05a09edc31c5e"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 247,
+          "sha256": "4af9c9297349b35d5f4bea3e675e15a7b7f61e2d249221c5ab3298eb3f274288"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 734,
+          "sha256": "5627b8e1a6dc2a9bb1b93daf6ea6adcf48de98817b5193744a5e934aa5944832"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.timestamp",
+      "version": "100",
+      "shortcode": "batmjr",
+      "name": "Timestamp",
+      "description": "Paste the current date and time.",
+      "url": "https://public.popclip.app/extensions/ext_9dMc5rSHlRxh/file",
+      "sha256": "d4829bbb53227dca32c051959f97650a8ed1605d60aa9403d40bee8244b9c4f6",
+      "bytes": 16248,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 325,
+          "sha256": "6300b4a592c13fcb8dfae8c4742c9135200cd438ded97acf8a8e52a59250830f"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 467,
+          "sha256": "0fa03724e27957244b3c63918cd45f70804eb89321d63f6fc5cd35e2261993d4"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 740,
+          "sha256": "acd94b632c1d5b1380f1bff460bababf08a7297e5d6334a66620751af447f221"
+        },
+        {
+          "path": "clock.png",
+          "bytes": 12811,
+          "sha256": "e8ef6b27264a00d9ba1a0ac95b7bb3d1cf776ac8fbbc89ff70ffc42f34aa8a82"
+        },
+        {
+          "path": "timestamp.js",
+          "bytes": 2264,
+          "sha256": "b8e45fdfdbb15617d5e2909af17f1d6dce1bdf53fbc42f4678ee10e8943990d5"
+        },
+        {
+          "path": "timestamp.ts",
+          "bytes": 1672,
+          "sha256": "045ff2e887a6d45b52e030d2d8386bcd44710e1541e01f7b2dfbca5a92b5b160"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.title-case",
+      "version": "237",
+      "shortcode": "2cr65p",
+      "name": "Title Case",
+      "description": "Capitalizes words according to typical English titling conventions.",
+      "url": "https://public.popclip.app/extensions/ext_Bx7w7UoQNvMP/file",
+      "sha256": "9adec87949fc44cfc15bf762cf19cdde397446505790fec3cd9cf5212398b171",
+      "bytes": 3378,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 469,
+          "sha256": "ce57db8c861f6ef39e3bccbbb61d3c9fd941362b5d954d0ffa1082e791c4dcf7"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 260,
+          "sha256": "59421e4241dd2149fb6cd51d09053ce3460f9fbd7a18a6e25646e063f3c43ffc"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 741,
+          "sha256": "01ebc706b43b2e9212df3d046a62a9b76d058918a28e43135335fae7fa77803b"
+        },
+        {
+          "path": "titlecase.pl",
+          "bytes": 3115,
+          "sha256": "5f83018ee308268d9454edf92306c8dcccce01dca28252f5817ef42761971a9e"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.traditional-simplified",
+      "version": "373",
+      "shortcode": "fwrfay",
+      "name": "Traditional/Simplified",
+      "description": "Convert text between Traditional and Simplified Chinese.",
+      "url": "https://public.popclip.app/extensions/ext_999xjJGr4FAI/file",
+      "sha256": "affdc8b04dbb7433239280844f69b88609bc16a59eeb425b131ab58794978fa1",
+      "bytes": 112572,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 639,
+          "sha256": "da2d653a3d2ca930ee8976044a478be72a93814af969be09392dfb46bb20a41c"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 348,
+          "sha256": "8146d5fd17b029d49e13b52c1733aa5f9f10378266323b0e171b2b215b3e14ab"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 753,
+          "sha256": "c10fb63a6ec5bdac12801f047375edaa796c243de3fcc520ec25ff05ffb6ca3e"
+        },
+        {
+          "path": "dict/s2t-char.json",
+          "bytes": 40066,
+          "sha256": "4f8e5e233bfd388854c2a4bb66583b2876073fa49c00f861791baccbdf337668"
+        },
+        {
+          "path": "dict/s2t-phrase.json",
+          "bytes": 177139,
+          "sha256": "4192e9a28b705d43ad63615737344a3bf2e1a1cf1740c0aa820fc1244e8d6cd5"
+        },
+        {
+          "path": "dict/t2s-char.json",
+          "bytes": 45698,
+          "sha256": "7d6146ffd2b53aee7e3c808ee344449a55f6a210c05aace3f2bad2bd72a87283"
+        },
+        {
+          "path": "dict/t2s-phrase.json",
+          "bytes": 18975,
+          "sha256": "1886949ad46aca8a91f316359245179d88875416f7a7d9a7ada4f7350223b50b"
+        },
+        {
+          "path": "module.bundle.js",
+          "bytes": 8329,
+          "sha256": "8b606dd399e7c3d5ec495643a1f61a8f09a25ed63c9287e72a732ea93e6f0e06"
+        },
+        {
+          "path": "trad-sim.png",
+          "bytes": 10070,
+          "sha256": "7aec0ef1ee53a0e6e121a3afd6689b1e664022f13e62379afd53e4c2de3e8512"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.twitter-search",
+      "version": "100",
+      "shortcode": "7kmrpe",
+      "name": "Twitter Search",
+      "description": "Search the world's tweets on Twitter.",
+      "url": "https://public.popclip.app/extensions/ext_K66U4u2aAdvB/file",
+      "sha256": "d80d31e4058d0e1779e0d125d0553949b505750873c05fed333786185ed4d1d3",
+      "bytes": 13339,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 695,
+          "sha256": "3a46cf9bdc27c5c73911f887ff0e8f38736f01ff99baa608fb2d2caa22cd7d49"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 745,
+          "sha256": "9307890a813b9bd031d6eb165a56801a9c491b9b0cb239d6aa28f78aa9d3db21"
+        },
+        {
+          "path": "twitter-search.png",
+          "bytes": 12266,
+          "sha256": "8533bc0f8d405e2e8eeb873fe371e32d7dc090e3526a75ba36bba694a8d69a99"
+        }
+      ]
+    },
+    {
+      "id": "com.brettterpstra.popclip.extension.twitterify",
+      "version": "2.0.6",
+      "shortcode": "hy4t7n",
+      "name": "Twitterify",
+      "description": "Converts @names and #hashtags to x.com urls.",
+      "url": "https://public.popclip.app/extensions/ext_7F5T78fySf0j/file",
+      "sha256": "884b0143876f6d005cbe2f68c266e4ecfb4de4c9fe7d166ec0ff5a9c43b2c3b3",
+      "bytes": 9774,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 473,
+          "sha256": "17bd6caf7cb159f11228a4db93da0e5c28caf723b73088c652723ac569829288"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 471,
+          "sha256": "18ca5343ef8cb89720f64b7239bba266d9627113d5b9f767aaae2d8febced980"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 747,
+          "sha256": "1d1c76d8f79a734466932455eecf14b1f419b08b1bd3ff937e89b18c60b8f951"
+        },
+        {
+          "path": "icon.png",
+          "bytes": 7537,
+          "sha256": "d1a674750f6693b192a399f8571048d5c04bb74f8ded534d5110d1897fdefb8f"
+        },
+        {
+          "path": "script.ts",
+          "bytes": 1231,
+          "sha256": "e891ff5cfeb15fb263dee10e061bb24d44ad5d18553128b9efeb0ff55c0494fe"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.underscore",
+      "version": "100",
+      "shortcode": "09a521",
+      "name": "Underscore",
+      "description": "Replace spaces between words with underscores, and vice versa.",
+      "url": "https://public.popclip.app/extensions/ext_3YdWfOML6aSh/file",
+      "sha256": "d6778674ce87278665dc600c3312b76071d51b9b6f2a9fb0937293f691f86aaa",
+      "bytes": 8316,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 301,
+          "sha256": "b8a82d786b3747740d9ea17e56937964ed33cfa7bdd8551a3e8f214e0a1369e2"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 469,
+          "sha256": "256d66d09d01846cd56d9610cfe38d721f647bcd78b267c7bc3e44096d4c3081"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 741,
+          "sha256": "e899de3c42030572065b7cc1defe42c5a30cdcb69c44f1c590d602b02f0a144d"
+        },
+        {
+          "path": "build",
+          "bytes": 144,
+          "sha256": "d767b16b5ca812867e5c4d9f6d9ede24c1cf66f63312b016139f20bb5f46d0fb"
+        },
+        {
+          "path": "underscore.bundle.js",
+          "bytes": 3778,
+          "sha256": "cb7b20bbef569a4985ec0915bd1b14698a27317565febda8abff42af528731c3"
+        },
+        {
+          "path": "underscore.js",
+          "bytes": 554,
+          "sha256": "648856d0688fdd88225e653981a6aa2e5ad44ae0f4dabe7fb85d640d84726d0b"
+        },
+        {
+          "path": "underscore.png",
+          "bytes": 5105,
+          "sha256": "92a158982163f075b67de51c59af3646d4fe612eff82211f7bfdcb72d9b78d1f"
+        },
+        {
+          "path": "underscore.ts",
+          "bytes": 372,
+          "sha256": "ebf274ff0b76fc36e1d1cbfd7d0803e1d5015d882aa166f321e401654ae8e380"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.unicode-lens",
+      "version": "188",
+      "shortcode": "ve8j52",
+      "name": "Unicode Lens",
+      "description": "View the underlying Unicode code points of selected text.",
+      "url": "https://public.popclip.app/extensions/ext_RaPeQhb62lEP/file",
+      "sha256": "d1b014eaa8fd53631af68781793698ff7150d7b9e650b30c112b43f7f4c3d838",
+      "bytes": 1850,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 473,
+          "sha256": "1a88438e802e9f13b23c5e44d55077d922ed0601af0e88ffd7ca1a83f78dd1aa"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 579,
+          "sha256": "35aa566e3542142630974be9ede020ed058f01366e429a95a604a2ec2825ce3a"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 743,
+          "sha256": "e86957d264f892d068f770de8e5cd435366ed01cf050885a9b9703bb27832cc9"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.unix-time",
+      "version": "373",
+      "shortcode": "ahphpq",
+      "name": "Unix Time",
+      "description": "Convert Unix timestamps to formatted dates and times.",
+      "url": "https://public.popclip.app/extensions/ext_njbvxkL03wsx/file",
+      "sha256": "c7d68ff7bfc840a3175e261383bece38b87f48900ec533bbab7d097f6b4b3d10",
+      "bytes": 6249,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 467,
+          "sha256": "db0a4bac5e625bdcf61de8400d692805683e96720099d783e22745396a37839a"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 4171,
+          "sha256": "63e11c1586429ba5a9344821c08079e8d8280c47560790183b10118f039d9872"
+        },
+        {
+          "path": "UnixTime.png",
+          "bytes": 3704,
+          "sha256": "935b3ee711db0a9d611a523aa2d8528873af48a783692c88ad7f659f86e770a8"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 740,
+          "sha256": "467905148ee69db983c9acf6d9c88c2df50926af222f30cc5b9254689bbb71ba"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.upnote",
+      "version": "170",
+      "shortcode": "h036ws",
+      "name": "UpNote",
+      "description": "Create a new note in UpNote with the selected text. Requires an installed Linux UpNote protocol handler. Captures plain text.",
+      "url": "https://public.popclip.app/extensions/ext_0WK1zO6JkMNP/file",
+      "sha256": "08a21f95be1519773120d15156e86f4c02726fe8a1afff654441e7410a3017cb",
+      "bytes": 2698,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 461,
+          "sha256": "1ff695b61c6fdb4af319200ddd1c64e15eb67a5a4fc651fffed04441256533f5"
+        },
+        {
+          "path": "Config.ts",
+          "bytes": 935,
+          "sha256": "5ae629333b5ff82629becd9c23ce6e481ba41fb139c1fe35f2fd9362bc42e097"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 737,
+          "sha256": "e6164a7e02a6f64e0a5499bed8ed9ff9e737663945212b1ecdbf0aca6c11eff2"
+        },
+        {
+          "path": "upnote.svg",
+          "bytes": 952,
+          "sha256": "3954bb7c82c520eeee7dce61eb413373b477e46bbe52b6cfb12d4770f9dec5d8"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.uppercase",
+      "version": "350",
+      "shortcode": "fzmf6w",
+      "name": "Uppercase",
+      "description": "Make the selected text ALL UPPERCASE.",
+      "url": "https://public.popclip.app/extensions/ext_eopRGcVhglf4/file",
+      "sha256": "a7cfedcf59d8f05ca01d7f242f8e0eac6e74478b4bb14bc3c5a3636fcfb197d2",
+      "bytes": 1698,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.js",
+          "bytes": 320,
+          "sha256": "19e9e2df11475392f9b4311239cf9bbbcca5c6d63696058c4bd1992b588a19f1"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 467,
+          "sha256": "81c81efbce103ba96e8d732dbf4efed688393a9c9612db71eee0b52b38be2166"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 740,
+          "sha256": "1e12e7d845817327cf9e49bcc077b1bd0a55a3627bb3ce40e7523e20af36b793"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.urlencode",
+      "version": "145",
+      "shortcode": "t1gh6s",
+      "name": "URL Encode",
+      "description": "Percent-encode or decode the selected text.",
+      "url": "https://public.popclip.app/extensions/ext_BYD2jkzv7vME/file",
+      "sha256": "a9270c27943ee0501096e3ad315ad041e8648ba092217bfe318ca7aae850bc0c",
+      "bytes": 1754,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.js",
+          "bytes": 532,
+          "sha256": "0d7082258af334350feaaec890e1d736cbbba73ecf1d270d89830d19ec302ebf"
+        },
+        {
+          "path": "Config.plist",
+          "bytes": 468,
+          "sha256": "7c460cf823079f1b021914ba347737aa5041f1ab76b5917ea5f15a0404d797b2"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 740,
+          "sha256": "f61a7e886eb024dc085302dc514f01649dee86f3938a1c983196d84c93bbe72b"
+        }
+      ]
+    },
+    {
+      "id": "com.brettterpstra.popclip.extension.urlencode",
+      "version": "2.0.6",
+      "shortcode": "818qw5",
+      "name": "URLEncode",
+      "description": "Percent encode selected text.",
+      "url": "https://public.popclip.app/extensions/ext_8F8TFOmcqCwz/file",
+      "sha256": "81f6db19c809ebaf2dc1e246fad96f908950b049a456b0661958965bc9d540a9",
+      "bytes": 2020,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 471,
+          "sha256": "21981b4072cee271fa0dd82427bcaa524822a2ba2d79036eceaa71f86e74d47e"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 262,
+          "sha256": "91a12fbf34ab1ff77b9afebfc7edfea489c162b04501e556c4d7b75ac02632c4"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 746,
+          "sha256": "4395c98c378c9c4280a33a1e4b405d4904dbd75fb6ba1eeadfdf21ecbb424d1e"
+        },
+        {
+          "path": "urlencode.ts",
+          "bytes": 122,
+          "sha256": "4dbb8e6ffd098f21830c5a37bc8331b89c329dcec839d0199f434cc367669cf6"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.what3words",
+      "version": "238",
+      "shortcode": "4q8mrz",
+      "name": "What3Words",
+      "description": "Open a what3words address on the web.",
+      "url": "https://public.popclip.app/extensions/ext_Be1tT9rRTYY6/file",
+      "sha256": "395c9cbd93ca30997e5b55b5ab1f43cf02e88a001dd0ea7d590dfdeb8700b3d0",
+      "bytes": 1697,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 469,
+          "sha256": "dac257710da77a6811527969702a90e83996b9a3b7e3341b6ef5a4c8c5336ae5"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 335,
+          "sha256": "08f6b213e93c98d933f2c034ec3a0bd7b8c95500a7606746541923d94f97ea74"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 741,
+          "sha256": "b33051d5dd6af0bd03300afd285bd6d7cbaadd49f302920917e225f63562d73b"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.wikipedia",
+      "version": "100",
+      "shortcode": "cv37yb",
+      "name": "Wikipedia",
+      "description": "Search Wikipedia articles.",
+      "url": "https://public.popclip.app/extensions/ext_STToZ8Kbcyad/file",
+      "sha256": "90343b398074dcaaa644dfaca82966f96d3fbd91d4bf72bb95b7c1e059e5574b",
+      "bytes": 14698,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 2063,
+          "sha256": "0af178e13e1c5754f65099644c248bc34314b358ac2533f6a31f9ddb12562faa"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 740,
+          "sha256": "43de8219c06098c5add04c9c51b04d5e74b92bbea80b7cfce949474716383e55"
+        },
+        {
+          "path": "w.png",
+          "bytes": 14105,
+          "sha256": "6dfa35edf426eb2c3c30545550ad435de72384afae6f238c8799df19aa3e565d"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.worldcat",
+      "version": "100",
+      "shortcode": "pbj90j",
+      "name": "WorldCat",
+      "description": "Search worldwide library collections using WorldCat.",
+      "url": "https://public.popclip.app/extensions/ext_nY3cE5dr4HCG/file",
+      "sha256": "4d85e203011aa2e5382343ac6fd4a38b4b7823c2a17bd17427ec5a7fef3568b6",
+      "bytes": 14505,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 883,
+          "sha256": "f178911af386164ba9855abbb41e4fa5d06c49f4b38b26e32cce4ef1064c3c2c"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 739,
+          "sha256": "045747b2ac6e39d149ff070f9814dda867bc573eab4573d20025af8085079084"
+        },
+        {
+          "path": "worldcat.png",
+          "bytes": 13465,
+          "sha256": "83a38e4e7a2846332c599ef66a6b135e58d112f968fa123431b71ec38cbef1e2"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.yahoo-search",
+      "version": "100",
+      "shortcode": "tngcm1",
+      "name": "Yahoo!",
+      "description": "Search the web using Yahoo!.",
+      "url": "https://public.popclip.app/extensions/ext_PkOotsL6dmvr/file",
+      "sha256": "8b83fd3044918d6584159455a43fdc20f7d372cfa22d753fbca1817182c7b63d",
+      "bytes": 10019,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 1922,
+          "sha256": "c514a6c003107efddf561c0b9c1287adabcdc08c2c5ab9b921c5b549162ae112"
+        },
+        {
+          "path": "Yahoo.png",
+          "bytes": 8379,
+          "sha256": "7656e298e22074ec5d0414bb0ca34f74eec17b9001cb618db66aba694d96d9bf"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 743,
+          "sha256": "04fb59896083c22fab7a4a4123c4a0883c4d7ee24cffeeb5350c7bd5b68a047d"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.yahoo-japan-search",
+      "version": "100",
+      "shortcode": "t1z0y4",
+      "name": "Yahoo! Japan",
+      "description": "Search the web using Yahoo! Japan.",
+      "url": "https://public.popclip.app/extensions/ext_0lSlE9QUyQvN/file",
+      "sha256": "51c4e04cccec8f4973ff6f6eaa5ace819399a2f745ece0db3f5707bed1228b3d",
+      "bytes": 8290,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 931,
+          "sha256": "0627b26eb45dc3ecdc694f4eec830e76f010f4b75405aacaee51dc54da7c237d"
+        },
+        {
+          "path": "YahooJapan.png",
+          "bytes": 7230,
+          "sha256": "9b306dc973fb3c847327160fbc02ce21d65e03640650be9e9424facfe784403d"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 749,
+          "sha256": "e3644b8982a9e7fb467c6521af2a31fbdf67c1fdd704731ccf0e253068418113"
+        }
+      ]
+    },
+    {
+      "id": "com.pilotmoon.popclip.extension.yandex",
+      "version": "267",
+      "shortcode": "1bgbbm",
+      "name": "Yandex",
+      "description": "Search the web using Yandex.",
+      "url": "https://public.popclip.app/extensions/ext_CYt9lrqUGLjO/file",
+      "sha256": "92d4993e6a75d346b4f895ca7efa1bc3e3301871c6e0efbbbadf6de6eba933ef",
+      "bytes": 10616,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.plist",
+          "bytes": 543,
+          "sha256": "305eb4dd9ea51551b8e5142ff69f3e4c4e8d0a712fcad450dac041fa8760f321"
+        },
+        {
+          "path": "Config.yaml",
+          "bytes": 326,
+          "sha256": "2b6f5ca67c282a077ec77b4c8e3e345120840b9cd1c5d9dc0f741eb5d726d362"
+        },
+        {
+          "path": "_Signature.plist",
+          "bytes": 737,
+          "sha256": "1b2dc4cdb8d203b070f5b6cdc4d539cea4c69035639b8aeac7633e87aa4450bd"
+        },
+        {
+          "path": "yandex.png",
+          "bytes": 9068,
+          "sha256": "b50691c0bcada456edde74a9db4636aa018922f2834f75ea73df1d9ce3f25b19"
+        }
+      ]
+    }
+  ]
+}

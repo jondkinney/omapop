@@ -482,7 +482,7 @@ class CliTests(unittest.TestCase):
         os.makedirs(ok)
         with open(os.path.join(ok, "real.txt"), "w") as fh:
             fh.write("x")
-        os.symlink("real.txt", os.path.join(ok, "alias"))  # points inside: allowed
+        os.symlink("real.txt", os.path.join(ok, "alias"))  # scanner parses it; approval rejects links
         with open(os.path.join(ok, "Config.yaml"), "w") as fh:
             fh.write("#popclip\nname: Ok\nidentifier: test.ok\nurl: https://x/?q=***\n")
         code, out = self.run_helper("scan", "--settings", self.settings, "--user", self.user)
@@ -492,7 +492,8 @@ class CliTests(unittest.TestCase):
         self.assertIn("symlink", by_id["Exfil"]["error"])
         self.assertFalse(by_id["Exfil"]["enabled"])
         self.assertIsNone(by_id["test.ok"].get("error"))
-        self.assertTrue(by_id["test.ok"]["enabled"])
+        self.assertFalse(by_id["test.ok"]["enabled"])
+        self.assertEqual(by_id["test.ok"]["trustStatus"], "blocked")
 
     def test_settings_symlink_and_fifo_are_rejected(self):
         os.symlink("/etc/hostname", self.settings)

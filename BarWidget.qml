@@ -26,6 +26,7 @@ Panel {
     readonly property bool showIcon: service ? service.setting("showBarIcon", true) !== false : setting("showBarIcon", true) !== false
     property string expandedId: ""
     property bool directorySeeded: false
+    property string confirmInstallId: ""
     property bool settingsOpen: false
     readonly property string panelScreenName: panel.screen ? panel.screen.name : ""
 
@@ -83,6 +84,7 @@ Panel {
     }
 
     onOpenedChanged: {
+        if (!opened) confirmInstallId = ""
         if (!opened && settingsOpen)
             settingsPage.finishEditing()
         // Re-read on every open: the catalogue may have been refreshed in the
@@ -287,6 +289,8 @@ Panel {
                                     if (modelData.usable === false)
                                         return Actions.oneLine(note || "Cannot run here", 400)
                                     var description = modelData.description || (modelData.source === "bundled" ? "Bundled example" : "")
+                                    if (modelData.trustStatus === "manual")
+                                        description = "Local extension: outside the reviewed catalog. Enable only after reviewing its code. " + description
                                     return Actions.oneLine(note ? (description ? description + " " : "") + note + "." : description, 400)
                                 }
                                 textFormat: Text.PlainText
@@ -299,7 +303,7 @@ Panel {
 
                         PanelActionButton {
                             Layout.alignment: Qt.AlignVCenter
-                            visible: !!(modelData.options && modelData.options.length)
+                            visible: true
                             iconText: root.expandedId === modelData.identifier ? "\u{F0143}" : "\u{F0493}"
                             tooltipText: "Settings"
                             onClicked: root.expandedId = root.expandedId === modelData.identifier ? "" : modelData.identifier
@@ -319,6 +323,26 @@ Panel {
                         Layout.leftMargin: extensionIcon.width + extensionHeader.spacing
                         visible: root.expandedId === extRow.modelData.identifier
                         spacing: Style.spacing.sm
+
+                        Dropdown {
+                            Layout.fillWidth: true
+                            label: "Command key"
+                            options: [{ value: "inherit", label: "Use global setting" }, { value: "ctrl", label: "Ctrl" }, { value: "super", label: "Super" }]
+                            value: extRow.modelData.commandKey || "inherit"
+                            onChanged: function (next) {
+                                if (root.service) root.service.setExtensionCommandKey(extRow.modelData.identifier, next)
+                            }
+                        }
+                        Text {
+                            Layout.fillWidth: true
+                            text: "Inherit uses Omapop's global setting."
+                                  + (extRow.modelData.recommendedCommandKey === "ctrl" ? " This extension uses ordinary app shortcuts; Ctrl is recommended." : "")
+                            textFormat: Text.PlainText
+                            wrapMode: Text.WordWrap
+                            color: root.secondaryText
+                            font.family: root.fontFamily
+                            font.pixelSize: Style.font.caption
+                        }
 
                         Repeater {
                             model: root.expandedId === extRow.modelData.identifier ? (extRow.modelData.options || []) : []
@@ -445,9 +469,9 @@ Panel {
                         if (root.service.directoryTotal > 0) {
                             var s = root.service.directoryResults.length + " shown"
                             if (root.service.directoryShowMac)
-                                s += " \u00b7 macOS-only included"
+                                s += " \u00b7 unapproved included"
                             else if (root.service.directoryHidden > 0)
-                                s += " \u00b7 " + root.service.directoryHidden + " macOS-only hidden"
+                                s += " \u00b7 " + root.service.directoryHidden + " unapproved hidden"
                             if (root.service.directoryClassifying)
                                 s += " \u00b7 checking which need macOS\u2026"
                             return s
@@ -467,8 +491,8 @@ Panel {
                     id: macToggle
                     Layout.alignment: Qt.AlignVCenter
                     visible: !!(root.service && (root.service.directoryShowMac || root.service.directoryHidden > 0))
-                    text: root.service && root.service.directoryShowMac ? "Hide macOS-only" : "Show macOS-only"
-                    tooltipText: "Extensions that can only run on macOS are left out of the list"
+                    text: root.service && root.service.directoryShowMac ? "Hide unapproved" : "Show unapproved"
+                    tooltipText: "Only reviewed versions can be installed from the directory"
                     onClicked: if (root.service) root.service.setDirectoryShowMac(!root.service.directoryShowMac)
                 }
             }
@@ -522,7 +546,8 @@ Panel {
                             Text {
                                 Layout.fillWidth: true
                                 visible: text !== ""
-                                text: (modelData.needsMac ? "Needs macOS. " : "") + modelData.description + (modelData.author ? "  \u2014 " + modelData.author : "")
+                                text: (modelData.approved ? "Reviewed v" + modelData.version + ". " : "Not approved for installation. ")
+                                      + (modelData.needsMac ? "Needs macOS. " : "") + modelData.description
                                 textFormat: Text.PlainText
                                 wrapMode: Text.WordWrap
                 color: root.secondaryText
@@ -541,10 +566,24 @@ Panel {
 
                         Button {
                             Layout.alignment: Qt.AlignVCenter
-                            text: dirRow.installing ? "\u2026" : "Install"
-                            enabled: !dirRow.installing
-                            tooltipText: "Download and install " + modelData.name
-                            onClicked: if (root.service) root.service.installFromDirectory(modelData.shortcode)
+                            text: dirRow.installing ? "\u2026" : root.confirmInstallId === modelData.shortcode ? "Confirm install" : "Install"
+                            enabled: !dirRow.installing && modelData.approved && !!(root.service && root.service.extensionDownloads)
+                            tooltipText: root.service && !root.service.extensionDownloads ? "Enable extension downloads in Settings"
+                                         : "Download this reviewed version. Enable it separately after installation."
+                            onClicked: {
+                                if (root.confirmInstallId !== modelData.shortcode) {
+                                    root.confirmInstallId = modelData.shortcode
+                                    return
+                                }
+                                root.confirmInstallId = ""
+                                if (root.service) root.service.installFromDirectory(modelData.shortcode)
+                            }
+                        }
+                        PanelActionButton {
+                            visible: root.confirmInstallId === modelData.shortcode
+                            iconText: "\u{F0156}"
+                            tooltipText: "Cancel installation"
+                            onClicked: root.confirmInstallId = ""
                         }
                     }
 

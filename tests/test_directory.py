@@ -353,7 +353,7 @@ class PlatformReportTests(unittest.TestCase):
         self.assertTrue(report["usable"])
         self.assertIn("1 of 2 actions need macOS", report["note"])
         report = directory.platform_report(self.package("name: Fine\nurl: https://x/?q=***\n"))
-        self.assertEqual(report, {"usable": True, "note": "", "error": ""})
+        self.assertEqual(report, {"usable": True, "note": "", "error": "", "identifier": "P"})
 
     def test_an_unreadable_package_is_reported_not_passed_off(self):
         report = directory.platform_report(self.package(None))
@@ -369,9 +369,14 @@ class IndexTests(unittest.TestCase):
         self._bundled, self._cache = directory.bundled_path, directory.cache_path
         directory.bundled_path = lambda: self.bundled
         directory.cache_path = lambda: self.cache
+        self._catalog = directory.catalog.load_catalog
+        directory.catalog.load_catalog = lambda: {"reviewDate": "2026-09-08", "extensions": [
+            {"shortcode": "ccc333", "name": "Wikipedia", "description": "look it up", "id": "wikipedia",
+             "version": "1", "commandKey": "inherit"}]}
 
     def tearDown(self):
         directory.bundled_path, directory.cache_path = self._bundled, self._cache
+        directory.catalog.load_catalog = self._catalog
         shutil.rmtree(self.tmp, ignore_errors=True)
 
     def write(self, path, names):
@@ -404,7 +409,7 @@ class IndexTests(unittest.TestCase):
             directory.cmd_search(list(args))
         return json.loads(out.getvalue()) if "--json" in args else out.getvalue()
 
-    def test_search_hides_mac_only_entries_unless_asked(self):
+    def test_search_only_offers_approved_versions_and_marks_other_entries(self):
         with open(self.cache, "w", encoding="utf-8") as fh:
             json.dump({"fetched": "now", "count": 4, "extensions": [
                 {"shortcode": "aaa111", "name": "Alfred", "description": "launcher", "author": "", "actionType": "AppleScript"},
@@ -413,21 +418,22 @@ class IndexTests(unittest.TestCase):
                 {"shortcode": "ddd444", "name": "Newcomer", "description": "not looked up yet", "author": ""},
             ]}, fh)
         result = self.search("--json")  # no query: catalogue order, which refresh writes name-sorted
-        self.assertEqual([e["name"] for e in result["extensions"]], ["Wikipedia", "Newcomer"])
-        self.assertEqual((result["total"], result["hidden"], result["pending"]), (4, 2, 1))
-        self.assertFalse(result["extensions"][1]["needsMac"])
+        self.assertEqual([e["name"] for e in result["extensions"]], ["Wikipedia"])
+        self.assertEqual((result["total"], result["hidden"], result["pending"]), (4, 3, 0))
+        self.assertTrue(result["extensions"][0]["approved"])
         result = self.search("--json", "--all")
-        self.assertEqual([e["name"] for e in result["extensions"]], ["Alfred", "Yoink", "Wikipedia", "Newcomer"])
+        self.assertEqual([e["name"] for e in result["extensions"]], ["Wikipedia", "Alfred", "Yoink", "Newcomer"])
         self.assertEqual(result["hidden"], 0)
-        self.assertTrue(result["extensions"][0]["needsMac"])
+        self.assertTrue(result["extensions"][1]["needsMac"])
+        self.assertFalse(result["extensions"][1]["approved"])
         # The hidden count follows the query.
         result = self.search("--json", "alfred")
         self.assertEqual((result["count"], result["hidden"]), (0, 1))
         text = self.search("alfred")
         self.assertIn("Nothing matched", text)
-        self.assertIn("1 more needs macOS", text)
+        self.assertIn("1 unapproved extensions hidden", text)
         self.assertIn("--all", text)
-        self.assertIn("(needs macOS)", self.search("--all", "alfred"))
+        self.assertIn("(not approved, needs macOS)", self.search("--all", "alfred"))
 
     def test_index_rejects_links_fifos_invalid_schema_and_oversized_files(self):
         self.write(self.bundled, ["valid"])

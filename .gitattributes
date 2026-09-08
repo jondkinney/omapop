@@ -1,0 +1,3 @@
+/catalog/approved.json text eol=lf
+/catalog/approval-key.pem text eol=lf
+/catalog/approved.sig binary

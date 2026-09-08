@@ -15,7 +15,7 @@ ColumnLayout {
     readonly property var groups: [
         { title: "Selection", keys: ["longPress", "position", "shortcut", "excludedApps"] },
         { title: "Search", keys: ["searchEngine", "searchUrl"] },
-        { title: "General", keys: ["showBarIcon", "directoryRefresh"] },
+        { title: "General", keys: ["showBarIcon", "extensionDownloads", "directoryRefresh"] },
         { title: "Advanced", keys: ["dragThreshold", "hideDistance", "maxSelectionKiB", "accessibilityProbe", "assumeEditable", "terminalClasses", "commandKey"] }
     ]
     readonly property var labels: ({
@@ -31,7 +31,7 @@ ColumnLayout {
         shortcut: "Record a key combination to open the action bar. Clear it to disable.",
         excludedApps: "Omapop stays hidden in these apps. Choose a running window to ignore its whole application.",
         showBarIcon: "Keep Omapop in the bar for quick access to extensions and settings.",
-        directoryRefresh: "Check popclip.app weekly for new extensions. You can also update the catalogue by hand.",
+        directoryRefresh: "Refresh the published listing weekly. This cannot change approved packages or versions.",
         accessibilityProbe: "Detect whether the focused field accepts text before offering Paste or actions that replace text. Browsers may need a restart.",
         assumeEditable: "Offer editing actions when Omapop cannot tell whether a field accepts text.",
         terminalClasses: "Window classes separated by commas. These apps paste with Ctrl+Shift+V and cannot cut.",
