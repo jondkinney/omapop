@@ -68,7 +68,7 @@ reloads its configuration (`hyprctl reload`), or immediately with
   away, or switch window or workspace. Hold **Super** while selecting to keep
   it away.
 - **Click the bar icon** to turn extensions on and off, edit their options,
-  rescan the extensions folder or open it. Click **Settings** at the top of
+  rescan the extensions folder or open it. Click the **Settings cog** at the top of
   the panel to change Omapop's preferences. **Right-click** pauses and resumes
   Omapop.
 - Set a **keyboard shortcut** in Settings (for example

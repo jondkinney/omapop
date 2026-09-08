@@ -159,9 +159,11 @@ Panel {
                     font.weight: Font.DemiBold
                 }
                 Button {
-                    text: "Settings"
+                    iconText: "\u{F0493}"
                     focusable: true
-                    tooltipText: "Omapop preferences"
+                    tooltipText: "Settings"
+                    Accessible.role: Accessible.Button
+                    Accessible.name: "Settings"
                     enabled: !!root.service
                     onClicked: root.openSettings()
                 }
