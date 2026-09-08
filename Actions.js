@@ -585,3 +585,38 @@ function isTerminalClass(appClass, list) {
 function splitList(text) {
     return String(text || "").split(",").map(function (s) { return s.trim() }).filter(function (s) { return s.length })
 }
+
+// The settings editor retains the existing comma-separated format. Bound it
+// before splitting; duplicate classes (including case variants) share one row.
+function excludedAppList(text) {
+    if (typeof text !== "string" || text.length > 4096)
+        return []
+    var seen = Object.create(null)
+    return splitList(text).filter(function (entry) {
+        var key = entry.toLowerCase()
+        if (seen[key]) return false
+        seen[key] = true
+        return true
+    })
+}
+
+// ToplevelManager owns the live window objects. Inspect at most 512 windows,
+// retaining only bounded strings for the picker, never the window objects.
+// Do not truncate/clean a class into a different rule or allow CSV injection.
+function runningWindowOptions(windows, excluded) {
+    var options = []
+    if (!windows) return options
+    for (var i = 0; i < Math.min(windows.length, 512); i++) {
+        var window = windows[i]
+        if (!window) continue
+        var appClass = window.appId
+        if (typeof appClass !== "string" || !appClass.length || appClass.length > 256
+                || appClass.indexOf(",") !== -1 || oneLine(appClass, 256) !== appClass)
+            continue
+        if (classMatches(excluded, appClass)) continue
+        var title = typeof window.title === "string" ? oneLine(window.title, 256) : ""
+        options.push({ value: appClass, label: title || appClass, description: title ? appClass : "" })
+    }
+    options.sort(function (a, b) { return a.label.localeCompare(b.label) })
+    return options
+}

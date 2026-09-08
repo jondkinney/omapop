@@ -84,6 +84,11 @@ save on Enter, when you leave the field, or when you close the page. The shell
 saves these preferences in Omapop's entry in `~/.config/omarchy/shell.json`
 and applies them automatically.
 
+Under **Excluded apps**, choose **Add from running windows…** and search for
+an app or window title. Selecting a window ignores its whole application;
+click **×** beside an entry to remove it, even after that app has closed.
+The terminal list remains an advanced text field with common terminals filled in.
+
 If you hide the bar icon, you can still open the settings screen with
 `omarchy-shell io.github.jondkinney.omapop settings` and turn the icon back on.
 

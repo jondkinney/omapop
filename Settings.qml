@@ -29,7 +29,7 @@ ColumnLayout {
         longPress: "Hold the left mouse button for half a second to open the action bar, even without a selection.",
         position: "Auto places the bar above or below the pointer to leave your selection visible.",
         shortcut: "Open the action bar with a key combination. Leave empty to disable.",
-        excludedApps: "Window classes separated by commas. Omapop stays hidden in these apps.",
+        excludedApps: "Omapop stays hidden in these apps. Choose a running window to ignore its whole application.",
         showBarIcon: "Keep Omapop in the bar for quick access to extensions and settings.",
         directoryRefresh: "Check popclip.app weekly for new extensions. You can also update the catalogue by hand.",
         accessibilityProbe: "Detect whether the focused field accepts text before offering Paste or actions that replace text. Browsers may need a restart.",
@@ -183,7 +183,7 @@ ColumnLayout {
 
         function commit() {
             if (!visible) return
-            if (kind === "string" && input.edited && input.text !== currentValue)
+            if (kind === "string" && key !== "excludedApps" && input.edited && input.text !== currentValue)
                 root.save(field, input.text)
             if (kind === "integer" && number.edited && number.field.contentItem.acceptableInput) {
                 var next = number.field.valueFromText(number.field.contentItem.text, number.field.locale)
@@ -264,12 +264,22 @@ ColumnLayout {
                 function onTextEdited() { number.edited = true }
             }
         }
+        Loader {
+            Layout.fillWidth: true
+            active: row.key === "excludedApps"
+            visible: active
+            sourceComponent: ExcludedApps {
+                value: typeof row.currentValue === "string" ? row.currentValue : ""
+                windows: root.service ? root.service.runningWindows : []
+                onEdited: function (next) { root.save(row.field, next) }
+            }
+        }
         TextField {
             id: input
             property bool edited: false
             objectName: "setting_" + row.key + "_input"
             Layout.fillWidth: true
-            visible: row.kind === "string"
+            visible: row.kind === "string" && row.key !== "excludedApps"
             maximumLength: row.key === "shortcut" ? 64 : 4096
             text: typeof row.currentValue === "string" ? row.currentValue.slice(0, maximumLength) : ""
             placeholderText: row.key === "shortcut" ? "SUPER + SHIFT + P"

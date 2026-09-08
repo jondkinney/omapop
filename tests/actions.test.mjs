@@ -16,6 +16,7 @@ new Function("A", source + `
   A.parseKeyCombo = parseKeyCombo; A.modifiersFromMask = modifiersFromMask; A.parseIconSpec = parseIconSpec;
   A.isEmoji = isEmoji; A.symbolGlyph = symbolGlyph; A.initials = initials; A.truncateResult = truncateResult;
   A.isTerminalClass = isTerminalClass; A.splitList = splitList; A.SEARCH_ENGINES = SEARCH_ENGINES;
+  A.excludedAppList = excludedAppList; A.runningWindowOptions = runningWindowOptions;
   A.isEditingAction = isEditingAction; A.resolveEditable = resolveEditable; A.editingKind = editingKind;`)(A);
 
 let passed = 0;
@@ -28,6 +29,47 @@ test("sanitizeDisplay strips controls and bidi, caps length", () => {
   assert.equal(A.sanitizeDisplay("x".repeat(1000), 10).length, 10);
   assert.equal(A.sanitizeDisplay("<b>unsafe</b>"), "<b>unsafe</b>"); // markup is inert under Text.PlainText
   assert.equal(A.oneLine("  a\n\n b\t c  "), "a b c");
+});
+
+test("excluded app entries retain existing rules and combine case variants", () => {
+  assert.deepEqual(A.excludedAppList(" firefox, Code, FIREFOX,,com.apple.Terminal "), ["firefox", "Code", "com.apple.Terminal"]);
+  assert.deepEqual(A.excludedAppList("__proto__,constructor,__proto__"), ["__proto__", "constructor"]);
+  assert.deepEqual(A.excludedAppList("x".repeat(4096)), ["x".repeat(4096)]);
+  for (const value of ["x".repeat(4097), null, 123, {}, [], ["firefox"]])
+    assert.deepEqual(A.excludedAppList(value), []);
+});
+
+test("window choices retain window titles but exclude already ignored applications", () => {
+  const windows = [
+    { appId: "firefox", title: "Notes" }, { appId: "firefox", title: "Downloads" },
+    { appId: "Code", title: "Editor" }, { appId: "kitty", title: "Terminal" },
+  ];
+  assert.deepEqual(A.runningWindowOptions(windows, []), [
+    { value: "firefox", label: "Downloads", description: "firefox" },
+    { value: "Code", label: "Editor", description: "Code" },
+    { value: "firefox", label: "Notes", description: "firefox" },
+    { value: "kitty", label: "Terminal", description: "kitty" },
+  ]);
+  assert.deepEqual(A.runningWindowOptions(windows, ["FIREFOX", "com.apple.Terminal"]), [
+    { value: "Code", label: "Editor", description: "Code" },
+  ]);
+});
+
+test("window fields are bounded and sanitized before reaching the picker", () => {
+  const invalid = ["", " leading", "trailing ", "two,apps", "a\nb", "a\tb", "a\x00b", "a\x9fb", "a\u202eb", "a\u2066b", "x".repeat(257), null, {}, 123];
+  assert.deepEqual(A.runningWindowOptions(invalid.map(appId => ({ appId, title: "Window" })), []), []);
+  assert.deepEqual(A.runningWindowOptions([
+    null, { appId: "valid", title: "<b>unsafe</b>\n\u202e\x07 title" },
+    { appId: "x".repeat(256), title: "y".repeat(100000) },
+    { appId: "empty-title", title: {} },
+  ], []), [
+    { value: "valid", label: "<b>unsafe</b> title", description: "valid" },
+    { value: "empty-title", label: "empty-title", description: "" },
+    { value: "x".repeat(256), label: "y".repeat(256), description: "x".repeat(256) },
+  ]);
+  const windows = Array.from({ length: 512 }, (_, i) => ({ appId: `app-${i}`, title: "Window" }));
+  windows.push({ get appId() { throw new Error("must not inspect windows beyond the limit"); } });
+  assert.equal(A.runningWindowOptions(windows, []).length, 512);
 });
 
 test("requirements narrow and negate", () => {

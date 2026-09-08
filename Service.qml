@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Hyprland
+import Quickshell.Wayland
 import qs.Commons
 import "Actions.js" as Actions
 import "OutputBuffer.js" as OutputBuffer
@@ -91,6 +92,7 @@ Item {
 
     readonly property var settingsSchema: manifest && manifest.barWidget && Array.isArray(manifest.barWidget.schema)
         ? manifest.barWidget.schema : []
+    readonly property var runningWindows: ToplevelManager.toplevels.values
 
     // The shell owns shell.json. Merge into its current entry so another
     // setting changed through IPC or on a second monitor cannot be lost.

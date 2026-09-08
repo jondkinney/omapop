@@ -26,6 +26,7 @@ TestCase {
         property var settingsSchema: manifestFile.loaded ? JSON.parse(manifestFile.text()).barWidget.schema : []
         property var settings: ({})
         property var writes: []
+        property var runningWindows: []
         function setting(key, fallback) { return settings[key] === undefined ? fallback : settings[key] }
         function setSetting(key, value) {
             var next = Object.assign({}, settings)
@@ -60,6 +61,15 @@ TestCase {
         findChild(page, "settingsBack").forceActiveFocus()
         wait(150)
         grabImage(canvas).save(directory + "/selection.png")
+        fakeService.settings = ({ excludedApps: "com.mitchellh.ghostty,org.gnome.Calculator" })
+        var picker = findChild(page, "excludedAppsPicker")
+        page.reveal(picker)
+        wait(50)
+        grabImage(canvas).save(directory + "/excluded-apps.png")
+        picker.open()
+        wait(100)
+        grabImage(canvas).save(directory + "/window-picker.png")
+        picker.close()
         var scroll = findChild(page, "settingsScroll")
         scroll.contentY = Math.max(0, scroll.contentHeight - scroll.height)
         wait(50)
@@ -69,6 +79,12 @@ TestCase {
     function init() {
         fakeService.settings = ({})
         fakeService.writes = []
+        fakeService.runningWindows = [
+            { appId: "firefox", title: "Notes — Mozilla Firefox" },
+            { appId: "firefox", title: "Downloads — Mozilla Firefox" },
+            { appId: "org.gnome.Calculator", title: "Calculator" },
+            { appId: "com.mitchellh.ghostty", title: "Projects — Ghostty" }
+        ]
         findChild(page, "settingsScroll").contentY = 0
         page.errorText = ""
         wait(20)
@@ -94,12 +110,76 @@ TestCase {
     }
 
     function test_text_is_saved_when_leaving_the_page() {
-        var field = findChild(page, "setting_excludedApps_input")
+        var field = findChild(page, "setting_shortcut_input")
         field.forceActiveFocus()
         keyClick(Qt.Key_A, Qt.ControlModifier)
         keyClick(Qt.Key_X)
         page.finishEditing()
-        compare(fakeService.settings.excludedApps, "x")
+        compare(fakeService.settings.shortcut, "x")
+    }
+
+    function test_choose_a_window_ignores_the_app_once() {
+        var picker = findChild(page, "excludedAppsPicker")
+        compare(picker.options.length, 4)
+        page.reveal(picker)
+        mouseClick(picker)
+        tryCompare(picker, "popupOpen", true)
+        wait(50)
+        keyClick(Qt.Key_F)
+        keyClick(Qt.Key_I)
+        compare(picker.filtered.length, 2)
+        keyClick(Qt.Key_Return)
+        tryCompare(picker, "popupOpen", false)
+        compare(fakeService.settings.excludedApps, "firefox")
+        compare(fakeService.writes.length, 1)
+        compare(picker.value, "")
+        compare(picker.options.length, 2)
+        compare(findChild(page, "excludedAppsList").count, 1)
+        // Other windows of this app cannot create duplicate entries.
+        findChild(page, "excludedAppsEditor").add("firefox")
+        compare(fakeService.writes.length, 1)
+    }
+
+    function test_closed_apps_remain_removable_with_mouse_and_keyboard() {
+        fakeService.settings = ({ excludedApps: "firefox,FIREFOX,closed-app", searchEngine: "kagi" })
+        fakeService.runningWindows = []
+        var list = findChild(page, "excludedAppsList")
+        tryCompare(list, "count", 2)
+        wait(30)
+        var remove = findChild(page, "excludedAppsRemove_0")
+        page.reveal(remove)
+        mouseClick(remove)
+        compare(fakeService.settings.excludedApps, "closed-app")
+        tryCompare(list, "count", 1)
+        wait(30)
+        remove = findChild(page, "excludedAppsRemove_0")
+        remove.forceActiveFocus()
+        keyClick(Qt.Key_Space)
+        compare(fakeService.settings.excludedApps, "")
+        compare(fakeService.settings.searchEngine, "kagi")
+        compare(list.count, 0)
+    }
+
+    function test_running_window_list_updates_while_open() {
+        var picker = findChild(page, "excludedAppsPicker")
+        picker.open()
+        tryCompare(picker, "popupOpen", true)
+        fakeService.runningWindows = [{ appId: "new-app", title: "New window" }]
+        compare(picker.options.length, 1)
+        compare(picker.options[0].value, "new-app")
+        fakeService.runningWindows = []
+        compare(picker.options.length, 0)
+        compare(picker.filtered.length, 0)
+        picker.close()
+    }
+
+    function test_existing_ignored_apps_are_not_rewritten_on_open() {
+        fakeService.settings = ({ excludedApps: " firefox,Code,FIREFOX " })
+        compare(findChild(page, "excludedAppsList").count, 2)
+        compare(findChild(page, "setting_excludedApps_input").visible, false)
+        page.finishEditing()
+        compare(fakeService.writes.length, 0)
+        compare(fakeService.settings.excludedApps, " firefox,Code,FIREFOX ")
     }
 
     function test_typed_number_is_saved_as_a_number() {
