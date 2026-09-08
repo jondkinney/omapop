@@ -165,46 +165,20 @@ Panel {
                     enabled: !!root.service
                     onClicked: root.openSettings()
                 }
-                ToggleSwitch {
-                    checked: !root.paused
-                    onToggled: if (root.service) root.service.paused = !root.service.paused
-                }
             }
 
-            RowLayout {
+            Toggle {
                 Layout.fillWidth: true
-                spacing: Style.spacing.lg
-
-                Rectangle {
-                    Layout.alignment: Qt.AlignTop
-                    Layout.topMargin: Math.round(Style.space(4))
-                    implicitWidth: Math.round(Style.space(6))
-                    implicitHeight: implicitWidth
-                    radius: width / 2
-                    color: root.paused || !root.engineReady ? root.secondaryText : Color.accent
-                }
-                ColumnLayout {
-                    Layout.fillWidth: true
-                    spacing: Style.spacing.xxs
-                    Text {
-                        Layout.fillWidth: true
-                        text: root.paused ? "Paused" : root.engineReady ? "Ready for selection" : "Connecting to Hyprland"
-                        textFormat: Text.PlainText
-                        color: Color.popups.text
-                        font.family: root.fontFamily
-                        font.pixelSize: Style.font.bodySmall
-                        font.weight: Font.Medium
-                    }
-                    Text {
-                        Layout.fillWidth: true
-                        text: root.paused ? "Turn on to bring back the action bar." : root.engineReady ? "Select text with the mouse to show the action bar." : "Waiting for the selection engine to start."
-                        textFormat: Text.PlainText
-                        wrapMode: Text.WordWrap
-                        color: root.secondaryText
-                        font.family: root.fontFamily
-                        font.pixelSize: Style.font.caption
-                    }
-                }
+                label: "Enabled"
+                description: root.paused ? "Paused. Turn on to bring back the action bar."
+                    : root.engineReady ? "Select text with the mouse to show the action bar."
+                    : "Connecting to Hyprland."
+                titleSize: Style.font.bodySmall
+                fontFamily: root.fontFamily
+                foreground: Color.popups.text
+                checked: !root.paused
+                enabled: !!root.service
+                onClicked: root.service.paused = !root.service.paused
             }
 
             Text {
