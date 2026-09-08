@@ -61,25 +61,34 @@ reloads its configuration (`hyprctl reload`), or immediately with
   behaviour (Alt on Search means an exact-phrase search, Alt on Open Link
   copies the links instead of opening them, Shift on the bundled Uppercase
   makes lowercase).
-- **Long-press** is off by default. Enable `longPress` with the command below,
+- **Long-press** is off by default. Enable **Show on long press** in Settings,
   then hold the left button for half a second without moving to show the bar
   with no selection, for example to Paste.
 - The bar hides when you click elsewhere, press a key, scroll, move the pointer
   away, or switch window or workspace. Hold **Super** while selecting to keep
   it away.
 - **Click the bar icon** to turn extensions on and off, edit their options,
-  rescan the extensions folder or open it. **Right-click** pauses and resumes
+  rescan the extensions folder or open it. Click **Settings** at the top of
+  the panel to change Omapop's preferences. **Right-click** pauses and resumes
   Omapop.
-- Set a **keyboard shortcut** with the `shortcut` command below (for example
+- Set a **keyboard shortcut** in Settings (for example
   `SUPER + SHIFT + P`) to show the bar for the current selection, useful in apps
   that do not update the selection until you release the mouse. A bar opened
   this way takes keyboard focus: Left/Right or Tab move, Return runs, Down opens
   a submenu, Up or Backspace goes back, 1 to 9 run a button directly, Escape
   hides. Focus returns to the app before the action runs so pastes land in it.
 
-Omapop's panel manages extensions; there is no general settings screen yet.
-Change plugin settings with `omarchy bar set`. It saves the option in Omapop's
-entry in `~/.config/omarchy/shell.json`, and changes apply automatically:
+Open **Omapop's bar icon → Settings** to change selection behavior, search,
+and other preferences. Switches and dropdowns save immediately; text fields
+save on Enter, when you leave the field, or when you close the page. The shell
+saves these preferences in Omapop's entry in `~/.config/omarchy/shell.json`
+and applies them automatically.
+
+If you hide the bar icon, you can still open the settings screen with
+`omarchy-shell io.github.jondkinney.omapop settings` and turn the icon back on.
+
+For scripts and dotfiles, the same preferences are available through
+`omarchy bar set`:
 
 ```bash
 omarchy bar set io.github.jondkinney.omapop longPress false --json
@@ -104,10 +113,18 @@ number values; omit it for text values. The available setting keys are:
 | Extensions' `command` key maps to | `commandKey` | Ctrl (right for nearly every Linux app) or Super, for key combos written for macOS. |
 | Keep the extension catalogue up to date | `directoryRefresh` | Fetch the published-extension list weekly for **Available extensions**. Contacts popclip.app. Off means the catalogue only changes when you press Update. |
 | Keyboard shortcut | `shortcut` | A Hyprland bind that shows the bar for the current selection. |
-| Show icon in the bar | `showBarIcon` | Hide the icon if you only want the popup. Settings stay reachable through `omarchy bar set`. |
+| Show icon in the bar | `showBarIcon` | Hide the icon if you only want the popup. The settings screen stays reachable through the command above. |
 
 Extension options (an extension's own per-action settings) are edited from the
 gear next to the extension in the widget panel.
+
+Personal preferences live outside the plugin checkout, so updating the plugin
+does not replace them. Keep `shell.json` in your personal dotfiles repository
+if your machines share a shell layout. For machines with different layouts,
+version a small script of `omarchy bar set` commands to apply just Omapop's
+preferences. Installed extension packages and their preferences live under
+`~/.config/omapop/`; copy those separately, and exclude secret extension option
+values from Git history.
 
 ## When each button appears
 
@@ -431,10 +448,12 @@ a URL, or a network-entitled extension sends it.
 ```bash
 ln -s "$PWD" ~/.config/omarchy/plugins/io.github.jondkinney.omapop
 omarchy plugin validate .
-qmllint -I /usr/share/omarchy/shell *.qml
+/usr/lib/qt6/bin/qmllint -I /usr/share/omarchy/shell *.qml
 python3 -m unittest discover -s tests -p 'test_*.py'   # helpers, directory
 node tests/actions.test.mjs
 node tests/gestures.test.mjs                        # click timing and stale read callbacks
+node tests/settings.test.mjs                        # typed settings and preservation of other preferences
+python3 tests/check_settings_ui.py                   # controls in an isolated, offscreen Quickshell
 lua tests/engine.test.lua                          # modified mouse input and engine reloads
 QT_QUICK_BACKEND=rhi QSG_RHI_BACKEND=opengl /usr/lib/qt6/bin/qmltestrunner -platform offscreen -input tests
 omarchy restart shell

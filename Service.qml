@@ -89,6 +89,51 @@ Item {
         return value === undefined || value === null ? fallback : value
     }
 
+    readonly property var settingsSchema: manifest && manifest.barWidget && Array.isArray(manifest.barWidget.schema)
+        ? manifest.barWidget.schema : []
+
+    // The shell owns shell.json. Merge into its current entry so another
+    // setting changed through IPC or on a second monitor cannot be lost.
+    function setSetting(name, value) {
+        var field = null
+        for (var i = 0; i < settingsSchema.length; i++) {
+            if (settingsSchema[i].key === name) {
+                field = settingsSchema[i]
+                break
+            }
+        }
+        if (!field)
+            return "Unknown setting."
+        if (field.type === "boolean") {
+            if (typeof value !== "boolean") return "Choose on or off."
+        } else if (field.type === "integer") {
+            if (typeof value !== "number" || !isFinite(value) || Math.floor(value) !== value
+                    || value < field.min || value > field.max)
+                return "Enter a whole number between " + field.min + " and " + field.max + "."
+        } else if (field.type === "enum") {
+            if (typeof value !== "string" || field.options.indexOf(value) < 0)
+                return "Choose one of the listed options."
+        } else if (field.type === "string") {
+            if (typeof value !== "string" || value.length > (name === "shortcut" ? 64 : 4096))
+                return "This value is too long."
+        } else {
+            return "This setting cannot be edited here."
+        }
+        if (setting(name, undefined) === value)
+            return ""
+        if (!shell || typeof shell.updateEntryInline !== "function")
+            return "The shell is unavailable. Try opening settings again."
+        var next = Object.assign({}, settings)
+        next[name] = value
+        try {
+            if (!shell.updateEntryInline(pluginId, next))
+                return "Could not save this setting. Check that Omapop is enabled."
+        } catch (error) {
+            return "Could not save this setting. Try again."
+        }
+        return ""
+    }
+
     function clampInt(value, low, high, fallback) {
         var n = Math.round(Number(value))
         return isFinite(n) && n >= low && n <= high ? n : fallback
@@ -2134,10 +2179,27 @@ Item {
         })
     }
 
+    function openSettings() {
+        if (!shell || !shell.bar || typeof shell.bar.moduleWidgets !== "function")
+            return "No Omapop widget is available."
+        var widgets = shell.bar.moduleWidgets(pluginId)
+        var screenName = Hyprland.focusedMonitor ? Hyprland.focusedMonitor.name : ""
+        var chosen = null
+        for (var i = 0; i < widgets.length; i++) {
+            if (typeof widgets[i].openSettings !== "function") continue
+            if (!chosen || widgets[i].panelScreenName === screenName) chosen = widgets[i]
+            if (widgets[i].panelScreenName === screenName) break
+        }
+        if (!chosen) return "No Omapop widget is available."
+        chosen.openSettings()
+        return "ok"
+    }
+
     // `omarchy-shell io.github.jondkinney.omapop <method>` from scripts and binds.
     IpcHandler {
         target: "io.github.jondkinney.omapop"
         function show(): string { root.showForCurrentSelection(); return "ok" }
+        function settings(): string { return root.openSettings() }
         function hide(): string { root.hidePopup(); return "ok" }
         function pause(): string { root.paused = true; return "ok" }
         function resume(): string { root.paused = false; return "ok" }

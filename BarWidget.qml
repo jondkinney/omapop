@@ -23,9 +23,16 @@ Panel {
     readonly property var extensions: service ? service.extensions : []
     readonly property string fontFamily: bar ? bar.fontFamily : Style.font.family
     readonly property color secondaryText: Qt.rgba(Color.popups.text.r, Color.popups.text.g, Color.popups.text.b, Color.popups.text.a * 0.68)
-    readonly property bool showIcon: setting("showBarIcon", true) !== false
+    readonly property bool showIcon: service ? service.setting("showBarIcon", true) !== false : setting("showBarIcon", true) !== false
     property string expandedId: ""
     property bool directorySeeded: false
+    property bool settingsOpen: false
+    readonly property string panelScreenName: panel.screen ? panel.screen.name : ""
+
+    function openSettings() {
+        settingsOpen = true
+        open()
+    }
 
     component RowSeparator: Rectangle {
         Layout.fillWidth: true
@@ -76,9 +83,11 @@ Panel {
     }
 
     onOpenedChanged: {
+        if (!opened && settingsOpen)
+            settingsPage.finishEditing()
         // Re-read on every open: the catalogue may have been refreshed in the
         // background since last time. Keeps whatever query is already typed.
-        if (opened && service) {
+        if (opened && service && !settingsOpen) {
             directorySeeded = true
             service.searchDirectory(service.directoryQuery)
         }
@@ -101,7 +110,7 @@ Panel {
         }
         foreground: root.paused || !root.engineReady ? Qt.darker(root.barForeground, 1.55) : root.barForeground
         tooltipText: (root.paused ? "Omapop is paused" : root.engineReady ? "Omapop: select text to act on it" : "Omapop: waiting for Hyprland")
-            + "\nClick for extensions, right click to " + (root.paused ? "resume" : "pause")
+            + "\nClick for extensions and settings, right click to " + (root.paused ? "resume" : "pause")
         onPressed: function (button) {
             if (button === Qt.LeftButton)
                 root.toggle()
@@ -117,7 +126,7 @@ Panel {
         bar: root.bar
         open: root.opened
         contentWidth: panel.fittedContentWidth(Style.space(400))
-        contentHeight: panel.fittedContentHeight(content.implicitHeight, Math.round(panel.screenH * 0.9))
+        contentHeight: panel.fittedContentHeight(root.settingsOpen ? settingsPage.implicitHeight : content.implicitHeight, Math.round(panel.screenH * 0.9))
 
         // Nothing scrolls the panel as a whole: the status at the top and the
         // Reload / Open folder row at the bottom stay put, and each list scrolls
@@ -126,6 +135,7 @@ Panel {
         ColumnLayout {
             id: content
             anchors.fill: parent
+            visible: !root.settingsOpen
             spacing: Style.space(6)
 
             RowLayout {
@@ -147,6 +157,13 @@ Panel {
                     font.family: root.fontFamily
                     font.pixelSize: Math.round(Style.font.heading * 1.25)
                     font.weight: Font.DemiBold
+                }
+                Button {
+                    text: "Settings"
+                    focusable: true
+                    tooltipText: "Omapop preferences"
+                    enabled: !!root.service
+                    onClicked: root.openSettings()
                 }
                 ToggleSwitch {
                     checked: !root.paused
@@ -586,6 +603,17 @@ Panel {
                 color: Qt.darker(Color.popups.text, 1.6)
                 font.family: root.fontFamily
                 font.pixelSize: Style.font.caption
+            }
+        }
+
+        Settings {
+            id: settingsPage
+            anchors.fill: parent
+            visible: root.settingsOpen
+            service: root.service
+            onBackRequested: {
+                root.settingsOpen = false
+                if (root.service) root.service.searchDirectory(root.service.directoryQuery)
             }
         }
     }
