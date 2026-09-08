@@ -61,40 +61,50 @@ reloads its configuration (`hyprctl reload`), or immediately with
   behaviour (Alt on Search means an exact-phrase search, Alt on Open Link
   copies the links instead of opening them, Shift on the bundled Uppercase
   makes lowercase).
-- **Long-press** is off by default. Enable **Show on long press** in the widget
-  settings, then hold the left button for half a second without moving to show
-  the bar with no selection, for example to Paste.
+- **Long-press** is off by default. Enable `longPress` with the command below,
+  then hold the left button for half a second without moving to show the bar
+  with no selection, for example to Paste.
 - The bar hides when you click elsewhere, press a key, scroll, move the pointer
   away, or switch window or workspace. Hold **Super** while selecting to keep
   it away.
 - **Click the bar icon** to turn extensions on and off, edit their options,
   rescan the extensions folder or open it. **Right-click** pauses and resumes
   Omapop.
-- Set a **keyboard shortcut** in the widget settings (for example
+- Set a **keyboard shortcut** with the `shortcut` command below (for example
   `SUPER + SHIFT + P`) to show the bar for the current selection, useful in apps
   that do not update the selection until you release the mouse. A bar opened
   this way takes keyboard focus: Left/Right or Tab move, Return runs, Down opens
   a submenu, Up or Backspace goes back, 1 to 9 run a button directly, Escape
   hides. Focus returns to the app before the action runs so pastes land in it.
 
-Settings live in the widget's settings form:
+Omapop's panel manages extensions; there is no general settings screen yet.
+Change plugin settings with `omarchy bar set`. It saves the option in Omapop's
+entry in `~/.config/omarchy/shell.json`, and changes apply automatically:
 
-| Setting | What it does |
-|---|---|
-| Search engine, Custom search URL | Where the Search button goes. `other` uses your URL with `***` in place of the text. |
-| Drag threshold | How far the pointer must move between press and release to count as a drag. |
-| Bar position | `auto` (above the pointer, below when the drag went downwards), `above` or `below`. |
-| Assume unknown fields are editable | Off by default. See "When each button appears". |
-| Detect editable fields via accessibility | Keeps a small AT-SPI helper running and turns on the session accessibility flag. |
-| Hide when pointer moves away | Distance in pixels. |
-| Show on long press | Off by default. When enabled, hold the left button half a second to show the bar without a selection. |
-| Largest selection read | Selections larger than this (KiB) are ignored. |
-| Excluded apps | Window classes where the bar never appears. |
-| Terminal window classes | Windows that paste with Ctrl+Shift+V and cannot cut. |
-| Extensions' `command` key maps to | Ctrl (right for nearly every Linux app) or Super, for key combos written for macOS. |
-| Keep the extension catalogue up to date | Fetch the published-extension list weekly for **Available extensions**. Contacts popclip.app. Off means the catalogue only changes when you press Update. |
-| Keyboard shortcut | A Hyprland bind that shows the bar for the current selection. |
-| Show icon in the bar | Hide the icon if you only want the popup. Settings stay reachable through `omarchy-shell`. |
+```bash
+omarchy bar set io.github.jondkinney.omapop longPress false --json
+omarchy bar set io.github.jondkinney.omapop shortcut 'SUPER + SHIFT + P'
+```
+
+Replace `false` with `true` to enable long-press. Use `--json` for boolean and
+number values; omit it for text values. The available setting keys are:
+
+| Setting | Key | What it does |
+|---|---|---|
+| Search engine, Custom search URL | `searchEngine`, `searchUrl` | Where the Search button goes. `other` uses your URL with `***` in place of the text. |
+| Drag threshold | `dragThreshold` | How far the pointer must move between press and release to count as a drag. |
+| Bar position | `position` | `auto` (above the pointer, below when the drag went downwards), `above` or `below`. |
+| Assume unknown fields are editable | `assumeEditable` | Off by default. See "When each button appears". |
+| Detect editable fields via accessibility | `accessibilityProbe` | Keeps a small AT-SPI helper running and turns on the session accessibility flag. |
+| Hide when pointer moves away | `hideDistance` | Distance in pixels. |
+| Show on long press | `longPress` | Off by default. When enabled, hold the left button half a second to show the bar without a selection. |
+| Largest selection read | `maxSelectionKiB` | Selections larger than this (KiB) are ignored. |
+| Excluded apps | `excludedApps` | Window classes where the bar never appears. |
+| Terminal window classes | `terminalClasses` | Windows that paste with Ctrl+Shift+V and cannot cut. |
+| Extensions' `command` key maps to | `commandKey` | Ctrl (right for nearly every Linux app) or Super, for key combos written for macOS. |
+| Keep the extension catalogue up to date | `directoryRefresh` | Fetch the published-extension list weekly for **Available extensions**. Contacts popclip.app. Off means the catalogue only changes when you press Update. |
+| Keyboard shortcut | `shortcut` | A Hyprland bind that shows the bar for the current selection. |
+| Show icon in the bar | `showBarIcon` | Hide the icon if you only want the popup. Settings stay reachable through `omarchy bar set`. |
 
 Extension options (an extension's own per-action settings) are edited from the
 gear next to the extension in the widget panel.
