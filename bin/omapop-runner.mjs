@@ -11,7 +11,10 @@
 // beyond what its entitlements allow. The runtime's own sandbox flags (Deno
 // --allow-read/--allow-net, Node --permission) are set by the shell.
 
+import { limitedFetch, checkHttpUrl } from "./omapop-http.mjs";
+
 const isDeno = typeof globalThis.Deno !== "undefined";
+const nativeFetch = globalThis.fetch.bind(globalThis);
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 const MAX_INPUT = 8 * 1024 * 1024;
@@ -116,6 +119,7 @@ const packageRoot = String(ext.dir || "/nonexistent");
 const allowNetwork = !!(request.runtime && request.runtime.allowNetwork);
 const entitlements = Array.isArray(ext.entitlements) ? ext.entitlements : [];
 const populating = mode !== "action";
+globalThis.fetch = limitedFetch(nativeFetch, () => allowNetwork && !populating);
 
 let finished = false;
 function finish(obj) {
@@ -143,7 +147,7 @@ function call(name, ...args) {
 }
 
 const modifiers = Object.freeze(Object.assign({ shift: false, control: false, option: false, command: false }, populating ? {} : (request.modifiers || {})));
-const options = Object.freeze(Object.assign({}, request.options || {}));
+let options = Object.freeze(Object.assign({}, request.options || {}));
 const context = Object.freeze(Object.assign({
   hasFormatting: false, canPaste: true, canCopy: true, canCut: true,
   browserUrl: "", browserTitle: "", appName: "", appIdentifier: "",
@@ -156,7 +160,7 @@ const input = Object.freeze({
   regexResult: rawInput.regexResult || null,
   html: rawInput.html || "",
   xhtml: rawInput.html || "",
-  markdown: rawInput.markdown || "",
+  markdown: rawInput.markdown || String(rawInput.text || ""),
   rtf: "",
   data: Object.freeze(data),
   content: Object.freeze({ "public.utf8-plain-text": String(rawInput.text || ""), "public.html": rawInput.html || undefined }),
@@ -208,7 +212,7 @@ const api = {
   get input() { return input; },
   get context() { return context; },
   get modifiers() { return modifiers; },
-  options: optionsWithAuth(),
+  get options() { return optionsWithAuth(); },
   pasteText(text, opts) { return call("pasteText", String(text), { restore: !!(opts && opts.restore) }); },
   pasteContent(content, opts) {
     const text = content && (content["public.utf8-plain-text"] || content["public.html"]) || "";
@@ -228,10 +232,11 @@ const api = {
   settingsRequiredError(message) { const e = new Error(message || "Settings error"); e.omapopKind = "settings"; return e; },
   signInRequiredError(message) { const e = new Error(message || "Not signed in"); e.omapopKind = "signin"; return e; },
   pressKey(key, mods, opts) {
-    const spec = typeof mods === "number" && mods ? modifierNames(mods).join(" ") + " " + String(key) : String(key);
+    const name = typeof key === "number" ? "0x" + key.toString(16) : String(key);
+    const spec = typeof mods === "number" && mods ? modifierNames(mods).join(" ") + " " + name : name;
     return call("pressKeys", [spec], { target: (opts && opts.target) || "session" });
   },
-  pressKeys(sequence, opts) { return call("pressKeys", (Array.isArray(sequence) ? sequence : [sequence]).map(String), { target: (opts && opts.target) || "session" }); },
+  pressKeys(sequence, opts) { return call("pressKeys", (Array.isArray(sequence) ? sequence : [sequence]).map(k => typeof k === "number" ? "0x" + k.toString(16) : String(k)), { target: (opts && opts.target) || "session" }); },
   openUrl(url, opts) { return call("openUrl", String(url), Object.assign({ activate: true, backgroundTab: false }, opts || {})); },
   openTemplateUrl(template, query, opts) {
     opts = opts || {};
@@ -305,6 +310,16 @@ function stripTags(html) {
     .replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'");
 }
 
+function randomUniform(max) {
+  if (!Number.isSafeInteger(max) || max < 0 || max > 0xffffffff)
+    throw new RangeError("max must be a non-negative 32-bit integer");
+  const bound = max + 1;
+  const minimum = 0x100000000 % bound;
+  const sample = new Uint32Array(1);
+  do { crypto.getRandomValues(sample); } while (sample[0] < minimum);
+  return sample[0] % bound;
+}
+
 const util = {
   localize: (s) => String(s),
   hasDictionaryDefinition: () => false,
@@ -331,7 +346,7 @@ const util = {
   clarify: (obscured) => JSON.parse(base64Decode(String(obscured).replace(/[a-zA-Z]/g, (c) => String.fromCharCode((c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26)))),
   sleep: (ms) => new Promise((r) => setTimeout(r, Math.min(Number(ms) || 0, 600000))),
   getRandomValues: (arr) => crypto.getRandomValues(arr),
-  randomUniform: (max) => Math.random() * (Number(max) || 1),
+  randomUniform,
   randomUuid: () => crypto.randomUUID(),
   hash: (data, alg) => digest(alg || "sha256", data),
   hmac: (data, key, alg) => digest(alg || "sha256", data, key),
@@ -353,9 +368,7 @@ class OmapopXMLHttpRequest {
   open(method, url) {
     if (!allowNetwork) throw new Error("XMLHttpRequest needs the network entitlement");
     if (populating) throw new Error("XMLHttpRequest cannot be used while populating actions");
-    const u = new URL(String(url));
-    const localHost = u.hostname === "localhost" || u.hostname.endsWith(".local") || !u.hostname.includes(".");
-    if (u.protocol !== "https:" && !(u.protocol === "http:" && localHost)) throw new Error("only https: URLs are allowed (http: for localhost)");
+    const u = checkHttpUrl(url);
     this._method = String(method || "GET").toUpperCase(); this._url = u.toString(); this.readyState = 1; this._change();
   }
   setRequestHeader(name, value) { this._headers[String(name)] = String(value); }
@@ -379,10 +392,13 @@ class OmapopXMLHttpRequest {
   }
 }
 
-function makeAxios() {
+function makeAxios(defaults = {}) {
   async function axiosRequest(config) {
     if (typeof config === "string") config = { url: config };
-    config = config || {};
+    config = Object.assign({}, defaults, config || {}, {
+      headers: Object.assign({}, defaults.headers || {}, config?.headers || {}),
+      params: Object.assign({}, defaults.params || {}, config?.params || {})
+    });
     if (!allowNetwork) throw new Error("network access needs the network entitlement");
     const url = new URL(String(config.url), config.baseURL);
     if (config.params) for (const [k, v] of Object.entries(config.params)) url.searchParams.set(k, String(v));
@@ -413,7 +429,11 @@ function makeAxios() {
   for (const m of ["get", "delete", "head", "options"]) axios[m] = (url, config) => axiosRequest(Object.assign({}, config, { url, method: m }));
   for (const m of ["post", "put", "patch"]) axios[m] = (url, data, config) => axiosRequest(Object.assign({}, config, { url, data, method: m }));
   axios.request = axiosRequest;
-  axios.create = (defaults) => { const inst = (config) => axiosRequest(Object.assign({}, defaults, typeof config === "string" ? { url: config } : config)); for (const k of Object.keys(axios)) inst[k] = (url, a, b) => axios[k](url, Object.assign({}, defaults, a), b); inst.defaults = defaults || {}; return inst; };
+  axios.create = (extra = {}) => makeAxios(Object.assign({}, defaults, extra, {
+    headers: Object.assign({}, defaults.headers || {}, extra.headers || {}),
+    params: Object.assign({}, defaults.params || {}, extra.params || {})
+  }));
+  axios.defaults = defaults;
   axios.isAxiosError = (e) => !!(e && e.response);
   axios.default = axios;
   return axios;
@@ -473,7 +493,7 @@ if (!allowNetwork) {
 
 // ---------------------------------------------------------------- module loading
 
-const MODULE_SYNTAX = /(^|\n)\s*(export\s|import\s)|\bdefineExtension\s*\(|\bmodule\.exports\b|\bexports\.[A-Za-z_$]/;
+const MODULE_SYNTAX = /(^|\n)\s*(export\s|import\s)|\bdefineExtension\s*(?:<|\()|\bmodule\.exports\b|\bexports\.[A-Za-z_$]/;
 
 function looksLikeModule(source) {
   const stripped = source.replace(/\/\*[\s\S]*?\*\//g, "").replace(/(^|\n)\s*\/\/.*(?=\n|$)/g, "$1");
@@ -483,6 +503,11 @@ function looksLikeModule(source) {
 async function loadModule(path) {
   if (!insidePackage(path, packageRoot) || !fileExists(path)) throw new Error("module file not found: " + path);
   const source = readTextFile(path);
+  if (!looksLikeModule(source)) {
+    // A Config.js/Config.ts snippet can be an action body. Inspecting its
+    // metadata must never execute that body or any of its effects.
+    return { action: () => runScriptFile(path, source) };
+  }
   const esm = /(^|\n)\s*(export\s|import\s)/.test(source.replace(/(^|\n)\s*\/\/.*(?=\n|$)/g, "$1"));
   let exported;
   if (esm || path.endsWith(".ts")) {
@@ -531,7 +556,26 @@ function normaliseList(list, exported) {
   if (!list) return [];
   if (!Array.isArray(list)) list = [list];
   const defaults = extensionDefaults(exported);
-  return list.filter(Boolean).map((a) => (typeof a === "function" ? Object.assign({}, defaults, { code: a }) : Object.assign({}, defaults, a)));
+  return list.filter(Boolean).slice(0, 64).map((a) => (typeof a === "function" ? Object.assign({}, defaults, a, { code: a }) : Object.assign({}, defaults, a)));
+}
+
+function moduleOptions(exported) {
+  const result = [];
+  for (const option of (Array.isArray(exported?.options) ? exported.options : []).slice(0, 64)) {
+    if (!option || typeof option !== "object" || typeof option.identifier !== "string") continue;
+    const type = option.type || "string";
+    if (!["string", "secret", "boolean", "multiple", "heading"].includes(type)) continue;
+    const text = value => String(typeof value === "object" && value ? value.en ?? Object.values(value)[0] ?? "" : value ?? "")
+      .slice(0, 256).replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f\u202a-\u202e\u2066-\u2069]/g, "");
+    const values = (Array.isArray(option.values) ? option.values : []).slice(0, 200).map(text);
+    result.push({ identifier: text(option.identifier).slice(0, 128), type, label: text(option.label || option.identifier),
+      description: text(option.description), values,
+      valueLabels: (Array.isArray(option.valueLabels || option["value labels"]) ? (option.valueLabels || option["value labels"]) : []).slice(0, 200).map(text),
+      defaultValue: type === "boolean" ? (option.defaultValue ?? option["default value"] ?? true) === true : text(option.defaultValue ?? option["default value"] ?? (type === "multiple" ? values[0] : "") ?? ""),
+      allowOther: option.allowOther === true, allowNone: option.allowNone === true,
+      multiline: option.multiline === true, hidden: option.hidden === true });
+  }
+  return result;
 }
 
 function serialiseAction(a, index, depth) {
@@ -600,20 +644,18 @@ async function main() {
     if (!insidePackage(path, packageRoot) || !fileExists(path)) throw new Error("javascript file not found");
     const source = readTextFile(path);
     if (!looksLikeModule(source)) {
-      if (path.endsWith(".ts")) {
-        const imported = await import("file://" + path);
-        if (typeof imported.default === "function") return await imported.default(input, options, context);
-        return undefined;
-      }
-      return runInline(source);
+      return runScriptFile(path, source);
     }
     ext.module = path;
   }
   if (!ext.module) throw new Error("nothing to run");
   const exported = await loadModule(String(ext.module));
+  const declaredOptions = moduleOptions(exported);
+  options = Object.freeze(Object.assign(Object.fromEntries(declaredOptions.map(o => [o.identifier, o.defaultValue])), request.options || {}));
+  if (mode === "metadata") return { actions: [], options: declaredOptions };
   if (mode === "populate") {
     const list = await resolveActions(exported);
-    return { actions: list.map((a, i) => serialiseAction(a, i, 0)).filter(Boolean) };
+    return { actions: list.map((a, i) => serialiseAction(a, i, 0)).filter(Boolean), options: declaredOptions };
   }
   if (mode === "submenu") {
     const parent = await locateAction(exported, action.path || [0]);
@@ -628,9 +670,21 @@ async function main() {
   return await code(input, options, context);
 }
 
+async function runScriptFile(path, source) {
+  if (!path.endsWith(".ts")) return runInline(source);
+  if (!isDeno) {
+    const { stripTypeScriptTypes } = await import("node:module");
+    const wrapped = stripTypeScriptTypes("async function omapopInline() {\n" + source + "\n}");
+    return runInline(wrapped + "\nreturn await omapopInline();");
+  }
+  const wrapped = "export default async function() {\n" + source + "\n}";
+  const imported = await import("data:application/typescript;base64," + base64Encode(wrapped));
+  return await imported.default();
+}
+
 try {
   const result = await main();
-  if (result && typeof result === "object" && Array.isArray(result.actions)) finish({ actions: result.actions });
+  if (result && typeof result === "object" && Array.isArray(result.actions)) finish({ actions: result.actions, options: result.options || [] });
   else finish({ result: typeof result === "string" ? result : null });
 } catch (err) {
   finish({ error: classifyError(err) });

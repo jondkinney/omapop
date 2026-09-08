@@ -258,7 +258,7 @@ function buildUrl(template, text, options, flags) {
 
 var ALLOWED_SCHEMES = ["http", "https", "mailto", "ftp", "ftps", "spotify", "file", "tel", "sms", "geo", "magnet",
     "ssh", "git", "vscode", "obsidian", "zoommtg", "slack", "tg", "irc", "matrix", "xmpp", "news", "webcal", "mumble",
-    "steam", "discord", "bluesky", "x-devonthink-item", "hook", "message", "omnifocus", "craftdocs", "evernote"]
+    "steam", "discord", "bluesky", "x-devonthink-item", "hook", "message", "omnifocus", "craftdocs", "evernote", "upnote", "logseq"]
 
 function urlIsOpenable(url) {
     var m = /^([a-z][a-z0-9+.-]*):/i.exec(String(url || ""))
@@ -299,6 +299,10 @@ var VIRTUAL_KEYS = {
     0x7a: "F1", 0x78: "F2", 0x63: "F3", 0x76: "F4", 0x60: "F5", 0x61: "F6", 0x62: "F7", 0x64: "F8", 0x65: "F9",
     0x6d: "F10", 0x67: "F11", 0x6f: "F12", 0x72: "Help", 0x73: "Home", 0x74: "Prior", 0x75: "Delete", 0x77: "End",
     0x79: "Next", 0x7b: "Left", 0x7c: "Right", 0x7d: "Down", 0x7e: "Up", 0x4c: "KP_Enter",
+}
+
+function extensionCommandKey(globalKey, override) {
+    return override === "ctrl" || override === "super" ? override : globalKey
 }
 
 // Parse one key combo ("command shift v", "wait 50", "0x74", 9) into

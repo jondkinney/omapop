@@ -13,7 +13,7 @@ const A = {};
 new Function("A", source + `
   A.sanitizeDisplay = sanitizeDisplay; A.oneLine = oneLine; A.classMatches = classMatches; A.appAllowed = appAllowed;
   A.checkRequirements = checkRequirements; A.applyRegex = applyRegex; A.buildUrl = buildUrl; A.urlIsOpenable = urlIsOpenable;
-  A.parseKeyCombo = parseKeyCombo; A.modifiersFromMask = modifiersFromMask; A.parseIconSpec = parseIconSpec;
+  A.parseKeyCombo = parseKeyCombo; A.extensionCommandKey = extensionCommandKey; A.modifiersFromMask = modifiersFromMask; A.parseIconSpec = parseIconSpec;
   A.isEmoji = isEmoji; A.symbolGlyph = symbolGlyph; A.initials = initials; A.truncateResult = truncateResult;
   A.isTerminalClass = isTerminalClass; A.splitList = splitList; A.SEARCH_ENGINES = SEARCH_ENGINES;
   A.excludedAppList = excludedAppList; A.runningWindowOptions = runningWindowOptions;
@@ -201,6 +201,36 @@ function runRunner(request, runtime = "node") {
 
 const baseExt = { identifier: "t", name: "T", dir: reverseDir, entitlements: [] };
 
+test("per-extension Command overrides preserve the global default", () => {
+  assert.equal(A.extensionCommandKey("super", "ctrl"), "ctrl");
+  assert.equal(A.extensionCommandKey("ctrl", "super"), "super");
+  assert.equal(A.extensionCommandKey("super", "inherit"), "super");
+  assert.equal(A.extensionCommandKey("ctrl", undefined), "ctrl");
+  assert.equal(A.parseKeyCombo("command b", A.extensionCommandKey("super", "ctrl")).mods, "CTRL");
+});
+
+test("runner: secure inclusive integer sampling rejects biased values", () => {
+  for (const runtime of ["node", "deno"]) {
+    const r = runRunner({ extension: baseExt, action: { javascript: `
+      let calls = 0;
+      Object.defineProperty(globalThis, 'crypto', {value: {getRandomValues(a) { a[0] = calls++ ? 6 : 0; return a; }}});
+      const n = util.randomUniform(9);
+      let invalid = 0;
+      for (const max of [-1, 0.5, NaN, 2**32]) { try { util.randomUniform(max); } catch { invalid++; } }
+      return JSON.stringify([n, calls, util.randomUniform(0), invalid]);
+    ` } }, runtime);
+    assert.equal(r.status, 0, r.stderr);
+    assert.deepEqual(JSON.parse(r.done.result), [6, 2, 0, 4]);
+  }
+});
+
+test("runner: numeric PopClip keys and plain-text Markdown fallback", () => {
+  const r = runRunner({ extension: baseExt, input: {text:"Hello & ü"}, action: {javascript:
+    "popclip.pressKey(util.constant.KEY_DELETE); return popclip.input.markdown"} });
+  assert.deepEqual(r.lines[0].args[0], ["0x33"]);
+  assert.equal(r.done.result, "Hello & ü");
+});
+
 test("runner: inline action returns result and emits effects", () => {
   const r = runRunner({ mode: "action", extension: baseExt, action: { javascript: "popclip.copyText('x', {notify: false}); await sleep(1); return popclip.input.text.toUpperCase()" }, input: { text: "abc" } });
   assert.equal(r.status, 0, r.stderr);
@@ -228,7 +258,7 @@ test("runner: network needs entitlement", () => {
   const r = runRunner({ mode: "action", extension: baseExt, action: { javascript: "const x = new XMLHttpRequest(); x.open('GET', 'https://example.com'); return 'opened'" }, input: { text: "a" } });
   assert.match(r.done.error.message, /network entitlement/);
   const r2 = runRunner({ mode: "action", extension: baseExt, action: { javascript: "const x = new XMLHttpRequest(); x.open('GET', 'http://insecure.example.com'); return 'opened'" }, runtime: { allowNetwork: true }, input: { text: "a" } });
-  assert.match(r2.done.error.message, /https/);
+  assert.match(r2.done.error.message, /https/i);
 });
 
 test("runner: module populate and action by path", () => {
