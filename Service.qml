@@ -96,7 +96,7 @@ Item {
 
     readonly property int dragThreshold: clampInt(setting("dragThreshold", 6), 1, 100, 6)
     readonly property int hideDistance: clampInt(setting("hideDistance", 220), 40, 2000, 220)
-    readonly property bool longPressEnabled: setting("longPress", true) !== false
+    readonly property bool longPressEnabled: setting("longPress", false) === true
     readonly property int maxSelectionBytes: clampInt(setting("maxSelectionKiB", 256), 4, 4096, 256) * 1024
     readonly property var excludedApps: Actions.splitList(setting("excludedApps", ""))
     readonly property var terminalClasses: Actions.splitList(setting("terminalClasses", ""))

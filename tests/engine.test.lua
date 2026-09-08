@@ -76,6 +76,7 @@ assert(__omapop == installed and #bindings == 6)
 
 -- An engine upgrade must retire old callbacks, including a held long press.
 mask, x, y = 1, 100, 100
+installed.configure({ long_press = true })
 dispatch_mouse("mouse:272", false)
 installed.version = installed.version - 1
 dofile(path)

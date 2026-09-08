@@ -61,8 +61,9 @@ reloads its configuration (`hyprctl reload`), or immediately with
   behaviour (Alt on Search means an exact-phrase search, Alt on Open Link
   copies the links instead of opening them, Shift on the bundled Uppercase
   makes lowercase).
-- **Long-press** the left button for half a second without moving to show the
-  bar with no selection, for example to Paste.
+- **Long-press** is off by default. Enable **Show on long press** in the widget
+  settings, then hold the left button for half a second without moving to show
+  the bar with no selection, for example to Paste.
 - The bar hides when you click elsewhere, press a key, scroll, move the pointer
   away, or switch window or workspace. Hold **Super** while selecting to keep
   it away.
@@ -86,7 +87,7 @@ Settings live in the widget's settings form:
 | Assume unknown fields are editable | Off by default. See "When each button appears". |
 | Detect editable fields via accessibility | Keeps a small AT-SPI helper running and turns on the session accessibility flag. |
 | Hide when pointer moves away | Distance in pixels. |
-| Show on long press | Hold the left button half a second to show the bar without a selection. |
+| Show on long press | Off by default. When enabled, hold the left button half a second to show the bar without a selection. |
 | Largest selection read | Selections larger than this (KiB) are ignored. |
 | Excluded apps | Window classes where the bar never appears. |
 | Terminal window classes | Windows that paste with Ctrl+Shift+V and cannot cut. |
@@ -434,7 +435,7 @@ omarchy-shell io.github.jondkinney.omapop status
 selection; `hide`, `pause`, `resume`, `toggle` and `rescan` do what they say;
 `click <index> <modmask>` activates a visible button as a click would;
 `debug` dumps the current state. To exercise the bar without touching the
-mouse, put text on the primary selection and send the engine's long-press
+mouse, put text on the primary selection and send the engine's shortcut
 event yourself, at the pointer's real position (the engine dismisses a bar the
 pointer is far from) and with a window class that is not a terminal so the
 click below copies instead of pasting:
@@ -442,7 +443,7 @@ click below copies instead of pasting:
 ```bash
 wl-copy --primary "hello big world"
 read -r x y < <(hyprctl -j cursorpos | jq -r '"\(.x) \(.y)"')
-hyprctl eval "hl.dispatch(hl.dsp.event(\"omapop|longpress|$x|$y|0|DP-1|0|0|2560|1440|1|chromium|Page|0x0|0\"))"
+hyprctl eval "hl.dispatch(hl.dsp.event(\"omapop|shortcut|$x|$y|0|DP-1|0|0|2560|1440|1|chromium|Page|0x0|0\"))"
 omarchy-shell io.github.jondkinney.omapop status     # lists the visible buttons
 omarchy-shell io.github.jondkinney.omapop click 4 0  # runs the fifth one
 ```

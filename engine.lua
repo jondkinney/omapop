@@ -43,7 +43,7 @@ local E = {
   press = nil,
   press_serial = 0,
   last_key_ms = 0,
-  cfg = { far = 220, long_press = true, shortcut = "" },
+  cfg = { far = 220, long_press = false, shortcut = "" },
 }
 _G.__omapop = E
 

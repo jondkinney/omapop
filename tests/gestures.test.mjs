@@ -47,7 +47,7 @@ function harness(autoComplete = true) {
     lastPressAt: 0, lastPressMods: 0, selectionChangedAt: 0,
     pendingRelease: null, lastReleaseInfo: null, clickCount: 0,
     multiClickInterval: 450, clickSettleInterval: 80, dragThreshold: 6, paused: false,
-    longPressEnabled: true, Actions: { sanitizeDisplay: value => value },
+    longPressEnabled: false, Actions: { sanitizeDisplay: value => value },
     readTask: null, readGeneration: 0, maxSelectionBytes: 262144,
     excludedApps: [], selectionHelper: "unused", busyTask: null, busy: false,
     current: null, selectionUpdating: false, popup, positionMode: "auto",
@@ -310,6 +310,7 @@ test("a suppressed Super click cannot start the next multi-click sequence", () =
 test("Super suppresses long press while Shift still permits it", () => {
   for (const mods of [1, 64]) {
     const h = harness();
+    h.c.longPressEnabled = true;
     h.c.onPress(100, 100, 272, mods, false);
     h.c.handleEngineEvent(`longpress|100|100|${mods}|test|0|0|1920|1080|1|foot|test|0x1|1`);
     h.advance(20);

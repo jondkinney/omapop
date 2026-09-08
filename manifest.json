@@ -31,7 +31,7 @@
       "searchUrl": "",
       "dragThreshold": 6,
       "hideDistance": 220,
-      "longPress": true,
+      "longPress": false,
       "maxSelectionKiB": 256,
       "excludedApps": "",
       "terminalClasses": "Alacritty,kitty,foot,footclient,com.mitchellh.ghostty,Ghostty,org.wezfurlong.wezterm,xterm,konsole,org.kde.konsole,org.gnome.Terminal,gnome-terminal-server,Terminal,st-256color,tilix,wezterm",
@@ -120,8 +120,8 @@
         "key": "longPress",
         "type": "boolean",
         "label": "Show on long press",
-        "defaultValue": true,
-        "description": "Hold the left button for half a second without moving to show the bar with no selection, e.g. to paste."
+        "defaultValue": false,
+        "description": "Off by default. Hold the left button for half a second without moving to show the bar with no selection, e.g. to paste."
       },
       {
         "key": "maxSelectionKiB",
