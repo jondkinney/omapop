@@ -47,6 +47,7 @@ TestCase {
             service: fakeService
         }
     }
+    SignalSpy { id: backSpy; target: page; signalName: "backRequested" }
 
     onCompletedChanged: if (completed) console.log("OMAPOP_SETTINGS_TESTS " + JSON.stringify({ passed: qtest_results.passCount, failed: qtest_results.failCount }))
 
@@ -77,6 +78,7 @@ TestCase {
     }
 
     function init() {
+        page.finishEditing()
         fakeService.settings = ({})
         fakeService.writes = []
         fakeService.runningWindows = [
@@ -110,12 +112,110 @@ TestCase {
     }
 
     function test_text_is_saved_when_leaving_the_page() {
-        var field = findChild(page, "setting_shortcut_input")
+        var field = findChild(page, "setting_terminalClasses_input")
         field.forceActiveFocus()
         keyClick(Qt.Key_A, Qt.ControlModifier)
         keyClick(Qt.Key_X)
         page.finishEditing()
-        compare(fakeService.settings.shortcut, "x")
+        compare(fakeService.settings.terminalClasses, "x")
+    }
+
+    function test_shortcut_records_after_all_keys_are_released() {
+        var recorder = findChild(page, "shortcutRecorder")
+        var record = findChild(page, "shortcutRecord")
+        page.reveal(record)
+        mouseClick(record)
+        compare(recorder.recording, true)
+        keyPress(Qt.Key_Meta)
+        keyPress(Qt.Key_Shift, Qt.MetaModifier)
+        compare(fakeService.writes.length, 0)
+        keyPress(Qt.Key_P, Qt.MetaModifier | Qt.ShiftModifier)
+        compare(recorder.pendingCombo, "SUPER + SHIFT + P")
+        compare(fakeService.writes.length, 0)
+        // Supplying modifiers to QtTest.keyRelease also synthesizes their
+        // releases. Release each physical key separately for this assertion.
+        keyRelease(Qt.Key_P)
+        compare(fakeService.writes.length, 0)
+        keyRelease(Qt.Key_Shift)
+        compare(fakeService.writes.length, 0)
+        keyRelease(Qt.Key_Meta)
+        compare(fakeService.settings.shortcut, "SUPER + SHIFT + P")
+        compare(fakeService.writes.length, 1)
+        compare(recorder.recording, false)
+    }
+
+    function test_shortcut_cancel_clear_and_keyboard_activation() {
+        fakeService.settings = ({ shortcut: "SUPER + P" })
+        var recorder = findChild(page, "shortcutRecorder")
+        var record = findChild(page, "shortcutRecord")
+        record.forceActiveFocus()
+        keyClick(Qt.Key_Space)
+        compare(recorder.recording, true)
+        var backCount = backSpy.count
+        keyClick(Qt.Key_Escape)
+        compare(recorder.recording, false)
+        compare(backSpy.count, backCount)
+        compare(fakeService.writes.length, 0)
+        compare(fakeService.settings.shortcut, "SUPER + P")
+        mouseClick(record)
+        compare(recorder.recording, true)
+        mouseClick(record)
+        compare(recorder.recording, false)
+        compare(fakeService.writes.length, 0)
+        var clear = findChild(page, "shortcutClear")
+        mouseClick(clear)
+        compare(fakeService.settings.shortcut, "")
+        compare(clear.enabled, false)
+    }
+
+    function test_shortcut_focus_loss_and_leaving_cancel_recording() {
+        var recorder = findChild(page, "shortcutRecorder")
+        recorder.start()
+        compare(recorder.recording, true)
+        findChild(page, "settingsBack").forceActiveFocus()
+        compare(recorder.recording, false)
+        recorder.start()
+        keyPress(Qt.Key_P, Qt.ControlModifier)
+        page.finishEditing()
+        compare(recorder.recording, false)
+        compare(fakeService.writes.length, 0)
+        keyRelease(Qt.Key_P, Qt.ControlModifier)
+        keyRelease(Qt.Key_Control, Qt.ControlModifier)
+    }
+
+    function test_shortcut_avoids_bare_typing_keys_and_accepts_function_keys() {
+        var recorder = findChild(page, "shortcutRecorder")
+        recorder.start()
+        keyClick(Qt.Key_P)
+        compare(recorder.recording, true)
+        compare(fakeService.writes.length, 0)
+        verify(recorder.hint.indexOf("Ctrl") !== -1)
+        keyClick(Qt.Key_F12)
+        compare(fakeService.settings.shortcut, "F12")
+        compare(recorder.recording, false)
+    }
+
+    function test_shortcut_key_names_data() {
+        return [
+            { tag: "punctuation", key: Qt.Key_Plus, mods: Qt.ControlModifier | Qt.ShiftModifier, expected: "CTRL + SHIFT + plus" },
+            { tag: "navigation", key: Qt.Key_PageDown, mods: Qt.MetaModifier, expected: "SUPER + Next" },
+            { tag: "tab", key: Qt.Key_Tab, mods: Qt.ControlModifier, expected: "CTRL + Tab" },
+            { tag: "space", key: Qt.Key_Space, mods: Qt.MetaModifier, expected: "SUPER + space" },
+            { tag: "keypad", key: Qt.Key_1, mods: Qt.ControlModifier | Qt.KeypadModifier, expected: "CTRL + KP_1" },
+            { tag: "media", key: Qt.Key_VolumeMute, mods: Qt.NoModifier, expected: "XF86AudioMute" }
+        ]
+    }
+
+    function test_shortcut_key_names(data) {
+        var recorder = findChild(page, "shortcutRecorder")
+        recorder.start()
+        keyPress(data.key, data.mods)
+        keyRelease(data.key, data.mods)
+        if (data.mods & Qt.ShiftModifier) keyRelease(Qt.Key_Shift, data.mods)
+        if (data.mods & Qt.ControlModifier) keyRelease(Qt.Key_Control, data.mods & ~Qt.ShiftModifier)
+        if (data.mods & Qt.MetaModifier) keyRelease(Qt.Key_Meta, Qt.MetaModifier)
+        compare(fakeService.settings.shortcut, data.expected)
+        compare(recorder.recording, false)
     }
 
     function test_choose_a_window_ignores_the_app_once() {

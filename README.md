@@ -72,7 +72,9 @@ reloads its configuration (`hyprctl reload`), or immediately with
   the panel to change Omapop's preferences. **Right-click** pauses and resumes
   Omapop.
 - Set a **keyboard shortcut** in Settings (for example
-  `SUPER + SHIFT + P`) to show the bar for the current selection, useful in apps
+  `SUPER + SHIFT + P`): click **Record**, press the combination, and release
+  the keys to save. **Escape** cancels recording; **Clear** disables the shortcut.
+  The shortcut shows the bar for the current selection, useful in apps
   that do not update the selection until you release the mouse. A bar opened
   this way takes keyboard focus: Left/Right or Tab move, Return runs, Down opens
   a submenu, Up or Backspace goes back, 1 to 9 run a button directly, Escape

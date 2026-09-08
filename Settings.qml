@@ -28,7 +28,7 @@ ColumnLayout {
     readonly property var descriptions: ({
         longPress: "Hold the left mouse button for half a second to open the action bar, even without a selection.",
         position: "Auto places the bar above or below the pointer to leave your selection visible.",
-        shortcut: "Open the action bar with a key combination. Leave empty to disable.",
+        shortcut: "Record a key combination to open the action bar. Clear it to disable.",
         excludedApps: "Omapop stays hidden in these apps. Choose a running window to ignore its whole application.",
         showBarIcon: "Keep Omapop in the bar for quick access to extensions and settings.",
         directoryRefresh: "Check popclip.app weekly for new extensions. You can also update the catalogue by hand.",
@@ -185,7 +185,8 @@ ColumnLayout {
 
         function commit() {
             if (!visible) return
-            if (kind === "string" && key !== "excludedApps" && input.edited && input.text !== currentValue)
+            if (shortcutEditor.item) shortcutEditor.item.cancel()
+            if (kind === "string" && key !== "excludedApps" && key !== "shortcut" && input.edited && input.text !== currentValue)
                 root.save(field, input.text)
             if (kind === "integer" && number.edited && number.field.contentItem.acceptableInput) {
                 var next = number.field.valueFromText(number.field.contentItem.text, number.field.locale)
@@ -267,6 +268,16 @@ ColumnLayout {
             }
         }
         Loader {
+            id: shortcutEditor
+            Layout.fillWidth: true
+            active: row.key === "shortcut"
+            visible: active
+            sourceComponent: ShortcutRecorder {
+                value: typeof row.currentValue === "string" ? row.currentValue : ""
+                onEdited: function (next) { root.save(row.field, next) }
+            }
+        }
+        Loader {
             Layout.fillWidth: true
             active: row.key === "excludedApps"
             visible: active
@@ -281,7 +292,7 @@ ColumnLayout {
             property bool edited: false
             objectName: "setting_" + row.key + "_input"
             Layout.fillWidth: true
-            visible: row.kind === "string" && row.key !== "excludedApps"
+            visible: row.kind === "string" && row.key !== "excludedApps" && row.key !== "shortcut"
             maximumLength: row.key === "shortcut" ? 64 : 4096
             text: typeof row.currentValue === "string" ? row.currentValue.slice(0, maximumLength) : ""
             placeholderText: row.key === "shortcut" ? "SUPER + SHIFT + P"
