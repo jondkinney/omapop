@@ -3,9 +3,10 @@
 Select text with the mouse and a small bar of actions appears beside it:
 **Cut, Copy, Paste, Search, Open Link, Reveal in Files**, plus whatever
 extensions you add. Extensions are YAML snippets, shell scripts or JavaScript,
-and Omapop is compatible with extensions from the PopClip Extensions Directory
-(https://www.popclip.app/extensions/): download a package there, drop it into
-`~/.config/omapop/extensions/`, and it shows up in the bar.
+and Omapop supports a reviewed subset of the
+[PopClip Extensions Directory](https://www.popclip.app/extensions/).
+Browse the approved packages from the bar icon, confirm installation, then
+enable the extensions you want to use.
 
 ![Omapop selection-action example and live extensions panel](preview.jpg)
 
@@ -32,7 +33,7 @@ JavaScript extensions additionally need `deno` (preferred) or `nodejs`; without
 one of them they are listed but disabled.
 
 The standard runtime helpers also use Bash/coreutils, `xdg-utils`, `util-linux`
-(`setpriv`), D-Bus, and GLib's `gdbus`. Editable-field detection additionally
+(`setpriv`), OpenSSL (for catalog signatures), D-Bus, and GLib's `gdbus`. Editable-field detection additionally
 uses `python-gobject` and `at-spi2-core`; if those optional bindings are missing,
 the accessibility helper reports unknown editability and the usual fallback
 rules apply. Omapop never installs these dependencies automatically.
@@ -117,13 +118,20 @@ number values; omit it for text values. The available setting keys are:
 | Largest selection read | `maxSelectionKiB` | Selections larger than this (KiB) are ignored. |
 | Excluded apps | `excludedApps` | Window classes where the bar never appears. |
 | Terminal window classes | `terminalClasses` | Windows that paste with Ctrl+Shift+V and cannot cut. |
-| Extensions' `command` key maps to | `commandKey` | Ctrl (right for nearly every Linux app) or Super, for key combos written for macOS. |
-| Keep the extension catalogue up to date | `directoryRefresh` | Fetch the published-extension list weekly for **Available extensions**. Contacts popclip.app. Off means the catalogue only changes when you press Update. |
+| Extensions' `command` key maps to | `commandKey` | Global default for synthetic macOS Command shortcuts: Ctrl or Super. Individual extensions can override it. |
+| Allow extension downloads | `extensionDownloads` | Off by default. Allows confirmed installation of exact versions in Omapop's signed approval catalog. |
+| Keep the extension catalogue up to date | `directoryRefresh` | Fetch the published listing weekly. Contacts popclip.app; this refresh cannot approve packages or change pinned versions. |
 | Keyboard shortcut | `shortcut` | A Hyprland bind that shows the bar for the current selection. |
 | Show icon in the bar | `showBarIcon` | Hide the icon if you only want the popup. The settings screen stays reachable through the command above. |
 
 Extension options (an extension's own per-action settings) are edited from the
 gear next to the extension in the widget panel.
+
+That gear also contains **Command key**: **Use global setting**, **Ctrl**, or
+**Super**. The global default remains Ctrl. This changes shortcuts the extension
+sends to an application; it does not remap holding Super or Alt while clicking
+an action. App-specific combinations such as Control+Command or a terminal's
+Ctrl+Shift shortcuts can require a port beyond this single modifier override.
 
 Personal preferences live outside the plugin checkout, so updating the plugin
 does not replace them. Keep `shell.json` in your personal dotfiles repository
@@ -184,73 +192,68 @@ the screen width spill into a "More" page.
 
 ## Extensions
 
-Extensions live in `~/.config/omapop/extensions/`. Each one is either a
+Extensions live in `~/.config/omapop/extensions/`. Each one is a
 `Name.popclipext/` folder holding a `Config.yaml`, `Config.json`, `Config.js`,
 `Config.ts` or `Config.plist` (the format's original XML form, which many older
-directory packages still use) plus any icons and scripts it needs, or a
-`Name.popcliptxt` snippet file. Four bundled examples ship in the plugin's `extensions/` folder
+directory packages still use) plus any icons and scripts it needs.
+Use the snippet installer below to turn snippet text into a package; loose
+`.popcliptxt` files are listed but cannot be enabled. Four bundled examples ship in the plugin's `extensions/` folder
 (Word Count, Wikipedia, Uppercase, Reverse) and show a shell script, a URL, an
 inline JavaScript action and a module-based extension.
 
 ### From the directory
 
-Click the bar icon and use **Available extensions**: the whole published
-catalogue is listed, type to filter it, press **Install**, and the extension is
-downloaded, unpacked and live in the bar. No terminal, no unzipping, no file
-paths. The arrow beside each entry opens that extension's own page on the
-directory (screenshots, readme, license), and the one next to **Update** opens
-the directory itself; those are the only two links Omapop will open from here.
+The bundled [signed catalog](catalog/approved.json) approves **95 exact package
+versions**. The [review ledger](catalog/REVIEW.md) covers all 276 published
+downloads evaluated on 2026-09-08, including Linux ports and excluded packages.
 
-Some directory extensions can only run on macOS. Each entry's page on the
-directory states its action type, and after a refresh Omapop looks those pages
-up (once per extension, in the background) and leaves out the ones whose every
-action is AppleScript or a macOS Service; the count line says how many are
-hidden, and **Show macOS-only** lists them anyway, marked. Install one of those
-and Omapop says so plainly -- "Installed Alfred, but it needs macOS (applescript
-actions are macOS-only), so it stays disabled" -- and the installed list shows
-the same note in place of its description, dimmed, with its switch locked off.
-An extension that merely drives a Mac app through a `url` scheme cannot be told
-apart from one that opens a website; it installs and simply has nothing to talk
-to.
+1. Open **Settings → General → Allow extension downloads**. This is off by default.
+2. Return to **Available extensions** and choose **Install → Confirm install**.
+3. The package appears under installed extensions, **disabled**. Read its
+   description and requirements, configure any options, then enable its switch.
 
-The same thing from a terminal, which also works with the shell stopped:
+After upgrading, previously installed user extensions also need explicit
+enablement if no content approval was recorded. An older or edited package with
+an approved identifier must be replaced with the approved version first.
+
+Approved metadata is available offline. **Show unapproved** also displays the
+optional cached directory listing for inspection; those entries cannot be
+installed through Omapop. **Update** and the weekly refresh only refresh this
+listing. New approvals require a trusted Omapop release.
+
+Installation verifies Omapop's catalog signature, then the downloaded archive's
+SHA-256 **before extraction**, followed by every extracted file and the package's
+identity/version before publication. If the publisher changes a download at the
+same URL, installation fails until that version is reviewed and approved.
+PopClip's embedded signatures are retained as package data; Omapop does not
+claim to verify them.
+
+The explicit terminal installer also works with the shell stopped:
 
 ```bash
 cd ~/.config/omarchy/plugins/io.github.jondkinney.omapop
-python3 bin/omapop-directory.py search markdown      # find one
-python3 bin/omapop-directory.py install 09a521       # install it
-python3 bin/omapop-directory.py refresh              # update the catalogue
+python3 bin/omapop-directory.py search markdown
+python3 bin/omapop-directory.py install 09a521
+python3 bin/omapop-directory.py refresh
 ```
 
-`install` takes a shortcode (`09a521`), an extension page link, or a direct
-package link; `search --all` includes the macOS-only entries and `classify`
-looks up any pages not yet checked. `omarchy-shell io.github.jondkinney.omapop
-dirsearch <query>`, `dirresults`, `dirinstall <shortcode>`, `dirshowmac <0|1>`
-and `dirrefresh` drive the same code from a script.
+`install` accepts an approved shortcode, identifier, extension page URL or
+package URL. It enforces the same signed approval policy and leaves the package
+disabled. `search --all` includes cached unapproved entries; `classify` collects
+their action-type metadata. IPC supports directory browsing through
+`dirsearch <query>`, `dirresults`, `dirshowmac <0|1>` (the legacy name for
+showing unapproved entries), and `dirrefresh`. Installation and action execution
+have no IPC command.
 
-Installation never overwrites an existing package, including an empty folder or
-symlink. To reinstall, explicitly move the previous `.popclipext` folder out of
-the extensions directory first; keep that backup if you have made local edits.
+Installation never overwrites an existing package, empty folder or symlink.
+To reinstall, explicitly move the old package out of the extensions folder
+first. An edited package with an approved identifier fails the content check.
+For your own reviewed fork, use a new identifier and install it manually.
 
-The catalogue is a local index of what the directory publishes: name,
-description, author, shortcode and action type. It is built on first use and
-refreshed weekly (setting: **Keep the extension catalogue up to date**), and it
-is cached under `~/.config/omapop/`, never shipped with the plugin. Search works
-offline against whatever was last fetched.
-
-Installing by hand still works if you prefer: every directory entry offers a
-`.popclipextz` download, which is a zip.
-
-```bash
-unzip -d ~/.config/omapop/extensions ~/Downloads/Underscore.popclipextz
-```
-
-Either way the archive unpacks to a folder such as
-`@09a521.com.pilotmoon.popclip.extension.underscore.popclipext/`; the leading
-`@shortcode.` is fine. Underscore is the extension used to test this path: a
-module extension with the `dynamic` entitlement, an icon file and a bundled
-JavaScript module. Select `hello big world`, click its button, and
-`hello_big_world` replaces it (or is copied, when the field cannot be edited).
+Manual packages and snippets remain supported, with an explicit trust notice
+and enablement step. They are not approved by the catalog. New or changed
+content starts disabled, and user packages are checked again before each action
+or module population. Enabling an unknown script means trusting it to run as you.
 
 ### From a snippet
 
@@ -268,8 +271,9 @@ after: show-result
 javascript: return "Hello, " + popclip.input.text
 ```
 
-Snippets are stored as a package folder under the extensions folder, so they
-can be edited, disabled or deleted like any other extension.
+Snippets are stored as a package folder under the extensions folder and start
+disabled. Review the code, then enable the installed entry. Editing it requires
+reviewing and enabling the new content again.
 
 ### Writing your own
 
@@ -313,15 +317,22 @@ Not available on Linux: AppleScript, macOS Services, Shortcuts, `share()`,
 Dictionary and Spelling. `runShellScript` from JavaScript is not implemented
 yet; use a shell-script action instead.
 
-Option values and enabled/disabled state are stored in
+Option values, per-extension key preferences and content-bound enablement are stored in
 `~/.config/omapop/settings.json`:
 
 ```json
 {
   "disabled": ["io.github.jondkinney.omapop.wikipedia"],
-  "options": { "com.example.translate": { "language": "de" } }
+  "options": { "com.example.translate": { "language": "de" } },
+  "commandKeys": { "com.example.translate": "ctrl" },
+  "enabled": {}
 }
 ```
+
+Enabling a user extension records its content digest in `enabled`; an ID alone
+cannot enable replacement code. Packages copied to another machine must retain
+the same bytes and safe file permissions. Copy the settings too to preserve
+explicit enablement, or enable the packages individually on the new machine.
 
 ## How it works
 
@@ -356,9 +367,9 @@ Option values and enabled/disabled state are stored in
 
 ## Security boundaries
 
-The Omarchy shell is a long-lived process that owns your bar, so nothing
-untrusted is parsed inside it without a limit, and nothing runs inside it at
-all. The boundaries, and the contract at each:
+The Omarchy shell is a long-lived process that owns your bar. External inputs
+are bounded before parsing, and third-party extension code runs in child
+processes. The boundaries, and the contract at each:
 
 - **Selections and the clipboard** are read by `omapop-selection.py`, never by
   the shell. It streams at most the configured maximum (default 256 KiB) plus
@@ -375,11 +386,9 @@ all. The boundaries, and the contract at each:
   and emitted as JSON the shell caps again. Package-relative file references
   that escape the package are rejected (`realpath` compared against the
   package root); icon files must be regular files of at most 1 MiB before the
-  shell's image decoders see them; a package containing any symlink whose
-  target escapes the package is rejected outright and never run, because
-  both JavaScript runtimes authorise reads by the lexical path and would
-  otherwise follow such a symlink out of the sandbox; at most 200 packages
-  per folder. YAML/plist aliases are expanded under an 8192-value, 1 MiB
+  shell's image decoders see them. User-package content verification rejects
+  all symlinks, special files and files writable by other users. At most 200
+  packages are scanned per folder. YAML/plist aliases are expanded under an 8192-value, 1 MiB
   string-byte budget; cyclic or excessively nested configurations are rejected.
 - **Snippet installs** always confirm, and say when the snippet carries code.
   The package is staged as 0600 files in a 0700 directory and published by
@@ -394,16 +403,22 @@ all. The boundaries, and the contract at each:
   the environment the extension format defines, a 256 KiB output cap and a
   120 s deadline, and are killed when you click the spinner.
 - **Extension JavaScript** never runs in the shell. Under Deno the runner
-  starts with `--no-prompt --no-remote --allow-read=<package>,<plugin>/bin`
-  and nothing else; under Node with `--permission --allow-fs-read=<package>`.
+  starts with `--no-config --no-prompt --no-remote` and read access to the
+  package and plugin helpers; under Node it uses `--permission` with the same
+  read paths.
   `--allow-net` is added only for extensions that declare the `network`
   entitlement, so the runtime itself enforces it (verified: without the
   entitlement `fetch` and `node:net` fail with a permission error under both).
   No write, run, env or FFI permission is ever granted. The read sandbox is
-  confined to the package directory; because both runtimes follow a symlink
-  out of a permitted path, packages carrying an escaping symlink are refused
-  at scan time (above) rather than relied on to stay inside it. Effects come back over
-  a JSON line protocol and the shell performs them after validation: URLs are
+  confined to the package and helper directories. The shared `fetch`,
+  `XMLHttpRequest` and Axios compatibility APIs enforce a 20-second whole-request
+  deadline, 1 MiB streamed response cap, 256 KiB request-body cap, four concurrent
+  requests and at most five same-origin redirects. HTTPS is required except for
+  loopback HTTP services. A network-entitled script can still use native runtime
+  networking; this compatibility layer is not a hostile-code containment proxy.
+  Effects come back over a JSON line protocol. At most 128 are queued, then
+  performed in order after successful process completion. Failed, truncated or
+  stale actions discard their queued effects. URLs are
   checked against a scheme allowlist (`javascript:`, `data:` and `vbscript:`
   never open), key combos are parsed into known modifiers and keysyms, paths
   to reveal must be absolute, and every result string is capped and sanitised
@@ -425,9 +440,20 @@ all. The boundaries, and the contract at each:
   same limits into private staging. Linux `renameat2(RENAME_NOREPLACE)` publishes
   the package relative to the pinned destination, never replacing an existing
   package. Cleanup is descriptor-relative. An installed package still has to
-  pass the scan above before the shell will load it. Directory packages are
-  third-party code fetched over HTTPS, not independently signed or certified
-  by Omapop; review the publisher before installing.
+  pass the scan above before the shell will load it.
+- **Approval policy** comes from the bundled catalog, never refreshed HTML or
+  the per-user listing cache. A public-key fingerprint pinned in the helper
+  anchors an Ed25519 signature over the exact catalog bytes. The helper reads
+  at most 2 MiB, verifies through descriptor-backed snapshots with a five-second
+  OpenSSL deadline, then parses and validates the schema. Each entry binds an
+  identifier, version, download URL, archive SHA-256 and complete file hash list.
+  Archive verification happens before extraction; staged-file and identity
+  checks happen before publication. User extensions start disabled; enablement
+  records a digest of their content. A changed approved package is blocked, and
+  all user packages are checked before each action or module population.
+  These are point-in-time checks, not isolation from a hostile same-user process
+  changing files between verification and execution. The catalog and its key
+  update with trusted plugin code; there is no standalone remote rollback policy.
 - **The engine** is Lua pushed into Hyprland with `hyprctl eval`. The only
   values injected are clamped integers and one escaped string (the shortcut).
   Its events percent-encode every field with a 240-byte cap per field, and the
@@ -460,6 +486,10 @@ python3 -m unittest discover -s tests -p 'test_*.py'   # helpers, directory
 node tests/actions.test.mjs
 node tests/gestures.test.mjs                        # click timing and stale read callbacks
 node tests/settings.test.mjs                        # typed settings and preservation of other preferences
+node tests/extension-policy.test.mjs                # ordered effects, opt-in, per-extension preferences
+node tests/http.test.mjs                            # request deadlines and streamed byte limits
+node tests/runner-http.test.mjs                     # fetch, XHR and Axios through the restricted runner
+node tests/runner-modules.test.mjs                  # TypeScript, defaults and dynamic population
 python3 tests/check_settings_ui.py                   # controls in an isolated, offscreen Quickshell
 lua tests/engine.test.lua                          # modified mouse input and engine reloads
 QT_QUICK_BACKEND=rhi QSG_RHI_BACKEND=opengl /usr/lib/qt6/bin/qmltestrunner -platform offscreen -input tests
@@ -468,21 +498,12 @@ omarchy-shell io.github.jondkinney.omapop status
 ```
 
 `omarchy-shell io.github.jondkinney.omapop show` shows the bar for the current
-selection; `hide`, `pause`, `resume`, `toggle` and `rescan` do what they say;
-`click <index> <modmask>` activates a visible button as a click would;
-`debug` dumps the current state. To exercise the bar without touching the
-mouse, put text on the primary selection and send the engine's shortcut
-event yourself, at the pointer's real position (the engine dismisses a bar the
-pointer is far from) and with a window class that is not a terminal so the
-click below copies instead of pasting:
+selection; `settings` opens preferences; `hide`, `pause`, `resume` and `toggle`
+control its visibility. `status` and `debug` inspect the current state. Rescan
+and action execution are available from the UI, not IPC.
 
-```bash
-wl-copy --primary "hello big world"
-read -r x y < <(hyprctl -j cursorpos | jq -r '"\(.x) \(.y)"')
-hyprctl eval "hl.dispatch(hl.dsp.event(\"omapop|shortcut|$x|$y|0|DP-1|0|0|2560|1440|1|chromium|Page|0x0|0\"))"
-omarchy-shell io.github.jondkinney.omapop status     # lists the visible buttons
-omarchy-shell io.github.jondkinney.omapop click 4 0  # runs the fifth one
-```
+See [catalog maintenance](catalog/README.md) for source collection, review
+decisions, offline compatibility checks and signing a new approval revision.
 
 ## License
 

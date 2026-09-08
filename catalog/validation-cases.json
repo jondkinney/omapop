@@ -1,0 +1,548 @@
+{
+  "w9stjb": [
+    {
+      "text": "cba",
+      "path": [
+        0
+      ],
+      "expect": "ABC"
+    },
+    {
+      "text": "a b c",
+      "path": [
+        1
+      ],
+      "validate": "same-letters"
+    }
+  ],
+  "8kvc4y": [
+    {
+      "text": "hello world",
+      "options": {
+        "randomness": false
+      },
+      "expect": "HeLlO WoRlD"
+    }
+  ],
+  "1yw6jd": [
+    {
+      "text": "Selected",
+      "expect": "Clipboard\nSelected"
+    }
+  ],
+  "6ymxrg": [
+    {
+      "text": "Hello",
+      "path": [
+        0
+      ],
+      "expect": "SGVsbG8"
+    },
+    {
+      "text": "SGVsbG8=",
+      "path": [
+        1
+      ],
+      "expect": "Hello"
+    }
+  ],
+  "x2brcm": [
+    {
+      "text": "255,0,128",
+      "path": [
+        0
+      ],
+      "expect": "#FF0080"
+    },
+    {
+      "text": "#FF0080",
+      "path": [
+        1
+      ],
+      "expect": "255,0,128"
+    }
+  ],
+  "xpcw12": [
+    {
+      "text": "See https://example.com/path",
+      "expect": "https://example.com/path\n"
+    }
+  ],
+  "02yq1x": [
+    {
+      "text": "{\"a\":1}",
+      "expect": "{\n  \"a\": 1\n}"
+    }
+  ],
+  "s16hap": [
+    {
+      "text": "ＡＢＣ",
+      "path": [
+        0
+      ],
+      "expect": "ABC"
+    },
+    {
+      "text": "ABC",
+      "path": [
+        1
+      ],
+      "expect": "ＡＢＣ"
+    }
+  ],
+  "zn9dyt": [
+    {
+      "text": "#ff0000",
+      "expect": "Red (closest match)\n"
+    }
+  ],
+  "0qqc31": [
+    {
+      "text": "USD 10"
+    }
+  ],
+  "t7hx1b": [
+    {
+      "text": "pilotmoon/PopClip-Extensions",
+      "expectUrlContains": "https://github.com/pilotmoon/PopClip-Extensions"
+    }
+  ],
+  "krvyqd": [
+    {
+      "text": "HELLO ÉLAN",
+      "expect": "hello élan"
+    }
+  ],
+  "fzmf6w": [
+    {
+      "text": "hello élan",
+      "expect": "HELLO ÉLAN"
+    }
+  ],
+  "54cf55": [
+    {
+      "text": "a b\n\tc",
+      "expect": "abc"
+    }
+  ],
+  "gt0c91": [
+    {
+      "text": "one\ntwo\nthree",
+      "expect": "three\ntwo\none"
+    }
+  ],
+  "41mamt": [
+    {
+      "text": "b10\nA2\nb2",
+      "expect": "A2\nb2\nb10"
+    }
+  ],
+  "01vjf6": [
+    {
+      "text": " one\r\n\n two ",
+      "expect": "one two"
+    }
+  ],
+  "nyasgn": [
+    {
+      "text": "  one\n  two",
+      "expect": "one\ntwo"
+    }
+  ],
+  "2f8dfs": [
+    {
+      "text": "plain text",
+      "expect": "plain text"
+    }
+  ],
+  "2cr65p": [
+    {
+      "text": "the lord of the rings",
+      "expect": "The Lord of the Rings"
+    }
+  ],
+  "b3yeve": [
+    {
+      "text": "élan FOO. next!",
+      "expect": "Élan foo. Next!"
+    }
+  ],
+  "x2p1qt": [
+    {
+      "text": "Café & C++",
+      "expect": "cafe-and-c-plus-plus"
+    }
+  ],
+  "7qdy94": [
+    {
+      "text": "“It’s ready”",
+      "expect": "\"It's ready\""
+    }
+  ],
+  "09a521": [
+    {
+      "text": "hello world",
+      "expect": "hello_world"
+    },
+    {
+      "text": "hello_world",
+      "expect": "hello world"
+    }
+  ],
+  "cyfq5y": [
+    {
+      "text": "hello world",
+      "expect": "hello-world"
+    },
+    {
+      "text": "hello-world",
+      "expect": "hello world"
+    }
+  ],
+  "ve8j52": [
+    {
+      "text": "À👋",
+      "expect": "c0 1f44b"
+    }
+  ],
+  "ahphpq": [
+    {
+      "text": "1535438729",
+      "expect": "2018-08-28 06:45:29 UTC"
+    }
+  ],
+  "t1gh6s": [
+    {
+      "text": "a & b",
+      "path": [
+        0
+      ],
+      "expect": "a%20%26%20b"
+    },
+    {
+      "text": "a%20b",
+      "path": [
+        1
+      ],
+      "expect": "a b"
+    }
+  ],
+  "818qw5": [
+    {
+      "text": "a & ü",
+      "expect": "a%20%26%20%C3%BC"
+    }
+  ],
+  "fwrfay": [
+    {
+      "text": "他们",
+      "path": [
+        1
+      ],
+      "expect": "他們"
+    },
+    {
+      "text": "他們",
+      "path": [
+        0
+      ],
+      "expect": "他们"
+    }
+  ],
+  "w8757f": [
+    {
+      "text": "你好",
+      "path": [
+        0,
+        0
+      ],
+      "expect": "nǐ hǎo "
+    },
+    {
+      "text": "你好",
+      "path": [
+        0,
+        1
+      ],
+      "expect": "ㄋㄧˇ ㄏㄠˇ "
+    },
+    {
+      "text": "你好",
+      "path": [
+        0,
+        0
+      ],
+      "options": {
+        "pinyin_tone_type": "number",
+        "output_mode": "show"
+      },
+      "expect": "ni3 hao3 "
+    },
+    {
+      "text": "你好",
+      "path": [
+        0,
+        0
+      ],
+      "options": {
+        "pinyin_tone_type": "alphabet",
+        "output_mode": "copy"
+      },
+      "expect": "ni hao "
+    }
+  ],
+  "4q8mrz": [
+    {
+      "text": "filled.count.soap"
+    }
+  ],
+  "y1e8y0": [
+    {
+      "text": "+15550101234"
+    }
+  ],
+  "0yehgm": [
+    {
+      "text": "https://example.com/",
+      "data": {
+        "urls": [
+          "https://example.com/"
+        ]
+      },
+      "isUrl": true
+    }
+  ],
+  "h036ws": [
+    {
+      "text": "Hello & ü",
+      "expectUrlContains": "text=Hello+%26+%C3%BC"
+    }
+  ],
+  "cvvw0q": [
+    {
+      "text": "first\nsecond",
+      "expect": "> first\n> second\n"
+    }
+  ],
+  "awjzhy": [
+    {
+      "text": "word",
+      "expect": "(word)"
+    }
+  ],
+  "0p0xhv": [
+    {
+      "text": "word",
+      "expect": "code"
+    }
+  ],
+  "hvg8y3": [
+    {
+      "text": "hello world",
+      "expect": "Hello World"
+    }
+  ],
+  "sthzh9": [
+    {
+      "text": "line1\nline2",
+      "expect": "```\nline1\nline2\n```\n"
+    }
+  ],
+  "r89xtt": [
+    {
+      "text": "user AT example DOT com",
+      "expect": "user@example.com"
+    },
+    {
+      "text": "user AT example DOT com",
+      "modifiers": {
+        "option": true
+      },
+      "expect": "user@example.com",
+      "expectUrlContains": "mailto:user@example.com"
+    }
+  ],
+  "8xb0vb": [
+    {
+      "text": "Hello",
+      "expect": "Hello"
+    }
+  ],
+  "1m4m8n": [
+    {
+      "text": "# Title\n- One\n  - Child",
+      "expect": "Title\n\tOne\n\t\tChild"
+    }
+  ],
+  "kpqh3r": [
+    {
+      "text": "a\nb",
+      "path": [
+        0,
+        0
+      ],
+      "expect": "* a\n* b"
+    },
+    {
+      "text": "a\nb",
+      "path": [
+        0,
+        1
+      ],
+      "expect": "1. a\n2. b"
+    },
+    {
+      "text": "* a\n2. b",
+      "path": [
+        0,
+        2
+      ],
+      "expect": "a\nb"
+    }
+  ],
+  "sqtny5": [
+    {
+      "text": "a\nb",
+      "path": [
+        0,
+        0
+      ],
+      "expect": "1. a\n1. b"
+    },
+    {
+      "text": "a\nb",
+      "path": [
+        0,
+        1
+      ],
+      "expect": "- a\n- b"
+    }
+  ],
+  "0jhrd3": [
+    {
+      "text": "password",
+      "validate": "password"
+    },
+    {
+      "text": "password",
+      "options": {
+        "leng": "256",
+        "noRepeat": true,
+        "excludeAmbiguous": true
+      },
+      "validate": "password"
+    },
+    {
+      "text": "password",
+      "options": {
+        "lowercase": false,
+        "uppercase": false,
+        "number": false,
+        "symbol": false,
+        "outputMode": "copy"
+      },
+      "validate": "password"
+    }
+  ],
+  "tss74a": [
+    {
+      "text": "a\nb\nc\n",
+      "validate": "same-lines"
+    }
+  ],
+  "batmjr": [
+    {
+      "text": "date",
+      "options": {
+        "format": "iso8601"
+      },
+      "validate": "date"
+    }
+  ],
+  "hy4t7n": [
+    {
+      "text": "Hi @alice",
+      "expect": "Hi [@alice](https://x.com/alice)"
+    },
+    {
+      "text": "#tag",
+      "options": {
+        "usemarkdown": false
+      },
+      "expect": "<a href=\"https://x.com/search?q=%23tag&src=hash\">#tag</a>"
+    }
+  ],
+  "b2fbhe": [
+    {
+      "text": "text",
+      "expectEffects": [
+        "performCommand",
+        "pressKeys"
+      ]
+    },
+    {
+      "text": "text",
+      "modifiers": {
+        "shift": true
+      },
+      "expectEffects": [
+        "performCommand",
+        "pressKeys"
+      ]
+    }
+  ],
+  "qrcc82": [
+    {
+      "text": "text",
+      "expectEffects": [
+        "performCommand"
+      ]
+    }
+  ],
+  "mjakak": [
+    {
+      "text": "user@example.com",
+      "data": {
+        "emails": [
+          "user@example.com"
+        ]
+      },
+      "path": [
+        0
+      ],
+      "expectUrlContains": "mailto:user@example.com"
+    },
+    {
+      "text": "Hello & ü",
+      "options": {
+        "enable-body": true,
+        "source": false
+      },
+      "expectUrlContains": "body=Hello%20%26%20%C3%BC"
+    }
+  ],
+  "wfhk0x": [
+    {
+      "text": "Hello & ü",
+      "options": {
+        "vaultName": "Test Vault"
+      },
+      "expectUrlContains": "data=%0AHello+%26+%C3%BC"
+    },
+    {
+      "text": "Hello",
+      "options": {
+        "vaultName": "Test Vault",
+        "fileName": "Inbox",
+        "newFile": true
+      },
+      "expectUrlContains": "mode=new"
+    }
+  ],
+  "a51hz5": [
+    {
+      "text": "Hello & ü",
+      "expectUrlContains": "content=Hello+%26+%C3%BC"
+    }
+  ]
+}

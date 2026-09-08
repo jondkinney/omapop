@@ -1,0 +1,4513 @@
+{
+  "repository": "https://github.com/pilotmoon/PopClip-Extensions",
+  "commit": "315e34f5d9f80095d46f79fc75f6c1551b49ad2c",
+  "scope": "All source folders inventoried. Published archive reviews are separate; unpublished/contrib code is not approved.",
+  "packages": [
+    {
+      "path": "contrib/Accordance.popclipext",
+      "id": null,
+      "name": null,
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [],
+      "scannerNote": "Expecting value: line 1 column 1 (char 0)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/AddToQSpaceProStashShelf.popclipext",
+      "id": "com.pilotmoon.popclip.extension.add-to-qspace-pro-stashshelf",
+      "name": "Add to Stash Shelf",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/AddToQSpaceStashShelf.popclipext",
+      "id": "com.pilotmoon.popclip.extension.add-to-stashshelf",
+      "name": "Add to Stash Shelf",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/AsyncGlobals.popclipext",
+      "id": "com.pilotmoon.popclip.test-async-globals",
+      "name": "JS Async Globals",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "javascript"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/BibleVerses.popclipext",
+      "id": "com.pilotmoon.popclip.extesion.bibleverses",
+      "name": "Bible Verses",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Bookends.popclipext",
+      "id": null,
+      "name": null,
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [],
+      "scannerNote": "Config.plist: unexpected key at line 36",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/BulgarianPhoneticLatinSwitcher.popclipext",
+      "id": "com.pilotmoon.popclip.extension.bul_lat_switcher",
+      "name": "BulLatSwitcher",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "javascript"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/CoffeeScript.popclipext",
+      "id": "com.vfasky.popclip.extension.coffeescript",
+      "name": "CoffeeScript",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/ColorHexa.popclipext",
+      "id": "com.tommasobarbato.popclip.extension.ColorHexa",
+      "name": "Color Hexa",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/ConnectedPapers.popclipext",
+      "id": "com.pilotmoon.popclip.extension.connectedpapers",
+      "name": "Connected Papers",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/CopyAlternative.popclipext",
+      "id": "com.pilotmoon.popclip.extension.copy",
+      "name": "Copy (Alternative)",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/CopyUrlWithTitle.popclipext",
+      "id": "com.shahine.omar.copyurlwithtitle",
+      "name": "Copy URL with Title",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/CyrillicLatinSwitcher.popclipext",
+      "id": null,
+      "name": null,
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [],
+      "scannerNote": "Config.js has no YAML header",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/DB-IP.popclipext",
+      "id": "de.schneide-r.popclip.extension.ipgeolookup",
+      "name": "Geo Lookup DB-IP",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/DEVONthinkPro.popclipext",
+      "id": "com.pilotmoon.popclip.extension.devonthink",
+      "name": "DEVONthink Pro",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/DashSnippets.popclipext",
+      "id": "de.alxstu.popclip.extension.dashsnippet",
+      "name": "DashSnippets",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/DeepLApp.popclipext",
+      "id": "com.pilotmoon.popclip.extension.deepl-app",
+      "name": "DeepL App",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/DeskConnect.popclipext",
+      "id": "com.pilotmoon.popclip.extension.deskconnect",
+      "name": "DeskConnect",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/DialCommandC.popclipext",
+      "id": "com.semicolonsnet.popclipext.dialcc",
+      "name": "Dial with CommandC",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Dialectic.popclipext",
+      "id": "com.pilotmoon.popclip.extension.dialectic",
+      "name": "Dialectic",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/DictCC.popclipext",
+      "id": "com.pilotmoon.popclip.extension.dictcc",
+      "name": "dict.cc",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Dictionary2.popclipext",
+      "id": "com.pilotmoon.popclip.extension.dictionary2",
+      "name": "Dictionary2",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Douyin.popclipext",
+      "id": "com.lauxf.popclip.extension.douyin",
+      "name": "抖音",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Ember.popclipext",
+      "id": "com.pilotmoon.popclip.extension.ember",
+      "name": "Ember",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Emoji.popclipext",
+      "id": "com.pilotmoon.popclip.extension.emoji",
+      "name": "Emoji",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Emojipedia.popclipext",
+      "id": "com.pilotmoon.popclip.extension.emojipedia",
+      "name": "Emojipedia",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/EvernoteCodeBlock.popclipext",
+      "id": "com.pilotmoon.popclip.extension.code-block",
+      "name": "Code Block",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "key"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/ExplainShell.popclipext",
+      "id": "com.explain-shell.popclip.extension.explain-shell",
+      "name": "Explain Shell",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Fantastical.popclipext",
+      "id": "com.pilotmoon.popclip.extension.fantastical",
+      "name": "Fantastical",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Fantastical2.popclipext",
+      "id": "com.pilotmoon.popclip.extension.fantastical2",
+      "name": "Fantastical 2",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Flomo.popclipext",
+      "id": "com.popclip.extension.popcliptoflomo",
+      "name": "Flomo",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/GbkURLEncode.popclipext",
+      "id": "tech.zhangmin.extension.gbkurlencode",
+      "name": "GBK URL Encode",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/GetMagnetLinks.popclipext",
+      "id": "com.alenpuzic.popclip.extension.magnet",
+      "name": "Magnet",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/GitHubSearch.popclipext",
+      "id": "com.pilotmoon.popclip.extension.github-search",
+      "name": "GitHub Search",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/GmailCompose.popclipext",
+      "id": "com.pilotmoon.popclip.extension.gmail-compose",
+      "name": "Gmail Compose",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/GoldenDict.popclipext",
+      "id": "org.goldendict",
+      "name": "GoldenDict",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/GoogleExact.popclipext",
+      "id": "com.pilotmoon.popclip.extension.google-exact",
+      "name": "Google Exact",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/GoogleImagesExact.popclipext",
+      "id": "com.pilotmoon.popclip.extension.google-images-exact",
+      "name": "Google Images Exact",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/GoogleScholarFirefox.popclipext",
+      "id": "com.pilotmoon.popclip.extension.google-scholar",
+      "name": "Google Scholar",
+      "publishedShortcode": "p20n16",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Guokr.popclipext",
+      "id": "com.guokr.extension.guokr-search",
+      "name": "Guokr",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/HTMLToMarkdown.popclipext",
+      "id": "com.pilotmoon.popclip.extension.html-to-markdown",
+      "name": "HTML→Markdown",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Hypothesis.popclipext",
+      "id": "Hypothesis",
+      "name": "Hypothesis",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/IPdb.popclipext",
+      "id": "com.mkpowers.popclip.extension.ipdb",
+      "name": "IPdb",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/IconPreview.popclipext",
+      "id": "com.pilotmoon.popclip.extension.icon-preview",
+      "name": "Icon Preview",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/ImFeelingLucky.popclipext",
+      "id": "com.lucifr.popclip.extension.google-lucky",
+      "name": "I'm Feeling Lucky",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/InstantTranslateApp.popclipext",
+      "id": "com.pilotmoon.popclip.extension.insttranslate",
+      "name": "Instant Translate",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Instapaper.popclipext",
+      "id": "com.pilotmoon.popclip.extension.instapaper",
+      "name": "Instapaper",
+      "publishedShortcode": "f2xzek",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/JSONTailor.popclipext",
+      "id": "com.jsontailor.popclip",
+      "name": "JSON Tailor",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/JSONer.popclipext",
+      "id": "com.ihtcboy.popclip.extension.jsoner",
+      "name": "JSONer",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/JiraCloud.popclipext",
+      "id": "com.pilotmoon.popclip.extension.jira",
+      "name": "Jira Cloud",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/JsonPrettify.popclipext",
+      "id": "com.github.stevenrudenko.popclip.extension.jsonprettify",
+      "name": "JSON Prettify",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Klipz.popclipext",
+      "id": "com.dhoerl.popclip.extension.swap",
+      "name": "Klipz",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/LLMCLI.popclipext",
+      "id": "com.pestly.popclip.extension.llm-cli-rewrite",
+      "name": "LLM CLI",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/LanguageBar.popclipext",
+      "id": "com.pilotmoon.popclip.extension.languagebar",
+      "name": "Language Bar",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Lingvo.popclipext",
+      "id": "com.pilotmoon.popclip.extension.lingvo-dictionary",
+      "name": "Lingvo",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/MD5.popclipext",
+      "id": "com.alenpuzic.popclip.extension.md5",
+      "name": "MD5",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/MD5Python.popclipext",
+      "id": "com.custom.popclip.extension.md5python",
+      "name": "MD5 Python",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Magnetize.popclipext",
+      "id": "com.oxxie.popclipextensions.magnetize",
+      "name": "Magnetize",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Mail.popclipext",
+      "id": "com.pilotmoon.popclip.extension.mail",
+      "name": "Mail",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/MarkdownLink.popclipext",
+      "id": "org.tcchou.popclip.extension.mdlink",
+      "name": "Markdown Link",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Mastodon.popclipext",
+      "id": "com.pilotmoon.popclip.extension.mastodon",
+      "name": "Mastodon",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/MicrosoftWord.popclipext",
+      "id": null,
+      "name": null,
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [],
+      "scannerNote": "snippet Config with a script body is not supported inside a package",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Myna.popclipext",
+      "id": "com.madbirdies.popclip.extension.myna",
+      "name": "Myna",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Neeva.popclipext",
+      "id": "us.kary.popclip.extension.neeva",
+      "name": "Neeva",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/NotationalVelocity.popclipext",
+      "id": "com.pilotmoon.popclip.extension.notational-velocity",
+      "name": "Notational Velocity",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Notebooks.popclipext",
+      "id": "com.pilotmoon.popclip.extension.notebooks",
+      "name": "Notebooks",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/OneNote.popclipext",
+      "id": null,
+      "name": null,
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [],
+      "scannerNote": "no Config file",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/OpenHTMLLinks.popclipext",
+      "id": "com.pilotmoon.popclip.extention.open-html-links",
+      "name": "Open HTML Links",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "cannot run here (action has no behaviour)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/OpenInBrave.popclipext",
+      "id": "com.pilotmoon.popclip.extension.open-in-brave",
+      "name": "Open in Brave",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/OpenInChrome.popclipext",
+      "id": "com.pilotmoon.popclip.extension.open-in-chrome",
+      "name": "Open in Chrome",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/OpenInEdge.popclipext",
+      "id": "com.pilotmoon.popclip.extension.open-in-edge",
+      "name": "Open in Edge",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/OpenInFirefox.popclipext",
+      "id": "com.pilotmoon.popclip.extension.open-in-firefox",
+      "name": "Open in Firefox",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/OpenInFirefoxNightly.popclipext",
+      "id": "com.pilotmoon.popclip.extension.open-in-firefox",
+      "name": "Open in Firefox",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/OpenInOpera.popclipext",
+      "id": "com.pilotmoon.popclip.extension.open-in-opera",
+      "name": "Open in Opera",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/OpenInSafari.popclipext",
+      "id": "com.pilotmoon.popclip.extension.open-in-safari",
+      "name": "Open in Safari",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/OpenInVSCode.popclipext",
+      "id": "com.brummelhook.popclip.extension.OpenInVSCode",
+      "name": "Open In VS Code",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/OpenInVivaldi.popclipext",
+      "id": "com.pilotmoon.popclip.extension.open-in-vivaldi",
+      "name": "Open in Vivaldi",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Phind.popclipext",
+      "id": "us.kary.popclip.extension.phind",
+      "name": "Phind",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Pochta.popclipext",
+      "id": "com.pilotmoon.popclip.extension.pochta",
+      "name": "Pochta.ru",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/PreviewHighlight.popclipext",
+      "id": "com.pilotmoon.popclip.extension.preview-highlight",
+      "name": "PDF Highlight",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "key"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Pronounce.popclipext",
+      "id": "com.pilotmoon.popclip.extension.pronounce",
+      "name": "Pronounce",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/PushDialer.popclipext",
+      "id": "com.semicolonsnet.popclipext.pushdialer",
+      "name": "PushDialer",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/PythonPackage.popclipext",
+      "id": "com.whtsky.popclip.extension.python-package",
+      "name": "Python Package",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/QRCode.popclipext",
+      "id": "com.pilotmoon.popclip.extension.qrcode",
+      "name": "QR Code",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/QRGenerator.popclipext",
+      "id": "com.bimawa.popclip.extension.qrGenerator",
+      "name": "QR Generator",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/RRun.popclipext",
+      "id": "com.uribo.popclip.extension.rrun",
+      "name": "RRun",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Rdio.popclipext",
+      "id": "com.pilotmoon.popclip.extension.rdio",
+      "name": "Rdio",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/ReferenceResolver.popclipext",
+      "id": "com.whj.popclip.extension.crr",
+      "name": "Reference Resolver",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Reflow.popclipext",
+      "id": "com.stympy.popclip.extension.clean-paste",
+      "name": "Reflow",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "javascript"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Return.popclipext",
+      "id": "com.pilotmoon.popclip.extension.return",
+      "name": "Return",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "key"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/RevealInQSpace.popclipext",
+      "id": "com.pilotmoon.popclip.extension.reveal-in-qspace",
+      "name": "Reveal in QSpace",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/RevealInQSpacePro.popclipext",
+      "id": "com.pilotmoon.popclip.extension.reveal-in-qspace-pro",
+      "name": "Reveal in QSpace Pro",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/SHA-1.popclipext",
+      "id": "com.alenpuzic.popclip.extension.sha1",
+      "name": "SHA-1",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/SHA-256.popclipext",
+      "id": "com.alenpuzic.popclip.extension.sha256",
+      "name": "SHA-256",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/SHA-512.popclipext",
+      "id": "com.alenpuzic.popclip.extension.sha512",
+      "name": "SHA-512",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/SalesforceSearch.popclipext",
+      "id": "search-salesforce",
+      "name": "Search Salesforce",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/SayAlt.popclipext",
+      "id": "com.pilotmoon.popclip.extension.sayalt",
+      "name": "Say",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "key"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/SearX.popclipext",
+      "id": "com.popclip.extension.searx",
+      "name": "SearX",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/SelectAllAndCopy.popclipext",
+      "id": "com.pilotmoon.popclip.extension.select-all-and-copy",
+      "name": "Select All & Copy",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "key"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/ShowInNatoAlphabet.popclipext",
+      "id": "com.jbaruch.popclip.extension.show_in_nato_alphabet",
+      "name": "Show In NATO Alphabet",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "javascript"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Simplenote.popclipext",
+      "id": "com.pilotmoon.popclip.extension.simplenote",
+      "name": "Simplenote",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/SinaWeibo.popclipext",
+      "id": "com.pilotmoon.popclip.extension.weibo-osx",
+      "name": "Sina Weibo",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Slicereader.popclipext",
+      "id": "com.pilotmoon.popclip.extension.slicereader",
+      "name": "Slicereader",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/SmartTranslate.popclipext",
+      "id": "io.icell.SmartTranslate.PopClipExtension",
+      "name": "Smart Translate",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/SnipNotes.popclipext",
+      "id": "de.lisczyk.felix.SnipNotes.popclip.extension",
+      "name": "SnipNotes",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Sparrow.popclipext",
+      "id": "com.pilotmoon.popclip.extension.sparrow",
+      "name": "Sparrow",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Spotlight.popclipext",
+      "id": "com.pilotmoon.popclip.extension.spotlight",
+      "name": "Spotlight",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/StickyNotifications.popclipext",
+      "id": "com.pilotmoon.popclip.extension.sticky-notifications",
+      "name": "Sticky Notification",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/SublimeText.popclipext",
+      "id": "com.pilotmoon.popclip.extension.sublimetext",
+      "name": "Sublime Text",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Subscript.popclipext",
+      "id": "com.pilotmoon.popclip.extension.subscript",
+      "name": "Subscript",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "key"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Summarize.popclipext",
+      "id": "com.pilotmoon.popclip.extension.summarize",
+      "name": "Summarize",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Superscript.popclipext",
+      "id": "com.pilotmoon.popclip.extension.superscript",
+      "name": "Superscript",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "key"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Template_JavaScript_Network.popclipext",
+      "id": "template.js-network",
+      "name": "Template",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestAppleScriptResult.popclipext",
+      "id": "com.pilotmoon.popclip.extension.as-result-test",
+      "name": "AS Result",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestDynamic.popclipext",
+      "id": "com.pilotmoonunsignedtest.popclip.extension.test-jdynamics",
+      "name": "TestDynamic",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "javascript"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestFieldsAppleScript.popclipext",
+      "id": "com.pilotmoon.popclip.extension.test.ascript",
+      "name": "Test Applescript",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestFieldsShell.popclipext",
+      "id": "com.pilotmoon.popclip.extension.test.shell",
+      "name": "Test Shell",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestIconStrings.popclipext",
+      "id": null,
+      "name": null,
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [],
+      "scannerNote": "no Config file",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestIcons.popclipext",
+      "id": "com.pilotmoon.popclip.extension.test-svg",
+      "name": "Test Icons",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestJSAuth.popclipext",
+      "id": "com.pilotmoon.popclip.extension.test-js-auth",
+      "name": "TestJSAuth",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestJavaScript.popclipext",
+      "id": "com.pilotmoonunsignedtest.popclip.extension.test-js",
+      "name": "Test the JS plz",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestMinimal.popclipext",
+      "id": "TestMinimal",
+      "name": "Example",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestMultiConfig.popclipext",
+      "id": "com.pilotmoon.popclip.extension.textexpander",
+      "name": "TextExpander",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestOptions.popclipext",
+      "id": "com.pilotmoon.popclip.extension.test-options",
+      "name": "Test Options",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestPasswordAuth.popclipext",
+      "id": "com.pilotmoon.popclip.extension.test-pwauth",
+      "name": "TestPWAuth",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestPasteboard.popclipext",
+      "id": "com.pilotmoonunsignedtest.popclip.extension.test-jdynamics",
+      "name": "TestPasteboard",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "javascript"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestRTF.popclipext",
+      "id": "com.pilotmoon.popclip.extension.test-rtf",
+      "name": "TestRTF",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestScpt.popclipext",
+      "id": "TestScpt",
+      "name": "Test Scpt",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestScripts.popclipext",
+      "id": "TestScripts",
+      "name": "Test Scripts",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestSpin.popclipext",
+      "id": "com.pilotmoon.popclip.extension.test.spin",
+      "name": "Test Spinner",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TestYAML.popclipext",
+      "id": "TestYAML",
+      "name": "Example 2",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TextExpander.popclipext",
+      "id": "com.pilotmoon.popclip.extension.textexpander",
+      "name": "TextExpander",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TextMate.popclipext",
+      "id": "com.pilotmoon.popclip.extension.textmate",
+      "name": "TextMate",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TextWrangler.popclipext",
+      "id": "com.pilotmoon.popclip.extension.textwrangler",
+      "name": "TextWrangler",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Things.popclipext",
+      "id": "com.pilotmoon.popclip.extension.things",
+      "name": "Things",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Together.popclipext",
+      "id": "com.pilotmoon.popclip.extension.together",
+      "name": "Together",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/ToggleCase.popclipext",
+      "id": "com.oxxie.popclipextensions.togglecase",
+      "name": "Toggle Case",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TorontoPublicLibrary.popclipext",
+      "id": "com.frankferrao.popclip.extension.TorontoPublicLibrary",
+      "name": "TorontoPublicLibrary",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Tweet.popclipext",
+      "id": "com.pilotmoon.popclip.extension.tweet-osx",
+      "name": "Tweet",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TweetInNotificationCenter.popclipext",
+      "id": "com.pilotmoon.popclip.extension.tweet",
+      "name": "Tweet",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Tweetbot.popclipext",
+      "id": "com.pilotmoon.popclip.extension.tweetbot",
+      "name": "Tweetbot",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TweetbotUser.popclipext",
+      "id": "com.pilotmoon.popclip.extension.tweetbot-user",
+      "name": "Tweetbot User",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Twitter.popclipext",
+      "id": "com.pilotmoon.popclip.extension.twitter",
+      "name": "Twitter for Mac",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/TwitterColor.popclipext",
+      "id": "-colortest",
+      "name": "Twitter",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Twitterrific.popclipext",
+      "id": "com.pilotmoon.popclip.extension.twitterrific",
+      "name": "Twitterrific",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Underline.popclipext",
+      "id": "com.penlong.popclip.extension.preview-underline",
+      "name": "PDF Underline",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "key"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/UniversalTranslator.popclipext",
+      "id": "com.pilotmoon.popclip.extension.universal-translator",
+      "name": "Universal Translator",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Vocabulary.popclipext",
+      "id": "com.alanchen.popclip.extension.vocabulary",
+      "name": "Vocabulary.com",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/WhoIs.popclipext",
+      "id": "com.alenpuzic.popclip.extension.whois",
+      "name": "Whois",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Wunderlist.popclipext",
+      "id": "com.pilotmoon.popclip.extension.wunderlist",
+      "name": "Wunderlist",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/XcodeComment.popclipext",
+      "id": "net.shidanqing.popclip.extension.annotation",
+      "name": "Annotation",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "key"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/YoruFukurou.popclipext",
+      "id": "com.hzlzh.popclip.extension.yorufukurou",
+      "name": "YoruFukurou",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/Zhihu.popclipext",
+      "id": "com.liutf.popclip.extension.zhihu",
+      "name": "知乎",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/ZnajdzAukcje.popclipext",
+      "id": "com.sebaszwarc.znajdzaukcje",
+      "name": "Znajdz Aukcje",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/iCal.popclipext",
+      "id": "com.xinthink.popclip.extension.ical",
+      "name": "iCal",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/iTunesMusic.popclipext",
+      "id": "com.pilotmoon.popclip.extension.itunes-music",
+      "name": "iTunes Music",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "contrib/jmpy.popclipext",
+      "id": "com.jmpy.popclipext",
+      "name": "Jmpy",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "misc/NoID.popclipext",
+      "id": "NoID",
+      "name": "NoId",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "javascript"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/2Do.popclipext",
+      "id": "com.pilotmoon.popclip.extension.2do",
+      "name": "2Do",
+      "publishedShortcode": "de7znv",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Agenda.popclipext",
+      "id": "com.pilotmoon.popclip.extension.agenda",
+      "name": "Agenda",
+      "publishedShortcode": "62b6wp",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Alfred.popclipext",
+      "id": "com.pilotmoon.popclip.extension.alfred",
+      "name": "Alfred",
+      "publishedShortcode": "8tjp5p",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Alphagram.popclipext",
+      "id": "com.pilotmoon.popclip.extension.alphagram",
+      "name": "Alphagram",
+      "publishedShortcode": "w9stjb",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/AlternatingCase.popclipext",
+      "id": "com.pilotmoon.popclip.extension.alternating-case",
+      "name": "Alternating Case",
+      "publishedShortcode": "8kvc4y",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Amazon.popclipext",
+      "id": "com.pilotmoon.popclip.extension.amazon-search",
+      "name": "Amazon",
+      "publishedShortcode": "z7bjka",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Antidote.popclipext",
+      "id": "com.pilotmoon.popclip.extension.antidote",
+      "name": "Antidote",
+      "publishedShortcode": "ezfj24",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Antinote.popclipext",
+      "id": null,
+      "name": null,
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [],
+      "scannerNote": "snippet Config with a script body is not supported inside a package",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Anybox.popclipext",
+      "id": "cc.Anybox.anybox.PopClip.save",
+      "name": "Anybox",
+      "publishedShortcode": "55rk4w",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Append.popclipext",
+      "id": "com.pilotmoon.popclip.extension.append",
+      "name": "Append to Clipboard",
+      "publishedShortcode": "1yw6jd",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/ArchiveIs.popclipext",
+      "id": "com.pilotmoon.popclip.extension.archiveis",
+      "name": "Archive.today",
+      "publishedShortcode": "0yehgm",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Audible.popclipext",
+      "id": "com.pilotmoon.popclip.extension.audible-search",
+      "name": "Audible",
+      "publishedShortcode": "ezvs1d",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/BBEdit.popclipext",
+      "id": "com.pilotmoon.popclip.extension.bbedit",
+      "name": "BBEdit",
+      "publishedShortcode": "xytazw",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Baidu.popclipext",
+      "id": "com.snowzjx.popclip.extension.baidu-search",
+      "name": "Baidu",
+      "publishedShortcode": "nwcz3b",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Base64.popclipext",
+      "id": "com.pilotmoon.popclip.extension.base64",
+      "name": "Base64",
+      "publishedShortcode": "6ymxrg",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Bear.popclipext",
+      "id": "com.pilotmoon.popclip.extension.bear",
+      "name": "Bear",
+      "publishedShortcode": "e0h8fr",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Bike.popclipext",
+      "id": "com.pilotmoon.popclip.extension.bike",
+      "name": "Bike",
+      "publishedShortcode": "e7gyf8",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Bing.popclipext",
+      "id": "com.pilotmoon.popclip.extension.bing",
+      "name": "Bing",
+      "publishedShortcode": "hfp7pg",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/BingTranslator.popclipext",
+      "id": "com.pilotmoon.popclip.extension.bing-translator",
+      "name": "Bing Translator",
+      "publishedShortcode": "vjmt48",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Bitly.popclipext",
+      "id": "com.pilotmoon.popclip.extension.bitly",
+      "name": "Bitly",
+      "publishedShortcode": "sj4s5m",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Brackets.popclipext",
+      "id": "com.pilotmoon.popclip.extension.brackets",
+      "name": "Brackets",
+      "publishedShortcode": "awjzhy",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/BubbleTranslate3.popclipext",
+      "id": "ru.bubble-translate.pop-clip.translate",
+      "name": "Bubble Translate",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Buffer.popclipext",
+      "id": "com.pilotmoon.popclip.extension.buffer",
+      "name": "Buffer",
+      "publishedShortcode": "hpx6q6",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/BundleID.popclipext",
+      "id": "com.pilotmoon.popclip.extension.bundleid",
+      "name": "Bundle ID",
+      "publishedShortcode": "0p0xhv",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/BusyCal.popclipext",
+      "id": "com.pilotmoon.popclip.extension.busycal",
+      "name": "BusyCal",
+      "publishedShortcode": "qbbxn1",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/BusyContacts.popclipext",
+      "id": "com.pilotmoon.popclip.extension.busycontacts",
+      "name": "BusyContacts",
+      "publishedShortcode": "vganjj",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Calculate.popclipext",
+      "id": "com.pilotmoon.popclip.extension.calculate",
+      "name": "Calculate",
+      "publishedShortcode": "7ccsap",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Call.popclipext",
+      "id": "com.pilotmoon.popclip.extension.call",
+      "name": "Call",
+      "publishedShortcode": "y1e8y0",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/CamelCamelCamel.popclipext",
+      "id": "com.pilotmoon.popclip.extension.camelcamelcamel",
+      "name": "CamelCamelCamel",
+      "publishedShortcode": "9tr4cr",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Capitalize.popclipext",
+      "id": "com.pilotmoon.popclip.extension.capitalize",
+      "name": "Capitalize Words",
+      "publishedShortcode": "hvg8y3",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Cardhop.popclipext",
+      "id": "com.pilotmoon.popclip.extension.cardhop",
+      "name": "Cardhop",
+      "publishedShortcode": "7r9whf",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/CharCount.popclipext",
+      "id": "com.pilotmoon.popclip.extension.charcount",
+      "name": "Character Count",
+      "publishedShortcode": "4hzjpg",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "cannot run here (action has no behaviour)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/ChatGPTApp.popclipext",
+      "id": "com.pilotmoon.popclip.extension.chatgpt-app",
+      "name": "ChatGPT App",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/ChatGPTWebsite.popclipext",
+      "id": "com.pilotmoon.popclip.extension.chatgpt-website",
+      "name": "ChatGPT Website",
+      "publishedShortcode": "73pbck",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/ClaudeWebsite.popclipext",
+      "id": "com.pilotmoon.popclip.extension.claude-website",
+      "name": "Claude Website",
+      "publishedShortcode": "69v3ms",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/ClickUp.popclipext",
+      "id": "com.pilotmoon.popclip.extension.clickup",
+      "name": "ClickUp",
+      "publishedShortcode": "qpdzej",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/CodeCase.popclipext",
+      "id": "com.pilotmoon.popclip.extension.code-case",
+      "name": "Coding Cases",
+      "publishedShortcode": "rzrz9e",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/CommaList.popclipext",
+      "id": "com.pilotmoon.popclip.extension.comma-list",
+      "name": "Comma List",
+      "publishedShortcode": "yfcs28",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Convert.popclipext",
+      "id": "com.pilotmoon.popclip.extension.convert",
+      "name": "Convert",
+      "publishedShortcode": "yw6cpd",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/CopyAsMarkdown.popclipext",
+      "id": "com.pilotmoon.popclip.extension.copy-as-markdown",
+      "name": "Copy as Markdown",
+      "publishedShortcode": "r77xv8",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/CopyLinkToHighlight.popclipext",
+      "id": "com.pilotmoon.popclip.extension.copy-link-to-Highlight",
+      "name": "Copy Link to Highlight",
+      "publishedShortcode": "bqdd6c",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Craft.popclipext",
+      "id": "com.pilotmoon.popclip.extension.craft",
+      "name": "Craft",
+      "publishedShortcode": "6tnp73",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Curiota.popclipext",
+      "id": "com.zengobi.curiota.popclip",
+      "name": "Curiota",
+      "publishedShortcode": "9124zj",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/CyrillicTransliteration.popclipext",
+      "id": "com.pilotmoon.popclip.extension.cyrillic-transliteration",
+      "name": "Cyrillic Transliteration",
+      "publishedShortcode": "w9pny6",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/DEVONthink.popclipext",
+      "id": "com.pilotmoon.popclip.extension.devonthink3",
+      "name": "DEVONthink",
+      "publishedShortcode": "1w8gze",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/DOI.popclipext",
+      "id": "com.pilotmoon.popclip.extension.doi",
+      "name": "DOI",
+      "publishedShortcode": "frmvjs",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Dash.popclipext",
+      "id": "com.pilotmoon.popclip.extension.dash",
+      "name": "Dash",
+      "publishedShortcode": "5y965f",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/DayOne.popclipext",
+      "id": "com.pilotmoon.popclip.extension.dayone",
+      "name": "Day One",
+      "publishedShortcode": "ddsyvb",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/DeepLTranslator.popclipext",
+      "id": "com.pilotmoon.popclip.extension.deepl-translator",
+      "name": "DeepL Translator",
+      "publishedShortcode": "awwqpp",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Delete.popclipext",
+      "id": "com.pilotmoon.popclip.extension.delete",
+      "name": "Delete",
+      "publishedShortcode": "7qx7w2",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "key"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Deliveries.popclipext",
+      "id": "com.pilotmoon.popclip.extension.deliveries",
+      "name": "Deliveries",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Discogs.popclipext",
+      "id": "com.pilotmoon.popclip.extension.discogs",
+      "name": "Discogs",
+      "publishedShortcode": "px544f",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Dockside.popclipext",
+      "id": "com.hachipoo.Dockside.PopClipExtension",
+      "name": "Dockside",
+      "publishedShortcode": "p8rrp7",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Doit.popclipext",
+      "id": "com.snoworange.Doitim-Mac",
+      "name": "Doit.im",
+      "publishedShortcode": "hmaayn",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Douban.popclipext",
+      "id": "com.pilotmoon.popclip.extension.douban",
+      "name": "Douban",
+      "publishedShortcode": "z822bm",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Downie.popclipext",
+      "id": "com.pilotmoon.popclip.extension.open-in-downie",
+      "name": "Downie",
+      "publishedShortcode": "4tfd7x",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Drafts.popclipext",
+      "id": "com.pilotmoon.popclip.extension.drafts",
+      "name": "Drafts",
+      "publishedShortcode": "9p32gf",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Droplr.popclipext",
+      "id": "com.pilotmoon.popclip.extension.droplr",
+      "name": "Droplr",
+      "publishedShortcode": "g9x1ny",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Dropover.popclipext",
+      "id": "com.pilotmoon.popclip.extension.dropiver",
+      "name": "Dropover",
+      "publishedShortcode": "zme7a4",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Dropshelf.popclipext",
+      "id": "com.pilotmoon.popclip.extension.dropshelf",
+      "name": "Dropshelf",
+      "publishedShortcode": "dftn25",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/DuckDuckGo.popclipext",
+      "id": "com.pilotmoon.popclip.extension.duckduckgo",
+      "name": "DuckDuckGo",
+      "publishedShortcode": "kdc0qy",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Due.popclipext",
+      "id": "com.pilotmoon.popclip.extension.due",
+      "name": "Due",
+      "publishedShortcode": "afv2db",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/EagleFiler.popclipext",
+      "id": "com.pilotmoon.popclip.extension.eaglefiler",
+      "name": "EagleFiler",
+      "publishedShortcode": "rb49jk",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Ebay.popclipext",
+      "id": "com.pilotmoon.popclip.extension.ebay",
+      "name": "Ebay",
+      "publishedShortcode": "7xpd57",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Ecosia.popclipext",
+      "id": "com.pilotmoon.popclip.extension.ecosia",
+      "name": "Ecosia",
+      "publishedShortcode": "k0qmqe",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Email.popclipext",
+      "id": "com.pilotmoon.popclip.extension.generic-mail",
+      "name": "Email",
+      "publishedShortcode": "mjakak",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Etsy.popclipext",
+      "id": "com.pilotmoon.popclip.extension.etsy",
+      "name": "Etsy",
+      "publishedShortcode": "8eyzkz",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Eudic.popclipext",
+      "id": "com.pilotmoon.popclip.extension.eudic",
+      "name": "Eudic",
+      "publishedShortcode": "8ap4bc",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Evernote.popclipext",
+      "id": "com.pilotmoon.popclip.extension.evernote",
+      "name": "Evernote",
+      "publishedShortcode": "gfthdw",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Fantastical3.popclipext",
+      "id": "com.pilotmoon.popclip.extension.fantastical3",
+      "name": "Fantastical 3",
+      "publishedShortcode": "r74ss5",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/FindAnyFile.popclipext",
+      "id": "org.tempel.pilotmoon.popclip.extension.FindAnyFile",
+      "name": "FindAnyFile",
+      "publishedShortcode": "4hgr6s",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Floating.popclipext",
+      "id": null,
+      "name": null,
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [],
+      "scannerNote": "while parsing a flow mapping\n  in \"<unicode string>\", line 7, column 7:\n     app: { name: Floating, bundleIdentifi ... \n          ^\nexpected ',' or '}', but got '?'\n  in \"<unicode string>\", line 7, column 139:\n     ... -picture-in-picture/id1508833245?mt=12, checkInstalled: true }\n                                         ^",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Formatting.popclipext",
+      "id": "com.pilotmoon.popclip.extension.formatting",
+      "name": "Formatting",
+      "publishedShortcode": "xh9jan",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "key"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Freeform.popclipext",
+      "id": "com.pilotmoon.popclip.extension.freeform",
+      "name": "Freeform",
+      "publishedShortcode": "35tnkw",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/FullHalfWidth.popclipext",
+      "id": "com.pilotmoon.popclip.extension.fullhalfwidth",
+      "name": "Full/Half Width",
+      "publishedShortcode": "s16hap",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/GetIP.popclipext",
+      "id": "com.pilotmoon.popclip.extension.getip",
+      "name": "Get IP",
+      "publishedShortcode": "k50jz6",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Gladys.popclipext",
+      "id": "com.andrewford.popclip.extension.gladystext",
+      "name": "Gladys",
+      "publishedShortcode": "5n6ehh",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Glosbe.popclipext",
+      "id": "com.pilotmoon.popclip.extension.glosbe",
+      "name": "Glosbe",
+      "publishedShortcode": "8nsm31",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/GoodLinks.popclipext",
+      "id": "com.pilotmoon.popclip.extension.goodlinks",
+      "name": "GoodLinks",
+      "publishedShortcode": "deg31w",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Goodreads.popclipext",
+      "id": "com.pilotmoon.popclip.extension.goodreads",
+      "name": "Goodreads",
+      "publishedShortcode": "xy7tjc",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/GoogleImages.popclipext",
+      "id": "com.pilotmoon.popclip.extension.google-images",
+      "name": "Google Images",
+      "publishedShortcode": "780a6k",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/GoogleMaps.popclipext",
+      "id": "com.pilotmoon.popclip.extension.google-maps",
+      "name": "Google Maps",
+      "publishedShortcode": "07802r",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/GoogleScholar.popclipext",
+      "id": "com.pilotmoon.popclip.extension.google-scholar",
+      "name": "Google Scholar",
+      "publishedShortcode": "p20n16",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/GoogleSearch.popclipext",
+      "id": "com.pilotmoon.popclip.extension.google-search",
+      "name": "Google",
+      "publishedShortcode": "ckrwqw",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/GoogleTranslate.popclipext",
+      "id": "com.pilotmoon.popclip.extension.google-translate",
+      "name": "Google Translate",
+      "publishedShortcode": "d38ynn",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/GrokWebsite.popclipext",
+      "id": "com.pilotmoon.popclip.extension.grok-website",
+      "name": "Grok Website",
+      "publishedShortcode": "j2wxmc",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/HTMLEncode.popclipext",
+      "id": "com.pilotmoon.popclip.extension.htmlencode",
+      "name": "HTML Encode",
+      "publishedShortcode": "py867z",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Highlight.popclipext",
+      "id": "com.pilotmoon.popclip.extension.highlight",
+      "name": "Highlight",
+      "publishedShortcode": "v1hh5h",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "key"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/HoudahSpot.popclipext",
+      "id": "com.pilotmoon.popclip.extension.HoudahSpot",
+      "name": "HoudahSpot",
+      "publishedShortcode": "g7fk28",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Hyphenate.popclipext",
+      "id": "com.pilotmoon.popclip.extension.hyphenate",
+      "name": "Hyphenate",
+      "publishedShortcode": "cyfq5y",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/IINA.popclipext",
+      "id": "com.pilotmoon.popclip.extension.iina",
+      "name": "IINA",
+      "publishedShortcode": "fk4e5k",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/IMDb.popclipext",
+      "id": "com.pilotmoon.popclip.extension.imdb",
+      "name": "IMDb",
+      "publishedShortcode": "fq9d07",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/InstantTranslate.popclipext",
+      "id": "com.popclip.extension.instant-translate",
+      "name": "Instant Translate",
+      "publishedShortcode": "08hhdb",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Instapaper.popclipext",
+      "id": "com.pilotmoon.popclip.extension.instapaper",
+      "name": "Instapaper",
+      "publishedShortcode": "f2xzek",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/JD.popclipext",
+      "id": "com.pilotmoon.popclip.extension.jd",
+      "name": "JD",
+      "publishedShortcode": "v8m6j4",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/JoinLines.popclipext",
+      "id": "com.pilotmoon.popclip.extension.join-lines",
+      "name": "Join Lines",
+      "publishedShortcode": "01vjf6",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Kagi.popclipext",
+      "id": "com.pilotmoon.popclip.extension.kagi",
+      "name": "Kagi",
+      "publishedShortcode": "z9d8vd",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/KagiTranslate.popclipext",
+      "id": "com.pilotmoon.popclip.extension.kagi-translate",
+      "name": "Kagi Translate",
+      "publishedShortcode": "ezfkbp",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/LargeType.popclipext",
+      "id": "com.pilotmoon.popclip.extension.large-type",
+      "name": "Large Type",
+      "publishedShortcode": "8xb0vb",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "javascript"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/LatexToMathML.popclipext",
+      "id": "com.pilotmoon.popclip.extension.latextomathml",
+      "name": "Latex to MathML",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/LaunchBar.popclipext",
+      "id": "com.pilotmoon.popclip.extension.launchbar",
+      "name": "LaunchBar",
+      "publishedShortcode": "4wx7bh",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Leap.popclipext",
+      "id": "com.pilotmoon.popclip.extension.leap",
+      "name": "Leap",
+      "publishedShortcode": "vmhrkk",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Leech.popclipext",
+      "id": "com.pilotmoon.popclip.extension.leech",
+      "name": "Leech",
+      "publishedShortcode": "fpfbn7",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Lexibird.popclipext",
+      "id": "com.pilotmoon.popclip.extension.lexibird",
+      "name": "Lexibird",
+      "publishedShortcode": "nhfcp3",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/LineCount.popclipext",
+      "id": "com.pilotmoon.popclip.extension.linecount",
+      "name": "Line Count",
+      "publishedShortcode": "az0jxd",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/LinkedIn.popclipext",
+      "id": "com.pilotmoon.popclip.extension.linkedin",
+      "name": "LinkedIn",
+      "publishedShortcode": "j7ds2s",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Logseq.popclipext",
+      "id": "me.eindex.popclip.extesion.logseq",
+      "name": "Logseq",
+      "publishedShortcode": "a51hz5",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Lowercase.popclipext",
+      "id": "com.pilotmoon.popclip.extension.lowercase",
+      "name": "Lowercase",
+      "publishedShortcode": "krvyqd",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/MDNWebDocs.popclipext",
+      "id": "com.pilotmoon.popclip.extension.mdn",
+      "name": "MDN Web Docs",
+      "publishedShortcode": "t65bec",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/MakeSticky.popclipext",
+      "id": "com.pilotmoon.popclip.extension.make-sticky",
+      "name": "Stickies",
+      "publishedShortcode": "a6arrs",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Maps.popclipext",
+      "id": "com.pilotmoon.popclip.extension.maps",
+      "name": "Maps",
+      "publishedShortcode": "bcjg80",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Mapy.popclipext",
+      "id": "com.pilotmoon.popclip.extension.mapy",
+      "name": "Mapy",
+      "publishedShortcode": "4ka8r3",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Markdown.popclipext",
+      "id": "com.pilotmoon.popclip.extension.markdown-to-html",
+      "name": "Markdown",
+      "publishedShortcode": "kbzse6",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/MarkdownToRTF.popclipext",
+      "id": "com.pilotmoon.popclip.extension.markdown-to-rtf",
+      "name": "Markdown to RTF",
+      "publishedShortcode": "pt4k2d",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/MateTranslate.popclipext",
+      "id": "com.pilotmoon.popclip.extension.matetranslate",
+      "name": "Mate Translate",
+      "publishedShortcode": "jha0ze",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Messages.popclipext",
+      "id": "com.pilotmoon.popclip.extension.messages",
+      "name": "Messages",
+      "publishedShortcode": "fnacak",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "javascript"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Music.popclipext",
+      "id": "com.pilotmoon.popclip.extension.music",
+      "name": "Apple Music",
+      "publishedShortcode": "f2tnjr",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/NameColor.popclipext",
+      "id": "com.oxxie.popclipextensions.namecolor",
+      "name": "Name Color",
+      "publishedShortcode": "zn9dyt",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Naver.popclipext",
+      "id": "com.pilotmoon.popclip.extension.SearchNaver",
+      "name": "Naver",
+      "publishedShortcode": "enc6pz",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/NaverMap.popclipext",
+      "id": "com.pilotmoon.popclip.extension.navermap",
+      "name": "Naver Map",
+      "publishedShortcode": "ebp66h",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/NoteAway.popclipext",
+      "id": "com.pilotmoon.popclip.extension.noteaway",
+      "name": "NoteAway",
+      "publishedShortcode": "xabpfp",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Notefile.popclipext",
+      "id": "com.pilotmoon.popclip.extension.junecloud-notefile",
+      "name": "Notefile",
+      "publishedShortcode": "9znbj6",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Notes.popclipext",
+      "id": "com.pilotmoon.popclip.extension.notes",
+      "name": "Notes",
+      "publishedShortcode": "s9zv38",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/NotesTab.popclipext",
+      "id": "com.pilotmoon.popclip.extension.notestab",
+      "name": "MiniNote Pro",
+      "publishedShortcode": "9hsp3q",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Notion.popclipext",
+      "id": "com.pilotmoon.popclip.extension.notion",
+      "name": "Notion",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Obsidian.popclipext",
+      "id": "com.pilotmoon.popclip.extension.obsidian",
+      "name": "Obsidian",
+      "publishedShortcode": "wfhk0x",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Ollama.popclipext",
+      "id": "com.pilotmoon.popclip.extension.ollama",
+      "name": "Ollama",
+      "publishedShortcode": "6p9xq3",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/OmniFocus.popclipext",
+      "id": "com.pilotmoon.popclip.extension.omnifocus",
+      "name": "OmniFocus",
+      "publishedShortcode": "69vkqz",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Omnivore.popclipext",
+      "id": "com.pilotmoon.popclip.extension.omnivore",
+      "name": "Omnivore",
+      "publishedShortcode": "edyw91",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/OneNote.popclipext",
+      "id": "com.pilotmoon.popclip.extension.onenote",
+      "name": "OneNote",
+      "publishedShortcode": "0kk4s6",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/OnlineDictionary.popclipext",
+      "id": "com.pilotmoon.popclip.extension.online-dictionary",
+      "name": "Online Dictionary",
+      "publishedShortcode": "966gax",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/OnlineThesaurus.popclipext",
+      "id": "com.pilotmoon.popclip.extension.online-thesaurus",
+      "name": "Online Thesaurus",
+      "publishedShortcode": "g9rfgp",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/OpenAIChat.popclipext",
+      "id": "com.pilotmoon.popclip.extension.chatgpt",
+      "name": "OpenAI Chat",
+      "publishedShortcode": "48f32j",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Pages.popclipext",
+      "id": "com.pilotmoon.popclip.extension.pages",
+      "name": "Pages",
+      "publishedShortcode": "twgkmj",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Paper.popclipext",
+      "id": "com.pilotmoon.popclip.extension.paper",
+      "name": "Paper",
+      "publishedShortcode": "aj7s7a",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Parcel.popclipext",
+      "id": "com.pilotmoon.popclip.extension.parcel",
+      "name": "Parcel",
+      "publishedShortcode": "q52q9r",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/PasteAndEnter.popclipext",
+      "id": "com.pilotmoon.popclip.extension.pasteandenter",
+      "name": "Paste and Enter",
+      "publishedShortcode": "b2fbhe",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/PasteAndMatch.popclipext",
+      "id": "com.pilotmoon.popclip.extension.pasteplain",
+      "name": "Paste and Match Style",
+      "publishedShortcode": "qrcc82",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/PhoneAmego.popclipext",
+      "id": "com.pilotmoon.popclip.extension.PhoneAmego",
+      "name": "Phone Amego",
+      "publishedShortcode": "hvze18",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Pinboard.popclipext",
+      "id": "com.pilotmoon.popclip.extension.pinboard",
+      "name": "Pinboard",
+      "publishedShortcode": "5zp8bb",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Pinyin.popclipext",
+      "id": "com.pilotmoon.popclip.extension.pinyin",
+      "name": "Pinyin",
+      "publishedShortcode": "xzb667",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "javascript"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Pocket.popclipext",
+      "id": "com.pilotmoon.popclip.extension.pocket",
+      "name": "Pocket",
+      "publishedShortcode": "z0d0zd",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/PopDo.popclipext",
+      "id": "com.pilotmoon.popclip.extension.popdo",
+      "name": "PopDo",
+      "publishedShortcode": "d9mr13",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Presearch.popclipext",
+      "id": "com.pilotmoon.popclip.extension.presearch",
+      "name": "Presearch",
+      "publishedShortcode": "w25tea",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Print.popclipext",
+      "id": "com.pilotmoon.popclip.extension.print",
+      "name": "Print",
+      "publishedShortcode": "ykm8zw",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/PubMed.popclipext",
+      "id": "com.pilotmoon.popclip.extension.pubmed",
+      "name": "PubMed",
+      "publishedShortcode": "2ed0xf",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Quicksilver.popclipext",
+      "id": "com.pilotmoon.popclip.extension.quicksilver",
+      "name": "Quicksilver",
+      "publishedShortcode": "txr2db",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Quiver.popclipext",
+      "id": "com.pilotmoon.popclip.extension.quiver",
+      "name": "Quiver",
+      "publishedShortcode": "cbvj5j",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Quotes.popclipext",
+      "id": "com.pilotmoon.popclip.extension.quotes",
+      "name": "Quotes",
+      "publishedShortcode": "wyq4we",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Qwant.popclipext",
+      "id": "com.pilotmoon.popclip.extension.qwant",
+      "name": "Qwant",
+      "publishedShortcode": "v7hgh5",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/ROT13.popclipext",
+      "id": "com.pilotmoon.popclip.extension.rot13",
+      "name": "ROT13",
+      "publishedShortcode": "m1fa94",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/RaindropIO.popclipext",
+      "id": "com.miller.popclip.extension.raindrop",
+      "name": "Raindrop.io",
+      "publishedShortcode": "rc70x5",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/ReadingList.popclipext",
+      "id": "com.pilotmoon.popclip.extension.safari-reading-list",
+      "name": "Reading List",
+      "publishedShortcode": "cs8ygk",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Readwise.popclipext",
+      "id": "com.pilotmoon.popclip.extension.readwise",
+      "name": "Readwise",
+      "publishedShortcode": "1zemre",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Reminders.popclipext",
+      "id": null,
+      "name": null,
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [],
+      "scannerNote": "snippet Config with a script body is not supported inside a package",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/RemoveSpaces.popclipext",
+      "id": "com.pilotmoon.popclip.extension.remove-spaces",
+      "name": "Remove Spaces",
+      "publishedShortcode": "54cf55",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "javascript"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Reverse.popclipext",
+      "id": "com.pilotmoon.popclip.extension.reverse",
+      "name": "Reverse",
+      "publishedShortcode": "gt0c91",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "javascript"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Reverso.popclipext",
+      "id": "com.pilotmoon.popclip.extension.reverso",
+      "name": "Reverso",
+      "publishedShortcode": "wcsadc",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/RoamResearch.popclipext",
+      "id": "com.pilotmoon.popclip.extension.roamresearch",
+      "name": "Roam Research",
+      "publishedShortcode": "4kcy03",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/RottenTomatoes.popclipext",
+      "id": "com.pilotmoon.popclip.extension.rotten-tomatoes",
+      "name": "RottenTomatoes",
+      "publishedShortcode": "b1cyx8",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/RunCommand.popclipext",
+      "id": "com.pilotmoon.popclip.extension.rtc",
+      "name": "Terminal",
+      "publishedShortcode": "8jj623",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Say.popclipext",
+      "id": "com.pilotmoon.popclip.extension.say",
+      "name": "Say",
+      "publishedShortcode": "emvaxx",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/ScreenFloat.popclipext",
+      "id": "at.EternalStorms.ScreenFloat.PopClipExtension",
+      "name": "ScreenFloat",
+      "publishedShortcode": "bz87ea",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Scrivener.popclipext",
+      "id": "com.pilotmoon.popclip.extension.scrivener",
+      "name": "Scrivener",
+      "publishedShortcode": "xptzb5",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/SelectAll.popclipext",
+      "id": "com.pilotmoon.popclip.extension.select-all",
+      "name": "Select All",
+      "publishedShortcode": "97rvpd",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "javascript"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/SentenceCase.popclipext",
+      "id": "com.pilotmoon.popclip.extension.sentence-case",
+      "name": "Sentence Case",
+      "publishedShortcode": "b3yeve",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/ShortMenu.popclipext",
+      "id": "com.pilotmoon.popclip.extension.short-menu",
+      "name": "Short Menu",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/ShortenLink.popclipext",
+      "id": "com.pilotmoon.popclip.extension.urlshortener",
+      "name": "Shorten Link",
+      "publishedShortcode": "6pa6yt",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Shuffle.popclipext",
+      "id": "com.pilotmoon.popclip.extension.shuffle",
+      "name": "Shuffle",
+      "publishedShortcode": "tss74a",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/SideNotes.popclipext",
+      "id": "com.pilotmoon.popclip.extension.sidenotes",
+      "name": "SideNotes",
+      "publishedShortcode": "fjz0a2",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Skype.popclipext",
+      "id": "com.pilotmoon.popclip.extension.skype",
+      "name": "Skype",
+      "publishedShortcode": "d5hnfy",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Slack.popclipext",
+      "id": "com.pilotmoon.popclip.extension.slack",
+      "name": "Slack",
+      "publishedShortcode": "wdp7x0",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Slugify.popclipext",
+      "id": "com.pilotmoon.popclip.extension.slugify",
+      "name": "Slugify",
+      "publishedShortcode": "rqgjxd",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/SnippetsLab.popclipext",
+      "id": "com.pilotmoon.popclip.extension.SnippetsLab",
+      "name": "SnippetsLab",
+      "publishedShortcode": "9hn2ej",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Sort.popclipext",
+      "id": "com.pilotmoon.popclip.extension.sort",
+      "name": "Sort",
+      "publishedShortcode": "41mamt",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "javascript"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Spotify.popclipext",
+      "id": "com.pilotmoon.popclip.extension.spotify-search",
+      "name": "Spotify",
+      "publishedShortcode": "fxz1nb",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/StartPage.popclipext",
+      "id": "com.pilotmoon.popclip.extension.startpage",
+      "name": "StartPage",
+      "publishedShortcode": "wsqynj",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Swap.popclipext",
+      "id": "com.pilotmoon.popclip.extension.swap",
+      "name": "Swap with Clipboard",
+      "publishedShortcode": "2x5yjg",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Tana.popclipext",
+      "id": "com.pilotmoon.popclip.extension.tana",
+      "name": "Tana",
+      "publishedShortcode": "x9q882",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Taobao.popclipext",
+      "id": "com.pilotmoon.popclip.extension.taobao-search",
+      "name": "Taobao",
+      "publishedShortcode": "tv2c35",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/TaskPaper.popclipext",
+      "id": "com.pilotmoon.popclip.extension.taskpaper",
+      "name": "TaskPaper",
+      "publishedShortcode": "jpvndj",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Tembo.popclipext",
+      "id": "com.pilotmoon.popclip.extension.tembo",
+      "name": "Tembo",
+      "publishedShortcode": "zvdj0n",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/TextEdit.popclipext",
+      "id": "com.pilotmoon.popclip.extension.textedit",
+      "name": "TextEdit",
+      "publishedShortcode": "34fddp",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/TextSoap.popclipext",
+      "id": "com.pilotmoon.popclip.extension.textsoap",
+      "name": "TextSoap",
+      "publishedShortcode": "x6kvb6",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/TheHitList.popclipext",
+      "id": "com.potionfactory.popclip-extension.TheHitList",
+      "name": "The Hit List",
+      "publishedShortcode": null,
+      "decision": "source-only-not-approved",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Things3.popclipext",
+      "id": "com.pilotmoon.popclip.extension.things3",
+      "name": "Things 3",
+      "publishedShortcode": "2xsjgt",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/TickTick.popclipext",
+      "id": "com.pilotmoon.popclip.extension.ticktick",
+      "name": "TickTick",
+      "publishedShortcode": "htd93q",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Timestamp.popclipext",
+      "id": "com.pilotmoon.popclip.extension.timestamp",
+      "name": "Timestamp",
+      "publishedShortcode": "batmjr",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/TitleCase.popclipext",
+      "id": "com.pilotmoon.popclip.extension.title-case",
+      "name": "Title Case",
+      "publishedShortcode": "2cr65p",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "shell"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Todo.popclipext",
+      "id": "com.pilotmoon.popclip.extension.appigo-todo",
+      "name": "Todo",
+      "publishedShortcode": "1h3ywp",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Todoist.popclipext",
+      "id": "com.pilotmoon.popclip.extension.todoist",
+      "name": "Todoist",
+      "publishedShortcode": "yzf4sx",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Tot.popclipext",
+      "id": "com.pilotmoon.popclip.extension.tot",
+      "name": "Tot",
+      "publishedShortcode": "jdebg7",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/TradSim.popclipext",
+      "id": "com.pilotmoon.popclip.extension.traditional-simplified",
+      "name": "Traditional/Simplified",
+      "publishedShortcode": "fwrfay",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/TranslateTab.popclipext",
+      "id": "com.pilotmoon.popclip.extension.translate-tab",
+      "name": "Translate Tab",
+      "publishedShortcode": "chthw3",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Translatium.popclipext",
+      "id": "com.pilotmoon.popclip.extension.translatium",
+      "name": "Translatium",
+      "publishedShortcode": "tx4q96",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/TwitterSearch.popclipext",
+      "id": "com.pilotmoon.popclip.extension.twitter-search",
+      "name": "Twitter Search",
+      "publishedShortcode": "7kmrpe",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Typinator.popclipext",
+      "id": "com.pilotmoon.popclip.extension.typinator",
+      "name": "Typinator",
+      "publishedShortcode": "6stfvg",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (applescript actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/URLEncode.popclipext",
+      "id": "com.pilotmoon.popclip.extension.urlencode",
+      "name": "URL Encode",
+      "publishedShortcode": "t1gh6s",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Ulysses.popclipext",
+      "id": "com.pilotmoon.popclip.extension.ulysses",
+      "name": "Ulysses",
+      "publishedShortcode": "1qcya7",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Unclutter.popclipext",
+      "id": "com.pilotmoon.popclip.extension.unclutter",
+      "name": "Unclutter",
+      "publishedShortcode": "88j3w5",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Underscore.popclipext",
+      "id": "com.pilotmoon.popclip.extension.underscore",
+      "name": "Underscore",
+      "publishedShortcode": "09a521",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/UnicodeLens.popclipext",
+      "id": "com.pilotmoon.popclip.extension.unicode-lens",
+      "name": "Unicode Lens",
+      "publishedShortcode": "ve8j52",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/UnixTime.popclipext",
+      "id": "com.pilotmoon.popclip.extension.unix-time",
+      "name": "Unix Time",
+      "publishedShortcode": "ahphpq",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/UpNote.popclipext",
+      "id": "com.pilotmoon.popclip.extension.upnote",
+      "name": "UpNote",
+      "publishedShortcode": "h036ws",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Uppercase.popclipext",
+      "id": "com.pilotmoon.popclip.extension.uppercase",
+      "name": "Uppercase",
+      "publishedShortcode": "fzmf6w",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/UrbanDictionary.popclipext",
+      "id": "com.pilotmoon.popclip.extension.urban-dictionary",
+      "name": "Urban Dictionary",
+      "publishedShortcode": "6n9d0y",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/WaybackMachine.popclipext",
+      "id": "com.pilotmoon.popclip.extension.waybackmachine",
+      "name": "Wayback Machine",
+      "publishedShortcode": "1pbpz0",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "module"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/What3Words.popclipext",
+      "id": "com.pilotmoon.popclip.extension.what3words",
+      "name": "What3Words",
+      "publishedShortcode": "4q8mrz",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Wikipedia.popclipext",
+      "id": "com.pilotmoon.popclip.extension.wikipedia",
+      "name": "Wikipedia",
+      "publishedShortcode": "cv37yb",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/WolframAlpha.popclipext",
+      "id": "com.pilotmoon.popclip.extension.wolframalpha",
+      "name": "Wolfram Alpha",
+      "publishedShortcode": "by5b30",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/WordCount.popclipext",
+      "id": "com.pilotmoon.popclip.extension.wordcount",
+      "name": "Word Count",
+      "publishedShortcode": "p94cm7",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "cannot run here (action has no behaviour)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/WorldCat.popclipext",
+      "id": "com.pilotmoon.popclip.extension.worldcat",
+      "name": "WorldCat",
+      "publishedShortcode": "pbj90j",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/YahooJapanSearch.popclipext",
+      "id": "com.pilotmoon.popclip.extension.yahoo-japan-search",
+      "name": "Yahoo! Japan",
+      "publishedShortcode": "t1z0y4",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/YahooSearch.popclipext",
+      "id": "com.pilotmoon.popclip.extension.yahoo-search",
+      "name": "Yahoo!",
+      "publishedShortcode": "tngcm1",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Yandex.popclipext",
+      "id": "com.pilotmoon.popclip.extension.yandex",
+      "name": "Yandex",
+      "publishedShortcode": "1bgbbm",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Yoink.popclipext",
+      "id": "at.EternalStorms.Yoink.PopClipExtension",
+      "name": "Yoink",
+      "publishedShortcode": "7qrrqm",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/Yojimbo.popclipext",
+      "id": "com.pilotmoon.popclip.extension.yojimbo",
+      "name": "Yojimbo",
+      "publishedShortcode": "0m7bex",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "unsupported"
+      ],
+      "scannerNote": "needs macOS (service actions are macOS-only)",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/YouTube.popclipext",
+      "id": "com.pilotmoon.popclip.extension.youtube",
+      "name": "YouTube",
+      "publishedShortcode": "ahsn7t",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    },
+    {
+      "path": "source/nvALT.popclipext",
+      "id": "com.pilotmoon.popclip.extension.nvalt",
+      "name": "nvALT",
+      "publishedShortcode": "y1tae2",
+      "decision": "see-published-review",
+      "actionTypes": [
+        "url"
+      ],
+      "scannerNote": "",
+      "securityReview": "not-audited-as-a-separate-release"
+    }
+  ]
+}
