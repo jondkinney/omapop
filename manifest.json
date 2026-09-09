@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "io.github.jondkinney.omapop",
   "name": "Omapop",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "author": "Jon Kinney",
   "license": "MIT",
   "description": "Select text with the mouse and a small bar of actions appears beside it: cut, copy, paste, search, open links, reveal paths, and extensions written as YAML snippets, shell scripts or JavaScript. Supports a reviewed subset of the PopClip Extensions Directory (https://www.popclip.app/extensions/).",
@@ -32,6 +32,7 @@
       "dragThreshold": 6,
       "hideDistance": 220,
       "longPress": false,
+      "requireTerminalShift": true,
       "maxSelectionKiB": 256,
       "excludedApps": "",
       "terminalClasses": "Alacritty,kitty,foot,footclient,com.mitchellh.ghostty,Ghostty,org.wezfurlong.wezterm,xterm,konsole,org.kde.konsole,org.gnome.Terminal,gnome-terminal-server,Terminal,st-256color,tilix,wezterm",
@@ -123,6 +124,13 @@
         "label": "Show on long press",
         "defaultValue": false,
         "description": "Off by default. Hold the left button for half a second without moving to show the bar with no selection, e.g. to paste."
+      },
+      {
+        "key": "requireTerminalShift",
+        "type": "boolean",
+        "label": "Require Shift in terminals",
+        "defaultValue": true,
+        "description": "Hold Shift while selecting in terminal windows to show Omapop. Prevents stale popups when Herdr, tmux or another terminal app copies and clears its own selection. Applies at plain shell prompts too; the keyboard shortcut still works."
       },
       {
         "key": "maxSelectionKiB",

@@ -6,11 +6,14 @@ import vm from "node:vm";
 import assert from "node:assert/strict";
 
 const source = readFileSync(new URL("../Service.qml", import.meta.url), "utf8");
+const actions = vm.createContext({});
+vm.runInContext(readFileSync(new URL("../Actions.js", import.meta.url), "utf8").replace(/^\.pragma library\s*/, ""), actions);
 const wanted = new Set([
   "onPress", "onRelease", "onSelectionChanged", "scheduleSelectionRead",
   "takePendingSelection", "cancelSelection", "trigger", "hidePopup",
   "handleEngineEvent", "parseContext", "decodeField",
   "isClickContinuation", "present", "handleClick",
+  "automaticTriggerAllowed",
 ]);
 const functions = [...source.matchAll(/^    function (\w+)\([^]*?^    \}/gm)]
   .filter(match => wanted.has(match[1])).map(match => match[0]).join("\n");
@@ -23,6 +26,7 @@ function harness(autoComplete = true) {
   const events = new Set();
   const reads = [], probes = [], presentations = [];
   const activations = [];
+  const engineCalls = [];
   let visible = false, openings = 0, entrances = 0;
   const screen = { name: "test" };
   const popup = vm.createContext({
@@ -47,11 +51,11 @@ function harness(autoComplete = true) {
     lastPressAt: 0, lastPressMods: 0, selectionChangedAt: 0,
     pendingRelease: null, lastReleaseInfo: null, clickCount: 0,
     multiClickInterval: 450, clickSettleInterval: 80, dragThreshold: 6, paused: false,
-    longPressEnabled: false, Actions: { sanitizeDisplay: value => value },
+    longPressEnabled: false, requireTerminalShift: true, terminalClasses: [], Actions: actions,
     readTask: null, readGeneration: 0, maxSelectionBytes: 262144,
     excludedApps: [], selectionHelper: "unused", busyTask: null, busy: false,
     current: null, selectionUpdating: false, popup, positionMode: "auto", extensions: [], moduleActions: {},
-    luaCall() {}, log() {}, warn() {},
+    luaCall(code) { engineCalls.push(code); }, log() {}, warn() {},
     extensionsWantHtml: () => false,
     parseJson: text => JSON.parse(text),
     buildInput: text => ({ text }), buildContext: () => ({}),
@@ -109,7 +113,7 @@ function harness(autoComplete = true) {
     return { x: 100, y: 100, pressX: 100, pressY: 100, mods: 0,
       pressInside: false, wasLongPress: false,
       monitor: { name: "test", x: 0, y: 0, w: 1920, h: 1080 },
-      app: { pid: 1, appClass: "foot", address: "0x1" }, ...overrides };
+      app: { pid: 1, appClass: "chromium", address: "0x1" }, ...overrides };
   }
   function click({ changed = true, ...overrides } = {}) {
     const ctx = context(overrides);
@@ -119,7 +123,7 @@ function harness(autoComplete = true) {
     c.onRelease(ctx);
     return ctx;
   }
-  return { c, advance, context, click, reads, probes, presentations, activations,
+  return { c, advance, context, click, reads, probes, presentations, activations, engineCalls,
     openings: () => openings, entrances: () => entrances };
 }
 
@@ -237,10 +241,127 @@ test("a new selection after dismissal gets its own entrance animation", () => {
 
 test("Shift-drag reads promptly even without a new primary-selection notification", () => {
   const h = harness();
-  h.click({ mods: 1, x: 180, changed: false });
+  h.click({ mods: 1, x: 180, changed: false, app: { appClass: "foot", address: "0x1", pid: 1 } });
   h.advance(60);
   assert.equal(h.presentations.length, 1);
   assert.equal(h.presentations[0].ctx.dragged, true);
+});
+
+for (const changed of [false, true]) {
+  for (const appClass of ["foot", "kitty", "com.mitchellh.ghostty"]) {
+    test(`${appClass} mouse copying cannot read stale text without Shift (primary changed: ${changed})`, () => {
+      const h = harness();
+      const app = { appClass, address: "0x1", pid: 1 };
+      h.click({ app, x: 180, changed });
+      h.advance(100);
+      h.click({ app, changed });
+      h.advance(100);
+      h.click({ app, changed });
+      h.advance(100);
+      h.c.onSelectionChanged(); // A delayed OSC 52/clipboard notification cannot revive the release.
+      h.advance(600);
+      assert.equal(h.c.pendingRelease, null);
+      assert.equal(h.c.clickCount, 0);
+      assert.equal(h.reads.length, 0);
+      assert.equal(h.probes.length, 0);
+      assert.equal(h.presentations.length, 0);
+      assert.equal(h.engineCalls.length, 0);
+    });
+  }
+}
+
+test("terminal selection needs Shift at both ends of the gesture", () => {
+  for (const [pressMods, releaseMods] of [[1, 0], [0, 1], [1, 1], [65, 65]]) {
+    const h = harness();
+    h.c.onPress(100, 100, 272, pressMods, false);
+    h.advance(10);
+    h.c.onSelectionChanged();
+    h.c.onRelease(h.context({ mods: releaseMods, x: 180, app: { appClass: "foot", address: "0x1", pid: 1 } }));
+    h.advance(100);
+    assert.equal(h.presentations.length, pressMods === 1 && releaseMods === 1 ? 1 : 0);
+  }
+});
+
+test("an unmodified terminal click cannot contribute to a later Shift double-click", () => {
+  const h = harness();
+  const app = { appClass: "foot", address: "0x1", pid: 1 };
+  h.click({ app });
+  h.advance(100);
+  h.click({ app, mods: 1, changed: false });
+  h.advance(600);
+  assert.equal(h.presentations.length, 0);
+});
+
+test("terminal Shift policy applies to custom terminal classes and can be disabled", () => {
+  const h = harness();
+  h.c.terminalClasses = ["org.omarchy.agent"];
+  const app = { appClass: "org.omarchy.agent", address: "0x1", pid: 1 };
+  h.click({ app, x: 180 });
+  h.advance(100);
+  assert.equal(h.reads.length, 0);
+  h.c.requireTerminalShift = false;
+  h.click({ app, x: 180 });
+  h.advance(100);
+  assert.equal(h.presentations.length, 1);
+});
+
+test("terminal mouse policy blocks direct automatic triggers but preserves the keyboard shortcut", () => {
+  const h = harness();
+  const ctx = h.context({ app: { appClass: "foot", address: "0x1", pid: 1 } });
+  for (const kind of ["selection", "longpress"]) {
+    h.c.trigger(ctx, kind);
+    h.advance(100);
+    assert.equal(h.reads.length, 0);
+  }
+  h.c.trigger(ctx, "shortcut");
+  h.advance(100);
+  assert.equal(h.presentations.length, 1);
+  assert.equal(h.c.popup.keyboardMode, true);
+});
+
+test("an unmodified terminal gesture cancels an older Shift selection waiting for accessibility", () => {
+  const h = harness(false);
+  const app = { appClass: "foot", address: "0x1", pid: 1 };
+  h.click({ app, mods: 1, x: 180 });
+  h.advance(100);
+  h.reads[0].complete("stale selection");
+  h.click({ app, x: 180 });
+  h.probes[0](true);
+  h.advance(600);
+  assert.equal(h.reads.length, 1);
+  assert.equal(h.presentations.length, 0);
+});
+
+test("an unmodified terminal gesture dismisses even a just-opened Shift popup", () => {
+  const h = harness();
+  const app = { appClass: "foot", address: "0x1", pid: 1 };
+  h.click({ app, mods: 1, x: 180 });
+  h.advance(60);
+  assert.equal(h.c.popup.visible, true);
+  h.click({ app, x: 240 });
+  h.advance(100);
+  assert.equal(h.c.popup.visible, false);
+  assert.equal(h.reads.length, 1);
+});
+
+test("Shift may be released before clicking a terminal popup action", () => {
+  const h = harness();
+  const app = { appClass: "foot", address: "0x1", pid: 1 };
+  h.click({ app, mods: 1, x: 180 });
+  h.advance(60);
+  h.c.onPress(100, 60, 272, 0, true);
+  h.c.onRelease(h.context({ app, pressInside: true }));
+  h.c.handleClick({ builtin: true }, 0);
+  assert.deepEqual(h.activations, ["selected text"]);
+});
+
+test("holding Shift cannot show a popup for an empty terminal selection", () => {
+  const h = harness(false);
+  h.click({ mods: 1, x: 180, app: { appClass: "foot", address: "0x1", pid: 1 } });
+  h.advance(100);
+  h.reads[0].complete("");
+  h.probes[0](true);
+  assert.equal(h.presentations.length, 0);
 });
 
 test("double-click can reselect the same text without a notification", () => {

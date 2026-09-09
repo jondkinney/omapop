@@ -13,7 +13,7 @@ ColumnLayout {
     property string errorText: ""
     readonly property color secondaryText: Qt.rgba(Color.popups.text.r, Color.popups.text.g, Color.popups.text.b, 0.68)
     readonly property var groups: [
-        { title: "Selection", keys: ["longPress", "position", "shortcut", "excludedApps"] },
+        { title: "Selection", keys: ["longPress", "requireTerminalShift", "position", "shortcut", "excludedApps"] },
         { title: "Search", keys: ["searchEngine", "searchUrl"] },
         { title: "General", keys: ["showBarIcon", "extensionDownloads", "directoryRefresh"] },
         { title: "Advanced", keys: ["dragThreshold", "hideDistance", "maxSelectionKiB", "accessibilityProbe", "assumeEditable", "terminalClasses", "commandKey"] }
@@ -27,6 +27,7 @@ ColumnLayout {
     })
     readonly property var descriptions: ({
         longPress: "Hold the left mouse button for half a second to open the action bar, even without a selection.",
+        requireTerminalShift: "Hold Shift throughout selection in terminal windows, including plain shell prompts. Avoids stale popups from Herdr, tmux and other terminal apps that copy and clear their selection. The keyboard shortcut still works.",
         position: "Auto places the bar above or below the pointer to leave your selection visible.",
         shortcut: "Record a key combination to open the action bar. Clear it to disable.",
         excludedApps: "Omapop stays hidden in these apps. Choose a running window to ignore its whole application.",

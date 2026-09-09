@@ -60,7 +60,7 @@ ShellRoot {
         captured = not args.capture_dir or all(
             (args.capture_dir / name).is_file() and (args.capture_dir / name).stat().st_size > 0
             for name in (("confirmation.png",) if args.ports else ("selection.png", "advanced.png", "excluded-apps.png", "window-picker.png")))
-        return 0 if result.returncode == 0 and summary.get("failed") == 0 and summary.get("passed", 0) >= (4 if args.ports else 20) and captured else 1
+        return 0 if result.returncode == 0 and summary.get("failed") == 0 and summary.get("passed", 0) >= (4 if args.ports else 21) and captured else 1
 
 
 if __name__ == "__main__":

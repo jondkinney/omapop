@@ -111,6 +111,21 @@ TestCase {
         compare(fakeService.settings.longPress, false)
     }
 
+    function test_terminal_shift_default_and_toggle() {
+        var toggle = findChild(page, "setting_requireTerminalShift_toggle")
+        verify(toggle.visible)
+        compare(toggle.checked, true)
+        compare(fakeService.writes.length, 0)
+        page.reveal(toggle)
+        wait(20)
+        mouseClick(toggle)
+        compare(fakeService.settings.requireTerminalShift, false)
+        compare(toggle.checked, false)
+        toggle.forceActiveFocus()
+        keyClick(Qt.Key_Space)
+        compare(fakeService.settings.requireTerminalShift, true)
+    }
+
     function test_text_is_saved_when_leaving_the_page() {
         var field = findChild(page, "setting_terminalClasses_input")
         field.forceActiveFocus()

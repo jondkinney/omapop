@@ -145,6 +145,7 @@ Item {
     readonly property int dragThreshold: clampInt(setting("dragThreshold", 6), 1, 100, 6)
     readonly property int hideDistance: clampInt(setting("hideDistance", 220), 40, 2000, 220)
     readonly property bool longPressEnabled: setting("longPress", false) === true
+    readonly property bool requireTerminalShift: setting("requireTerminalShift", true) !== false
     readonly property int maxSelectionBytes: clampInt(setting("maxSelectionKiB", 256), 4, 4096, 256) * 1024
     readonly property var excludedApps: Actions.splitList(setting("excludedApps", ""))
     readonly property var terminalClasses: Actions.splitList(setting("terminalClasses", ""))
@@ -664,10 +665,12 @@ Item {
 
     function onRelease(ctx) {
         var now = Date.now()
+        var automaticAllowed = automaticTriggerAllowed(ctx, "selection")
         // Super suppresses selection, including its contribution to a later
         // multi-click sequence after the modifier has been released.
-        if (ctx.pressInside || ctx.wasLongPress || paused || ((ctx.mods | lastPressMods) & 64) !== 0) {
-            if (selectionUpdating && !ctx.pressInside)
+        if (ctx.pressInside || ctx.wasLongPress || paused || ((ctx.mods | lastPressMods) & 64) !== 0
+                || !automaticAllowed) {
+            if ((selectionUpdating || (!automaticAllowed && popup.visible)) && !ctx.pressInside)
                 hidePopup()
             lastReleaseInfo = null
             clickCount = 0
@@ -754,9 +757,21 @@ Item {
         }
     }
 
+    function automaticTriggerAllowed(ctx, kind) {
+        if (kind === "shortcut" || !requireTerminalShift
+                || !Actions.isTerminalClass(ctx.app ? ctx.app.appClass : "", terminalClasses))
+            return true
+        // A TUI can copy on mouse-up and remove its highlight while PRIMARY
+        // still contains older text. A drag or notification is not proof that
+        // the terminal has a selection. Shift asks the terminal to select;
+        // require it at both ends rather than accepting a late modifier press.
+        return ((ctx.mods & lastPressMods) & 1) !== 0
+    }
+
     function trigger(ctx, kind) {
         cancelSelection()
-        if (paused || (excludedApps.length && Actions.classMatches(excludedApps, ctx.app.appClass))) {
+        if (paused || (excludedApps.length && Actions.classMatches(excludedApps, ctx.app.appClass))
+                || !automaticTriggerAllowed(ctx, kind)) {
             if (selectionUpdating)
                 hidePopup()
             return
@@ -2426,6 +2441,7 @@ Item {
                 busy: root.busy, hasCurrent: !!root.current, reading: !!root.readTask, pending: !!root.pendingRelease,
                 mode: popup.mode, visible: popup.visible, screen: popup.screen ? String(popup.screen.name) : "",
                 keyboard: popup.keyboardMode, probeRunning: contextProc.running,
+                requireTerminalShift: root.requireTerminalShift,
                 gesture: { clicks: root.clickCount, settleMs: root.clickSettleInterval, multiClickMs: root.multiClickInterval,
                     readDelayMs: readSoon.interval, generation: root.readGeneration, updating: root.selectionUpdating },
                 context: root.current ? { app: root.current.context.appIdentifier, editable: root.current.context.editable, source: root.current.context.editSource, canPaste: root.current.context.canPaste, canReplace: root.current.context.canReplace } : null,

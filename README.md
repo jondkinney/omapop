@@ -54,8 +54,10 @@ reloads its configuration (`hyprctl reload`), or immediately with
 
 - **Select text** by dragging, double-clicking a word or triple-clicking a
   line. The bar appears above the pointer (below when the drag went downwards,
-  so it never covers what you selected). In terminal apps that capture mouse
-  input, hold **Shift** while selecting. The bar appears promptly after a
+  so it never covers what you selected). In terminal windows, hold **Shift**
+  from mouse-down through mouse-up. This also applies at a plain shell prompt;
+  turn off **Settings → Selection → Require Shift in terminals** to opt out.
+  The bar appears promptly after a
   double-click and updates in place if a third click extends the selection.
 - **Hover** a button to see its name. **Click** to run it. Hold **Shift**,
   **Ctrl**, **Alt** or **Super** while clicking for an action's alternate
@@ -80,6 +82,16 @@ reloads its configuration (`hyprctl reload`), or immediately with
   this way takes keyboard focus: Left/Right or Tab move, Return runs, Down opens
   a submenu, Up or Backspace goes back, 1 to 9 run a button directly, Escape
   hides. Focus returns to the app before the action runs so pastes land in it.
+
+Herdr and tmux can handle a drag themselves, copy the text and clear their
+highlight on mouse-up. The Wayland primary selection can still contain older
+text, so a drag alone cannot establish that text remains selected. In Foot,
+[Shift forces the terminal's own selection](https://man.archlinux.org/man/foot.1.en#MOUSE_SHORTCUTS).
+Tmux documents its [copy-on-release mouse behavior](https://github.com/tmux/tmux/wiki/Getting-Started#using-the-mouse).
+The default Shift requirement applies to recognized terminal windows, including
+other terminal programs and plain shells. Add custom window classes under
+**Settings → Advanced → Terminal apps**. Normal browser and editor windows
+continue to open Omapop without Shift.
 
 Open **Omapop's bar icon → Settings** to change selection behavior, search,
 and other preferences. Switches and dropdowns save immediately; text fields
@@ -115,6 +127,7 @@ number values; omit it for text values. The available setting keys are:
 | Detect editable fields via accessibility | `accessibilityProbe` | Keeps a small AT-SPI helper running and turns on the session accessibility flag. |
 | Hide when pointer moves away | `hideDistance` | Distance in pixels. |
 | Show on long press | `longPress` | Off by default. When enabled, hold the left button half a second to show the bar without a selection. |
+| Require Shift in terminals | `requireTerminalShift` | On by default. Hold Shift throughout terminal selections or long presses; explicit keyboard invocation is unaffected. Uses the Terminal apps list under Advanced. |
 | Largest selection read | `maxSelectionKiB` | Selections larger than this (KiB) are ignored. |
 | Excluded apps | `excludedApps` | Window classes where the bar never appears. |
 | Terminal window classes | `terminalClasses` | Windows that paste with Ctrl+Shift+V and cannot cut. |
