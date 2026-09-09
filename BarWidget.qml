@@ -546,7 +546,7 @@ Panel {
                             Text {
                                 Layout.fillWidth: true
                                 visible: text !== ""
-                                text: (modelData.approved ? "Reviewed v" + modelData.version + ". " : "Not approved for installation. ")
+                                text: (modelData.approved ? (modelData.isPort ? "Omapop Linux port v" : "Reviewed v") + modelData.version + ". " : "Not approved for installation. ")
                                       + (modelData.needsMac ? "Needs macOS. " : "") + modelData.description
                                 textFormat: Text.PlainText
                                 wrapMode: Text.WordWrap

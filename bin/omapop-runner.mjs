@@ -220,8 +220,15 @@ const api = {
   },
   copyText(text, opts) { return call("copyText", String(text), { notify: !(opts && opts.notify === false) }); },
   copyContent(content, opts) {
+    if (content && typeof content['public.rtf'] === 'string')
+      return call('copyTypedText', content['public.rtf'], { mime: 'text/rtf' });
     const text = content && (content["public.utf8-plain-text"] || content["public.html"]) || "";
     return call("copyText", String(text), { notify: !(opts && opts.notify === false) });
+  },
+  nativeAction(kind, options = {}) {
+    if (!entitlements.includes('native')) throw new Error('nativeAction needs the native entitlement');
+    if (!['dns','zeal','browser','speech','note','editor','print','terminal','execute'].includes(kind)) throw new Error('Unknown native action');
+    return call('nativeAction', kind, options);
   },
   performCommand(command, opts) { return call("performCommand", String(command), { transform: (opts && opts.transform) || "none" }); },
   showText(text, opts) { return call("showText", String(text), { style: (opts && opts.style) || "compact", preview: !!(opts && opts.preview) }); },

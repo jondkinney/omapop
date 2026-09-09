@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "io.github.jondkinney.omapop",
   "name": "Omapop",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": "Jon Kinney",
   "license": "MIT",
   "description": "Select text with the mouse and a small bar of actions appears beside it: cut, copy, paste, search, open links, reveal paths, and extensions written as YAML snippets, shell scripts or JavaScript. Supports a reviewed subset of the PopClip Extensions Directory (https://www.popclip.app/extensions/).",
@@ -161,9 +161,9 @@
       {
         "key": "extensionDownloads",
         "type": "boolean",
-        "label": "Allow extension downloads",
+        "label": "Allow extension installs",
         "defaultValue": false,
-        "description": "Allow installing the exact extension versions reviewed by Omapop. Every installation asks for confirmation; new extensions start disabled."
+        "description": "Allow installing reviewed directory extensions, including bundled Linux ports. Every installation asks for confirmation; new extensions start disabled."
       },
       {
         "key": "directoryRefresh",

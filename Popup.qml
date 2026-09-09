@@ -23,6 +23,7 @@ PanelWindow {
     property bool resultPreview: false
     property bool statusOk: true
     property string confirmText: ""
+    property string confirmDetails: ""
     property string confirmAccept: "Install"
     property string hoveredTitle: ""
     property real shownAt: 0
@@ -212,8 +213,9 @@ PanelWindow {
         mode = "busy"
     }
 
-    function showConfirm(text, acceptLabel) {
+    function showConfirm(text, acceptLabel, details) {
         confirmText = Actions.oneLine(text, 200)
+        confirmDetails = details ? String(details).slice(0, 131072) : ""
         confirmAccept = acceptLabel || "Install"
         hoveredTitle = ""
         mode = "confirm"
@@ -322,7 +324,7 @@ PanelWindow {
             x: win.cardLeft
             y: win.labelHeight + win.nubSize
             implicitWidth: Math.max(win.buttonSize, body.implicitWidth + Style.spacing.xs * 2)
-            implicitHeight: win.buttonSize + Style.spacing.xs * 2
+            implicitHeight: body.implicitHeight + Style.spacing.xs * 2
             width: implicitWidth
             height: implicitHeight
             z: 1
@@ -347,7 +349,7 @@ PanelWindow {
                 id: body
                 anchors.centerIn: parent
                 implicitWidth: buttonRow.visible ? buttonRow.implicitWidth : resultRow.visible ? resultRow.implicitWidth : statusItem.visible ? statusItem.implicitWidth : busyItem.visible ? busyItem.implicitWidth : confirmRow.implicitWidth
-                implicitHeight: win.buttonSize
+                implicitHeight: confirmRow.visible ? confirmRow.implicitHeight : win.buttonSize
 
                 Row {
                     id: buttonRow
@@ -463,32 +465,33 @@ PanelWindow {
                     }
                 }
 
-                // "Install 'Name'?" with two text buttons.
-                Row {
+                // The full selection can be inspected before printing or
+                // running a script. Installs omit the details panel.
+                Column {
                     id: confirmRow
                     visible: win.mode === "confirm"
-                    height: win.buttonSize
-                    spacing: Style.spacing.xs
-                    Text {
-                        anchors.verticalCenter: parent.verticalCenter
-                        leftPadding: Style.spacing.md
-                        text: win.confirmText
-                        textFormat: Text.PlainText
-                        elide: Text.ElideRight
-                        maximumLineCount: 1
-                        width: Math.min(implicitWidth, Math.round(win.screenW * 0.4))
-                        color: win.fg
-                        font.family: win.fontFamily
-                        font.pixelSize: Style.font.body
-                        renderType: Text.NativeRendering
+                    implicitWidth: Math.min(win.screenW * 0.65, Style.space(600))
+                    width: implicitWidth
+                    spacing: Style.spacing.sm
+                    ConfirmationText {
+                        width: parent.width
+                        summary: win.confirmText
+                        details: win.confirmDetails
+                        maxDetailsHeight: win.screenH * 0.4
+                        foreground: win.fg
+                        fontFamily: win.fontFamily
                     }
-                    ActionButton {
-                        button: ({ title: win.confirmAccept, showAs: "text", textLabel: win.confirmAccept, accent: true })
-                        onActivated: win.confirmAccepted()
-                    }
-                    ActionButton {
-                        button: ({ title: "Cancel", showAs: "text", textLabel: "Cancel" })
-                        onActivated: win.confirmRejected()
+                    Row {
+                        height: win.buttonSize
+                        spacing: Style.spacing.xs
+                        ActionButton {
+                            button: ({ title: win.confirmAccept, showAs: "text", textLabel: win.confirmAccept, accent: true })
+                            onActivated: win.confirmAccepted()
+                        }
+                        ActionButton {
+                            button: ({ title: "Cancel", showAs: "text", textLabel: "Cancel" })
+                            onActivated: win.confirmRejected()
+                        }
                     }
                 }
             }

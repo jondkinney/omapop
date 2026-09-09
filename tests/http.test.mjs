@@ -24,6 +24,8 @@ try {
   const bounded = limitedFetch(fetch, () => true, { maxBytes: 16, timeoutMs: 250 });
   assert.equal(await (await bounded(base + '/exact')).text(), 'x'.repeat(16));
   assert.equal(await (await bounded(base + '/redirect')).text(), 'x'.repeat(16));
+  assert.equal((await bounded(base + '/redirect', {redirect:'manual'})).status, 302);
+  await assert.rejects(bounded(base + '/redirect', {redirect:'error'}), /redirect is forbidden/);
   await assert.rejects(bounded(base + '/oversize'), /byte limit/);
   const start = Date.now();
   await assert.rejects(bounded(base + '/endless'), /byte limit/);

@@ -657,7 +657,7 @@ def cmd_search(args):
     entries = [dict(shortcode=e['shortcode'], name=e['name'], description=e['description'],
                     identifier=e['id'], author='', page=PAGE_URL % e['shortcode'],
                     approved=True, version=e['version'], actionType='Reviewed',
-                    commandKey=e['commandKey']) for e in approved['extensions']]
+                    commandKey=e['commandKey'], isPort=catalog.is_port(e)) for e in approved['extensions']]
     known = {e['shortcode'] for e in entries}
     others = [dict(e, approved=False) for e in index.get('extensions', []) if e['shortcode'] not in known]
     if show_all:
@@ -871,7 +871,7 @@ def cmd_install(args):
     entry = catalog.approved_target(targets[0])
     # The signed release catalog supplies identity, URL and expected bytes.
     # Mutable HTML, cached listings and package-provided hashes have no vote.
-    data = fetch(entry['url'], entry['bytes'])
+    data = catalog.read_regular(catalog.port_archive(entry), entry['bytes']) if catalog.is_port(entry) else fetch(entry['url'], entry['bytes'])
     catalog.verify_archive(data, entry)
     with pinned_directory(dest, create=True) as parent:
         stage_name = ".omapop-download-" + secrets.token_hex(12)
@@ -885,8 +885,11 @@ def cmd_install(args):
                 catalog.verify_tree(package_fd, entry)
             finally:
                 os.close(package_fd)
-            signature = catalog.read_regular(os.path.join(package, '_Signature.plist'), MAX_MEMBER_BYTES)
-            metadata = plistlib.loads(signature).get('Metadata', {})
+            if catalog.is_port(entry):
+                metadata = json.loads(catalog.read_regular(os.path.join(package, '_Omapop.json'), 4096))
+            else:
+                signature = catalog.read_regular(os.path.join(package, '_Signature.plist'), MAX_MEMBER_BYTES)
+                metadata = plistlib.loads(signature).get('Metadata', {})
             if (metadata.get('identifier') != entry['id'] or str(metadata.get('version')) != entry['version']
                     or metadata.get('shortcode') != entry['shortcode']):
                 raise ValueError('package identity/version differs from its approval')

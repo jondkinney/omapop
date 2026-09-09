@@ -25,6 +25,8 @@ export function limitedFetch(transport, permitted, { maxBytes = HTTP_MAX_BYTES, 
     const size = typeof body === "string" ? new TextEncoder().encode(body).length
       : body instanceof Uint8Array ? body.byteLength : body == null ? 0 : Infinity;
     if (size > HTTP_MAX_REQUEST_BYTES) throw new Error("HTTP request body exceeds limit");
+    const redirectMode = init.redirect || 'follow';
+    if (!['follow', 'manual', 'error'].includes(redirectMode)) throw new Error('Invalid HTTP redirect mode');
     const controller = new AbortController();
     const abort = () => controller.abort(init.signal?.reason);
     if (init.signal?.aborted) abort();
@@ -36,8 +38,10 @@ export function limitedFetch(transport, permitted, { maxBytes = HTTP_MAX_BYTES, 
       let method = String(init.method || "GET").toUpperCase();
       let headers = new Headers(init.headers);
       for (let redirects = 0; ; redirects++) {
-        response = await transport(url.href, { method, headers, body, signal: controller.signal, redirect: "manual" });
+        response = await transport(url.href, { method, headers, body, signal: controller.signal, redirect: "manual", credentials: init.credentials || 'omit' });
         if (![301, 302, 303, 307, 308].includes(response.status)) break;
+        if (redirectMode === 'manual') break;
+        if (redirectMode === 'error') throw new Error('HTTP redirect is forbidden for this request');
         const location = response.headers.get("location");
         await response.body?.cancel();
         if (!location || redirects >= 5) throw new Error("HTTP redirect limit exceeded");

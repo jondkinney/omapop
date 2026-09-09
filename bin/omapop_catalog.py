@@ -23,6 +23,16 @@ CODE = re.compile(r'[A-Za-z0-9]{4,16}')
 URL = re.compile(r'https://public\.popclip\.app/extensions/ext_[A-Za-z0-9]+/file')
 
 
+def is_port(entry):
+    return entry.get('source', 'popclip') == 'omapop-port'
+
+
+def port_archive(entry):
+    if not is_port(entry) or not CODE.fullmatch(entry['shortcode']):
+        raise ValueError('invalid Omapop port')
+    return CATALOG_DIR.parent / 'ports' / 'archives' / (entry['shortcode'] + '.popclipextz')
+
+
 def read_regular(path, limit):
     fd = os.open(path, os.O_RDONLY | os.O_NONBLOCK | os.O_NOFOLLOW | os.O_CLOEXEC)
     with os.fdopen(fd, 'rb') as handle:
@@ -94,10 +104,18 @@ def validate_catalog(data):
                     or re.search(r'[\x00-\x1f\x7f-\x9f\u202a-\u202e\u2066-\u2069]', value)):
                 raise ValueError('invalid approved extension field: ' + key)
         if (not entry['id'] or not entry['name'] or not re.fullmatch(r'[0-9]+(?:\.[0-9]+){0,3}', entry['version'])
-                or not CODE.fullmatch(entry['shortcode']) or not URL.fullmatch(entry['url'])
+                or not CODE.fullmatch(entry['shortcode'])
                 or not HEX.fullmatch(entry['sha256']) or entry['commandKey'] not in ('inherit', 'ctrl', 'super')
                 or type(entry.get('bytes')) is not int or not 0 < entry['bytes'] <= MAX_ARCHIVE_BYTES):
             raise ValueError('invalid approved package identity, version or digest')
+        if entry.get('source', 'popclip') not in ('popclip', 'omapop-port'):
+            raise ValueError('unknown approved package source')
+        if is_port(entry):
+            if (entry['url'] != 'omapop:ports/' + entry['shortcode']
+                    or entry['id'] != 'io.github.jondkinney.omapop.port.' + entry['shortcode']):
+                raise ValueError('invalid Omapop port identity')
+        elif not URL.fullmatch(entry['url']):
+            raise ValueError('invalid upstream package URL')
         if entry['id'] in ids or entry['shortcode'] in codes or entry['url'] in urls:
             raise ValueError('duplicate approved extension')
         ids.add(entry['id']); codes.add(entry['shortcode']); urls.add(entry['url'])

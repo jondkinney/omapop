@@ -191,6 +191,39 @@ class CatalogTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'identity/version'):
                 directory.cmd_install(['abcd12', '--dest', tmp, '--json'])
 
+    def test_local_port_installs_without_network_and_rejects_tampering(self):
+        self.entry.update(source='omapop-port', id='io.github.jondkinney.omapop.port.abcd12', url='omapop:ports/abcd12')
+        self.files = {'Config.json': json.dumps({'name': 'Port', 'identifier': self.entry['id'], 'javascript': 'return "hello";'}).encode(),
+                      '_Omapop.json': json.dumps({'identifier': self.entry['id'], 'version': '1', 'shortcode': 'abcd12'}).encode()}
+        archive = io.BytesIO()
+        with zipfile.ZipFile(archive, 'w') as z:
+            for name, data in self.files.items(): z.writestr('Port.popclipext/' + name, data)
+        raw = archive.getvalue()
+        self.entry.update(sha256=hashlib.sha256(raw).hexdigest(), bytes=len(raw),
+                          files=[{'path': k, 'bytes': len(v), 'sha256': hashlib.sha256(v).hexdigest()} for k, v in self.files.items()])
+        catalog.validate_catalog(self.manifest)
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp); (base / 'catalog').mkdir(); (base / 'ports/archives').mkdir(parents=True)
+            package = base / 'ports/archives/abcd12.popclipextz'; package.write_bytes(raw)
+            with patch.object(directory.catalog, 'load_catalog', return_value=self.manifest), \
+                 patch.object(directory.catalog, 'CATALOG_DIR', base / 'catalog'), \
+                 patch.object(directory, 'fetch', side_effect=AssertionError('local ports must not use network')):
+                out = io.StringIO()
+                with contextlib.redirect_stdout(out): directory.cmd_install(['abcd12', '--dest', str(base / 'installed'), '--json'])
+                installed = json.loads(out.getvalue())
+                self.assertTrue(installed['approved'])
+                self.assertFalse(Path(installed['dir'], '_Signature.plist').exists())
+                package.write_bytes(raw[:-1] + bytes([raw[-1] ^ 1]))
+                with self.assertRaisesRegex(ValueError, 'changed since review'):
+                    directory.cmd_install(['abcd12', '--dest', str(base / 'tampered'), '--json'])
+
+    def test_port_source_cannot_supply_a_path_or_claim_upstream_identity(self):
+        for values in [dict(source='file', url='/tmp/package.zip'),
+                       dict(source='omapop-port', url='omapop:ports/../file'),
+                       dict(source='omapop-port', url='omapop:ports/abcd12')]:
+            data = copy.deepcopy(self.manifest); data['extensions'][0].update(values)
+            with self.assertRaises(ValueError): catalog.validate_catalog(data)
+
 
 if __name__ == '__main__':
     unittest.main()

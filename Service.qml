@@ -44,6 +44,7 @@ Item {
     readonly property string clipboardHelper: pluginDir + "/bin/omapop-clipboard.py"
     readonly property string runnerPath: pluginDir + "/bin/omapop-runner.mjs"
     readonly property string contextHelper: pluginDir + "/bin/omapop-context.py"
+    readonly property string nativeHelper: pluginDir + "/bin/omapop-native.py"
     readonly property string directoryHelper: pluginDir + "/bin/omapop-directory.py"
     readonly property int engineVersion: 3
 
@@ -1137,6 +1138,7 @@ Item {
     }
 
     function hidePopup() {
+        pendingConfirm = null
         cancelSelection()
         selectionUpdating = false
         if (busyTask)
@@ -1224,6 +1226,8 @@ Item {
     function finishAction(button) {
         if (!popup.visible)
             return
+        if (current && current.actionResultVisible)
+            return
         if (button && button.action && button.action.stayVisible) {
             popup.mode = "buttons"
             rearm.restart()
@@ -1291,6 +1295,60 @@ Item {
             if (done)
                 done(result.ok)
         })
+    }
+
+    function copyTypedText(text, mime, done) {
+        if (mime !== "text/rtf" || typeof text !== "string" || text.length > 131072) {
+            scriptFailed("Unsupported clipboard format or oversized content", false)
+            done()
+            return
+        }
+        var session = current
+        spawn({ command: ["/usr/bin/python3", "-I", clipboardHelper, "--type", mime],
+            stdin: text, limit: 4096, deadline: 8000 }, function (result) {
+            if (current !== session) return
+            if (!result.ok) scriptFailed("Rich clipboard write failed", false)
+            done()
+        })
+    }
+
+    function runNativeAction(kind, options, button, done) {
+        if (!current || !button || (button.ext.entitlements || []).indexOf("native") === -1) {
+            scriptFailed("Native action is not permitted", false)
+            done()
+            return
+        }
+        var session = current
+        var request = { action: kind, text: session.input.text, options: options || {} }
+        var invoke = function () {
+            if (current !== session) return
+            busy = true
+            popup.showBusy()
+            busyTask = spawn({ command: ["/usr/bin/python3", "-I", nativeHelper],
+                stdin: JSON.stringify(request), limit: 262144, deadline: kind === "speech" ? 120000 : 15000 }, function (result) {
+                busyTask = null
+                if (current !== session) return
+                busy = false
+                var reply = result.ok ? parseJson(result.stdout, 262144) : null
+                if (!reply || reply.ok !== true)
+                    scriptFailed(reply ? reply.error : "Native action failed or timed out", false)
+                else {
+                    session.lastResult = reply.text || ""
+                    if (reply.message) {
+                        session.actionResultVisible = true
+                        showResult(reply.message, false)
+                    }
+                }
+                done()
+            })
+        }
+        if (kind === "print" || kind === "execute") {
+            busy = false
+            pendingConfirm = invoke
+            var prompt = kind === "print" ? "Print the selected text on " + (options.printer || "the default printer") + "?"
+                : "Run this selection as a Bash script in a terminal? It will have your user permissions."
+            popup.showConfirm(prompt, kind === "print" ? "Print" : "Run script", session.input.text)
+        } else invoke()
     }
 
     // Copy `text`, press the app's paste shortcut, optionally put the previous
@@ -1461,6 +1519,7 @@ Item {
         var action = button.action
         var type = action.type
         current.lastResult = ""
+        current.actionResultVisible = false
         var mainStep = null
         if (type === "url") {
             var url = Actions.buildUrl(action.url, button.matchedText, button.options, { clean: !!action.cleanQuery, plus: !!action.spacesAsPlus, verbatim: mods.option })
@@ -1573,7 +1632,7 @@ Item {
         current.failed = true
         busy = false
         if (openSettings)
-            showResult("Needs settings: edit ~/.config/omapop/settings.json for " + Actions.oneLine(message, 80), false)
+            showResult("Configure " + Actions.oneLine(message, 80) + " using its gear in Installed extensions.", false)
         else if (message)
             showResult(Actions.oneLine(message, 160), false)
         else
@@ -1766,7 +1825,7 @@ Item {
             }
             var next = function () {
                 if (current !== session) { busy = false; return }
-                if (!effects.length) { busy = false; done(); return }
+                if (session.failed || !effects.length) { busy = false; done(); return }
                 var effect = effects.shift()
                 handleRunnerCall(effect.name, effect.args, button, next)
             }
@@ -1780,6 +1839,12 @@ Item {
         var text = args.length ? String(args[0] === undefined || args[0] === null ? "" : args[0]) : ""
         var opts = args.length > 1 && args[1] && typeof args[1] === "object" ? args[1] : {}
         switch (name) {
+        case "copyTypedText":
+            copyTypedText(text, opts.mime, done)
+            return
+        case "nativeAction":
+            runNativeAction(text, opts, button, done)
+            return
         case "pasteText":
             if (context && (context.canPaste || context.terminal))
                 pasteText(text, !!opts.restore, done)
@@ -1813,16 +1878,20 @@ Item {
             return
         case "showText":
             current.lastResult = text
+            current.actionResultVisible = true
             showResult(text, !!opts.preview)
             break
         case "showSuccess":
+            current.actionResultVisible = true
             showStatus(true)
             break
         case "showFailure":
+            current.actionResultVisible = true
             showStatus(false)
             break
         case "showSettings":
-            showResult("Settings: edit ~/.config/omapop/settings.json", false)
+            current.actionResultVisible = true
+            showResult("Use the gear beside this extension in Installed extensions.", false)
             break
         case "appear":
             delay(150, function () { showForCurrentSelection() })
@@ -2146,6 +2215,7 @@ Item {
                     author: Actions.oneLine(e.author || "", 60),
                     page: Actions.oneLine(e.page || "", 200),
                     approved: e.approved === true,
+                    isPort: e.isPort === true,
                     version: Actions.oneLine(e.version || "", 40),
                     needsMac: e.needsMac === true
                 })
@@ -2209,7 +2279,7 @@ Item {
 
     function installFromDirectory(shortcode) {
         if (!extensionDownloads) {
-            directoryStatus = "Enable extension downloads in Settings first."
+            directoryStatus = "Enable extension installs in Settings first."
             return
         }
         var code = String(shortcode || "").replace(/[^A-Za-z0-9]/g, "").slice(0, 16)
