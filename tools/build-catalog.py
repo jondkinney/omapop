@@ -72,6 +72,9 @@ def main():
                 raise ValueError('package identity differs from review record')
             approved.append(entry)
         records.append(record)
+    # Upstream re-review must not silently discard separately reviewed Linux
+    # ports. Their source, hashes and review lifecycle are maintained separately.
+    approved.extend(e for e in catalog.load_catalog()['extensions'] if catalog.is_port(e))
     manifest = dict(schemaVersion=1, revision=args.revision, reviewDate=evidence.name, extensions=approved)
     catalog.validate_catalog(manifest)
     save(ROOT / 'catalog/approved.json', manifest)

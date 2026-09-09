@@ -95,34 +95,37 @@ synthetic Command shortcuts.
 
 | Package / case | Follow-up |
 | --- | --- |
-| Select All | Cmd+A should become Ctrl+A; also needs selection re-reading after `appear`. |
-| Formatting | Cmd+B/I/U should become Ctrl+B/I/U; rich-text capability gating currently hides these actions. |
-| Highlight | Mac app IDs and Control+Command combinations require app-specific Linux shortcuts; a global substitution can collapse two modifiers. |
-| Terminal | Replace macOS terminal automation. Linux paste often needs Ctrl+Shift+V, beyond changing only Command. |
+| Select All | Port sends Ctrl+A and re-reads the selection. |
+| Formatting | Port sends explicit Ctrl+B/I in Obsidian, Logseq and Writer; underline only in Writer. |
+| Highlight | Port toggles Obsidian/Logseq markup, avoiding ambiguous Control+Command substitutions. |
+| Terminal | Port copies and opens a terminal for manual paste; Bash execution is separate and confirmed. |
 | DeepL desktop / Raycast | Desktop availability and app-specific bindings must be resolved before a mapping can help; excluded Mac integrations are not enabled by changing this preference. |
 | Blockquote / Outdent | Command is an incoming click modifier, so the send-key preference does not apply. |
 | Delete / Paste and Enter | Backspace and Return normalization/order are tested; no Command mapping is needed. |
 
-## Work to prioritize
+## Linux port results
 
-1. Fix small local transforms: HardWrap's line anchoring, Increment's zero-step
-   loop/output bound, literal comment-prefix escaping and array-string escaping.
-2. Make reviewed HTTPS variants of legacy browser searches, verifying every
-   selectable provider/country URL. Give modified packages our own identifiers,
-   provenance and hashes; upstream archive approvals cannot cover local edits.
-3. Add display-only module actions for line/character/word counts, then implement
-   capability-aware formatting and selection re-reading for Select All.
-4. Package pinned, reviewed dependencies for useful Linux integrations such as
-   Calculate and Ollama. Implement honest chat-state behavior and mocked API
-   tests before approval. Browser URL capture and rich clipboard types need
-   explicit host support rather than empty placeholders.
-5. Build our own OAuth registrations and credential flow where required. Remove
-   access-token logging and never reuse the publisher's application secrets or
-   obscured Translator key. Complete the held dependency/provider reviews.
+The separate [port ledger](../ports/REPORT.md) resolves the 98 entries above:
+85 ports, 9 explicitly named manual web alternatives, 2 blocked and 2 dropped.
+The signed catalog now contains 189 versions: the original 95 plus 94 Omapop
+archives. The original ledger remains a record of the upstream bytes.
 
-Mac-only app automations are excluded. General features such as speech, maps,
-dictionary lookup and reminders have separate port notes so useful Linux
-replacements can be considered without emulating proprietary Mac applications.
+Local port archives have separate identifiers, provenance and SHA-256 values.
+They install offline through the same verifier and start disabled. See the
+[port guide](../ports/README.md) for setup, dependencies, limitations and the
+build/test/approve/sign workflow. API success tests use documented fixtures;
+live accounts and desktop applications are not claimed as tested.
+
+The remaining authentication work is full automatic capture for web alternatives
+such as Evernote, OneNote and TickTick, and a separate Droplr application
+registration. WordClip needs a documented Linux receiver. Leafy is Mac-only;
+Skype is retired. Rich formatting parity, automatic browser metadata and
+persistent AI conversations remain separate improvements.
+
+Select All now sends Ctrl+A and re-reads the selection. Formatting sends explicit
+Ctrl shortcuts only in the supported Linux editors. Highlight uses Obsidian/
+Logseq markup. Terminal provides copy-and-open plus a separately confirmed Bash
+action. DeepL uses its web translator.
 
 ## Reproducing and extending the catalog
 

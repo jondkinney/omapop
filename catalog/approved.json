@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": 1,
+  "revision": 2,
   "reviewDate": "2026-09-08",
   "extensions": [
     {
@@ -65,6 +65,35 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.z7bjka",
+      "version": "1",
+      "shortcode": "z7bjka",
+      "source": "omapop-port",
+      "name": "Amazon",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/z7bjka",
+      "sha256": "9642771b908f753ae86ee780280f14249aeee9b68a3d3485457d90483db1583e",
+      "bytes": 2591,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 667,
+          "sha256": "f450b086f1fac107f00a1674ff99a70a5b9a2eefb76fcb3f40522a414d040d0d"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 439,
+          "sha256": "6888452e1155f2a3750df6251e9cc88f9222a84f335763ac3ed77657ca2f9a13"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.append",
       "version": "248",
       "shortcode": "1yw6jd",
@@ -94,6 +123,35 @@
           "path": "plus.png",
           "bytes": 6102,
           "sha256": "89edc7c665bdb5492345faa27204850f1946866ef2b9dd6ec0c91768b9312c73"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.f2tnjr",
+      "version": "1",
+      "shortcode": "f2tnjr",
+      "source": "omapop-port",
+      "name": "Apple Music",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/f2tnjr",
+      "sha256": "f6118cf200fcf405ce6a2593d984c2871306e8bb09f364d2e108f64dccbcb826",
+      "bytes": 2188,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 272,
+          "sha256": "bb1625af92110d2025066d3828fdcb589e7b442474301e87ae5a895c74fe02ff"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 431,
+          "sha256": "7356640a3a6e67b2ece2846bda650ab5e4f2ac23b2112f5694498af7f6317abe"
         }
       ]
     },
@@ -154,6 +212,35 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.nwcz3b",
+      "version": "1",
+      "shortcode": "nwcz3b",
+      "source": "omapop-port",
+      "name": "Baidu",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/nwcz3b",
+      "sha256": "45a40ea7ea5fe5ed10d1a7c3dcadd8799abe9a0954414689cfb4dac314de6910",
+      "bytes": 2175,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 254,
+          "sha256": "a6fff2b81fb8410090b0c1124be4c64f7b0de15e9f5d4ae48c91431bc4a2ee67"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 436,
+          "sha256": "9ba527add9cba99e67ccbb10014b16f19ca8bad079c8b105af47130331b10c71"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.base64",
       "version": "377",
       "shortcode": "6ymxrg",
@@ -197,6 +284,35 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.hfp7pg",
+      "version": "1",
+      "shortcode": "hfp7pg",
+      "source": "omapop-port",
+      "name": "Bing",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/hfp7pg",
+      "sha256": "6dbdae5001287fb815d4a3e231416d24ad211e84dd3a51266e970cabd25b9d14",
+      "bytes": 2171,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 256,
+          "sha256": "00e45acf0ab4594cb8bc16fe4599249fd0f53ff3426d4196a15832d39a8e8576"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 430,
+          "sha256": "290a3eadb9d3e66caf29cb2c1b57782e65949d972195b28f0b6beac4da3691ad"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.bing-translator",
       "version": "100",
       "shortcode": "vjmt48",
@@ -221,6 +337,45 @@
           "path": "btrans.png",
           "bytes": 12157,
           "sha256": "0fdf9a7904bc630a2eb936b8ed870434da295060029681b55fbc82f84c6b759f"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.sj4s5m",
+      "version": "1",
+      "shortcode": "sj4s5m",
+      "source": "omapop-port",
+      "name": "Bitly",
+      "description": "Shorten up to five HTTPS links with your personal Bitly token.",
+      "url": "omapop:ports/sj4s5m",
+      "sha256": "eadf4efe8d6b59382b759d3f1b772d3d1c15621591f7cf441692084932ad1af3",
+      "bytes": 20614,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 471,
+          "sha256": "bed6c8b777ece53b6e8c31b4a96d9a29edd5d1c538608a2c199a09ca4b751755"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 431,
+          "sha256": "8c084371022a6f0620ace9ba61d8515be7f63529166836852fbb73efdbe0cd9f"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
         }
       ]
     },
@@ -291,6 +446,45 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.hpx6q6",
+      "version": "1",
+      "shortcode": "hpx6q6",
+      "source": "omapop-port",
+      "name": "Buffer",
+      "description": "Save selected text as a Buffer idea using your own API key and organization ID.",
+      "url": "omapop:ports/hpx6q6",
+      "sha256": "b7bed3e10b66a30cc2d43fc4b034e5b6c3272df302f25d491149ce889a29af5f",
+      "bytes": 20790,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 646,
+          "sha256": "0060e4ebb94e3a5d155c58e823e5e03a001ccf36feaa3afb2ad2d8048beab0df"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 432,
+          "sha256": "bfb6dd24ff0aace45d5f1c553770914aa202cd7916f85f555844f9a0306914ab"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.bundleid",
       "version": "100",
       "shortcode": "0p0xhv",
@@ -315,6 +509,40 @@
           "path": "_Signature.plist",
           "bytes": 739,
           "sha256": "d8d6e9e98d6c346eeb4a88a1fff2041f3735a96a72623d731bd733374d4070f0"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.7ccsap",
+      "version": "1",
+      "shortcode": "7ccsap",
+      "source": "omapop-port",
+      "name": "Calculate",
+      "description": "Calculate bounded arithmetic and scientific functions; no JavaScript evaluation.",
+      "url": "omapop:ports/7ccsap",
+      "sha256": "787d72ffec5cb31de30b268c25b965a99abbc7089defb396953932122e6a1f7d",
+      "bytes": 19074,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 415,
+          "sha256": "a50576aca43598bf8fb580eba22c314c83ece7a6117866ebbd9dbeb5ff25051e"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 435,
+          "sha256": "45a410f983d1476e4446eb01ca547858abb5a8ee6c6089273d6f14eb5bb0d195"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
         }
       ]
     },
@@ -413,6 +641,40 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.4hzjpg",
+      "version": "1",
+      "shortcode": "4hzjpg",
+      "source": "omapop-port",
+      "name": "Character Count",
+      "description": "Count Unicode characters in the selection.",
+      "url": "omapop:ports/4hzjpg",
+      "sha256": "d6718bff9c26fc0460047340f864eedcf8ea30a121559b53e40849355e25df9f",
+      "bytes": 19049,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 390,
+          "sha256": "f8947fd1d9f2a86c0e37ade8eabba7256c806ace15780b44daa7d501ec205262"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 435,
+          "sha256": "9b334f7dc01f7c84463cb746eccbcd09844c8cc516115b332798e91feb848ce9"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.chatgpt-website",
       "version": "311",
       "shortcode": "73pbck",
@@ -441,6 +703,45 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.8rhhk4",
+      "version": "1",
+      "shortcode": "8rhhk4",
+      "source": "omapop-port",
+      "name": "CheckURLs",
+      "description": "Check up to five HTTPS links using bounded HEAD requests. Redirects and unavailable links are reported without opening tabs.",
+      "url": "omapop:ports/8rhhk4",
+      "sha256": "aa71cf47563e6ac05e7555a8cf66af296d0027ffa386b7cbb9768b4bb1a17fef",
+      "bytes": 20538,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 385,
+          "sha256": "fb1869acca47edb8a7067b860a6736da8f0ff7320c6b6b525d4c204861bd5bdb"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 441,
+          "sha256": "87206d08814ef48f1b7c65fa34138d6b9ed8f1020aa1e7095cd87725bc9073a5"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.claude-website",
       "version": "340",
       "shortcode": "69v3ms",
@@ -465,6 +766,45 @@
           "path": "_Signature.plist",
           "bytes": 745,
           "sha256": "bdd90c268690f4cf4a889d42ad02b45accda90c2a9c25d6a5f0db6153bc08fd8"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.qpdzej",
+      "version": "1",
+      "shortcode": "qpdzej",
+      "source": "omapop-port",
+      "name": "ClickUp",
+      "description": "Create a task in your configured ClickUp list.",
+      "url": "omapop:ports/qpdzej",
+      "sha256": "3ccf562e54668be44dc3895b29f80e60fb7a2488e19180f12ece0e9fec626da6",
+      "bytes": 20748,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 603,
+          "sha256": "0c02d814a375e227f714a8a9ffb830af3682dc8abb739cceed50d8917f9a593f"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 433,
+          "sha256": "10bcf887713cdffe20a921a82bb8cd932ec883275a1d06b1140ef3a86422b69a"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
         }
       ]
     },
@@ -507,6 +847,40 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.rzrz9e",
+      "version": "1",
+      "shortcode": "rzrz9e",
+      "source": "omapop-port",
+      "name": "Coding Cases",
+      "description": "Convert Unicode words and acronym boundaries into coding naming styles.",
+      "url": "omapop:ports/rzrz9e",
+      "sha256": "6325d9e111e4c9ef701a8c9ea12161f939aaed52ce4eae5e5631d83c80542005",
+      "bytes": 20203,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 1545,
+          "sha256": "9f9ce22b9c547aa65231d01002a99f6330ab9dcff1d9adcae53d1d4a679c78d7"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 434,
+          "sha256": "2e4ec7ec44cb993483601a78e83fa6941e6c1e02a0961b09b5c9de1dabf9b277"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        }
+      ]
+    },
+    {
       "id": "xyz.phpz.popclip.extension.rgbhex",
       "version": "1.6",
       "shortcode": "x2brcm",
@@ -540,6 +914,40 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.yfcs28",
+      "version": "1",
+      "shortcode": "yfcs28",
+      "source": "omapop-port",
+      "name": "Comma List",
+      "description": "Join lines with CSV quoting, or split comma-separated values into lines.",
+      "url": "omapop:ports/yfcs28",
+      "sha256": "90ec55399984808acff492f7c5e6f9a9a7f568897422150aafe6eb2f308ad5cf",
+      "bytes": 19255,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 595,
+          "sha256": "5c718349717c626a9f317cee8a07320696b13497cfb3b0040452c8d7df405af3"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 436,
+          "sha256": "f8adcb26a29fb50ff128a2c8e4ea83a715acc92fb1ad7a4ec44d3581a03ce17b"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        }
+      ]
+    },
+    {
       "id": "com.brettterpstra.popclip.extension.comment",
       "version": "2.0.6",
       "shortcode": "a7tvhf",
@@ -569,6 +977,457 @@
           "path": "comment.png",
           "bytes": 2377,
           "sha256": "0cbab0025fd0fa29db80b757bf76ec4863be1c401ea6770a641326f1526eac59"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.1dze64",
+      "version": "1",
+      "shortcode": "1dze64",
+      "source": "omapop-port",
+      "name": "Comment Switcher",
+      "description": "Toggle a literal comment prefix, preserving indentation.",
+      "url": "omapop:ports/1dze64",
+      "sha256": "59d192394587dc7bb3b1a6cd6fe05c63c30f702db1847981b2b2985aa35c3d65",
+      "bytes": 19202,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 541,
+          "sha256": "c1013bddc208ddb94bb0e7ef0576aa2c2ae4d1a6dc6156d048220792bf7c9ad7"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 437,
+          "sha256": "c5326e9075f31e4ec23da49a9a0ca5c2f6d38bcd9dd70abdc303cdd84e7ccd16"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.yw6cpd",
+      "version": "1",
+      "shortcode": "yw6cpd",
+      "source": "omapop-port",
+      "name": "Convert",
+      "description": "Convert metric, US/imperial and temperature units. Supports comma decimals.",
+      "url": "omapop:ports/yw6cpd",
+      "sha256": "fb79696967e53923f3e65848bfc52a8961c897c3297529b8b7a39b4b216090f0",
+      "bytes": 19070,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 414,
+          "sha256": "9860c1e64ead00cbb43ec1db5a98961d77cffa514aab70155372a83afd794423"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 432,
+          "sha256": "0b59ed39d8e3cef9e66097e824624e28f17d91a99009534b2f189ae21248ff0a"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.63wzx3",
+      "version": "1",
+      "shortcode": "63wzx3",
+      "source": "omapop-port",
+      "name": "Convert Currency",
+      "description": "Convert 10 USD to EUR using dated Frankfurter reference rates; no API key.",
+      "url": "omapop:ports/63wzx3",
+      "sha256": "6cd498a60a8fda7e64f43aae5536979a9ab1ba960f68fdbe120a393f3e355dad",
+      "bytes": 20654,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 508,
+          "sha256": "7e755667494fe4fa75d01aabbb3a799c526e67cc7e1e990ec7de29b54217230f"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 434,
+          "sha256": "84d99ea1edd11fc1450e71c47e2c25e1ce17a3ebe6ba93f8287b0963e9eca36e"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.r77xv8",
+      "version": "1",
+      "shortcode": "r77xv8",
+      "source": "omapop-port",
+      "name": "Copy as Markdown",
+      "description": "Copy rich selected HTML as basic Markdown, with plain-text fallback.",
+      "url": "omapop:ports/r77xv8",
+      "sha256": "38681acd0d6086b1ef179f578f3b8e619c23e0e88d7eab95961f0be13c77108f",
+      "bytes": 61149,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 375,
+          "sha256": "91ef652cdccdd8bef8dc7f5a0483c142c61b73a194bdec5544f04d0f4f1d3362"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 442,
+          "sha256": "05f7772731ebcfe1485c82a57d67f9335dfe177bb3a93c7a65eebac32e53df60"
+        },
+        {
+          "path": "entities.json",
+          "bytes": 35102,
+          "sha256": "1232b77617d9260ebe39e2fb454f3a467a5ace1a69e6b20948c41f7a2a90b05b"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        },
+        {
+          "path": "markup.js",
+          "bytes": 3846,
+          "sha256": "042ab2f587fb48c1ad5aff28ab7e63e0f211e2e6ac643bc2a21fabe5c9ed35b9"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.bqdd6c",
+      "version": "1",
+      "shortcode": "bqdd6c",
+      "source": "omapop-port",
+      "name": "Copy Link to Highlight",
+      "description": "Copy the page URL first, then select text and run this action to copy its text-fragment link.",
+      "url": "omapop:ports/bqdd6c",
+      "sha256": "36efdd855f1f0d59e1b2edc34deac731fb98c950adccd6592e5b6f00a865637c",
+      "bytes": 5179,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 354,
+          "sha256": "d45c2e8d2436c0bac4d5f3ccafb74c7b5bf0e9b7de6e96c0427598f4572bc294"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 448,
+          "sha256": "15109a49d473011456210b348048a928387c0b2411001b2198e064e406465242"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.ezfj24",
+      "version": "1",
+      "shortcode": "ezfj24",
+      "source": "omapop-port",
+      "name": "Copy to Antidote Web",
+      "description": "Copy the selection and open Antidote Web. Paste into its text field; this replaces the Mac service.",
+      "url": "omapop:ports/ezfj24",
+      "sha256": "ae4d4d973f0a8d938acfa2027df512d785f2d741ff499b5212dbc932a9122b7c",
+      "bytes": 2357,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 438,
+          "sha256": "2d0ed391bfac5a44ae9b8d597f2b3e17ec362abe071ad6560ac2303cd032e4f1"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 434,
+          "sha256": "de6df85fefe584a7f777c0a3c3cc82ab07379d5f848bdda156c70bce33da3f9b"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.hmaayn",
+      "version": "1",
+      "shortcode": "hmaayn",
+      "source": "omapop-port",
+      "name": "Copy to Doit.im Web",
+      "description": "Copy text and open Doit.im Web; paste into a new task. The Mac service is replaced by an explicit web handoff.",
+      "url": "omapop:ports/hmaayn",
+      "sha256": "c90fcc204e02a35feaf8e6c07f60e8329938abc993c5518316318a74fe15ad19",
+      "bytes": 2353,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 449,
+          "sha256": "d882d35b51676c2019b712a36a7ca800b43c12ff662171284969ec91a4d9e421"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 419,
+          "sha256": "c21f31ec77c1df44adfc51969a61d546b9b3f0569c7e73f1179dace23e42a6d9"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.gfthdw",
+      "version": "1",
+      "shortcode": "gfthdw",
+      "source": "omapop-port",
+      "name": "Copy to Evernote Web",
+      "description": "Copy text and open Evernote Web; paste into a new note or task. Automatic capture still needs an Omapop OAuth integration.",
+      "url": "omapop:ports/gfthdw",
+      "sha256": "42aedf084db36d08667b747a7c161514820e8ef30a8f910a834eb8cb3116c723",
+      "bytes": 2394,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 475,
+          "sha256": "937bbfa788a84ea2f2a79c0342e83b2a941fd5970fd3ead9b1efb44dd639d878"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 434,
+          "sha256": "79624cd6bb165ffca56163b7b0bb611ea70d38da720ef708071c43e6cd276178"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.nhfcp3",
+      "version": "1",
+      "shortcode": "nhfcp3",
+      "source": "omapop-port",
+      "name": "Copy to Lexibird Web",
+      "description": "Copy the selection and open Lexibird web app. Paste into its text field; this replaces the Mac service.",
+      "url": "omapop:ports/nhfcp3",
+      "sha256": "44a2e685d53d7c6e75f79c030b898cddba2850acc6829b176eeb02bc516149b7",
+      "bytes": 2369,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 450,
+          "sha256": "c2458c4073bedc608a024c12e9235552ee5dec2e926bc72285a2d35ea53dc16d"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 434,
+          "sha256": "d3ea21ac56effdb6e72c83c0d76b69fc6283808e072b312e7ad3c0317d21edc1"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.jha0ze",
+      "version": "1",
+      "shortcode": "jha0ze",
+      "source": "omapop-port",
+      "name": "Copy to Mate Web",
+      "description": "Copy the selection and open Mate web translator. Paste into its text field; this replaces the Mac service.",
+      "url": "omapop:ports/jha0ze",
+      "sha256": "da2afdfdbbafe544282f09c40807f54a9b0f86dd91b04c960ea452a81ec3a02f",
+      "bytes": 2387,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 463,
+          "sha256": "db7e1826c58736a86a64a8a99b0698919e33d071cbd5b58a0f96abc3480fec38"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 439,
+          "sha256": "704314d8984c25aeda20f963e10cdd7c3ccaabe1c582a11b082a8fbb027208a3"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.0kk4s6",
+      "version": "1",
+      "shortcode": "0kk4s6",
+      "source": "omapop-port",
+      "name": "Copy to OneNote Web",
+      "description": "Copy text and open OneNote Web; paste into a new note or task. Automatic capture still needs an Omapop OAuth integration.",
+      "url": "omapop:ports/0kk4s6",
+      "sha256": "150ddca775bb8e141eabafb6daaaeaf5884ad42a571b25161e372121c7082a4f",
+      "bytes": 2388,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 470,
+          "sha256": "d4613e959e2cc3d077e157c482826a1fb843936b7edb4c6aa6e0ee4e283e77c0"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 433,
+          "sha256": "aaf63753371fdd41e2b91fc05d61b383a4afa762cbfed76ca0e4afdff89a255d"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.wcsadc",
+      "version": "1",
+      "shortcode": "wcsadc",
+      "source": "omapop-port",
+      "name": "Copy to Reverso Web",
+      "description": "Copy the selection and open Reverso web translator. Paste into its text field; this replaces the Mac service.",
+      "url": "omapop:ports/wcsadc",
+      "sha256": "28d477ddc8d5c27d86f338b4dce85868998c97bae3899addb34132622a52f3a5",
+      "bytes": 2394,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 476,
+          "sha256": "8ee075e20d2073a5b1b27c8665bd9dd31045d357bd9075c66c85e3485c326172"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 433,
+          "sha256": "8c2eb2d15daac1797ed1bc836d0fb46cbb6c23c3a694aa5e21e638001dd08437"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.htd93q",
+      "version": "1",
+      "shortcode": "htd93q",
+      "source": "omapop-port",
+      "name": "Copy to TickTick Web",
+      "description": "Copy text and open TickTick Web; paste into a new note or task. Automatic capture still needs an Omapop OAuth integration.",
+      "url": "omapop:ports/htd93q",
+      "sha256": "cb6922286938b87ce2e0e9b1df3b8e085f9b23731d6d0da334d2e724d0fca962",
+      "bytes": 2387,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 468,
+          "sha256": "b3a2dfd9abf199cbc3136901d2bf31ac98548dbdc5fbad40a446f056ca17bf55"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 434,
+          "sha256": "ac3cffb0eefa880458ef39f3f228c37622f5574524203008a1f3089e8672926c"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.8f2t12",
+      "version": "1",
+      "shortcode": "8f2t12",
+      "source": "omapop-port",
+      "name": "CopyPLUS",
+      "description": "Append selected text to the clipboard with a configurable separator (128 KiB limit).",
+      "url": "omapop:ports/8f2t12",
+      "sha256": "97c3670954019533aef5143a68f1b613cf147df81b3331cd2cc0ed22dfd3c7d5",
+      "bytes": 2520,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 595,
+          "sha256": "877c23b5fd8c565a5d28e752d0bd0ed5a1e6100a1211c1a163ff585b07bd1c4a"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 440,
+          "sha256": "69674e967ef3d4cc9dc70d97fa39c32d6d7f282b49e76695a6cf6e3c24a21cf8"
         }
       ]
     },
@@ -611,6 +1470,45 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.6tnp73",
+      "version": "1",
+      "shortcode": "6tnp73",
+      "source": "omapop-port",
+      "name": "Craft",
+      "description": "Append selected Markdown to a document exposed by your Craft API connection.",
+      "url": "omapop:ports/6tnp73",
+      "sha256": "c4b6268ea510ef81027eb5f15b587b0a2ae61f2f8580c17b84542d02bdedcd1f",
+      "bytes": 20959,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 816,
+          "sha256": "5dc8193e505e6ca8417a27ed2538bf6c7c08715aa1045e62aae85efc77ed1568"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 431,
+          "sha256": "66d4877bdf6c1bc9e7f6e118180b0a544c5a9987680a6bafa447f2ffffd8f21c"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
       "id": "com.brettterpstra.popclip.extension.criticmarkup",
       "version": "2.0",
       "shortcode": "2b88gv",
@@ -640,6 +1538,137 @@
           "path": "icon.png",
           "bytes": 3193,
           "sha256": "e18ffcaa374909e1071ec86a1c3b079f954030279ec05d4fee4d9584445db6d5"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.0qqc31",
+      "version": "1",
+      "shortcode": "0qqc31",
+      "source": "omapop-port",
+      "name": "Currency Converter",
+      "description": "Convert 10 USD to EUR using dated Frankfurter reference rates; no API key.",
+      "url": "omapop:ports/0qqc31",
+      "sha256": "3c61439cec8bcb6388fe2988831e9780acfddb2bb80e0af04cbea48f1e01b8e1",
+      "bytes": 20666,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 510,
+          "sha256": "083630c5dc21ae7c795ab63d8a388ef43c2fa930d392a00c5d6d568216d47e8c"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 444,
+          "sha256": "bbcadd51ddeabd4108538525ee162350fcee2674aaded74a3c7d98145080283f"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.w9pny6",
+      "version": "1",
+      "shortcode": "w9pny6",
+      "source": "omapop-port",
+      "name": "Cyrillic Transliteration",
+      "description": "Transliterate Cyrillic letters using ISO 9-style Latin letters.",
+      "url": "omapop:ports/w9pny6",
+      "sha256": "9815708fc16d0f5d51e7cd3b8c10100379d47c8a78f4f5d1eda65d0bb3847e2c",
+      "bytes": 19091,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 417,
+          "sha256": "eb4e17c4140e3ee6ea06cad5f74c24c3ebaccf03330f029e1342e6564c708643"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 450,
+          "sha256": "286a0a924be03dd8b830fbda3ea1a929e0c7c46335f0422b621b7809e4554d58"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.5y965f",
+      "version": "1",
+      "shortcode": "5y965f",
+      "source": "omapop-port",
+      "name": "Dash",
+      "description": "Search selected text in Zeal’s installed offline documentation. Requires Zeal and downloaded docsets.",
+      "url": "omapop:ports/5y965f",
+      "sha256": "a5db21f5ca1240b62de478122209f86dcdb5a8d6cd15e37f264929c3fcfee01b",
+      "bytes": 2270,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 355,
+          "sha256": "fa39e3d37ec41a948f7bf30c7d1ee1d02ef30283b78072e48fab19122c27ee9a"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 430,
+          "sha256": "aadf38aac0e13cbfb489422d0409db21eea5ac6688ad4a6a58ae5069294abd1a"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.g9jbde",
+      "version": "1",
+      "shortcode": "g9jbde",
+      "source": "omapop-port",
+      "name": "DeepL Translator",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/g9jbde",
+      "sha256": "6167336ed96105c9ace7cda602e371761d1d10d1fa4f05875c11b0a652abe59d",
+      "bytes": 2572,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 650,
+          "sha256": "0d10171ef659bf0254a524186b6efcc203b7077bcbcd3c0e7e818509d5814ea0"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 437,
+          "sha256": "130bc43e0f5164cadc9698404c9e145073374478a5010446e27f161109ca7d04"
         }
       ]
     },
@@ -700,6 +1729,93 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.px544f",
+      "version": "1",
+      "shortcode": "px544f",
+      "source": "omapop-port",
+      "name": "Discogs",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/px544f",
+      "sha256": "e8960a524ac342434e7b71de48dc259c9f3fd9e8f9567038ccfb53dec99f188e",
+      "bytes": 2189,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 271,
+          "sha256": "9ab902f176b1006003cf39950e3a9e20c059134023f33d25f04b88655fadefe7"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 433,
+          "sha256": "d0dc25ac280c87d36dc76edf2acc95976cd0fee186541925c5d0b8b82cde56d9"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.frmvjs",
+      "version": "1",
+      "shortcode": "frmvjs",
+      "source": "omapop-port",
+      "name": "DOI",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/frmvjs",
+      "sha256": "13e2f08035b0a02f362d032bc243ba986e7cf6c6b6cc86beb5ee3daf22486000",
+      "bytes": 2155,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 241,
+          "sha256": "bbf0ca5b6e786cc1ce603937e13c6b117dc4d6986fcbede12ce8457c6fada132"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 429,
+          "sha256": "473841633426c05ad1354a23a1d38ee13ba938c1614bf781ce37ba3bda08d75a"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.z822bm",
+      "version": "1",
+      "shortcode": "z822bm",
+      "source": "omapop-port",
+      "name": "Douban",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/z822bm",
+      "sha256": "178c548c926fcd331b3247ae7cdff519eb6d81bcd158866582df70d5f018f8ce",
+      "bytes": 2177,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 260,
+          "sha256": "47f4ce6ba6e5881d8019974dfb2174494d352bb9ea06f697372499589e27fb58"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 432,
+          "sha256": "ea61666d6afe2d35f84bcf6095ac8746fe44055254d658ac3e1739e0b876e84a"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.duckduckgo",
       "version": "100",
       "shortcode": "kdc0qy",
@@ -724,6 +1840,35 @@
           "path": "duck.png",
           "bytes": 13810,
           "sha256": "3a6724c393e1e77461ea739ac360e6af378e0dd9ece45dd832136c6c8f0b70bd"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.7xpd57",
+      "version": "1",
+      "shortcode": "7xpd57",
+      "source": "omapop-port",
+      "name": "Ebay",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/7xpd57",
+      "sha256": "c9928bb02e878392c21ea1ee6806ce0762f7628fdecdb0d356a8bd32ec6eadab",
+      "bytes": 2527,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 612,
+          "sha256": "b83e4ed013c678c42cd6c0e2e816771137f3872feda7aaf9b2abe71bd340e589"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 430,
+          "sha256": "dba090389ade68bf3d6b412519438afdf4897e2432cfedf99db70064e6f370a7"
         }
       ]
     },
@@ -865,6 +2010,35 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.8ap4bc",
+      "version": "1",
+      "shortcode": "8ap4bc",
+      "source": "omapop-port",
+      "name": "Eudic",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/8ap4bc",
+      "sha256": "b76d1d5e8eb4fdac0f80ac7f183a10fddfad08efd522a161f8a64051aab5a905",
+      "bytes": 2174,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 259,
+          "sha256": "49b963ce4002d1095b007b0b508933ac09c99305f92c0ea06c0bf49c445b9d5a"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 430,
+          "sha256": "a2ad0007f76d93bd421e7d4960da9d09647df70a062ee8005336ea915d0d89cc"
+        }
+      ]
+    },
+    {
       "id": "com.brettterpstra.popclip.extension.fixemail",
       "version": "2.0.6",
       "shortcode": "r89xtt",
@@ -926,6 +2100,35 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.xh9jan",
+      "version": "1",
+      "shortcode": "xh9jan",
+      "source": "omapop-port",
+      "name": "Formatting",
+      "description": "Bold and italic in Obsidian, Logseq or LibreOffice Writer; underline in Writer. Uses explicit Linux Ctrl shortcuts.",
+      "url": "omapop:ports/xh9jan",
+      "sha256": "6b2a912d1521f6239fa18950a37dd4b9e3bf61d2b736b44355132b9650c46f1f",
+      "bytes": 2853,
+      "commandKey": "ctrl",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 932,
+          "sha256": "ce7bf8fe813c565ef7e07fbd92ca7a9054e99d0a1bc664cca51e2c9d313ae313"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 436,
+          "sha256": "538920e5105058965aa705f35d52708cd0ffb22e05123f512962d55a44a926f5"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.fullhalfwidth",
       "version": "100",
       "shortcode": "s16hap",
@@ -970,6 +2173,74 @@
           "path": "half.png",
           "bytes": 6549,
           "sha256": "4c6c9be2f3aa0baf98b141f0e35bf4ddc4944f5a6d6e00859f33c97f03f3d03c"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.k50jz6",
+      "version": "1",
+      "shortcode": "k50jz6",
+      "source": "omapop-port",
+      "name": "Get IP",
+      "description": "Resolve a hostname to at most 32 IP addresses, without a shell.",
+      "url": "omapop:ports/k50jz6",
+      "sha256": "2dd6479967120ac01abff5f987d2e089cd5d1259e60a782d82d0b428ec0896da",
+      "bytes": 2258,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 342,
+          "sha256": "1956d498cf5ad653215eda66b0423657aa8e7e180db31a1a6f7fd0d44eee2846"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 431,
+          "sha256": "d0bce05919835811ebefc49c1807654cac68d136f74e8eda326f059086395de4"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.mxa673",
+      "version": "1",
+      "shortcode": "mxa673",
+      "source": "omapop-port",
+      "name": "GitHub Hop",
+      "description": "Open owner/repo or owner/repo#123 directly, or search for the first matching GitHub repository.",
+      "url": "omapop:ports/mxa673",
+      "sha256": "097f54db27c3a1b9b4a3035c79a81aa8395b0f71f239440f199536241d5c2ed8",
+      "bytes": 20492,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 354,
+          "sha256": "d208d8c21865f3f50daac5ed14f3d1dfc6b84ca47d15e25f9bc717ae503c7442"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 426,
+          "sha256": "899dfa9f06a475407a8d03c1a47e69d346018e0572e9643370a8fcd960acc8ec"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
         }
       ]
     },
@@ -1139,6 +2410,35 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.p20n16",
+      "version": "1",
+      "shortcode": "p20n16",
+      "source": "omapop-port",
+      "name": "Google Scholar",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/p20n16",
+      "sha256": "f951893b6cec41d030cc145b0dd3dad9572f590d1118537ed65add37c6f152fa",
+      "bytes": 2198,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 273,
+          "sha256": "393ac5963e9d63b8fbcd0eef21e19e899696e1139f3471b27d57a66093f34171"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 440,
+          "sha256": "d5df56ed21157829913709702bc2939ef1499cf0e4d562f32cfe13701a69a9a0"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.google-translate",
       "version": "100",
       "shortcode": "d38ynn",
@@ -1191,6 +2491,108 @@
           "path": "_Signature.plist",
           "bytes": 743,
           "sha256": "3214a42b8bd8d01325554a144b385ab02046e31dd9579f5077e124f592c0c37a"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.fapat2",
+      "version": "1",
+      "shortcode": "fapat2",
+      "source": "omapop-port",
+      "name": "HardWrap",
+      "description": "Wrap each line or unwrap paragraphs without merging blank lines.",
+      "url": "omapop:ports/fapat2",
+      "sha256": "3857a605631226559789d953f63a3194999cc9c211b2ede67c83602657368f98",
+      "bytes": 19340,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 676,
+          "sha256": "3e3c7d045a46b9e07288f6f43d8ed59b5125a74ec84ee11fc5ed22a1d299a3d9"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 440,
+          "sha256": "62322f9041817b471560b2c50ef2977b67d30f256aa1a8d1a16b016dbf6dfacc"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.v1hh5h",
+      "version": "1",
+      "shortcode": "v1hh5h",
+      "source": "omapop-port",
+      "name": "Highlight",
+      "description": "Wrap selected text with ==highlight== markup in Obsidian or Logseq on Linux.",
+      "url": "omapop:ports/v1hh5h",
+      "sha256": "955c236fa68350aa7749bcf327cc626ea203d58c37c32f10b2f4fa4ae0711245",
+      "bytes": 2364,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 444,
+          "sha256": "6458caa34854555871b24814b923c957f1322dc9b64da5ea8a53d721f72dc483"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 435,
+          "sha256": "a442b2f9fda77848733ecccc388c6c1b08df5dacf400a2357cfcac693a28aaa5"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.py867z",
+      "version": "1",
+      "shortcode": "py867z",
+      "source": "omapop-port",
+      "name": "HTML Encode",
+      "description": "Encode HTML special characters or decode named and numeric entities.",
+      "url": "omapop:ports/py867z",
+      "sha256": "e14ee072f629cd5f8adaa1f42553ba7e58c1f0edaa17bf3f7e42805f93578590",
+      "bytes": 54483,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 583,
+          "sha256": "838c9c6b857629d9f820af6380a22ef541990c84e6ea5211e0986759bc89f4fa"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 436,
+          "sha256": "378f3070b4d368499ac0c14ea43e91905392a625f479f2e46c6e174614055049"
+        },
+        {
+          "path": "entities.json",
+          "bytes": 35102,
+          "sha256": "1232b77617d9260ebe39e2fb454f3a467a5ace1a69e6b20948c41f7a2a90b05b"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
         }
       ]
     },
@@ -1276,6 +2678,137 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.fq9d07",
+      "version": "1",
+      "shortcode": "fq9d07",
+      "source": "omapop-port",
+      "name": "IMDb",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/fq9d07",
+      "sha256": "2f9390a2d92f62950c89761d195c2d7cbb4367996a6f69d07d7c4bfc77b3c145",
+      "bytes": 2170,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 255,
+          "sha256": "705d20f0bbe682bada5841567329758126b24c84e73129c7849acdc5c64152e1"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 430,
+          "sha256": "3960aa806eb119a24d482383d2dfceb522c18b857acc453f6b394e8efee0d7b8"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.6zqrwd",
+      "version": "1",
+      "shortcode": "6zqrwd",
+      "source": "omapop-port",
+      "name": "Increment Templated",
+      "description": "Generate at most 1,000 rows using ##1..5## or ##a,b,c## templates and bounded arithmetic.",
+      "url": "omapop:ports/6zqrwd",
+      "sha256": "3c286ea10bc6a345efaa91b4cd6cdee9fff55f86023b634e0b10a42c1fe63a64",
+      "bytes": 19115,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 441,
+          "sha256": "8c8aabe3cd35efc3f99bd7931181f7d686da2f5a230a73ad71c64fe828629480"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 450,
+          "sha256": "2b6dfd8d1c2d6765d206d4908e51f10e6c7ede10a3fe7560c712f8ba9e7d1b4a"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.f2xzek",
+      "version": "1",
+      "shortcode": "f2xzek",
+      "source": "omapop-port",
+      "name": "Instapaper",
+      "description": "Save one HTTPS URL with Instapaper’s Simple API using your own account.",
+      "url": "omapop:ports/f2xzek",
+      "sha256": "7975b551d0e628cb27ef71670121a628b675e200acb9fe5125aa9617aeabccd2",
+      "bytes": 20799,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 651,
+          "sha256": "cc302811d7412090704a887e09f6f0eca54ea6b144cf8ecd7064119b1dcb0fa6"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 436,
+          "sha256": "72a6cd6a7a48ea32bb36cccc3303d1f5420a6e08b050d82208de853465cf7e0b"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.v8m6j4",
+      "version": "1",
+      "shortcode": "v8m6j4",
+      "source": "omapop-port",
+      "name": "JD",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/v8m6j4",
+      "sha256": "c54229b83ba8b74fd5bb09e41c9874952bbd70a85a8680e304c176024a46f6e7",
+      "bytes": 2184,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 271,
+          "sha256": "33a4ed0f9591d1213ecffff58806a952c13f4cc7e2a0db4d8143827731ca4cc5"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 428,
+          "sha256": "b7c19a7cd3134dc7d523cd99b45bd04e6b5007b246b7222df545454b12404fa7"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.join-lines",
       "version": "100",
       "shortcode": "01vjf6",
@@ -1320,6 +2853,40 @@
           "path": "test.js",
           "bytes": 108,
           "sha256": "8bfc167f706bba4e6497c632701bbeb2c71c7a44ad61d34809e80e6c3024b2a4"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.29vg9p",
+      "version": "1",
+      "shortcode": "29vg9p",
+      "source": "omapop-port",
+      "name": "JSON Tailor Local",
+      "description": "Format, minify or extract JSON locally using an optional JSON Pointer.",
+      "url": "omapop:ports/29vg9p",
+      "sha256": "f1447a137b55451c883c50b16392c71569038cbcad89848f2c0b14e709ba332b",
+      "bytes": 19388,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 733,
+          "sha256": "b034fa8ccad7c9700c2e2a62d1dff45f04419a5fe7213ddf7876396b91e875f6"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 431,
+          "sha256": "eef7bc80d0d80c6f9fcea6cd7c3aa80b53f8509662d128a0685fdff338e9282c"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
         }
       ]
     },
@@ -1446,6 +3013,40 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.az0jxd",
+      "version": "1",
+      "shortcode": "az0jxd",
+      "source": "omapop-port",
+      "name": "Line Count",
+      "description": "Count lines, including a final blank line.",
+      "url": "omapop:ports/az0jxd",
+      "sha256": "0e3853ff215bcda1341bcb0db03a53108fe0a4145d1a29283c049311170115c5",
+      "bytes": 19034,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 375,
+          "sha256": "535ff2594ab3a4907797927fbbd07cf66af52aafc9c94f8a5f47d57c78ef368a"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 435,
+          "sha256": "f1c38dea73db35893dfa001dd5f8f137cc1583334d1d94f0ecbc7ec31d5eeab7"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.linkedin",
       "version": "100",
       "shortcode": "j7ds2s",
@@ -1540,6 +3141,35 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.bcjg80",
+      "version": "1",
+      "shortcode": "bcjg80",
+      "source": "omapop-port",
+      "name": "Maps",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/bcjg80",
+      "sha256": "ad35a6d32985381febc77d85c8a9aac329aab58eb50c984f273d8107ddb6624d",
+      "bytes": 2189,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 274,
+          "sha256": "d9888a95e045ee7c27e1339ecf3c006e2316babeaef2b155c9e6236da538b511"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 430,
+          "sha256": "51c323c7e5e04fc0dfa7971c0a2eb28f3de8e50c7cc2e708749f3956dc1b8661"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.mapy",
       "version": "360",
       "shortcode": "4ka8r3",
@@ -1597,6 +3227,55 @@
           "path": "_Signature.plist",
           "bytes": 739,
           "sha256": "2accd00ce1122b93e8df82d0d6671344a07aa50d8d0c380ed950b4c54080d668"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.pt4k2d",
+      "version": "1",
+      "shortcode": "pt4k2d",
+      "source": "omapop-port",
+      "name": "Markdown to RTF",
+      "description": "Copy basic Markdown headings, emphasis and code as RTF. Unsupported Markdown stays literal.",
+      "url": "omapop:ports/pt4k2d",
+      "sha256": "9fad3c0617e219086081af7f65d38e1574708dfa9327e408011c227387c11831",
+      "bytes": 61133,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 360,
+          "sha256": "28819a9c69ddcc0728abc6cf0b06180b547ab03e8672254cce7100112d9999b6"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 441,
+          "sha256": "ca2f6b9fecd164b8b90f1f7d111471f45e47e7d3f2606dae90303dc869960597"
+        },
+        {
+          "path": "entities.json",
+          "bytes": 35102,
+          "sha256": "1232b77617d9260ebe39e2fb454f3a467a5ace1a69e6b20948c41f7a2a90b05b"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        },
+        {
+          "path": "markup.js",
+          "bytes": 3846,
+          "sha256": "042ab2f587fb48c1ad5aff28ab7e63e0f211e2e6ac643bc2a21fabe5c9ed35b9"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
         }
       ]
     },
@@ -1700,6 +3379,74 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.pgh8tr",
+      "version": "1",
+      "shortcode": "pgh8tr",
+      "source": "omapop-port",
+      "name": "Mosaic Text",
+      "description": "Replace each Unicode character with a mask. Keeping the original on the clipboard is optional.",
+      "url": "omapop:ports/pgh8tr",
+      "sha256": "3fbfc0e9375f3968c5d8945f451e6cdc4974836cf8745cf23bc1fe9c408fdf26",
+      "bytes": 19463,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 807,
+          "sha256": "e4a9e0aeca261ed71c08b85fe15c3e233498c05d7b426ca49dd968b4b0026b0d"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 432,
+          "sha256": "64401e4dac10b9620fe19459e7ce754a69c19c13e745151919684698e19ddd01"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.r7eape",
+      "version": "1",
+      "shortcode": "r7eape",
+      "source": "omapop-port",
+      "name": "Multi-Line to Array",
+      "description": "Convert lines into an escaped JavaScript or JSON array.",
+      "url": "omapop:ports/r7eape",
+      "sha256": "c7205e10909760f040f5bdd991aad7148ebd4726b748ca3907fb92a4776e391c",
+      "bytes": 19911,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 1247,
+          "sha256": "388c272323a686e6902a14e7cbf8f6f34d2222b52e3253fd79107e0299852edc"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 440,
+          "sha256": "b626e2f35dc1078bc9d430801af23c63299f083c2bf9d4295a68c732a69cfcb0"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        }
+      ]
+    },
+    {
       "id": "com.oxxie.popclipextensions.namecolor",
       "version": "134",
       "shortcode": "zn9dyt",
@@ -1734,6 +3481,35 @@
           "path": "namecolor.py",
           "bytes": 3268,
           "sha256": "d2db597fbce31f8e11873de394fff355eee3bd8cdf882f1f1c2e19bfafb1eb35"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.enc6pz",
+      "version": "1",
+      "shortcode": "enc6pz",
+      "source": "omapop-port",
+      "name": "Naver",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/enc6pz",
+      "sha256": "97c1ac3822df9a926460e4a57d455fc80473a2c8a6d82fb1cdcae52689aad56e",
+      "bytes": 2193,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 271,
+          "sha256": "4f2f6ac1f6cf1ff5e58649d2849eb1fa0bb02bf340abfecc7217e9636bb91924"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 437,
+          "sha256": "8263eca41452807cea1b33ec203f8b645211fc8745ad22219ed949a3fcc031c9"
         }
       ]
     },
@@ -1799,6 +3575,45 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.6p9xq3",
+      "version": "1",
+      "shortcode": "6p9xq3",
+      "source": "omapop-port",
+      "name": "Ollama",
+      "description": "Ask a local Ollama model about the selection. One prompt per action, without saved chat history.",
+      "url": "omapop:ports/6p9xq3",
+      "sha256": "3aa8127a123a78024e27fb4d52b48f1cdf2443270250c1127a43abdbd0f18f07",
+      "bytes": 21010,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 866,
+          "sha256": "e05d87f7b305b4ae14bfb2b54695aa3d5d2b67ddb97cecbe43b6ac4c76be2b9e"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 432,
+          "sha256": "47fe4d0cc87a121ae176102b38ec8ecab8c5954857a4d878ed7a74cb832c8b0b"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.online-dictionary",
       "version": "327",
       "shortcode": "966gax",
@@ -1828,6 +3643,35 @@
           "path": "dictionary.svg",
           "bytes": 3099,
           "sha256": "1f439911e1445438ff82da72a42eaac0dd62d42cc20660007054230333da1ee1"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.g9rfgp",
+      "version": "1",
+      "shortcode": "g9rfgp",
+      "source": "omapop-port",
+      "name": "Online Thesaurus",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/g9rfgp",
+      "sha256": "005336d57868e37dec78f3441f0ac2c8f3094c65914ba5c4c42b029a06a5cd5c",
+      "bytes": 2198,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 271,
+          "sha256": "29d32e94e9e6a6ca88381afd6f5b4edfd988ed1511fc3a417cadf8269dbf9a01"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 442,
+          "sha256": "34f8b7df8cd1fd6dbd79ba769abc6c0075006a8ac5949cf2ba02b0b133437722"
         }
       ]
     },
@@ -1875,6 +3719,74 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.wwgbd7",
+      "version": "1",
+      "shortcode": "wwgbd7",
+      "source": "omapop-port",
+      "name": "Open in Browser",
+      "description": "Open one selected HTTPS URL in the chosen installed Linux browser.",
+      "url": "omapop:ports/wwgbd7",
+      "sha256": "59905bb43254b6ffda1e8826e970eb1bb53171bacaf937c7f0771951447540ff",
+      "bytes": 2533,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 607,
+          "sha256": "6592202dc8dff1c0acc9b85c1ed99cde787623803959103e9aeab3bded361513"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 441,
+          "sha256": "0647e2ef080a7d6ede2b8203e302c96ea2e6cb850281e3b2398bdb4e92d6c267"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.48f32j",
+      "version": "1",
+      "shortcode": "48f32j",
+      "source": "omapop-port",
+      "name": "OpenAI Chat",
+      "description": "Ask an OpenAI model using your own API key. One prompt per action; response storage is disabled.",
+      "url": "omapop:ports/48f32j",
+      "sha256": "9522770b8d69ce5a4518a4c8c3748b396158538d8f709af3a4e8b5e7628434a9",
+      "bytes": 20987,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 842,
+          "sha256": "a5c6b0291d3933d38bdf510836699b5cb08ae09850a3ade52add43d5bdee3525"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 433,
+          "sha256": "ca232805204a9edb4af0d575134db8c429a36b6dfa5f0b0c590eb715bd52b8c6"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.openstreetmap",
       "version": "2",
       "shortcode": "fj4e7p",
@@ -1899,6 +3811,40 @@
           "path": "_Signature.plist",
           "bytes": 742,
           "sha256": "3e2efbe2153584e36a28b8a3c53572c7fec2282d0462136ff1975783c44bdf2e"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.g8d8kh",
+      "version": "1",
+      "shortcode": "g8d8kh",
+      "source": "omapop-port",
+      "name": "OpenURLS",
+      "description": "Open up to ten selected HTTPS URLs in the default browser.",
+      "url": "omapop:ports/g8d8kh",
+      "sha256": "7df5138e45f8ca05419022f19dffdf402e2b11300fed06b476efdeeb86d682ab",
+      "bytes": 5085,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 268,
+          "sha256": "be25c14c1654ba5fa3caef40f1939f567e3a98d339c09add373dd2c1b2090068"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 440,
+          "sha256": "83ffdf1a21f8b7b5674adc652267db0b9c17bd6397e527108194ab53d64e8b5d"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
         }
       ]
     },
@@ -1937,6 +3883,40 @@
           "path": "outdent.ts",
           "bytes": 726,
           "sha256": "183b331ba3b1db557f57b2c1c9f30081cce11df2d7614a2f593be57de911435e"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.g467b2",
+      "version": "1",
+      "shortcode": "g467b2",
+      "source": "omapop-port",
+      "name": "Outlook Permalink",
+      "description": "Convert a selected or clipboard Outlook web message URL into a permalink. Automatic browser URL capture is unavailable.",
+      "url": "omapop:ports/g467b2",
+      "sha256": "f21c3d77eacd93a150d4264ed485970a7dad452a2a714c40e594cb67336216cd",
+      "bytes": 5257,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 444,
+          "sha256": "9f536bf9580927f27a0677b80a41e95cf04b337e69e2bf153e0f4c0e581e75c2"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 436,
+          "sha256": "073a8557e08614d2658897e3bbf0a0daa5eb9d8810e5eebdc7160c90342a5210"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
         }
       ]
     },
@@ -2036,6 +4016,45 @@
           "path": "paste-equal.png",
           "bytes": 6031,
           "sha256": "7805eaa0adda91649ed29ca6f37dc271d85f0da3f550b1da56f27c75bed85ce9"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.5zp8bb",
+      "version": "1",
+      "shortcode": "5zp8bb",
+      "source": "omapop-port",
+      "name": "Pinboard",
+      "description": "Save an unread Pinboard bookmark. Existing bookmarks are preserved; new bookmarks default to private.",
+      "url": "omapop:ports/5zp8bb",
+      "sha256": "ffdc1d2dc151c7cf356c34d0720885914fd7c624fdebf05e47e4aef821a66a6c",
+      "bytes": 20989,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 843,
+          "sha256": "311b11d898c1fe57e3da032a730f6279eab1c8a384f64c59327ea7d7010f94bc"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 434,
+          "sha256": "c50568dd6f3ce6a48414dff309881460d19db8d2173a6ac0cac219d5a67daf5c"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
         }
       ]
     },
@@ -2159,6 +4178,132 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.rn4p5p",
+      "version": "1",
+      "shortcode": "rn4p5p",
+      "source": "omapop-port",
+      "name": "PreviewURL",
+      "description": "Open one selected HTTPS URL in your browser. This replaces the macOS Quick Look workflow.",
+      "url": "omapop:ports/rn4p5p",
+      "sha256": "6118b8f84587e0520c4cb34d7f76d2fb773ef80d2fc71710819a4aaaf019b0d1",
+      "bytes": 5139,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 320,
+          "sha256": "cf2c598dae6128473f6fe401383357edc3c648b1e5dd24d02cb6529993de45f2"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 442,
+          "sha256": "e0ebf269ab3af8711da5888f31602fd51e6124bc2e863c38c5a7c057064dca59"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.ykm8zw",
+      "version": "1",
+      "shortcode": "ykm8zw",
+      "source": "omapop-port",
+      "name": "Print",
+      "description": "Print selected text through CUPS after confirmation.",
+      "url": "omapop:ports/ykm8zw",
+      "sha256": "187d139a1cff2b6ed738b5b0f876456e046a064dffdad1393a4da950042fec0e",
+      "bytes": 2394,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 478,
+          "sha256": "7adfb49121f51b90c66f26d74ee605804d866dfc3bb8867cc65121b3894e7862"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 431,
+          "sha256": "949c5d31058c23d846d529acf13241e1cd84507a10aeb02bee1178c8ad105f02"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.2ed0xf",
+      "version": "1",
+      "shortcode": "2ed0xf",
+      "source": "omapop-port",
+      "name": "PubMed",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/2ed0xf",
+      "sha256": "3b86078e5a5f7589dd0563fc1ae4d1fe5dc9e0587a4f806bceea12177d545381",
+      "bytes": 2183,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 266,
+          "sha256": "96c130d367e8b096de4ab50ce934a125d0c5dd4b11941bebb6281745dc37fbc5"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 432,
+          "sha256": "6ac8dcd495d5c885dfadc75a8652c62e04c849a1802453757d001b4e998a7c5c"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.wyq4we",
+      "version": "1",
+      "shortcode": "wyq4we",
+      "source": "omapop-port",
+      "name": "Quotes",
+      "description": "Surround text with the selected quotation style.",
+      "url": "omapop:ports/wyq4we",
+      "sha256": "31af509013529168c8d81621b0ce63ccce55a183d9d126c69a2b9e69f209347b",
+      "bytes": 19689,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 1033,
+          "sha256": "517c7fa57b7035435acefa26635d22081dd7e305cf941811933ce86ae1f2710c"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 432,
+          "sha256": "61000dda5cc513a401d8de8e71f391b69ed3b9ed4ab25b2c53104f3f97838a8c"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.qwant",
       "version": "301",
       "shortcode": "v7hgh5",
@@ -2192,6 +4337,45 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.rc70x5",
+      "version": "1",
+      "shortcode": "rc70x5",
+      "source": "omapop-port",
+      "name": "Raindrop.io",
+      "description": "Save one HTTPS URL to Raindrop.io using your own account’s test token.",
+      "url": "omapop:ports/rc70x5",
+      "sha256": "f9541e9602d95b84973a59379eaf150b4478543328aa59b5ffaa334e92b76868",
+      "bytes": 20967,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 824,
+          "sha256": "fb6e910172309f1e7f9574ae11a9dbf4e51e0d922ea0802aa2e6650f506469ff"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 431,
+          "sha256": "6e0637105ed73d56d098a75d203c4eb6725f5ff10650e8bf5e24a554ee474f56"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
       "id": "xyz.phpz.popclip.extension.ray-so",
       "version": "1.6",
       "shortcode": "831bpe",
@@ -2221,6 +4405,45 @@
           "path": "main.ts",
           "bytes": 724,
           "sha256": "e16d02c29f2cfee579954e1f1f5e141df69c95f57ad84e4ed347a5255e4f123e"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.1zemre",
+      "version": "1",
+      "shortcode": "1zemre",
+      "source": "omapop-port",
+      "name": "Readwise",
+      "description": "Capture a highlight to Readwise, or save a URL to Reader.",
+      "url": "omapop:ports/1zemre",
+      "sha256": "793125eb53ccb1c0373f5194d13d2ec51edc36fd0bdfdd480f12bdd4fb6410f4",
+      "bytes": 21014,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 868,
+          "sha256": "726177245bc1ffff910e4da7198c483b72ec34d0bbf0367f61a1b47bb88791b3"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 434,
+          "sha256": "1117184da874cb7b5d96b944e817def3ac05b55fc9d42380bc2987219f62ac6c"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
         }
       ]
     },
@@ -2291,6 +4514,205 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.4kcy03",
+      "version": "1",
+      "shortcode": "4kcy03",
+      "source": "omapop-port",
+      "name": "Roam Research",
+      "description": "Append selected text or Markdown to Roam using your graph’s append-only token.",
+      "url": "omapop:ports/4kcy03",
+      "sha256": "ec6528474df70334da2deec8ee2a78d8c2d30e0d82e8975f7109019de9169b1d",
+      "bytes": 21125,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 975,
+          "sha256": "03c7c230e3cedabfe7f24720ef486224b447ee347d2f3b3f1c51eff7f02e717c"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 438,
+          "sha256": "43f7f81e1a5426d67f0ce75064409f3f380ce50572226fb68c5880cd5f1e1328"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.m1fa94",
+      "version": "1",
+      "shortcode": "m1fa94",
+      "source": "omapop-port",
+      "name": "ROT13",
+      "description": "Apply ROT13 to Latin letters.",
+      "url": "omapop:ports/m1fa94",
+      "sha256": "5758212c43fade7c3661f30e77b61b5ddc95f234e13603548adc2bfb0ab25ef8",
+      "bytes": 19008,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 353,
+          "sha256": "eea28849515ba04daae05b00539024f7c0e5afee906e1aef31c5d34de9b7b342"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 431,
+          "sha256": "aadf7e9ee451d6af51bb9a0910d0247e53fffc370a7f7a16db85629769a44db6"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.b1cyx8",
+      "version": "1",
+      "shortcode": "b1cyx8",
+      "source": "omapop-port",
+      "name": "RottenTomatoes",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/b1cyx8",
+      "sha256": "94172b73d78ac9e218dd789378b6fa2d8da1c6b6d42274b6bf9cb8a9dc18fe20",
+      "bytes": 2207,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 281,
+          "sha256": "f333405db05c52a89e5639a579a9673a3b68c4f5076cabd7f47c7560fc63f3c2"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 441,
+          "sha256": "b64582710514abf2b7580b2181939aafe1512c1732b48cd9a270aa44423775e7"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.emvaxx",
+      "version": "1",
+      "shortcode": "emvaxx",
+      "source": "omapop-port",
+      "name": "Say",
+      "description": "Speak up to 1,000 characters using espeak-ng, with a 115-second limit.",
+      "url": "omapop:ports/emvaxx",
+      "sha256": "06748cdf2126ae7ba36fab0cbac91586637c3a589d83c3173394f095934a145c",
+      "bytes": 2237,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 323,
+          "sha256": "6f76d3e5e6dcd2097f783cfaa06d12cc1276a47032dafe707f6eaad87b41e6b8"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 429,
+          "sha256": "b7b6c7537f2611738f5197faaffacd9879c4ea99d7d7bb980c98013902a688c8"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.7yc6g6",
+      "version": "1",
+      "shortcode": "7yc6g6",
+      "source": "omapop-port",
+      "name": "SearchLink",
+      "description": "Create a Markdown link to the first Brave search result. Requires your own Brave Search API key; legacy SearchLink bang commands are not supported.",
+      "url": "omapop:ports/7yc6g6",
+      "sha256": "16b3f0b8aac1a5e4046ace7b06cad75d81b7e07735e52edc3b887ca3a8c9073e",
+      "bytes": 20720,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 566,
+          "sha256": "5a0c66222a9f2119c152d9f255d7a73d39f4b506a73856d678dc65a699286529"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 442,
+          "sha256": "8a74f775c2ab5ef48ae6e4edab01b18596c3534ff4e2f194136501286f9982bb"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.97rvpd",
+      "version": "1",
+      "shortcode": "97rvpd",
+      "source": "omapop-port",
+      "name": "Select All",
+      "description": "Select all in the active application and refresh Omapop’s captured selection.",
+      "url": "omapop:ports/97rvpd",
+      "sha256": "00cd05cb3aca8bb431efd2bed84a637aa37b7a64faa73c7fb0e70ef37e242eb9",
+      "bytes": 2209,
+      "commandKey": "ctrl",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 288,
+          "sha256": "16cec8827c8780f0d3902284c7d70fac6df3bb1ce66bdcb7be1865ea96d3c770"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 436,
+          "sha256": "5c33c9dff031fe0ee8d0aa159eb6e297cbf31c54221346ac8242ac88a8d487a9"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.sentence-case",
       "version": "100",
       "shortcode": "b3yeve",
@@ -2324,6 +4746,45 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.6pa6yt",
+      "version": "1",
+      "shortcode": "6pa6yt",
+      "source": "omapop-port",
+      "name": "Shorten Link",
+      "description": "Shorten up to five HTTPS links with is.gd. Only explicit action clicks contact the service.",
+      "url": "omapop:ports/6pa6yt",
+      "sha256": "685b9dc46385d35b3f27c71e13e6168555c420ce0ecb6b8509f5f3401a3f4924",
+      "bytes": 20503,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 353,
+          "sha256": "e7d77dcc4150d2100f5262038a6699d972c16e58655a035be68bb70c8b6596d4"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 438,
+          "sha256": "15f121dbdf35590dd05c9ed9b2fc3f95327654f9340c950915b93cc50b7d849d"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.shuffle",
       "version": "290",
       "shortcode": "tss74a",
@@ -2353,6 +4814,45 @@
           "path": "_Signature.plist",
           "bytes": 738,
           "sha256": "40525163d85437c0c5bb19d333f9cae86c1a3044c9f32c8bdb82eb6d06fd4698"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.wdp7x0",
+      "version": "1",
+      "shortcode": "wdp7x0",
+      "source": "omapop-port",
+      "name": "Slack",
+      "description": "Post the selection as plain text to the Slack channel assigned to your incoming webhook.",
+      "url": "omapop:ports/wdp7x0",
+      "sha256": "740dd134172a9becf21120b7eafe93885a7f699d89892ff6400fa691ab1652c0",
+      "bytes": 20644,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 501,
+          "sha256": "6aed8b9d1411aa21889c60d3998672965599cb24fd067eef83b222f370696c19"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 431,
+          "sha256": "589ce6a722af7582e5ee2ee103d6cd9f3b4e7d86a5d22862b1154c49ff4a1a02"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
         }
       ]
     },
@@ -2391,6 +4891,40 @@
           "path": "slugger.ts",
           "bytes": 562,
           "sha256": "d84259830fe85d25ee03e88557c970133a00c2b2b6f9a8fcb2a0b213f0902093"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.rqgjxd",
+      "version": "1",
+      "shortcode": "rqgjxd",
+      "source": "omapop-port",
+      "name": "Slugify",
+      "description": "Make a lowercase, accent-normalized slug.",
+      "url": "omapop:ports/rqgjxd",
+      "sha256": "51092c4a1bce081bd4c5820614abadf95c584ded07bc1bd1d04d44f22e3873c9",
+      "bytes": 19025,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 368,
+          "sha256": "cb1e5bb81b4ddb60f10e73c1aa27164424553b65537ec9327d5dd8ad706fc823"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 433,
+          "sha256": "03b5c57c8d4a5fd6278240442aa9cbf8d57c0dcd70170888973d7d3373301229"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
         }
       ]
     },
@@ -2494,6 +5028,35 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.a6arrs",
+      "version": "1",
+      "shortcode": "a6arrs",
+      "source": "omapop-port",
+      "name": "Stickies",
+      "description": "Save the selection as a private text note in ~/.local/share/omapop/captures. This replaces the Mac Stickies app.",
+      "url": "omapop:ports/a6arrs",
+      "sha256": "e2bd7ea603e908d83f71712964f97f0ee93907b5fdd3050e8cdd6ece23005e2b",
+      "bytes": 2290,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 368,
+          "sha256": "5d121c8947a61b877ab671d72f399f4d139cd48835d68750c7ed9e0f695aecc0"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 437,
+          "sha256": "01a65cee34286547e2e36dc91c8137b183cf64223d9808e0843602ab0b8d6925"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.straighten-quotes",
       "version": "17",
       "shortcode": "7qdy94",
@@ -2522,6 +5085,137 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.0v6xef",
+      "version": "1",
+      "shortcode": "0v6xef",
+      "source": "omapop-port",
+      "name": "Sum",
+      "description": "Sum selected numbers with exact decimal arithmetic (up to 18 fractional digits).",
+      "url": "omapop:ports/0v6xef",
+      "sha256": "64fe64d9097e196afffd7ca86268dcf0c44442c02f4e267b175ded1a1d8202c8",
+      "bytes": 19517,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 858,
+          "sha256": "9b719c222330ba86475e8bb2c20ca5dc5acb9b832cfd9573ab82ca26b0f20411"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 435,
+          "sha256": "41bb2c4bcaedb991ab892907a7011a7fa1b85f26257130db756ee67903c547a5"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.2x5yjg",
+      "version": "1",
+      "shortcode": "2x5yjg",
+      "source": "omapop-port",
+      "name": "Swap with Clipboard",
+      "description": "Paste the previous clipboard text, then copy the replaced selection.",
+      "url": "omapop:ports/2x5yjg",
+      "sha256": "54ae60321291af2c4be5f2eeb0d9d22e546f966c620e470c46921143d68947a6",
+      "bytes": 2345,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 430,
+          "sha256": "5ee8bbcae90d8b1b36ae3e6c41041c6b18f9b8c19b094b7e1cc04a0f57344582"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 430,
+          "sha256": "acda47829a0190890f77687f92811eb8b41e6742bb2fa041b5334217c50f0d74"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.x9q882",
+      "version": "1",
+      "shortcode": "x9q882",
+      "source": "omapop-port",
+      "name": "Tana",
+      "description": "Capture escaped text into a Tana node with your workspace token.",
+      "url": "omapop:ports/x9q882",
+      "sha256": "875e1af9a9243be9db9036fb29d623353f04e1bee53d3df40da13a7a977d98c9",
+      "bytes": 20774,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 632,
+          "sha256": "7496f2c01adc3780eb682b2db83f4a6d572ac0dc484edfb4cc84d2be622cccfa"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 430,
+          "sha256": "ac1c4ac37d8ce17da4f359357337681c93e4759a170ccf925399b0a625be5320"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.tv2c35",
+      "version": "1",
+      "shortcode": "tv2c35",
+      "source": "omapop-port",
+      "name": "Taobao",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/tv2c35",
+      "sha256": "707e29bd3cc2a96e610e2dd0efe55031d5eeff74c61d05558454d09fa7c4bc0b",
+      "bytes": 2182,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 258,
+          "sha256": "9f19cb2e1951013be27cf00d86fe0305f94a5ede7baa0a4af2410a9bf89c05ef"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 439,
+          "sha256": "5efedb5c437c0f875df6b00eb96b12d8f8e4447ccb9bd441172f8c24942b0c25"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.tenor",
       "version": "1",
       "shortcode": "ht5xxx",
@@ -2546,6 +5240,98 @@
           "path": "_Signature.plist",
           "bytes": 734,
           "sha256": "5627b8e1a6dc2a9bb1b93daf6ea6adcf48de98817b5193744a5e934aa5944832"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.8jj623",
+      "version": "1",
+      "shortcode": "8jj623",
+      "source": "omapop-port",
+      "name": "Terminal",
+      "description": "Copy text and open a terminal, or explicitly confirm running it as a Bash script.",
+      "url": "omapop:ports/8jj623",
+      "sha256": "72cd0e844abdbf5695b34a3ecb3741f308f1f53c36dbe3cb6e1242ae38af1ebe",
+      "bytes": 2469,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 555,
+          "sha256": "ce6c0119dffcac1692831af1460ff14ee76a6795dd35160b55c7bfbe6fcebe32"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 429,
+          "sha256": "c2c1f976288880056e6a13310499b3d1add3dcac0147feaaf45e3fca35ec3516"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.phq1ch",
+      "version": "1",
+      "shortcode": "phq1ch",
+      "source": "omapop-port",
+      "name": "Text Repeater",
+      "description": "Repeat text with text*COUNT, limited to 1,000 copies and 128 KiB.",
+      "url": "omapop:ports/phq1ch",
+      "sha256": "43092c3e55427c109c923cdba6daf5445e4c7a62da1256ed26f12f50142d55a1",
+      "bytes": 19057,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 399,
+          "sha256": "fd5ad1a653fe68d1dd4986f4e8d2b0e635e8f401b1aa9354decc48747e066407"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 434,
+          "sha256": "8b2bab60b0be4a10e5bb6525f12b28aed46e2bcfc1ebdf79b3719b247c5604c6"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.34fddp",
+      "version": "1",
+      "shortcode": "34fddp",
+      "source": "omapop-port",
+      "name": "TextEdit",
+      "description": "Save selected text privately and open it in your default Linux text editor.",
+      "url": "omapop:ports/34fddp",
+      "sha256": "42e8afce30f7b1969dbe0c6a87a94f70addcea945c16856832ea8e0475ee91af",
+      "bytes": 2252,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 333,
+          "sha256": "7dd0b273ca32c7e9311f18626fe758af2d819e858a31b545533a86d41d43f6ba"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 434,
+          "sha256": "221b2ec6fde154b3215dfa7a7596c48f0d4b8c1ca41ec19dc9cd3f2b7263c687"
         }
       ]
     },
@@ -2626,6 +5412,45 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.yzf4sx",
+      "version": "1",
+      "shortcode": "yzf4sx",
+      "source": "omapop-port",
+      "name": "Todoist",
+      "description": "Create a task using the current Todoist API and your personal token.",
+      "url": "omapop:ports/yzf4sx",
+      "sha256": "d145cf12551899a221c8ee96db743a1e2972dc625504fa43a73f7037d828fa35",
+      "bytes": 20965,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 820,
+          "sha256": "05bcd4cb2598c3476351ab7889505681c9e2e8be6bb4147695a374e3b29d7f96"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 433,
+          "sha256": "074d8ac286a5fc518aa55a64b2ba3488526eb4108657273efb1628e6cc87a3bc"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.traditional-simplified",
       "version": "373",
       "shortcode": "fwrfay",
@@ -2680,6 +5505,35 @@
           "path": "trad-sim.png",
           "bytes": 10070,
           "sha256": "7aec0ef1ee53a0e6e121a3afd6689b1e664022f13e62379afd53e4c2de3e8512"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.tx4q96",
+      "version": "1",
+      "shortcode": "tx4q96",
+      "source": "omapop-port",
+      "name": "Translatium to Lexibird Web",
+      "description": "Copy the selection and open Lexibird web app. Paste into its text field; this replaces the Mac service.",
+      "url": "omapop:ports/tx4q96",
+      "sha256": "33506a5efe0c7900e27a43b45ed248a0a8b673eea9c8b9b602f26ccfa306e51b",
+      "bytes": 2379,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 457,
+          "sha256": "acaa221c0b14c65757c6bd4c0d6d6bc92616e3a413babdb0afd8114e78b8df04"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 437,
+          "sha256": "6cc4669e44a61332978e80a6b4957d76b13ef7df3c5a36a87ae998eb31ca0c72"
         }
       ]
     },
@@ -2925,6 +5779,35 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.6n9d0y",
+      "version": "1",
+      "shortcode": "6n9d0y",
+      "source": "omapop-port",
+      "name": "Urban Dictionary",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/6n9d0y",
+      "sha256": "2773dbc678cf3c317567f94c0ee606177da258ba4a0e0baa6f6f51154f4160f3",
+      "bytes": 2213,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 286,
+          "sha256": "dfcd68cf5fa93a4b83ddb7905ae75f0fec227dcb3c26cbeb07e7b34eeb9db0cf"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 442,
+          "sha256": "bd5f8e9c537d9e9293ab7503b28bee06046f4620d7177f2cc7dd9dac46104550"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.urlencode",
       "version": "145",
       "shortcode": "t1gh6s",
@@ -2986,6 +5869,133 @@
       ]
     },
     {
+      "id": "io.github.jondkinney.omapop.port.41g81p",
+      "version": "1",
+      "shortcode": "41g81p",
+      "source": "omapop-port",
+      "name": "Variable Name Convert",
+      "description": "Toggle underscore names to PascalCase, and other names to snake_case.",
+      "url": "omapop:ports/41g81p",
+      "sha256": "ba33f295939c03fe1b5788a08e33753b3a5425814401d04918eb1065e7f400e4",
+      "bytes": 19080,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 419,
+          "sha256": "6101fb559f54105fd844817df978ad833b3a24d6bf58bef4ccb45447163c5e9a"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 437,
+          "sha256": "87f63ca0bf2a8300e21c8e5ec00db10918a800512f869f8083665d19c237b337"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.1pbpz0",
+      "version": "1",
+      "shortcode": "1pbpz0",
+      "source": "omapop-port",
+      "name": "Wayback Machine",
+      "description": "Find and open an available archive.org snapshot of the selected HTTPS URL.",
+      "url": "omapop:ports/1pbpz0",
+      "sha256": "fda5968ffcdd5791a97b481d2af8ae2b55e126e6f8770a6489c8e06838b7dacd",
+      "bytes": 20491,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 339,
+          "sha256": "2ddf767bb940e0f046b37ecef78d9d47302f102ae6ba2637584daa9e96333314"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 440,
+          "sha256": "09916a8fee9f3e41d9479f1104285f4d0999c8fa5546f19212d161a7717afe69"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.ssavd7",
+      "version": "1",
+      "shortcode": "ssavd7",
+      "source": "omapop-port",
+      "name": "WebMarkdown",
+      "description": "Fetch a public HTTPS page and copy its basic Markdown. No login cookies, external images or page scripts.",
+      "url": "omapop:ports/ssavd7",
+      "sha256": "9d5b5c61a864d3984c9f2a6d7ddd5871e58081dae7abcc35d35f50c7836b9193",
+      "bytes": 76480,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 370,
+          "sha256": "f6ea34ce82905e1aa1321d8a722c5387d24c27c2fe253feb974590b34d81b5b5"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 443,
+          "sha256": "bcd68304846b2cd239d980504dadd11dd740a02522a5be4f8695609a02cb2fc2"
+        },
+        {
+          "path": "api.js",
+          "bytes": 15211,
+          "sha256": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7"
+        },
+        {
+          "path": "entities.json",
+          "bytes": 35102,
+          "sha256": "1232b77617d9260ebe39e2fb454f3a467a5ace1a69e6b20948c41f7a2a90b05b"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
+        },
+        {
+          "path": "markup.js",
+          "bytes": 3846,
+          "sha256": "042ab2f587fb48c1ad5aff28ab7e63e0f211e2e6ac643bc2a21fabe5c9ed35b9"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
+        }
+      ]
+    },
+    {
       "id": "com.pilotmoon.popclip.extension.what3words",
       "version": "238",
       "shortcode": "4q8mrz",
@@ -3038,6 +6048,69 @@
           "path": "w.png",
           "bytes": 14105,
           "sha256": "6dfa35edf426eb2c3c30545550ad435de72384afae6f238c8799df19aa3e565d"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.by5b30",
+      "version": "1",
+      "shortcode": "by5b30",
+      "source": "omapop-port",
+      "name": "Wolfram Alpha",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/by5b30",
+      "sha256": "69882fa3dbc98e7cc18c69a4e5f15418734715659a9e77cdfb4c8c3b6581fb94",
+      "bytes": 2195,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 272,
+          "sha256": "7b41d2fad50a5f261515091821d025997b87d33cc47dd6dfb3fd4cf55654843d"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 438,
+          "sha256": "c8b52dc1575baa130a9c7ba43d15a8fe343bce7f1eb2679b8f3bb6701405f78b"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.p94cm7",
+      "version": "1",
+      "shortcode": "p94cm7",
+      "source": "omapop-port",
+      "name": "Word Count",
+      "description": "Count words using Unicode word boundaries.",
+      "url": "omapop:ports/p94cm7",
+      "sha256": "22d0562485cd9b7e9d7fc3a1a06bba51294c0c4083d48cd01772d5b6cbc598f2",
+      "bytes": 19034,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 375,
+          "sha256": "80c58c797bb3f4e092c1aff35f33e6f114ee96a84d33668b4b88f1dcf3c1a04b"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 435,
+          "sha256": "8a5aea95e46f0ea4afe457fa9f805302da9e50053042a27e307295c57a97dff5"
+        },
+        {
+          "path": "local.js",
+          "bytes": 16611,
+          "sha256": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc"
         }
       ]
     },
@@ -3155,6 +6228,69 @@
           "path": "yandex.png",
           "bytes": 9068,
           "sha256": "b50691c0bcada456edde74a9db4636aa018922f2834f75ea73df1d9ce3f25b19"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.ahsn7t",
+      "version": "1",
+      "shortcode": "ahsn7t",
+      "source": "omapop-port",
+      "name": "YouTube",
+      "description": "Open the selected text in the provider’s HTTPS web interface.",
+      "url": "omapop:ports/ahsn7t",
+      "sha256": "5392ee9a23e206d1714063053b971251a0454ea04c29cb04d0c02f1205039f56",
+      "bytes": 2192,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 274,
+          "sha256": "09b92915f0917c6df5569d7a6f684e2395163ce6e481e7c8784eb1caeb42e1a9"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 433,
+          "sha256": "58a8a4ad452e26263076d79c5c409ca26780a7011bf59780bd2b02f8575e36a6"
+        }
+      ]
+    },
+    {
+      "id": "io.github.jondkinney.omapop.port.nv1dks",
+      "version": "1",
+      "shortcode": "nv1dks",
+      "source": "omapop-port",
+      "name": "小红书 Hop",
+      "description": "Open an HTTPS Xiaohongshu shared link, or search the selected text in its web interface.",
+      "url": "omapop:ports/nv1dks",
+      "sha256": "82fd134b24f31fc76525d88a02d5cf18140b85a1d8bd5cd3fca04665868fcf21",
+      "bytes": 5128,
+      "commandKey": "inherit",
+      "files": [
+        {
+          "path": "Config.json",
+          "bytes": 320,
+          "sha256": "146a29a68fb8e61b848c200b8cff3272cc7f4ea9bda0362231c8b99d35b8fc7d"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "29738b55c5346467e7d047b40d63831f7e8c9c27aa18a83897d4569e58f0890e"
+        },
+        {
+          "path": "_Omapop.json",
+          "bytes": 431,
+          "sha256": "bbe6abbd9d20b1e3e663be329657fa3e32cdf8283c08b8363fb63c6111a7e69e"
+        },
+        {
+          "path": "web.js",
+          "bytes": 2768,
+          "sha256": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c"
         }
       ]
     }

@@ -1,0 +1,138 @@
+{
+  "date": "2026-09-08",
+  "scope": "Read-only HTTPS reachability using Omapop user-agent; no account or rendering tests.",
+  "extensions": {
+    "z7bjka": {
+      "url": "https://www.amazon.com/s?k=Omapop",
+      "status": 503,
+      "https": true,
+      "note": "Provider rejected this automated read; browser behavior not tested."
+    },
+    "nwcz3b": {
+      "url": "https://www.baidu.com/s?wd=Omapop",
+      "status": 200,
+      "finalUrl": "https://wappass.baidu.com/static/captcha/tuxing_v2.html?&logid=11209011985940653658&ak=c27bbc89afca0463650ac9bde68ebe06&backurl=https%3A%2F%2Fwww.baidu.com%2Fs%3Fwd%3DOmapop&ext=x9G9QDmMXq%2FNo87gjGO0P8cJWeRqAi53fGMhcdYzP0KRefc3eGtarOGqhes%2BYoPEUgqUK9LXd1cIlztrhMwiv8uKTAe829cE1O31xRphHKqo0ZnFQZjUDWM0%2FXrTsBGC&signature=b8d762f3b02639e9d1d3fdce75ebd726&timestamp=1788922685",
+      "https": true
+    },
+    "hfp7pg": {
+      "url": "https://www.bing.com/search?q=Omapop",
+      "status": 200,
+      "finalUrl": "https://www.bing.com/search?q=Omapop",
+      "https": true
+    },
+    "frmvjs": {
+      "url": "https://doi.org/10.1038/nphys1170",
+      "status": 200,
+      "finalUrl": "https://www.nature.com/articles/nphys1170?error=cookies_not_supported&code=327dbdae-7853-444d-b1a2-3b74a5dd6f97",
+      "https": true
+    },
+    "px544f": {
+      "url": "https://www.discogs.com/search?q=Omapop&type=all",
+      "status": 403,
+      "https": true,
+      "note": "Provider rejected this automated read; browser behavior not tested."
+    },
+    "z822bm": {
+      "url": "https://www.douban.com/search?q=Omapop",
+      "status": 200,
+      "finalUrl": "https://www.douban.com/search?q=Omapop",
+      "https": true
+    },
+    "7xpd57": {
+      "url": "https://www.ebay.com/sch/i.html?_nkw=Omapop",
+      "status": 403,
+      "https": true,
+      "note": "Provider rejected this automated read; browser behavior not tested."
+    },
+    "p20n16": {
+      "url": "https://scholar.google.com/scholar?q=Omapop",
+      "status": 200,
+      "finalUrl": "https://scholar.google.com/scholar?q=Omapop",
+      "https": true
+    },
+    "fq9d07": {
+      "url": "https://www.imdb.com/find/?q=Omapop",
+      "status": 202,
+      "finalUrl": "https://www.imdb.com/find/?q=Omapop",
+      "https": true
+    },
+    "v8m6j4": {
+      "url": "https://search.jd.com/Search?keyword=Omapop&enc=utf-8",
+      "status": 200,
+      "finalUrl": "https://search.jd.com/Search?keyword=Omapop&enc=utf-8",
+      "https": true
+    },
+    "enc6pz": {
+      "url": "https://search.naver.com/search.naver?query=Omapop",
+      "status": 200,
+      "finalUrl": "https://search.naver.com/search.naver?query=Omapop",
+      "https": true
+    },
+    "2ed0xf": {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Omapop",
+      "status": 203,
+      "finalUrl": "https://pubmed.ncbi.nlm.nih.gov/16151197/",
+      "https": true
+    },
+    "b1cyx8": {
+      "url": "https://www.rottentomatoes.com/search?search=Omapop",
+      "status": 200,
+      "finalUrl": "https://www.rottentomatoes.com/search?search=Omapop",
+      "https": true
+    },
+    "tv2c35": {
+      "url": "https://s.taobao.com/search?q=Omapop",
+      "status": 200,
+      "finalUrl": "https://s.taobao.com/search?q=Omapop",
+      "https": true
+    },
+    "6n9d0y": {
+      "url": "https://www.urbandictionary.com/define.php?term=Omapop",
+      "status": 200,
+      "finalUrl": "https://www.urbandictionary.com/define.php?term=Omapop",
+      "https": true
+    },
+    "by5b30": {
+      "url": "https://www.wolframalpha.com/input?i=Omapop",
+      "status": 200,
+      "finalUrl": "https://www.wolframalpha.com/input?i=Omapop",
+      "https": true
+    },
+    "ahsn7t": {
+      "url": "https://www.youtube.com/results?search_query=Omapop",
+      "status": 200,
+      "finalUrl": "https://www.youtube.com/results?search_query=Omapop",
+      "https": true
+    },
+    "f2tnjr": {
+      "url": "https://music.apple.com/us/search?term=Omapop",
+      "status": 200,
+      "finalUrl": "https://music.apple.com/us/search?term=Omapop",
+      "https": true
+    },
+    "bcjg80": {
+      "url": "https://www.google.com/maps/search/?api=1&query=Omapop",
+      "status": 200,
+      "finalUrl": "https://www.google.com/maps/search/?api=1&query=Omapop",
+      "https": true
+    },
+    "g9jbde": {
+      "url": "https://www.deepl.com/translator#auto/en-us/Omapop",
+      "status": 200,
+      "finalUrl": "https://www.deepl.com/en/translator",
+      "https": true
+    },
+    "8ap4bc": {
+      "url": "https://dict.eudic.net/dicts/en/Omapop",
+      "status": 200,
+      "finalUrl": "https://dict.eudic.net/Account/Login?returnurl=http%3a%2f%2fdict.eudic.net%2fdicts%2fen%2fOmapop",
+      "https": true
+    },
+    "g9rfgp": {
+      "url": "https://www.thesaurus.com/browse/Omapop",
+      "status": 200,
+      "finalUrl": "https://www.thesaurus.com/browse/a-pop?q=Omapop&noredirect=true&mismatchType=misspelling",
+      "https": true
+    }
+  }
+}

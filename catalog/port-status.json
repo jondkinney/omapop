@@ -1,0 +1,2024 @@
+{
+  "vbr12x": {
+    "name": "Add to WordClip",
+    "status": "blocked",
+    "originalFinding": "Requires a wordclip: protocol handler. Verify a supported Linux client/handler before enabling this integration.",
+    "securityReview": "source-reviewed",
+    "note": "Reviewed the encoded wordclip://collect handoff and current publisher README. Both require an installed WordClip URL receiver; no verified Linux receiver or public capture API was found. Keep this pending a documented Linux app/receiver instead of shipping a dead link.",
+    "sources": [
+      "https://github.com/dofy/PopClip-Extensions/tree/master/src/WordClipCollect.popclipext"
+    ]
+  },
+  "z7bjka": {
+    "name": "Amazon",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.z7bjka",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Ten current markets; obsolete Amazon Smile entries removed.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "9642771b908f753ae86ee780280f14249aeee9b68a3d3485457d90483db1583e"
+  },
+  "ezfj24": {
+    "name": "Antidote",
+    "status": "alternative",
+    "originalFinding": "Antidote macOS Service cannot run here. Evaluate a documented web/Linux dictionary interface before investing in a port.",
+    "securityReview": "static-reviewed",
+    "implementation": "Copy the selection and open Antidote Web. Paste into its text field; this replaces the Mac service.",
+    "portId": "io.github.jondkinney.omapop.port.ezfj24",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Explicit copy-and-paste web alternative. Full automatic capture is not ported; implement an Omapop-owned authentication or documented browser handoff for parity.",
+    "sources": [
+      "https://www.antidote.info/en/antidote-web"
+    ],
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "ae4d4d973f0a8d938acfa2027df512d785f2d741ff499b5212dbc932a9122b7c"
+  },
+  "f2tnjr": {
+    "name": "Apple Music",
+    "status": "ported",
+    "originalFinding": "Apple Music native music: handler is unavailable; evaluate a music.apple.com web-search version.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.f2tnjr",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "f6118cf200fcf405ce6a2593d984c2871306e8bb09f364d2e108f64dccbcb826"
+  },
+  "nwcz3b": {
+    "name": "Baidu",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.nwcz3b",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "45a40ea7ea5fe5ed10d1a7c3dcadd8799abe9a0954414689cfb4dac314de6910"
+  },
+  "hfp7pg": {
+    "name": "Bing",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.hfp7pg",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "6dbdae5001287fb815d4a3e231416d24ad211e84dd3a51266e970cabd25b9d14"
+  },
+  "sj4s5m": {
+    "name": "Bitly",
+    "status": "ported",
+    "originalFinding": "Requires PopClip OAuth/authsecret integration and provider-registered callbacks. Omapop needs its own authentication flow; upstream client credentials are not ours to reuse.",
+    "securityReview": "static-reviewed",
+    "implementation": "Shorten up to five HTTPS links with your personal Bitly token.",
+    "portId": "io.github.jondkinney.omapop.port.sj4s5m",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Shorten up to five HTTPS links with your personal Bitly token.",
+    "sources": [
+      "https://dev.bitly.com/"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "eadf4efe8d6b59382b759d3f1b772d3d1c15621591f7cf441692084932ad1af3"
+  },
+  "hpx6q6": {
+    "name": "Buffer",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Save selected text as a Buffer idea using your own API key and organization ID.",
+    "portId": "io.github.jondkinney.omapop.port.hpx6q6",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Creates an unassigned Buffer idea for later editing; does not schedule or publish a social post.",
+    "sources": [
+      "https://developers.buffer.com/examples/create-idea.html",
+      "https://developers.buffer.com/reference.html"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "b7bed3e10b66a30cc2d43fc4b034e5b6c3272df302f25d491149ce889a29af5f"
+  },
+  "7ccsap": {
+    "name": "Calculate",
+    "status": "ported",
+    "originalFinding": "Depends on bare mathjs import unavailable in Omapop. Vendor a pinned reviewed math engine or provide a bounded local arithmetic implementation.",
+    "securityReview": "static-reviewed",
+    "implementation": "Calculate bounded arithmetic and scientific functions; no JavaScript evaluation.",
+    "portId": "io.github.jondkinney.omapop.port.7ccsap",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Supports bounded arithmetic, parentheses, pi/e/tau and listed Math functions; arbitrary mathjs units, matrices and assignments are not supported.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "787d72ffec5cb31de30b268c25b965a99abbc7089defb396953932122e6a1f7d"
+  },
+  "4hzjpg": {
+    "name": "Character Count",
+    "status": "ported",
+    "originalFinding": "Title-only count placeholders are not implemented; reuse Omapop's bundled count action or add tested display-only actions.",
+    "securityReview": "static-reviewed",
+    "implementation": "Count Unicode characters in the selection.",
+    "portId": "io.github.jondkinney.omapop.port.4hzjpg",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Count Unicode characters in the selection.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "d6718bff9c26fc0460047340f864eedcf8ea30a121559b53e40849355e25df9f"
+  },
+  "8rhhk4": {
+    "name": "CheckURLs",
+    "status": "ported",
+    "originalFinding": "Runs Ruby, /usr/bin/automator and osascript to preview/update URLs. Replace Automator and app activation with Linux UI and bounded URL handling.",
+    "securityReview": "static-reviewed",
+    "implementation": "Check up to five HTTPS links using bounded HEAD requests. Redirects and unavailable links are reported without opening tabs.",
+    "portId": "io.github.jondkinney.omapop.port.8rhhk4",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Checks up to five HTTPS URLs via HEAD; reports errors/redirects. Replaces Automator preview/update behavior with a report.",
+    "securityNote": "Reviewed bounded HEAD requests to explicitly selected HTTPS URLs, without credentials or login cookies. Redirects are rejected and reported; errors omit response bodies. Network runs only on action invocation, with no retries or remote code.",
+    "sha256": "aa71cf47563e6ac05e7555a8cf66af296d0027ffa386b7cbb9768b4bb1a17fef"
+  },
+  "qpdzej": {
+    "name": "ClickUp",
+    "status": "ported",
+    "originalFinding": "Requires PopClip OAuth/authsecret integration and provider-registered callbacks. Omapop needs its own authentication flow; upstream client credentials are not ours to reuse.",
+    "securityReview": "static-reviewed",
+    "implementation": "Create a task in your configured ClickUp list.",
+    "portId": "io.github.jondkinney.omapop.port.qpdzej",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Create a task in your configured ClickUp list.",
+    "sources": [
+      "https://developer.clickup.com/reference/createtask",
+      "https://developer.clickup.com/docs/authentication"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "3ccf562e54668be44dc3895b29f80e60fb7a2488e19180f12ece0e9fec626da6"
+  },
+  "rzrz9e": {
+    "name": "Coding Cases",
+    "status": "ported",
+    "originalFinding": "Entry point is a .lzfse compressed bundle; runtime cannot load it. Rebuild case-anything/core-js dependencies into a reviewed plain JS package.",
+    "securityReview": "static-reviewed",
+    "implementation": "Convert Unicode words and acronym boundaries into coding naming styles.",
+    "portId": "io.github.jondkinney.omapop.port.rzrz9e",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 16
+    },
+    "note": "Eight explicit coding cases; bundled dependencies are replaced by bounded Unicode-aware code.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "6325d9e111e4c9ef701a8c9ea12161f939aaed52ce4eae5e5631d83c80542005"
+  },
+  "yfcs28": {
+    "name": "Comma List",
+    "status": "ported",
+    "originalFinding": "Dynamic population fails on empty text and emits CR-only line separators. Port with empty-input guard and LF output, then test both join and split paths.",
+    "securityReview": "static-reviewed",
+    "implementation": "Join lines with CSV quoting, or split comma-separated values into lines.",
+    "portId": "io.github.jondkinney.omapop.port.yfcs28",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 4
+    },
+    "note": "Join lines with CSV quoting, or split comma-separated values into lines.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "90ec55399984808acff492f7c5e6f9a9a7f568897422150aafe6eb2f308ad5cf"
+  },
+  "1dze64": {
+    "name": "Comment Switcher",
+    "status": "ported",
+    "originalFinding": "Interpolates the user-configured comment prefix into RegExp without escaping. Literal prefixes such as /* can fail; escape the prefix before blessing.",
+    "securityReview": "static-reviewed",
+    "implementation": "Toggle a literal comment prefix, preserving indentation.",
+    "portId": "io.github.jondkinney.omapop.port.1dze64",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Toggle a literal comment prefix, preserving indentation.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "59d192394587dc7bb3b1a6cd6fe05c63c30f702db1847981b2b2985aa35c3d65"
+  },
+  "yw6cpd": {
+    "name": "Convert",
+    "status": "ported",
+    "originalFinding": "Quantity conversion uses parseFloat on comma decimals (9,3cm becomes 9cm). Correct decimal normalization and test locale cases before blessing.",
+    "securityReview": "static-reviewed",
+    "implementation": "Convert metric, US/imperial and temperature units. Supports comma decimals.",
+    "portId": "io.github.jondkinney.omapop.port.yw6cpd",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Convert metric, US/imperial and temperature units. Supports comma decimals.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "fb79696967e53923f3e65848bfc52a8961c897c3297529b8b7a39b4b216090f0"
+  },
+  "63wzx3": {
+    "name": "Convert Currency",
+    "status": "ported",
+    "originalFinding": "Uses bare axios import and relative TypeScript modules; current module resolver needs a reviewed import map/bundle. Review currency parsing and response bounds.",
+    "securityReview": "static-reviewed",
+    "implementation": "Convert 10 USD to EUR using dated Frankfurter reference rates; no API key.",
+    "portId": "io.github.jondkinney.omapop.port.63wzx3",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Convert 10 USD to EUR using dated Frankfurter reference rates; no API key.",
+    "sources": [
+      "https://frankfurter.dev/"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "6cd498a60a8fda7e64f43aae5536979a9ab1ba960f68fdbe120a393f3e355dad"
+  },
+  "r77xv8": {
+    "name": "Copy as Markdown",
+    "status": "ported",
+    "originalFinding": "Depends on HTML/Markdown conversion and clipboard content types. Validate formatting preservation before approval.",
+    "securityReview": "static-reviewed",
+    "implementation": "Copy rich selected HTML as basic Markdown, with plain-text fallback.",
+    "portId": "io.github.jondkinney.omapop.port.r77xv8",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Basic headings, links, emphasis, paragraphs and lists. Images and advanced HTML are omitted; plain text is preserved when rich selection is unavailable.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "38681acd0d6086b1ef179f578f3b8e619c23e0e88d7eab95961f0be13c77108f"
+  },
+  "bqdd6c": {
+    "name": "Copy Link to Highlight",
+    "status": "ported",
+    "originalFinding": "Needs current browser URL; Omapop currently supplies an empty browserUrl. Implement an explicit browser metadata integration first.",
+    "securityReview": "static-reviewed",
+    "implementation": "Copy the page URL first, then select text and run this action to copy its text-fragment link.",
+    "portId": "io.github.jondkinney.omapop.port.bqdd6c",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Copy the page URL first, then select text. Uses that clipboard URL; no automatic reading of browser tabs. Receiver must support text fragments.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "36efdd855f1f0d59e1b2edc34deac731fb98c950adccd6592e5b6f00a865637c"
+  },
+  "8f2t12": {
+    "name": "CopyPLUS",
+    "status": "ported",
+    "originalFinding": "Uses pbpaste/pbcopy and has a malformed Option-path here-document. Prefer the reviewed Append to Clipboard implementation.",
+    "securityReview": "static-reviewed",
+    "implementation": "Append selected text to the clipboard with a configurable separator (128 KiB limit).",
+    "portId": "io.github.jondkinney.omapop.port.8f2t12",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Append selected text to the clipboard with a configurable separator (128 KiB limit).",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "97c3670954019533aef5143a68f1b613cf147df81b3331cd2cc0ed22dfd3c7d5"
+  },
+  "6tnp73": {
+    "name": "Craft",
+    "status": "ported",
+    "originalFinding": "Craft URL scheme and Markdown capture need a Linux-capable handoff. Evaluate web/API capture; do not assume the macOS deep link works on Linux.",
+    "securityReview": "static-reviewed",
+    "implementation": "Append selected Markdown to a document exposed by your Craft API connection.",
+    "portId": "io.github.jondkinney.omapop.port.6tnp73",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Appends to a configured document/page instead of invoking Craft’s macOS create-document URL. Use a document-scoped API connection.",
+    "sources": [
+      "https://connect.craft.do/api-docs/documents/",
+      "https://support.craft.do/en/integrate/api"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "c4b6268ea510ef81027eb5f15b587b0a2ae61f2f8580c17b84542d02bdedcd1f"
+  },
+  "0qqc31": {
+    "name": "Currency Converter",
+    "status": "ported",
+    "originalFinding": "Exchange rates are fetched only from open.er-api.com or v6.exchangerate-api.com; selection is parsed locally. Optional API key goes to its provider. Requires bounded HTTP and mocked API-path tests. Offline check reached the network-denied error path, which is not success. API key field also needs secret masking.",
+    "securityReview": "static-reviewed",
+    "implementation": "Convert 10 USD to EUR using dated Frankfurter reference rates; no API key.",
+    "portId": "io.github.jondkinney.omapop.port.0qqc31",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Convert 10 USD to EUR using dated Frankfurter reference rates; no API key.",
+    "sources": [
+      "https://frankfurter.dev/"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "3c61439cec8bcb6388fe2988831e9780acfddb2bb80e0af04cbea48f1e01b8e1"
+  },
+  "w9pny6": {
+    "name": "Cyrillic Transliteration",
+    "status": "ported",
+    "originalFinding": "Relative JSON import lacks import attributes supported by Deno/Node; ICU Cyrillic regex also needs translation. Bundle or adapt the transliteration module.",
+    "securityReview": "static-reviewed",
+    "implementation": "Transliterate Cyrillic letters using ISO 9-style Latin letters.",
+    "portId": "io.github.jondkinney.omapop.port.w9pny6",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "ISO 9-style Unicode transliteration replaces the original inconsistent Russian table and macOS ICU matcher.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "9815708fc16d0f5d51e7cd3b8c10100379d47c8a78f4f5d1eda65d0bb3847e2c"
+  },
+  "5y965f": {
+    "name": "Dash",
+    "status": "ported",
+    "originalFinding": "Uses macOS open and dash: handler. Useful Linux port target: Zeal documentation browser.",
+    "securityReview": "static-reviewed",
+    "implementation": "Search selected text in Zeal’s installed offline documentation. Requires Zeal and downloaded docsets.",
+    "portId": "io.github.jondkinney.omapop.port.5y965f",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "native helper unit tests + Node/Deno effect + host confirmation tests",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Install Zeal and docsets separately. Fixed argv protects queries beginning with dashes.",
+    "sources": [
+      "https://github.com/zealdocs/zeal/blob/master/src/app/main.cpp"
+    ],
+    "securityNote": "Reviewed fixed Linux helper operation; no extension-selected executable paths. Print/execute require a host confirmation, other helpers use bounded data, deadlines and private files.",
+    "sha256": "a5db21f5ca1240b62de478122209f86dcdb5a8d6cd15e37f264929c3fcfee01b"
+  },
+  "g9jbde": {
+    "name": "DeepL Translator",
+    "status": "ported",
+    "originalFinding": "Website mode is portable, but default app mode sends double Cmd+C for a Mac client. Set reviewed default to website and test language options before approving.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.g9jbde",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "6167336ed96105c9ace7cda602e371761d1d10d1fa4f05875c11b0a652abe59d"
+  },
+  "px544f": {
+    "name": "Discogs",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.px544f",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "e8960a524ac342434e7b71de48dc259c9f3fd9e8f9567038ccfb53dec99f188e"
+  },
+  "frmvjs": {
+    "name": "DOI",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.frmvjs",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "13e2f08035b0a02f362d032bc243ba986e7cf6c6b6cc86beb5ee3daf22486000"
+  },
+  "hmaayn": {
+    "name": "Doit.im",
+    "status": "alternative",
+    "originalFinding": "Doit.im Mac Service cannot run here. Verify maintained service/API and authentication before a Linux task-capture port.",
+    "securityReview": "static-reviewed",
+    "implementation": "Copy text and open Doit.im Web; paste into a new task. The Mac service is replaced by an explicit web handoff.",
+    "portId": "io.github.jondkinney.omapop.port.hmaayn",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Explicit copy-and-paste web alternative. Full automatic capture is not ported; implement an Omapop-owned authentication or documented browser handoff for parity.",
+    "sources": [
+      "https://doit.im/"
+    ],
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "c90fcc204e02a35feaf8e6c07f60e8329938abc993c5518316318a74fe15ad19"
+  },
+  "z822bm": {
+    "name": "Douban",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.z822bm",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Uses the current general Douban web search; separate legacy category searches are omitted.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "178c548c926fcd331b3247ae7cdff519eb6d81bcd158866582df70d5f018f8ce"
+  },
+  "g9x1ny": {
+    "name": "Droplr",
+    "status": "blocked",
+    "originalFinding": "Needs custom Droplr authentication, URL ranges and a large bundled crypto dependency. Do not approve without completing dependency and auth review.",
+    "securityReview": "source-reviewed",
+    "note": "Reviewed upstream /links implementation and Droplr’s per-request HMAC authentication. Production access requires a separately issued application public/private key pair and staging approval, plus user credentials. PopClip’s embedded application secrets cannot be reused. A fresh application registration is the remaining dependency.",
+    "sources": [
+      "https://droplr.github.io/docs/"
+    ]
+  },
+  "7xpd57": {
+    "name": "Ebay",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.7xpd57",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Eight current markets; obsolete eBay country entries removed.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "c9928bb02e878392c21ea1ee6806ce0762f7628fdecdb0d356a8bd32ec6eadab"
+  },
+  "8ap4bc": {
+    "name": "Eudic",
+    "status": "ported",
+    "originalFinding": "Eudic AppleScript cannot run here; evaluate a supported Linux client/protocol or web lookup.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.8ap4bc",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "b76d1d5e8eb4fdac0f80ac7f183a10fddfad08efd522a161f8a64051aab5a905"
+  },
+  "gfthdw": {
+    "name": "Evernote",
+    "status": "alternative",
+    "originalFinding": "LZFSE-compressed Evernote SDK, OAuth callback flow and rich-text capture require dedicated Linux work.",
+    "securityReview": "static-reviewed",
+    "implementation": "Copy text and open Evernote Web; paste into a new note or task. Automatic capture still needs an Omapop OAuth integration.",
+    "portId": "io.github.jondkinney.omapop.port.gfthdw",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Explicit copy-and-paste web alternative. Full automatic capture is not ported; implement an Omapop-owned authentication or documented browser handoff for parity.",
+    "sources": [
+      "https://www.evernote.com/client/web"
+    ],
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "42aedf084db36d08667b747a7c161514820e8ef30a8f910a834eb8cb3116c723"
+  },
+  "xh9jan": {
+    "name": "Formatting",
+    "status": "ported",
+    "originalFinding": "Cmd+B/I/U require Ctrl, but formatting availability is currently false in Omapop so actions are hidden. Add explicit rich-text capability handling and app tests.",
+    "securityReview": "static-reviewed",
+    "implementation": "Bold and italic in Obsidian, Logseq or LibreOffice Writer; underline in Writer. Uses explicit Linux Ctrl shortcuts.",
+    "portId": "io.github.jondkinney.omapop.port.xh9jan",
+    "version": "1",
+    "commandKey": "ctrl",
+    "commandKeyNote": "Gated to Obsidian, Logseq and LibreOffice Writer; underline only in Writer. Explicit Ctrl+B/I/U, independent of the Command preference.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 3
+    },
+    "note": "Gated to Obsidian, Logseq and LibreOffice Writer; underline only in Writer. Explicit Ctrl+B/I/U, independent of the Command preference.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "6b2a912d1521f6239fa18950a37dd4b9e3bf61d2b736b44355132b9650c46f1f"
+  },
+  "k50jz6": {
+    "name": "Get IP",
+    "status": "ported",
+    "originalFinding": "Shell command uses unquoted URL/domain variables and host lookup with no byte/deadline bounds. Replace with parsed URLs and a bounded DNS helper.",
+    "securityReview": "static-reviewed",
+    "implementation": "Resolve a hostname to at most 32 IP addresses, without a shell.",
+    "portId": "io.github.jondkinney.omapop.port.k50jz6",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "native helper unit tests + Node/Deno effect + host confirmation tests",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Resolve a hostname to at most 32 IP addresses, without a shell.",
+    "securityNote": "Reviewed fixed Linux helper operation; no extension-selected executable paths. Print/execute require a host confirmation, other helpers use bounded data, deadlines and private files.",
+    "sha256": "2dd6479967120ac01abff5f987d2e089cd5d1259e60a782d82d0b428ec0896da"
+  },
+  "mxa673": {
+    "name": "GitHub Hop",
+    "status": "ported",
+    "originalFinding": "GitHub API request has a deadline but no response cap; launches /usr/bin/open with nohup. Port to bounded HTTP and Omapop URL effects.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open owner/repo or owner/repo#123 directly, or search for the first matching GitHub repository.",
+    "portId": "io.github.jondkinney.omapop.port.mxa673",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Open owner/repo or owner/repo#123 directly, or search for the first matching GitHub repository.",
+    "sources": [
+      "https://docs.github.com/en/rest/search/search#search-repositories"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "097f54db27c3a1b9b4a3035c79a81aa8395b0f71f239440f199536241d5c2ed8"
+  },
+  "p20n16": {
+    "name": "Google Scholar",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.p20n16",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "f951893b6cec41d030cc145b0dd3dad9572f590d1118537ed65add37c6f152fa"
+  },
+  "fapat2": {
+    "name": "HardWrap",
+    "status": "ported",
+    "originalFinding": "Wrap regex lacks multiline anchoring: short existing lines can split even at column 80. Fix that and bound the configurable column before approving; unwrap path passed.",
+    "securityReview": "static-reviewed",
+    "implementation": "Wrap each line or unwrap paragraphs without merging blank lines.",
+    "portId": "io.github.jondkinney.omapop.port.fapat2",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 4
+    },
+    "note": "Wrap each line or unwrap paragraphs without merging blank lines.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "3857a605631226559789d953f63a3194999cc9c211b2ede67c83602657368f98"
+  },
+  "v1hh5h": {
+    "name": "Highlight",
+    "status": "ported",
+    "originalFinding": "Mac bundle IDs and app-specific highlight shortcuts require Linux app mapping; Control+Command cannot be reduced by a simple global Cmd-to-Ctrl substitution.",
+    "securityReview": "static-reviewed",
+    "implementation": "Wrap selected text with ==highlight== markup in Obsidian or Logseq on Linux.",
+    "portId": "io.github.jondkinney.omapop.port.v1hh5h",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Toggle ==highlight== markup in Obsidian/Logseq; proprietary Mac PDF/app highlighting is not emulated.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "955c236fa68350aa7749bcf327cc626ea203d58c37c32f10b2f4fa4ae0711245"
+  },
+  "py867z": {
+    "name": "HTML Encode",
+    "status": "ported",
+    "originalFinding": "Bare entities import is unavailable. Vendor a pinned reviewed HTML entities implementation before approving.",
+    "securityReview": "static-reviewed",
+    "implementation": "Encode HTML special characters or decode named and numeric entities.",
+    "portId": "io.github.jondkinney.omapop.port.py867z",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 4
+    },
+    "note": "Encode HTML special characters or decode named and numeric entities.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "e14ee072f629cd5f8adaa1f42553ba7e58c1f0edaa17bf3f7e42805f93578590"
+  },
+  "fq9d07": {
+    "name": "IMDb",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.fq9d07",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "2f9390a2d92f62950c89761d195c2d7cbb4367996a6f69d07d7c4bfc77b3c145"
+  },
+  "6zqrwd": {
+    "name": "Increment Templated",
+    "status": "ported",
+    "originalFinding": "Numeric expansion accepts a zero increment and unbounded end values; can loop forever or exhaust memory. Add range/output limits and replace Function-based arithmetic with a bounded parser.",
+    "securityReview": "static-reviewed",
+    "implementation": "Generate at most 1,000 rows using ##1..5## or ##a,b,c## templates and bounded arithmetic.",
+    "portId": "io.github.jondkinney.omapop.port.6zqrwd",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Generate at most 1,000 rows using ##1..5## or ##a,b,c## templates and bounded arithmetic.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "3c286ea10bc6a345efaa91b4cd6cdee9fff55f86023b634e0b10a42c1fe63a64"
+  },
+  "f2xzek": {
+    "name": "Instapaper",
+    "status": "ported",
+    "originalFinding": "Depends on OAuth1, Axios interceptors and PopClip authsecret. Build a Linux authentication flow with our own provider registration.",
+    "securityReview": "static-reviewed",
+    "implementation": "Save one HTTPS URL with Instapaper’s Simple API using your own account.",
+    "portId": "io.github.jondkinney.omapop.port.f2xzek",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Uses Instapaper Simple API with the user’s own login via HTTPS POST; accounts requiring unsupported login methods need another integration.",
+    "sources": [
+      "https://old.instapaper.com/developers"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "7975b551d0e628cb27ef71670121a628b675e200acb9fe5125aa9617aeabccd2"
+  },
+  "v8m6j4": {
+    "name": "JD",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.v8m6j4",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "c54229b83ba8b74fd5bb09e41c9874952bbd70a85a8680e304c176024a46f6e7"
+  },
+  "29vg9p": {
+    "name": "JSON Tailor Local",
+    "status": "ported",
+    "originalFinding": "JSON viewer uses macOS open, local HTML persistence and browser storage. Port to private bounded files with explicit cleanup; complete viewer/dependency security review.",
+    "securityReview": "static-reviewed",
+    "implementation": "Format, minify or extract JSON locally using an optional JSON Pointer.",
+    "portId": "io.github.jondkinney.omapop.port.29vg9p",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 4
+    },
+    "note": "Local format/minify and JSON Pointer extraction replace the separate Tailor HTML application; no external page or storage.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "f1447a137b55451c883c50b16392c71569038cbcad89848f2c0b14e709ba332b"
+  },
+  "dcjzp8": {
+    "name": "LeafyApp",
+    "status": "drop",
+    "originalFinding": "Leafy custom URL handler requires a supported Linux client; verify availability before retaining its dictionary/Anki integration.",
+    "securityReview": "source-reviewed",
+    "note": "Leafy’s current official site requires macOS 14+ and stores the vocabulary library on that Mac. No documented Linux app or library-capture API; drop this proprietary app integration.",
+    "sources": [
+      "https://leafyapp.uk/"
+    ]
+  },
+  "nhfcp3": {
+    "name": "Lexibird",
+    "status": "alternative",
+    "originalFinding": "Translatium now redirects to Lexibird, whose current site lists macOS/Windows and a web app. Verify a maintained Linux protocol handler or port to the documented web service.",
+    "securityReview": "static-reviewed",
+    "implementation": "Copy the selection and open Lexibird web app. Paste into its text field; this replaces the Mac service.",
+    "portId": "io.github.jondkinney.omapop.port.nhfcp3",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Explicit copy-and-paste web alternative. Full automatic capture is not ported; implement an Omapop-owned authentication or documented browser handoff for parity.",
+    "sources": [
+      "https://lexibird.com/en/desktop"
+    ],
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "44a2e685d53d7c6e75f79c030b898cddba2850acc6829b176eeb02bc516149b7"
+  },
+  "az0jxd": {
+    "name": "Line Count",
+    "status": "ported",
+    "originalFinding": "Dynamic module returns a title-only line count. Add display-only action support; no external effects in the reviewed code.",
+    "securityReview": "static-reviewed",
+    "implementation": "Count lines, including a final blank line.",
+    "portId": "io.github.jondkinney.omapop.port.az0jxd",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Count lines, including a final blank line.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "0e3853ff215bcda1341bcb0db03a53108fe0a4145d1a29283c049311170115c5"
+  },
+  "bcjg80": {
+    "name": "Maps",
+    "status": "ported",
+    "originalFinding": "Apple Maps native maps: handler is unavailable; prefer approved Google Maps/Mapy/OpenStreetMap or evaluate Apple Maps web.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.bcjg80",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Uses Google Maps web search instead of Apple Maps.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "ad35a6d32985381febc77d85c8a9aac329aab58eb50c984f273d8107ddb6624d"
+  },
+  "pt4k2d": {
+    "name": "Markdown to RTF",
+    "status": "ported",
+    "originalFinding": "Requires RichString Markdown-to-RTF conversion and public.rtf clipboard writes. Implement real rich clipboard support first.",
+    "securityReview": "static-reviewed",
+    "implementation": "Copy basic Markdown headings, emphasis and code as RTF. Unsupported Markdown stays literal.",
+    "portId": "io.github.jondkinney.omapop.port.pt4k2d",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Basic headings, emphasis and code only; unsupported Markdown stays literal. Requires a receiving application that accepts text/rtf.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "9fad3c0617e219086081af7f65d38e1574708dfa9327e408011c227387c11831"
+  },
+  "jha0ze": {
+    "name": "Mate Translate",
+    "status": "alternative",
+    "originalFinding": "Mate Translate Mac Service cannot run here. Prefer approved browser translators or a documented web integration.",
+    "securityReview": "static-reviewed",
+    "implementation": "Copy the selection and open Mate web translator. Paste into its text field; this replaces the Mac service.",
+    "portId": "io.github.jondkinney.omapop.port.jha0ze",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Explicit copy-and-paste web alternative. Full automatic capture is not ported; implement an Omapop-owned authentication or documented browser handoff for parity.",
+    "sources": [
+      "https://matetranslate.com/en/help/is-mate-available-for-android-windows"
+    ],
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "da2afdfdbbafe544282f09c40807f54a9b0f86dd91b04c960ea452a81ec3a02f"
+  },
+  "pgh8tr": {
+    "name": "Mosaic Text",
+    "status": "ported",
+    "originalFinding": "Masking deliberately copies the original text to clipboard and output can expand without a bound. Omapop now orders effects correctly; still bound output and make clipboard behavior explicit before approval.",
+    "securityReview": "static-reviewed",
+    "implementation": "Replace each Unicode character with a mask. Keeping the original on the clipboard is optional.",
+    "portId": "io.github.jondkinney.omapop.port.pgh8tr",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Keeping the unmasked selection on the clipboard is off by default; opt in per installed extension.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "3fbfc0e9375f3968c5d8945f451e6cdc4974836cf8745cf23bc1fe9c408fdf26"
+  },
+  "r7eape": {
+    "name": "Multi-Line to Array",
+    "status": "ported",
+    "originalFinding": "Generated string arrays do not escape backslashes correctly. Use JSON.stringify or equivalent correct escaping before approval.",
+    "securityReview": "static-reviewed",
+    "implementation": "Convert lines into an escaped JavaScript or JSON array.",
+    "portId": "io.github.jondkinney.omapop.port.r7eape",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Convert lines into an escaped JavaScript or JSON array.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "c7205e10909760f040f5bdd991aad7148ebd4726b748ca3907fb92a4776e391c"
+  },
+  "enc6pz": {
+    "name": "Naver",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.enc6pz",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "97c1ac3822df9a926460e4a57d455fc80473a2c8a6d82fb1cdcae52689aad56e"
+  },
+  "6p9xq3": {
+    "name": "Ollama",
+    "status": "ported",
+    "originalFinding": "Useful Linux target: local Ollama API. Bare axios import, stateful chat/reset semantics and user-configured HTTP endpoints need a reviewed adapter and mocked API tests.",
+    "securityReview": "static-reviewed",
+    "implementation": "Ask a local Ollama model about the selection. One prompt per action, without saved chat history.",
+    "portId": "io.github.jondkinney.omapop.port.6p9xq3",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Requires a running loopback Ollama server and an already installed model. One prompt per action; 20-second deadline can reject a cold/slow model.",
+    "sources": [
+      "https://docs.ollama.com/api/chat"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "3aa8127a123a78024e27fb4d52b48f1cdf2443270250c1127a43abdbd0f18f07"
+  },
+  "0kk4s6": {
+    "name": "OneNote",
+    "status": "alternative",
+    "originalFinding": "OneNote web API is portable but requires our own OAuth flow and rich-text capture. Remove access-token logging before approval.",
+    "securityReview": "static-reviewed",
+    "implementation": "Copy text and open OneNote Web; paste into a new note or task. Automatic capture still needs an Omapop OAuth integration.",
+    "portId": "io.github.jondkinney.omapop.port.0kk4s6",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Explicit copy-and-paste web alternative. Full automatic capture is not ported; implement an Omapop-owned authentication or documented browser handoff for parity.",
+    "sources": [
+      "https://www.onenote.com/notebooks"
+    ],
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "150ddca775bb8e141eabafb6daaaeaf5884ad42a571b25161e372121c7082a4f"
+  },
+  "g9rfgp": {
+    "name": "Online Thesaurus",
+    "status": "ported",
+    "originalFinding": "Local URL builder is simple, but one selectable thesaurus still uses HTTP. Update all choices to verified HTTPS before approval.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.g9rfgp",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Uses Thesaurus.com over HTTPS; old provider selector is omitted.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "005336d57868e37dec78f3441f0ac2c8f3094c65914ba5c4c42b029a06a5cd5c"
+  },
+  "wwgbd7": {
+    "name": "Open in Browser",
+    "status": "ported",
+    "originalFinding": "Maps macOS bundle IDs to installed browsers and uses JSON imports. Implement Linux desktop/browser selection instead of ignoring the requested application.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open one selected HTTPS URL in the chosen installed Linux browser.",
+    "portId": "io.github.jondkinney.omapop.port.wwgbd7",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "native helper unit tests + Node/Deno effect + host confirmation tests",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Uses an explicitly selected installed browser or xdg-open; no automatic installation. Only HTTPS URLs.",
+    "securityNote": "Reviewed fixed Linux helper operation; no extension-selected executable paths. Print/execute require a host confirmation, other helpers use bounded data, deadlines and private files.",
+    "sha256": "59905bb43254b6ffda1e8826e970eb1bb53171bacaf937c7f0771951447540ff"
+  },
+  "48f32j": {
+    "name": "OpenAI Chat",
+    "status": "ported",
+    "originalFinding": "Named OpenAI API with user key/custom endpoint. Bare axios import and in-memory chat/reset semantics require adapter and mocked response tests; no durable history in our per-action runner.",
+    "securityReview": "static-reviewed",
+    "implementation": "Ask an OpenAI model using your own API key. One prompt per action; response storage is disabled.",
+    "portId": "io.github.jondkinney.omapop.port.48f32j",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Choose an available model and supply your own API key. One prompt per action, no retained conversation, store:false; 20-second request deadline.",
+    "sources": [
+      "https://developers.openai.com/api/docs/guides/text"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "9522770b8d69ce5a4518a4c8c3748b396158538d8f709af3a4e8b5e7628434a9"
+  },
+  "g8d8kh": {
+    "name": "OpenURLS",
+    "status": "ported",
+    "originalFinding": "Opens every detected URL without a count limit and defaults schemeless URLs to HTTP. Cap launches and default to HTTPS in a port.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open up to ten selected HTTPS URLs in the default browser.",
+    "portId": "io.github.jondkinney.omapop.port.g8d8kh",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Open up to ten selected HTTPS URLs in the default browser.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "7df5138e45f8ca05419022f19dffdf402e2b11300fed06b476efdeeb86d682ab"
+  },
+  "g467b2": {
+    "name": "Outlook Permalink",
+    "status": "ported",
+    "originalFinding": "Requires current browser-tab URL, which Omapop does not capture. Add explicit browser integration before approval.",
+    "securityReview": "static-reviewed",
+    "implementation": "Convert a selected or clipboard Outlook web message URL into a permalink. Automatic browser URL capture is unavailable.",
+    "portId": "io.github.jondkinney.omapop.port.g467b2",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Select or copy the Outlook message URL. Does not access browser tabs or Microsoft Graph.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "f21c3d77eacd93a150d4264ed485970a7dad452a2a714c40e594cb67336216cd"
+  },
+  "5zp8bb": {
+    "name": "Pinboard",
+    "status": "ported",
+    "originalFinding": "Pinboard requires sign-in callback/authsecret and basic-auth adapter. Prefer user-supplied API token with no password retention in a Linux port.",
+    "securityReview": "static-reviewed",
+    "implementation": "Save an unread Pinboard bookmark. Existing bookmarks are preserved; new bookmarks default to private.",
+    "portId": "io.github.jondkinney.omapop.port.5zp8bb",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Save an unread Pinboard bookmark. Existing bookmarks are preserved; new bookmarks default to private.",
+    "sources": [
+      "https://pinboard.in/api/"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "ffdc1d2dc151c7cf356c34d0720885914fd7c624fdebf05e47e4aef821a66a6c"
+  },
+  "rn4p5p": {
+    "name": "PreviewURL",
+    "status": "ported",
+    "originalFinding": "Automator preview workflow and shell command construction need replacement with bounded Linux URL UI.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open one selected HTTPS URL in your browser. This replaces the macOS Quick Look workflow.",
+    "portId": "io.github.jondkinney.omapop.port.rn4p5p",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Opens the URL in the browser instead of macOS Quick Look.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "6118b8f84587e0520c4cb34d7f76d2fb773ef80d2fc71710819a4aaaf019b0d1"
+  },
+  "ykm8zw": {
+    "name": "Print",
+    "status": "ported",
+    "originalFinding": "print.zsh uses print $POPCLIP_TEXT | lp; leading dash/options and backslash interpretation can change text. Port to printf %s, explicit printer selection and visible confirmation.",
+    "securityReview": "static-reviewed",
+    "implementation": "Print selected text through CUPS after confirmation.",
+    "portId": "io.github.jondkinney.omapop.port.ykm8zw",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "native helper unit tests + Node/Deno effect + host confirmation tests",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Requires CUPS lp and a configured printer. Full selected text is reviewed before submission.",
+    "sources": [
+      "https://www.cups.org/doc/man-lp.html"
+    ],
+    "securityNote": "Reviewed fixed Linux helper operation; no extension-selected executable paths. Print/execute require a host confirmation, other helpers use bounded data, deadlines and private files.",
+    "sha256": "187d139a1cff2b6ed738b5b0f876456e046a064dffdad1393a4da950042fec0e"
+  },
+  "2ed0xf": {
+    "name": "PubMed",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.2ed0xf",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "3b86078e5a5f7589dd0563fc1ae4d1fe5dc9e0587a4f806bceea12177d545381"
+  },
+  "wyq4we": {
+    "name": "Quotes",
+    "status": "ported",
+    "originalFinding": "Local quote transform, but after filtering styles the title indexes the unfiltered array and can advertise the wrong quote style. Correct labels before blessing.",
+    "securityReview": "static-reviewed",
+    "implementation": "Surround text with the selected quotation style.",
+    "portId": "io.github.jondkinney.omapop.port.wyq4we",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Surround text with the selected quotation style.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "31af509013529168c8d81621b0ce63ccce55a183d9d126c69a2b9e69f209347b"
+  },
+  "rc70x5": {
+    "name": "Raindrop.io",
+    "status": "ported",
+    "originalFinding": "Raindrop API is portable, but package embeds publisher OAuth client material and PopClip callbacks. Register our own client or use user token; fix JSON/bare imports.",
+    "securityReview": "static-reviewed",
+    "implementation": "Save one HTTPS URL to Raindrop.io using your own account’s test token.",
+    "portId": "io.github.jondkinney.omapop.port.rc70x5",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Save one HTTPS URL to Raindrop.io using your own account’s test token.",
+    "sources": [
+      "https://developer.raindrop.io/v1/raindrops/single",
+      "https://developer.raindrop.io/v1/authentication/token"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "f9541e9602d95b84973a59379eaf150b4478543328aa59b5ffaa334e92b76868"
+  },
+  "1zemre": {
+    "name": "Readwise",
+    "status": "ported",
+    "originalFinding": "Readwise API is useful on Linux; requires password/authsecret flow and bare axios adapter. Use a user-supplied secret token and explicit capture semantics.",
+    "securityReview": "static-reviewed",
+    "implementation": "Capture a highlight to Readwise, or save a URL to Reader.",
+    "portId": "io.github.jondkinney.omapop.port.1zemre",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 4
+    },
+    "note": "Choose highlight or Reader URL mode; uses personal access token. No browser source metadata is captured.",
+    "sources": [
+      "https://readwise.io/api_deets",
+      "https://readwise.io/reader_api"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "793125eb53ccb1c0373f5194d13d2ec51edc36fd0bdfdd480f12bdd4fb6410f4"
+  },
+  "wcsadc": {
+    "name": "Reverso",
+    "status": "alternative",
+    "originalFinding": "Reverso Mac Service cannot run here. Useful port to its web translation interface with encoded input.",
+    "securityReview": "static-reviewed",
+    "implementation": "Copy the selection and open Reverso web translator. Paste into its text field; this replaces the Mac service.",
+    "portId": "io.github.jondkinney.omapop.port.wcsadc",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Explicit copy-and-paste web alternative. Full automatic capture is not ported; implement an Omapop-owned authentication or documented browser handoff for parity.",
+    "sources": [
+      "https://www.reverso.net/text-translation"
+    ],
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "28d477ddc8d5c27d86f338b4dce85868998c97bae3899addb34132622a52f3a5"
+  },
+  "4kcy03": {
+    "name": "Roam Research",
+    "status": "ported",
+    "originalFinding": "Roam append-only API is a useful Linux target. Needs axios adapter, plain-text Markdown fallback and mocked append requests before approval.",
+    "securityReview": "static-reviewed",
+    "implementation": "Append selected text or Markdown to Roam using your graph’s append-only token.",
+    "portId": "io.github.jondkinney.omapop.port.4kcy03",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Use a graph append-only token; does not require full graph read/write access. Selection is plain text/Markdown.",
+    "sources": [
+      "https://github.com/pilotmoon/PopClip-Extensions/tree/master/source/RoamResearch.popclipext",
+      "https://github.com/Roam-Research/roam-tools"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "ec6528474df70334da2deec8ee2a78d8c2d30e0d82e8975f7109019de9169b1d"
+  },
+  "m1fa94": {
+    "name": "ROT13",
+    "status": "ported",
+    "originalFinding": "Bare rot13-cipher dependency unavailable. Vendor a pinned reviewed tiny cipher or port directly.",
+    "securityReview": "static-reviewed",
+    "implementation": "Apply ROT13 to Latin letters.",
+    "portId": "io.github.jondkinney.omapop.port.m1fa94",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Apply ROT13 to Latin letters.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "5758212c43fade7c3661f30e77b61b5ddc95f234e13603548adc2bfb0ab25ef8"
+  },
+  "b1cyx8": {
+    "name": "RottenTomatoes",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.b1cyx8",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "94172b73d78ac9e218dd789378b6fa2d8da1c6b6d42274b6bf9cb8a9dc18fe20"
+  },
+  "emvaxx": {
+    "name": "Say",
+    "status": "ported",
+    "originalFinding": "Uses macOS say through a script entitlement. Useful Linux port: speech-dispatcher or another explicit local TTS backend.",
+    "securityReview": "static-reviewed",
+    "implementation": "Speak up to 1,000 characters using espeak-ng, with a 115-second limit.",
+    "portId": "io.github.jondkinney.omapop.port.emvaxx",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "native helper unit tests + Node/Deno effect + host confirmation tests",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Install espeak-ng separately. At most 1,000 characters/115 seconds; cancellation terminates the attached speech process.",
+    "sources": [
+      "https://github.com/espeak-ng/espeak-ng/blob/master/docs/espeak-ng.1.ronn"
+    ],
+    "securityNote": "Reviewed fixed Linux helper operation; no extension-selected executable paths. Print/execute require a host confirmation, other helpers use bounded data, deadlines and private files.",
+    "sha256": "06748cdf2126ae7ba36fab0cbac91586637c3a589d83c3173394f095934a145c"
+  },
+  "7yc6g6": {
+    "name": "SearchLink",
+    "status": "ported",
+    "originalFinding": "Downloads a mutable latest release, unzips/installs workflows, removes prior workflows and evals Automator output. Remove automatic installation/eval; use a pinned independently reviewed Linux implementation.",
+    "securityReview": "static-reviewed",
+    "implementation": "Create a Markdown link to the first Brave search result. Requires your own Brave Search API key; legacy SearchLink bang commands are not supported.",
+    "portId": "io.github.jondkinney.omapop.port.7yc6g6",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Brave API key required. Produces a Markdown link to the first search result; legacy bang commands and custom search providers remain follow-up work.",
+    "sources": [
+      "https://api-dashboard.search.brave.com/api-reference/web/search/post"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "16b3f0b8aac1a5e4046ace7b06cad75d81b7e07735e52edc3b887ca3a8c9073e"
+  },
+  "97rvpd": {
+    "name": "Select All",
+    "status": "ported",
+    "originalFinding": "Cmd+A needs Ctrl on Linux; delayed appear requires completion/selection-refresh support. Test re-selection before approval.",
+    "securityReview": "static-reviewed",
+    "implementation": "Select all in the active application and refresh Omapop’s captured selection.",
+    "portId": "io.github.jondkinney.omapop.port.97rvpd",
+    "version": "1",
+    "commandKey": "ctrl",
+    "commandKeyNote": "Uses explicit Ctrl+A, then re-reads the application selection after the key effect finishes.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Uses explicit Ctrl+A, then re-reads the application selection after the key effect finishes.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "00cd05cb3aca8bb431efd2bed84a637aa37b7a64faa73c7fb0e70ef37e242eb9"
+  },
+  "6pa6yt": {
+    "name": "Shorten Link",
+    "status": "ported",
+    "originalFinding": "Requires URL range metadata and batches all URLs concurrently. Dormant PHP also disables TLS verification. Port bounded requests/ranges and remove unsafe legacy payload.",
+    "securityReview": "static-reviewed",
+    "implementation": "Shorten up to five HTTPS links with is.gd. Only explicit action clicks contact the service.",
+    "portId": "io.github.jondkinney.omapop.port.6pa6yt",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Shorten up to five HTTPS links with is.gd. Only explicit action clicks contact the service.",
+    "sources": [
+      "https://www.is.gd/apishorteningreference.php"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "685b9dc46385d35b3f27c71e13e6168555c420ce0ecb6b8509f5f3401a3f4924"
+  },
+  "d5hnfy": {
+    "name": "Skype",
+    "status": "drop",
+    "originalFinding": "Skype Mac Service cannot run here. Verify current product availability before porting; prefer generic tel: handoff.",
+    "securityReview": "source-reviewed",
+    "note": "Microsoft retired Skype on May 5, 2025. Do not ship a new Skype URL/action port; replacing it with a Teams integration would be a separate product.",
+    "sources": [
+      "https://support.microsoft.com/en-us/skype/22ccebb6-0cf9-4e1d-916f-aaf978e1b129"
+    ]
+  },
+  "wdp7x0": {
+    "name": "Slack",
+    "status": "ported",
+    "originalFinding": "Compressed LZFSE module plus publisher OAuth client and unsupported auth callback. Useful Linux port with own webhook/client; remove dormant PHP that disables TLS verification.",
+    "securityReview": "static-reviewed",
+    "implementation": "Post the selection as plain text to the Slack channel assigned to your incoming webhook.",
+    "portId": "io.github.jondkinney.omapop.port.wdp7x0",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Post the selection as plain text to the Slack channel assigned to your incoming webhook.",
+    "sources": [
+      "https://docs.slack.dev/messaging/sending-messages-using-incoming-webhooks/"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "740dd134172a9becf21120b7eafe93885a7f699d89892ff6400fa691ab1652c0"
+  },
+  "rqgjxd": {
+    "name": "Slugify",
+    "status": "ported",
+    "originalFinding": "Requires bare voca dependency. Prefer the dependency-free Slugify package after its compatibility test.",
+    "securityReview": "static-reviewed",
+    "implementation": "Make a lowercase, accent-normalized slug.",
+    "portId": "io.github.jondkinney.omapop.port.rqgjxd",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Make a lowercase, accent-normalized slug.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "51092c4a1bce081bd4c5820614abadf95c584ded07bc1bd1d04d44f22e3873c9"
+  },
+  "a6arrs": {
+    "name": "Stickies",
+    "status": "ported",
+    "originalFinding": "Apple Stickies Service cannot run here. Useful separate Linux sticky-note/plain-file capture action with explicit destination.",
+    "securityReview": "static-reviewed",
+    "implementation": "Save the selection as a private text note in ~/.local/share/omapop/captures. This replaces the Mac Stickies app.",
+    "portId": "io.github.jondkinney.omapop.port.a6arrs",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "native helper unit tests + Node/Deno effect + host confirmation tests",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Private text-file capture replaces floating Stickies windows. At most 200 files/10 MiB; old captures are moved manually.",
+    "securityNote": "Reviewed fixed Linux helper operation; no extension-selected executable paths. Print/execute require a host confirmation, other helpers use bounded data, deadlines and private files.",
+    "sha256": "e2bd7ea603e908d83f71712964f97f0ee93907b5fdd3050e8cdd6ece23005e2b"
+  },
+  "0v6xef": {
+    "name": "Sum",
+    "status": "ported",
+    "originalFinding": "Local sum parser lets decimal precision exceed toFixed's limit and accepts conflicting/multi-character separators. Add bounded precision and validate locale options.",
+    "securityReview": "static-reviewed",
+    "implementation": "Sum selected numbers with exact decimal arithmetic (up to 18 fractional digits).",
+    "portId": "io.github.jondkinney.omapop.port.0v6xef",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Exact BigInt decimal summation, at most 5,000 numbers and 18 decimal places; explicit grouping/decimal options.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "64fe64d9097e196afffd7ca86268dcf0c44442c02f4e267b175ded1a1d8202c8"
+  },
+  "2x5yjg": {
+    "name": "Swap with Clipboard",
+    "status": "ported",
+    "originalFinding": "Empty shell action relies on before/after clipboard swap semantics. Implement and test an atomic host clipboard swap rather than assume no-op shell is sufficient.",
+    "securityReview": "static-reviewed",
+    "implementation": "Paste the previous clipboard text, then copy the replaced selection.",
+    "portId": "io.github.jondkinney.omapop.port.2x5yjg",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Paste the previous clipboard text, then copy the replaced selection.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "54ae60321291af2c4be5f2eeb0d9d22e546f966c620e470c46921143d68947a6"
+  },
+  "x9q882": {
+    "name": "Tana",
+    "status": "ported",
+    "originalFinding": "Tana API capture currently receives empty HTML; needs escaped plain-text fallback, axios adapter, provider verification and mocked requests.",
+    "securityReview": "static-reviewed",
+    "implementation": "Capture escaped text into a Tana node with your workspace token.",
+    "portId": "io.github.jondkinney.omapop.port.x9q882",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Capture escaped text into a Tana node with your workspace token.",
+    "sources": [
+      "https://outliner.tana.inc/learn/features/input-api"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "875e1af9a9243be9db9036fb29d623353f04e1bee53d3df40da13a7a977d98c9"
+  },
+  "tv2c35": {
+    "name": "Taobao",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.tv2c35",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "707e29bd3cc2a96e610e2dd0efe55031d5eeff74c61d05558454d09fa7c4bc0b"
+  },
+  "8jj623": {
+    "name": "Terminal",
+    "status": "ported",
+    "originalFinding": "Mac terminal scripts execute selected text and use app-specific paste/tab shortcuts. Design a Linux terminal handoff with explicit execution confirmation and terminal-specific Ctrl+Shift mapping; finish full script audit.",
+    "securityReview": "static-reviewed",
+    "implementation": "Copy text and open a terminal, or explicitly confirm running it as a Bash script.",
+    "portId": "io.github.jondkinney.omapop.port.8jj623",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "native helper unit tests + Node/Deno effect + host confirmation tests",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 4
+    },
+    "note": "Default action copies text and opens a terminal for manual paste. Running as Bash is a separate confirmed action; full selection is shown before launch.",
+    "securityNote": "Reviewed fixed Linux helper operation; no extension-selected executable paths. Print/execute require a host confirmation, other helpers use bounded data, deadlines and private files.",
+    "sha256": "72cd0e844abdbf5695b34a3ecb3741f308f1f53c36dbe3cb6e1242ae38af1ebe"
+  },
+  "phq1ch": {
+    "name": "Text Repeater",
+    "status": "ported",
+    "originalFinding": "Selection controls String.repeat with no output/count bound. Cap count and expanded bytes before allocation.",
+    "securityReview": "static-reviewed",
+    "implementation": "Repeat text with text*COUNT, limited to 1,000 copies and 128 KiB.",
+    "portId": "io.github.jondkinney.omapop.port.phq1ch",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Repeat text with text*COUNT, limited to 1,000 copies and 128 KiB.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "43092c3e55427c109c923cdba6daf5445e4c7a62da1256ed26f12f50142d55a1"
+  },
+  "34fddp": {
+    "name": "TextEdit",
+    "status": "ported",
+    "originalFinding": "TextEdit AppleScript cannot run here. Useful Linux port: open a private bounded temporary text file in the selected editor.",
+    "securityReview": "static-reviewed",
+    "implementation": "Save selected text privately and open it in your default Linux text editor.",
+    "portId": "io.github.jondkinney.omapop.port.34fddp",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "native helper unit tests + Node/Deno effect + host confirmation tests",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Uses the installed default text editor for .txt files; captures are private, capped and retained for the user.",
+    "securityNote": "Reviewed fixed Linux helper operation; no extension-selected executable paths. Print/execute require a host confirmation, other helpers use bounded data, deadlines and private files.",
+    "sha256": "42e8afce30f7b1969dbe0c6a87a94f70addcea945c16856832ea8e0475ee91af"
+  },
+  "htd93q": {
+    "name": "TickTick",
+    "status": "alternative",
+    "originalFinding": "TickTick Mac Service cannot run here. Useful Linux/web API target; needs documented task handoff and own authentication.",
+    "securityReview": "static-reviewed",
+    "implementation": "Copy text and open TickTick Web; paste into a new note or task. Automatic capture still needs an Omapop OAuth integration.",
+    "portId": "io.github.jondkinney.omapop.port.htd93q",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Explicit copy-and-paste web alternative. Full automatic capture is not ported; implement an Omapop-owned authentication or documented browser handoff for parity.",
+    "sources": [
+      "https://ticktick.com/webapp/"
+    ],
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "cb6922286938b87ce2e0e9b1df3b8e085f9b23731d6d0da334d2e724d0fca962"
+  },
+  "yzf4sx": {
+    "name": "Todoist",
+    "status": "ported",
+    "originalFinding": "Useful Todoist web API integration, but needs own OAuth registration, axios/valibot dependencies, Markdown fallback and pagination testing.",
+    "securityReview": "static-reviewed",
+    "implementation": "Create a task using the current Todoist API and your personal token.",
+    "portId": "io.github.jondkinney.omapop.port.yzf4sx",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Create a task using the current Todoist API and your personal token.",
+    "sources": [
+      "https://developer.todoist.com/api/v1/"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "d145cf12551899a221c8ee96db743a1e2972dc625504fa43a73f7037d828fa35"
+  },
+  "tx4q96": {
+    "name": "Translatium",
+    "status": "alternative",
+    "originalFinding": "Translatium now redirects to Lexibird, whose current site lists macOS/Windows and a web app. Verify a maintained Linux protocol handler or port to the documented web service.",
+    "securityReview": "static-reviewed",
+    "implementation": "Copy the selection and open Lexibird web app. Paste into its text field; this replaces the Mac service.",
+    "portId": "io.github.jondkinney.omapop.port.tx4q96",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Explicit copy-and-paste web alternative. Full automatic capture is not ported; implement an Omapop-owned authentication or documented browser handoff for parity.",
+    "sources": [
+      "https://lexibird.com/en/desktop"
+    ],
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "33506a5efe0c7900e27a43b45ed248a0a8b673eea9c8b9b602f26ccfa306e51b"
+  },
+  "6n9d0y": {
+    "name": "Urban Dictionary",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.6n9d0y",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "2773dbc678cf3c317567f94c0ee606177da258ba4a0e0baa6f6f51154f4160f3"
+  },
+  "41g81p": {
+    "name": "Variable Name Convert",
+    "status": "ported",
+    "originalFinding": "Consecutive underscores create empty words and word[0].toUpperCase throws. Filter empty segments and add round-trip cases.",
+    "securityReview": "static-reviewed",
+    "implementation": "Toggle underscore names to PascalCase, and other names to snake_case.",
+    "portId": "io.github.jondkinney.omapop.port.41g81p",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Toggle underscore names to PascalCase, and other names to snake_case.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "ba33f295939c03fe1b5788a08e33753b3a5425814401d04918eb1065e7f400e4"
+  },
+  "1pbpz0": {
+    "name": "Wayback Machine",
+    "status": "ported",
+    "originalFinding": "Wayback request is launched without awaiting completion, so done can arrive before effects. Await action and validate returned archive origin before opening.",
+    "securityReview": "static-reviewed",
+    "implementation": "Find and open an available archive.org snapshot of the selected HTTPS URL.",
+    "portId": "io.github.jondkinney.omapop.port.1pbpz0",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Find and open an available archive.org snapshot of the selected HTTPS URL.",
+    "sources": [
+      "https://archive.org/help/wayback_api.php"
+    ],
+    "securityNote": "Reviewed fixed-provider API client. Credentials are user supplied and errors do not expose tokens or response bodies. Network runs only on action invocation; no retries, remote code or account enumeration.",
+    "sha256": "fda5968ffcdd5791a97b481d2af8ae2b55e126e6f8770a6489c8e06838b7dacd"
+  },
+  "ssavd7": {
+    "name": "WebMarkdown",
+    "status": "ported",
+    "originalFinding": "Uses macOS gather/AppleScript and offers an unpinned latest .pkg installer. Replace with pinned reviewed HTML conversion and no automatic dependency installation.",
+    "securityReview": "static-reviewed",
+    "implementation": "Fetch a public HTTPS page and copy its basic Markdown. No login cookies, external images or page scripts.",
+    "portId": "io.github.jondkinney.omapop.port.ssavd7",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "mocked API contract + Node/Deno package action",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Public HTTPS pages only; no account cookies or dynamic rendering. Basic HTML-to-Markdown conversion; redirects are rejected and 128 KiB responses enforced.",
+    "securityNote": "Reviewed bounded GET requests to an explicitly selected HTTPS URL, without credentials or login cookies. Redirects are rejected and errors omit response bodies. HTML conversion runs locally without scripts or external images; no retries or remote code.",
+    "sha256": "9d5b5c61a864d3984c9f2a6d7ddd5871e58081dae7abcc35d35f50c7836b9193"
+  },
+  "by5b30": {
+    "name": "Wolfram Alpha",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.by5b30",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "69882fa3dbc98e7cc18c69a4e5f15418734715659a9e77cdfb4c8c3b6581fb94"
+  },
+  "p94cm7": {
+    "name": "Word Count",
+    "status": "ported",
+    "originalFinding": "Title-only count placeholders are not implemented; reuse Omapop's bundled count action or add tested display-only actions.",
+    "securityReview": "static-reviewed",
+    "implementation": "Count words using Unicode word boundaries.",
+    "portId": "io.github.jondkinney.omapop.port.p94cm7",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Count words using Unicode word boundaries.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "22d0562485cd9b7e9d7fc3a1a06bba51294c0c4083d48cd01772d5b6cbc598f2"
+  },
+  "ahsn7t": {
+    "name": "YouTube",
+    "status": "ported",
+    "originalFinding": "Reviewed declarative browser handoff still sends selected text through HTTP. Useful small Linux port: update to the provider's verified HTTPS endpoint and remove obsolete country/service choices.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open the selected text in the provider’s HTTPS web interface.",
+    "portId": "io.github.jondkinney.omapop.port.ahsn7t",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 1
+    },
+    "note": "Open the selected text in the provider’s HTTPS web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "5392ee9a23e206d1714063053b971251a0454ea04c29cb04d0c02f1205039f56"
+  },
+  "nv1dks": {
+    "name": "小红书 Hop",
+    "status": "ported",
+    "originalFinding": "Search/link parsing is useful and source is quoted, but launches /usr/bin/open with nohup. Port to a bounded Omapop URL effect.",
+    "securityReview": "static-reviewed",
+    "implementation": "Open an HTTPS Xiaohongshu shared link, or search the selected text in its web interface.",
+    "portId": "io.github.jondkinney.omapop.port.nv1dks",
+    "version": "1",
+    "commandKey": "inherit",
+    "commandKeyNote": "No synthetic Command key is sent by this port.",
+    "validation": {
+      "kind": "local semantic tests + Node/Deno action or declarative URL checks",
+      "liveAccountTested": false,
+      "liveDesktopActionTested": false,
+      "packageChecks": 2
+    },
+    "note": "Open an HTTPS Xiaohongshu shared link, or search the selected text in its web interface.",
+    "securityNote": "Reviewed local text/clipboard or explicit browser handoff. No downloaded code, automatic execution, telemetry or hidden persistence.",
+    "sha256": "82fd134b24f31fc76525d88a02d5cf18140b85a1d8bd5cd3fca04665868fcf21"
+  }
+}

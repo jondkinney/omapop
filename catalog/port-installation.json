@@ -1,0 +1,1145 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-08",
+  "catalogRevision": 2,
+  "catalogSha256": "09a1e21e0d8614c426edab2de0a8c315cc4dceeec42557f15371661572ccf42c",
+  "scope": "Real signed-catalog installer and scanner in temporary directories; no network, extension execution or live settings changes.",
+  "packages": [
+    {
+      "shortcode": "w9stjb",
+      "sha256": "132c311de2e948cb9b88069dd3c8a2ecb875edf48bcea4e4a8c99be0c40555ac",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "8kvc4y",
+      "sha256": "944933fcff55b2ede0dd0c8c69aeadc75d49f1b92289fb3007a6200f35e7e3ea",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "z7bjka",
+      "sha256": "9642771b908f753ae86ee780280f14249aeee9b68a3d3485457d90483db1583e",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "1yw6jd",
+      "sha256": "bd3db6a6604a2be2120bf7e0a35115a68ce80614f65157a39c3354ed9467aa6a",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "f2tnjr",
+      "sha256": "f6118cf200fcf405ce6a2593d984c2871306e8bb09f364d2e108f64dccbcb826",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "0yehgm",
+      "sha256": "72569796b710a3d44c49eec358fc70f440b4caf300aac38ba9127135cb727d39",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "ezvs1d",
+      "sha256": "6107a4332cd0aebfb72a043357e948c4b1bfca5c22b20c04304fd406ea3ce9a3",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "nwcz3b",
+      "sha256": "45a40ea7ea5fe5ed10d1a7c3dcadd8799abe9a0954414689cfb4dac314de6910",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "6ymxrg",
+      "sha256": "5d61f0e7b53f0f925c7a46a38a583e800f2c01fb3d22285a5fdd51aec371db09",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "hfp7pg",
+      "sha256": "6dbdae5001287fb815d4a3e231416d24ad211e84dd3a51266e970cabd25b9d14",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "vjmt48",
+      "sha256": "f668fbff0ba2b6a29d37724d0a76a9dcd9212e611377703705046fea60c02f1d",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "sj4s5m",
+      "sha256": "eadf4efe8d6b59382b759d3f1b772d3d1c15621591f7cf441692084932ad1af3",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "cvvw0q",
+      "sha256": "63b7051d89d6868ea44eb07c691d593a887c9553c1c5b11899e789a51d80c2e3",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "awjzhy",
+      "sha256": "900918a2b483b95aea6b8e07b183c7cdb94c453efc7b9ffcf8b40e93da3c6c6e",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "hpx6q6",
+      "sha256": "b7bed3e10b66a30cc2d43fc4b034e5b6c3272df302f25d491149ce889a29af5f",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "0p0xhv",
+      "sha256": "ca9eb1eab39bba3041533aff3fce4761343bcaa51c15d059b760d8e49e3f09fa",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "7ccsap",
+      "sha256": "787d72ffec5cb31de30b268c25b965a99abbc7089defb396953932122e6a1f7d",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "y1e8y0",
+      "sha256": "eccd31163968bab7ce213bacf2506182dde09d0f3386e9963bceb34bccf75db4",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "9tr4cr",
+      "sha256": "cd9d1f85ede631135083625b2a82a55463d0f11568d53c640e122994d9fb3f59",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "hvg8y3",
+      "sha256": "d8737b48cc5751d86e5a54ccb34713ff77339ed1a839b1847d03494fad9a1cb2",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "4hzjpg",
+      "sha256": "d6718bff9c26fc0460047340f864eedcf8ea30a121559b53e40849355e25df9f",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "73pbck",
+      "sha256": "1bb3db58b27474ef14d0fa46af1b56c9995827668290983559ea5ea1ec4496bb",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "8rhhk4",
+      "sha256": "aa71cf47563e6ac05e7555a8cf66af296d0027ffa386b7cbb9768b4bb1a17fef",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "69v3ms",
+      "sha256": "5cea262cec2b9ce18f5b95f80a9baccb1c5aefa91466fce8a822099a44182838",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "qpdzej",
+      "sha256": "3ccf562e54668be44dc3895b29f80e60fb7a2488e19180f12ece0e9fec626da6",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "sthzh9",
+      "sha256": "4271635b8cb2bf682855562ba6231bc150caa5a5f0c31252034ba62858b0fe4a",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "rzrz9e",
+      "sha256": "6325d9e111e4c9ef701a8c9ea12161f939aaed52ce4eae5e5631d83c80542005",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "x2brcm",
+      "sha256": "8e0eacc9667faaa6dd21eaf1012903a93a658f0ad0836ab42a21047f7a005851",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "yfcs28",
+      "sha256": "90ec55399984808acff492f7c5e6f9a9a7f568897422150aafe6eb2f308ad5cf",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "a7tvhf",
+      "sha256": "fd63a62c4674996dd5ff1d24fa35731b38e8852c1ba59dad9a092e5ceb4ae3f0",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "1dze64",
+      "sha256": "59d192394587dc7bb3b1a6cd6fe05c63c30f702db1847981b2b2985aa35c3d65",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "yw6cpd",
+      "sha256": "fb79696967e53923f3e65848bfc52a8961c897c3297529b8b7a39b4b216090f0",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "63wzx3",
+      "sha256": "6cd498a60a8fda7e64f43aae5536979a9ab1ba960f68fdbe120a393f3e355dad",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "r77xv8",
+      "sha256": "38681acd0d6086b1ef179f578f3b8e619c23e0e88d7eab95961f0be13c77108f",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "bqdd6c",
+      "sha256": "36efdd855f1f0d59e1b2edc34deac731fb98c950adccd6592e5b6f00a865637c",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "ezfj24",
+      "sha256": "ae4d4d973f0a8d938acfa2027df512d785f2d741ff499b5212dbc932a9122b7c",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "hmaayn",
+      "sha256": "c90fcc204e02a35feaf8e6c07f60e8329938abc993c5518316318a74fe15ad19",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "gfthdw",
+      "sha256": "42aedf084db36d08667b747a7c161514820e8ef30a8f910a834eb8cb3116c723",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "nhfcp3",
+      "sha256": "44a2e685d53d7c6e75f79c030b898cddba2850acc6829b176eeb02bc516149b7",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "jha0ze",
+      "sha256": "da2afdfdbbafe544282f09c40807f54a9b0f86dd91b04c960ea452a81ec3a02f",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "0kk4s6",
+      "sha256": "150ddca775bb8e141eabafb6daaaeaf5884ad42a571b25161e372121c7082a4f",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "wcsadc",
+      "sha256": "28d477ddc8d5c27d86f338b4dce85868998c97bae3899addb34132622a52f3a5",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "htd93q",
+      "sha256": "cb6922286938b87ce2e0e9b1df3b8e085f9b23731d6d0da334d2e724d0fca962",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "8f2t12",
+      "sha256": "97c3670954019533aef5143a68f1b613cf147df81b3331cd2cc0ed22dfd3c7d5",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "xpcw12",
+      "sha256": "308902ba64dbec63711cc82f7b808da7f39e0f1b0b0e47f44309f645304f9381",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "6tnp73",
+      "sha256": "c4b6268ea510ef81027eb5f15b587b0a2ae61f2f8580c17b84542d02bdedcd1f",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "2b88gv",
+      "sha256": "6471afde4773af7c91c3c68804931b8f5e507869a85fbcf31cc0527c83668366",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "0qqc31",
+      "sha256": "3c61439cec8bcb6388fe2988831e9780acfddb2bb80e0af04cbea48f1e01b8e1",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "w9pny6",
+      "sha256": "9815708fc16d0f5d51e7cd3b8c10100379d47c8a78f4f5d1eda65d0bb3847e2c",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "5y965f",
+      "sha256": "a5db21f5ca1240b62de478122209f86dcdb5a8d6cd15e37f264929c3fcfee01b",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "g9jbde",
+      "sha256": "6167336ed96105c9ace7cda602e371761d1d10d1fa4f05875c11b0a652abe59d",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "7qx7w2",
+      "sha256": "2a240dfb5a86d14b5fe2563d6992a04c40437a7369dad02925eaf9a60388204d",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "7a4gkr",
+      "sha256": "bb5c2986c8f5ac3409dadff8dbe2f309fa55cebe2043e96d577e7cf4d01a3173",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "px544f",
+      "sha256": "e8960a524ac342434e7b71de48dc259c9f3fd9e8f9567038ccfb53dec99f188e",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "frmvjs",
+      "sha256": "13e2f08035b0a02f362d032bc243ba986e7cf6c6b6cc86beb5ee3daf22486000",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "z822bm",
+      "sha256": "178c548c926fcd331b3247ae7cdff519eb6d81bcd158866582df70d5f018f8ce",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "kdc0qy",
+      "sha256": "3a8c3fc0364d01771d57e70a1693ef57d219259ed08a460722f3ffd03ee2b757",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "7xpd57",
+      "sha256": "c9928bb02e878392c21ea1ee6806ce0762f7628fdecdb0d356a8bd32ec6eadab",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "k0qmqe",
+      "sha256": "d5ee71f1cb0acbeda29c7962e8d2be8fc2b14788a946e1a852f65b8a82ab349e",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "4fr6dv",
+      "sha256": "e147f5590c4b997903157ba0e73c2216ef4ab633d7c65c9d3a51032fbd2866d8",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "mjakak",
+      "sha256": "cb158c95cd2759c1fb36cc355b576ac05684979878d4b97f28cc67042c898325",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "8eyzkz",
+      "sha256": "9ae0dcbe6e694f89b35aa0e23ff29782990a2223e1084ab52d2912ba4332e9ad",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "8ap4bc",
+      "sha256": "b76d1d5e8eb4fdac0f80ac7f183a10fddfad08efd522a161f8a64051aab5a905",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "r89xtt",
+      "sha256": "ba9db717b188152d6ab347631f530066ee05a73c27092590040f4d000c55355d",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "02yq1x",
+      "sha256": "40c8f07fa7c1eaa90d8fac3e6c49335e9d0e920152d04e490e038676fdfa6638",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "xh9jan",
+      "sha256": "6b2a912d1521f6239fa18950a37dd4b9e3bf61d2b736b44355132b9650c46f1f",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "s16hap",
+      "sha256": "0250b78028da939a26946c37fd4be65e643d0fc0fc1be6cdf365f9ab48318656",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "k50jz6",
+      "sha256": "2dd6479967120ac01abff5f987d2e089cd5d1259e60a782d82d0b428ec0896da",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "mxa673",
+      "sha256": "097f54db27c3a1b9b4a3035c79a81aa8395b0f71f239440f199536241d5c2ed8",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "8nsm31",
+      "sha256": "7078d4b24021bf9493c029d2d7b821d770d37763c41a7bcf943d99d3608ab292",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "xy7tjc",
+      "sha256": "8b20f62844d8e1593cdde76835f438d9123c823d87fb00e577eab1eb73fbc7a8",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "ckrwqw",
+      "sha256": "b085a4a5f36a74dca948fb9ef8a769f0e018528db98d596c67cde4df73c0e2af",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "780a6k",
+      "sha256": "8f5e6185e7b1ca9bde14e49a9545d864e9cc6c21658df4bfb7771982d2913d20",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "07802r",
+      "sha256": "4d4ac5f615812a5000c00a50b21500c00490f9992d779f5f2d99da1940e824a1",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "p20n16",
+      "sha256": "f951893b6cec41d030cc145b0dd3dad9572f590d1118537ed65add37c6f152fa",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "d38ynn",
+      "sha256": "1b6c863e406e407e96e960343c9668ea99b59b74a04df277db4cf32b7e23718a",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "j2wxmc",
+      "sha256": "1c905a3de9ac7e2db64779c24d09b89293a18c45416261b4f2b3005d053afd75",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "fapat2",
+      "sha256": "3857a605631226559789d953f63a3194999cc9c211b2ede67c83602657368f98",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "v1hh5h",
+      "sha256": "955c236fa68350aa7749bcf327cc626ea203d58c37c32f10b2f4fa4ae0711245",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "py867z",
+      "sha256": "e14ee072f629cd5f8adaa1f42553ba7e58c1f0edaa17bf3f7e42805f93578590",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "cyfq5y",
+      "sha256": "751da5357eae1abec2da579c7ffe9b4ec7c15ae1d0b81e7c02c75d277ff0f4ca",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "8m0dm5",
+      "sha256": "99550a0b40817e47736ce60dd12d9ce26f85d47e97f8f77b92d8d52ed5d1e4a8",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "fq9d07",
+      "sha256": "2f9390a2d92f62950c89761d195c2d7cbb4367996a6f69d07d7c4bfc77b3c145",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "6zqrwd",
+      "sha256": "3c286ea10bc6a345efaa91b4cd6cdee9fff55f86023b634e0b10a42c1fe63a64",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "f2xzek",
+      "sha256": "7975b551d0e628cb27ef71670121a628b675e200acb9fe5125aa9617aeabccd2",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "v8m6j4",
+      "sha256": "c54229b83ba8b74fd5bb09e41c9874952bbd70a85a8680e304c176024a46f6e7",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "01vjf6",
+      "sha256": "10fccb949f1b5cff11165ae7430d63325d53bb8edd18658e936e3dc5518b80cd",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "29vg9p",
+      "sha256": "f1447a137b55451c883c50b16392c71569038cbcad89848f2c0b14e709ba332b",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "z9d8vd",
+      "sha256": "0a34e63bf8b4d8361ffc3d83f41b778ad966e8b6629eeb236ea603992066b705",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "ezfkbp",
+      "sha256": "cf06197268394383cea5870addbe9e14059cb19fc41fdad6f93079a4fcc174e1",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "8xb0vb",
+      "sha256": "2bcafde6fe18950fdf89ca2385ddd2850abf75330e74d8dcb465127e91b7bb49",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "dk2fh0",
+      "sha256": "48d55a47590ea08e240d62205728b70afa87647ea31a533d65a48b281c52522c",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "az0jxd",
+      "sha256": "0e3853ff215bcda1341bcb0db03a53108fe0a4145d1a29283c049311170115c5",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "j7ds2s",
+      "sha256": "8e389fa6a3bdf126f64462336f66fd262a861ff52e615ec9f23f2b08c602f196",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "a51hz5",
+      "sha256": "4ab4ff0936c72137dbe4f4f5048c7142c85ec634771cfe7e46cfeeab6605f5d9",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "krvyqd",
+      "sha256": "6bdbb62433d6c71424ec4fee533482702aea981ce47021629c7cef20f1307498",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "bcjg80",
+      "sha256": "ad35a6d32985381febc77d85c8a9aac329aab58eb50c984f273d8107ddb6624d",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "4ka8r3",
+      "sha256": "1d770dd6f701c682f68a3f71260382347c8a81f087ff8c8a62dc63a823caf4ae",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "sqtny5",
+      "sha256": "fb9689a93786cf41d91c58b2bc9189d800aceb144e42dabf1b5c702e7a9a5c59",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "pt4k2d",
+      "sha256": "9fad3c0617e219086081af7f65d38e1574708dfa9327e408011c227387c11831",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "1m4m8n",
+      "sha256": "00ac0dc67e3a02d629f14034931e3f7ddcd124d18e1ff50b392077c74bf1a1d2",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "kpqh3r",
+      "sha256": "491d5c61250012e77aab604380951319c3006625bdde6499a615096b92d0ba0a",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "t65bec",
+      "sha256": "c5da42170b69d3cbb916afc17e6bc0f0fe315f0f884b8a6b2a2b4184b7e8c0cc",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "pgh8tr",
+      "sha256": "3fbfc0e9375f3968c5d8945f451e6cdc4974836cf8745cf23bc1fe9c408fdf26",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "r7eape",
+      "sha256": "c7205e10909760f040f5bdd991aad7148ebd4726b748ca3907fb92a4776e391c",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "zn9dyt",
+      "sha256": "c607bd07fc96eca15f3fc29d92605374dc8a793718f91fbda3e4c6ea32269625",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "enc6pz",
+      "sha256": "97c1ac3822df9a926460e4a57d455fc80473a2c8a6d82fb1cdcae52689aad56e",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "ebp66h",
+      "sha256": "2174eb9111f1036e83d8f5ea7df07fd6650133c6439b3c89c84791e98ccebb2e",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "wfhk0x",
+      "sha256": "5dfbe66ad1273c02d719428ed4b246be2dcc3ab78b94a90c32f0c0361acf22f3",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "6p9xq3",
+      "sha256": "3aa8127a123a78024e27fb4d52b48f1cdf2443270250c1127a43abdbd0f18f07",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "966gax",
+      "sha256": "50069a19afc9d0a35d1f8199ebe6181a3a5c37e38fab78127a04ae5fb8750a5e",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "g9rfgp",
+      "sha256": "005336d57868e37dec78f3441f0ac2c8f3094c65914ba5c4c42b029a06a5cd5c",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "t7hx1b",
+      "sha256": "74a03539d79e72e1ff73be1be248005f8bfea684c8d71e0ed6e52fabbb0d736b",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "wwgbd7",
+      "sha256": "59905bb43254b6ffda1e8826e970eb1bb53171bacaf937c7f0771951447540ff",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "48f32j",
+      "sha256": "9522770b8d69ce5a4518a4c8c3748b396158538d8f709af3a4e8b5e7628434a9",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "fj4e7p",
+      "sha256": "8a3e3d720705ff0c0744c5a1c619478d3c4133498d3230a9d85d1781fb0173a4",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "g8d8kh",
+      "sha256": "7df5138e45f8ca05419022f19dffdf402e2b11300fed06b476efdeeb86d682ab",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "nyasgn",
+      "sha256": "4d5b7aff24c733a165d830f801af0e67f9dc0b0045a232f0ba7bd7caa3252ce3",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "g467b2",
+      "sha256": "f21c3d77eacd93a150d4264ed485970a7dad452a2a714c40e594cb67336216cd",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "0jhrd3",
+      "sha256": "5c60b18f40e54033738766747dfedf7faed28f56ff27e2f6c28a122e27f2a46d",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "b2fbhe",
+      "sha256": "ffc140211ee9840edd4fbaeab12c12c76327d40686ca19a7016b39be09a5dd58",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "qrcc82",
+      "sha256": "030fb1d8f7c10fd048cf8ad55d1026ecf0cf390b0fa46966bd39744741c999ec",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "5zp8bb",
+      "sha256": "ffdc1d2dc151c7cf356c34d0720885914fd7c624fdebf05e47e4aef821a66a6c",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "w8757f",
+      "sha256": "4904eb5ee0d597748fe0a4377c73e29c03edec3c994794686c5084fe9a678a31",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "2f8dfs",
+      "sha256": "88b0ba3358fad9151054e55af5e51d57678df659394a80eba075dc113a51b0ff",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "w25tea",
+      "sha256": "546e21ac3c361aba997b6a87ed0b219e3dbabe47a9efcd80c78c8ebe079492ab",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "rn4p5p",
+      "sha256": "6118b8f84587e0520c4cb34d7f76d2fb773ef80d2fc71710819a4aaaf019b0d1",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "ykm8zw",
+      "sha256": "187d139a1cff2b6ed738b5b0f876456e046a064dffdad1393a4da950042fec0e",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "2ed0xf",
+      "sha256": "3b86078e5a5f7589dd0563fc1ae4d1fe5dc9e0587a4f806bceea12177d545381",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "wyq4we",
+      "sha256": "31af509013529168c8d81621b0ce63ccce55a183d9d126c69a2b9e69f209347b",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "v7hgh5",
+      "sha256": "b52c70aa22021e6ecc70913bfc437c87e9f20544db12142515d994a084e2404f",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "rc70x5",
+      "sha256": "f9541e9602d95b84973a59379eaf150b4478543328aa59b5ffaa334e92b76868",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "831bpe",
+      "sha256": "19b8228f0872163b636ea69efc0e10ba1dbe7174764defee78e21bbc3d6b6bff",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "1zemre",
+      "sha256": "793125eb53ccb1c0373f5194d13d2ec51edc36fd0bdfdd480f12bdd4fb6410f4",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "54cf55",
+      "sha256": "5d65147b735e2dd9b806354242caac898846e7dd4de4b3f8125015bb72bf18d4",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "gt0c91",
+      "sha256": "f15ae778ece34c20eb60217463a08c50c0910d1d1d5f95a0c1751d0440f3a6b7",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "4kcy03",
+      "sha256": "ec6528474df70334da2deec8ee2a78d8c2d30e0d82e8975f7109019de9169b1d",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "m1fa94",
+      "sha256": "5758212c43fade7c3661f30e77b61b5ddc95f234e13603548adc2bfb0ab25ef8",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "b1cyx8",
+      "sha256": "94172b73d78ac9e218dd789378b6fa2d8da1c6b6d42274b6bf9cb8a9dc18fe20",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "emvaxx",
+      "sha256": "06748cdf2126ae7ba36fab0cbac91586637c3a589d83c3173394f095934a145c",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "7yc6g6",
+      "sha256": "16b3f0b8aac1a5e4046ace7b06cad75d81b7e07735e52edc3b887ca3a8c9073e",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "97rvpd",
+      "sha256": "00cd05cb3aca8bb431efd2bed84a637aa37b7a64faa73c7fb0e70ef37e242eb9",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "b3yeve",
+      "sha256": "30d9ecbbdfab8e6a9cd1515ca91338680eea990436df1d4ce10d5da6079de0f9",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "6pa6yt",
+      "sha256": "685b9dc46385d35b3f27c71e13e6168555c420ce0ecb6b8509f5f3401a3f4924",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "tss74a",
+      "sha256": "4daf1731ee9e6e7cf90b86d8dd5afc1a001ecb1be9fc7503c34d17d2218007ce",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "wdp7x0",
+      "sha256": "740dd134172a9becf21120b7eafe93885a7f699d89892ff6400fa691ab1652c0",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "x2p1qt",
+      "sha256": "0c84531a2f0ab592d30de31b84321d2fb961207264d5f444d0f5d52ad48a6f63",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "rqgjxd",
+      "sha256": "51092c4a1bce081bd4c5820614abadf95c584ded07bc1bd1d04d44f22e3873c9",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "41mamt",
+      "sha256": "b3c78be90a85a63e597c998458a8e31ce604a96ceb99cddac241759cb451bd86",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "fxz1nb",
+      "sha256": "4d628cc7a0e1ed368421b37dbb68ae23ba617435e8d252a4d8bbb6c8b7444b3c",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "wsqynj",
+      "sha256": "942cf396a813db097d6ef40dd9c82634c4e34009edf38f78a97497f249c2a5d3",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "a6arrs",
+      "sha256": "e2bd7ea603e908d83f71712964f97f0ee93907b5fdd3050e8cdd6ece23005e2b",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "7qdy94",
+      "sha256": "6dbc561e653c8ea00b1b810ffe0841b4b5715dc26fe26bd35daafb5815c5b46e",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "0v6xef",
+      "sha256": "64fe64d9097e196afffd7ca86268dcf0c44442c02f4e267b175ded1a1d8202c8",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "2x5yjg",
+      "sha256": "54ae60321291af2c4be5f2eeb0d9d22e546f966c620e470c46921143d68947a6",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "x9q882",
+      "sha256": "875e1af9a9243be9db9036fb29d623353f04e1bee53d3df40da13a7a977d98c9",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "tv2c35",
+      "sha256": "707e29bd3cc2a96e610e2dd0efe55031d5eeff74c61d05558454d09fa7c4bc0b",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "ht5xxx",
+      "sha256": "f6973cfcacd9f4b41055e695f66a1b08f4a39ba7ffa26aaee43f4f3059a19fba",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "8jj623",
+      "sha256": "72cd0e844abdbf5695b34a3ecb3741f308f1f53c36dbe3cb6e1242ae38af1ebe",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "phq1ch",
+      "sha256": "43092c3e55427c109c923cdba6daf5445e4c7a62da1256ed26f12f50142d55a1",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "34fddp",
+      "sha256": "42e8afce30f7b1969dbe0c6a87a94f70addcea945c16856832ea8e0475ee91af",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "batmjr",
+      "sha256": "d4829bbb53227dca32c051959f97650a8ed1605d60aa9403d40bee8244b9c4f6",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "2cr65p",
+      "sha256": "9adec87949fc44cfc15bf762cf19cdde397446505790fec3cd9cf5212398b171",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "yzf4sx",
+      "sha256": "d145cf12551899a221c8ee96db743a1e2972dc625504fa43a73f7037d828fa35",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "fwrfay",
+      "sha256": "affdc8b04dbb7433239280844f69b88609bc16a59eeb425b131ab58794978fa1",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "tx4q96",
+      "sha256": "33506a5efe0c7900e27a43b45ed248a0a8b673eea9c8b9b602f26ccfa306e51b",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "7kmrpe",
+      "sha256": "d80d31e4058d0e1779e0d125d0553949b505750873c05fed333786185ed4d1d3",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "hy4t7n",
+      "sha256": "884b0143876f6d005cbe2f68c266e4ecfb4de4c9fe7d166ec0ff5a9c43b2c3b3",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "09a521",
+      "sha256": "d6778674ce87278665dc600c3312b76071d51b9b6f2a9fb0937293f691f86aaa",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "ve8j52",
+      "sha256": "d1b014eaa8fd53631af68781793698ff7150d7b9e650b30c112b43f7f4c3d838",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "ahphpq",
+      "sha256": "c7d68ff7bfc840a3175e261383bece38b87f48900ec533bbab7d097f6b4b3d10",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "h036ws",
+      "sha256": "08a21f95be1519773120d15156e86f4c02726fe8a1afff654441e7410a3017cb",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "fzmf6w",
+      "sha256": "a7cfedcf59d8f05ca01d7f242f8e0eac6e74478b4bb14bc3c5a3636fcfb197d2",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "6n9d0y",
+      "sha256": "2773dbc678cf3c317567f94c0ee606177da258ba4a0e0baa6f6f51154f4160f3",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "t1gh6s",
+      "sha256": "a9270c27943ee0501096e3ad315ad041e8648ba092217bfe318ca7aae850bc0c",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "818qw5",
+      "sha256": "81f6db19c809ebaf2dc1e246fad96f908950b049a456b0661958965bc9d540a9",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "41g81p",
+      "sha256": "ba33f295939c03fe1b5788a08e33753b3a5425814401d04918eb1065e7f400e4",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "1pbpz0",
+      "sha256": "fda5968ffcdd5791a97b481d2af8ae2b55e126e6f8770a6489c8e06838b7dacd",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "ssavd7",
+      "sha256": "9d5b5c61a864d3984c9f2a6d7ddd5871e58081dae7abcc35d35f50c7836b9193",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "4q8mrz",
+      "sha256": "395c9cbd93ca30997e5b55b5ab1f43cf02e88a001dd0ea7d590dfdeb8700b3d0",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "cv37yb",
+      "sha256": "90343b398074dcaaa644dfaca82966f96d3fbd91d4bf72bb95b7c1e059e5574b",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "by5b30",
+      "sha256": "69882fa3dbc98e7cc18c69a4e5f15418734715659a9e77cdfb4c8c3b6581fb94",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "p94cm7",
+      "sha256": "22d0562485cd9b7e9d7fc3a1a06bba51294c0c4083d48cd01772d5b6cbc598f2",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "pbj90j",
+      "sha256": "4d85e203011aa2e5382343ac6fd4a38b4b7823c2a17bd17427ec5a7fef3568b6",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "tngcm1",
+      "sha256": "8b83fd3044918d6584159455a43fdc20f7d372cfa22d753fbca1817182c7b63d",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "t1z0y4",
+      "sha256": "51c4e04cccec8f4973ff6f6eaa5ace819399a2f745ece0db3f5707bed1228b3d",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "1bgbbm",
+      "sha256": "92d4993e6a75d346b4f895ca7efa1bc3e3301871c6e0efbbbadf6de6eba933ef",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "ahsn7t",
+      "sha256": "5392ee9a23e206d1714063053b971251a0454ea04c29cb04d0c02f1205039f56",
+      "installed": true,
+      "startsDisabled": true
+    },
+    {
+      "shortcode": "nv1dks",
+      "sha256": "82fd134b24f31fc76525d88a02d5cf18140b85a1d8bd5cd3fca04665868fcf21",
+      "installed": true,
+      "startsDisabled": true
+    }
+  ],
+  "explicitEnablePassed": true,
+  "tamperRejected": true
+}

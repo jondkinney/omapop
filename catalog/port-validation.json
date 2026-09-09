@@ -1,0 +1,3493 @@
+{
+  "schemaVersion": 1,
+  "validation": "offline Node + Deno actions; mocked API contracts and native effects",
+  "extensions": [
+    {
+      "shortcode": "0kk4s6",
+      "sha256": "150ddca775bb8e141eabafb6daaaeaf5884ad42a571b25161e372121c7082a4f",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://www.onenote.com/notebooks",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into OneNote Web.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://www.onenote.com/notebooks",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into OneNote Web.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "0qqc31",
+      "sha256": "3c61439cec8bcb6388fe2988831e9780acfddb2bb80e0af04cbea48f1e01b8e1",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "8.00 EUR (rate 2026-09-08)",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "8.00 EUR (rate 2026-09-08)",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "8.00 EUR (rate 2026-09-08)",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "8.00 EUR (rate 2026-09-08)",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "0v6xef",
+      "sha256": "64fe64d9097e196afffd7ca86268dcf0c44442c02f4e267b175ded1a1d8202c8",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "0.30",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "0.30",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "1dze64",
+      "sha256": "59d192394587dc7bb3b1a6cd6fe05c63c30f702db1847981b2b2985aa35c3d65",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "// Hello world\n// Second line",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "// Hello world\n// Second line",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "1pbpz0",
+      "sha256": "fda5968ffcdd5791a97b481d2af8ae2b55e126e6f8770a6489c8e06838b7dacd",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "openUrl",
+              "args": [
+                "https://web.archive.org/web/20260908/https://example.com/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "openUrl",
+              "args": [
+                "https://web.archive.org/web/20260908/https://example.com/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "1zemre",
+      "sha256": "793125eb53ccb1c0373f5194d13d2ec51edc36fd0bdfdd480f12bdd4fb6410f4",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Highlight saved",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Highlight saved",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Saved to Reader",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Saved to Reader",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "29vg9p",
+      "sha256": "f1447a137b55451c883c50b16392c71569038cbcad89848f2c0b14e709ba332b",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "{\n  \"a\": [\n    1,\n    2\n  ]\n}",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "{\n  \"a\": [\n    1,\n    2\n  ]\n}",
+          "effects": []
+        },
+        {
+          "action": 1,
+          "runtime": "deno",
+          "type": "local",
+          "result": "{\"a\":[1,2]}",
+          "effects": []
+        },
+        {
+          "action": 1,
+          "runtime": "node",
+          "type": "local",
+          "result": "{\"a\":[1,2]}",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "2ed0xf",
+      "sha256": "3b86078e5a5f7589dd0563fc1ae4d1fe5dc9e0587a4f806bceea12177d545381",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/?term=a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "2x5yjg",
+      "sha256": "54ae60321291af2c4be5f2eeb0d9d22e546f966c620e470c46921143d68947a6",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "pasteText",
+              "args": [
+                "Previous clipboard",
+                {
+                  "restore": false
+                }
+              ]
+            },
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "pasteText",
+              "args": [
+                "Previous clipboard",
+                {
+                  "restore": false
+                }
+              ]
+            },
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "34fddp",
+      "sha256": "42e8afce30f7b1969dbe0c6a87a94f70addcea945c16856832ea8e0475ee91af",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "nativeAction",
+              "args": [
+                "editor",
+                {}
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "nativeAction",
+              "args": [
+                "editor",
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "41g81p",
+      "sha256": "ba33f295939c03fe1b5788a08e33753b3a5425814401d04918eb1065e7f400e4",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "hello_world_second_line",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "hello_world_second_line",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "48f32j",
+      "sha256": "9522770b8d69ce5a4518a4c8c3748b396158538d8f709af3a4e8b5e7628434a9",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Explanation",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Explanation",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "4hzjpg",
+      "sha256": "d6718bff9c26fc0460047340f864eedcf8ea30a121559b53e40849355e25df9f",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "23",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "23",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "4kcy03",
+      "sha256": "ec6528474df70334da2deec8ee2a78d8c2d30e0d82e8975f7109019de9169b1d",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Captured to Roam",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Captured to Roam",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "5y965f",
+      "sha256": "a5db21f5ca1240b62de478122209f86dcdb5a8d6cd15e37f264929c3fcfee01b",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "nativeAction",
+              "args": [
+                "zeal",
+                {}
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "nativeAction",
+              "args": [
+                "zeal",
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "5zp8bb",
+      "sha256": "ffdc1d2dc151c7cf356c34d0720885914fd7c624fdebf05e47e4aef821a66a6c",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Saved to Pinboard",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Saved to Pinboard",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "63wzx3",
+      "sha256": "6cd498a60a8fda7e64f43aae5536979a9ab1ba960f68fdbe120a393f3e355dad",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "8.00 EUR (rate 2026-09-08)",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "8.00 EUR (rate 2026-09-08)",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "8.00 EUR (rate 2026-09-08)",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "8.00 EUR (rate 2026-09-08)",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "6n9d0y",
+      "sha256": "2773dbc678cf3c317567f94c0ee606177da258ba4a0e0baa6f6f51154f4160f3",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://www.urbandictionary.com/define.php?term=a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "6p9xq3",
+      "sha256": "3aa8127a123a78024e27fb4d52b48f1cdf2443270250c1127a43abdbd0f18f07",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Explanation",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Explanation",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "6pa6yt",
+      "sha256": "685b9dc46385d35b3f27c71e13e6168555c420ce0ecb6b8509f5f3401a3f4924",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "https://is.gd/test",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "https://is.gd/test",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "https://is.gd/test",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "https://is.gd/test",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "6tnp73",
+      "sha256": "c4b6268ea510ef81027eb5f15b587b0a2ae61f2f8580c17b84542d02bdedcd1f",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Captured to Craft",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Captured to Craft",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "6zqrwd",
+      "sha256": "3c286ea10bc6a345efaa91b4cd6cdee9fff55f86023b634e0b10a42c1fe63a64",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "item01: 2\nitem02: 4\nitem03: 6",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "item01: 2\nitem02: 4\nitem03: 6",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "7ccsap",
+      "sha256": "787d72ffec5cb31de30b268c25b965a99abbc7089defb396953932122e6a1f7d",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "14",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "14",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "7xpd57",
+      "sha256": "c9928bb02e878392c21ea1ee6806ce0762f7628fdecdb0d356a8bd32ec6eadab",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://www.ebay.com/sch/i.html?_nkw=a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "7yc6g6",
+      "sha256": "16b3f0b8aac1a5e4046ace7b06cad75d81b7e07735e52edc3b887ca3a8c9073e",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "[Query \\[text\\]](https://example.com/result)",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "[Query \\[text\\]](https://example.com/result)",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "[Query \\[text\\]](https://example.com/result)",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "[Query \\[text\\]](https://example.com/result)",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "8ap4bc",
+      "sha256": "b76d1d5e8eb4fdac0f80ac7f183a10fddfad08efd522a161f8a64051aab5a905",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://dict.eudic.net/dicts/en/a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "8f2t12",
+      "sha256": "97c3670954019533aef5143a68f1b613cf147df81b3331cd2cc0ed22dfd3c7d5",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Previous clipboard\nHello world\nSecond line",
+                {
+                  "notify": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Previous clipboard\nHello world\nSecond line",
+                {
+                  "notify": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "8jj623",
+      "sha256": "72cd0e844abdbf5695b34a3ecb3741f308f1f53c36dbe3cb6e1242ae38af1ebe",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "nativeAction",
+              "args": [
+                "terminal",
+                {}
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "nativeAction",
+              "args": [
+                "terminal",
+                {}
+              ]
+            }
+          ]
+        },
+        {
+          "action": 1,
+          "runtime": "deno",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "nativeAction",
+              "args": [
+                "execute",
+                {}
+              ]
+            }
+          ]
+        },
+        {
+          "action": 1,
+          "runtime": "node",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "nativeAction",
+              "args": [
+                "execute",
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "8rhhk4",
+      "sha256": "aa71cf47563e6ac05e7555a8cf66af296d0027ffa386b7cbb9768b4bb1a17fef",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "200 — https://example.com/",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "200 — https://example.com/",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "97rvpd",
+      "sha256": "00cd05cb3aca8bb431efd2bed84a637aa37b7a64faa73c7fb0e70ef37e242eb9",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "keys",
+          "keys": [
+            "control a"
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "a6arrs",
+      "sha256": "e2bd7ea603e908d83f71712964f97f0ee93907b5fdd3050e8cdd6ece23005e2b",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "nativeAction",
+              "args": [
+                "note",
+                {}
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "nativeAction",
+              "args": [
+                "note",
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "ahsn7t",
+      "sha256": "5392ee9a23e206d1714063053b971251a0454ea04c29cb04d0c02f1205039f56",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://www.youtube.com/results?search_query=a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "az0jxd",
+      "sha256": "0e3853ff215bcda1341bcb0db03a53108fe0a4145d1a29283c049311170115c5",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "2",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "2",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "b1cyx8",
+      "sha256": "94172b73d78ac9e218dd789378b6fa2d8da1c6b6d42274b6bf9cb8a9dc18fe20",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://www.rottentomatoes.com/search?search=a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "bcjg80",
+      "sha256": "ad35a6d32985381febc77d85c8a9aac329aab58eb50c984f273d8107ddb6624d",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://www.google.com/maps/search/?api=1&query=a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "bqdd6c",
+      "sha256": "36efdd855f1f0d59e1b2edc34deac731fb98c950adccd6592e5b6f00a865637c",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "https://example.com/#part:~:text=a%2Db%20%26%20c",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "https://example.com/#part:~:text=a%2Db%20%26%20c",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "by5b30",
+      "sha256": "69882fa3dbc98e7cc18c69a4e5f15418734715659a9e77cdfb4c8c3b6581fb94",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://www.wolframalpha.com/input?i=a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "emvaxx",
+      "sha256": "06748cdf2126ae7ba36fab0cbac91586637c3a589d83c3173394f095934a145c",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "nativeAction",
+              "args": [
+                "speech",
+                {}
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "nativeAction",
+              "args": [
+                "speech",
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "enc6pz",
+      "sha256": "97c1ac3822df9a926460e4a57d455fc80473a2c8a6d82fb1cdcae52689aad56e",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://search.naver.com/search.naver?query=a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "ezfj24",
+      "sha256": "ae4d4d973f0a8d938acfa2027df512d785f2d741ff499b5212dbc932a9122b7c",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://antidote.app/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into Antidote Web.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://antidote.app/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into Antidote Web.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "f2tnjr",
+      "sha256": "f6118cf200fcf405ce6a2593d984c2871306e8bb09f364d2e108f64dccbcb826",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://music.apple.com/us/search?term=a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "f2xzek",
+      "sha256": "7975b551d0e628cb27ef71670121a628b675e200acb9fe5125aa9617aeabccd2",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Saved to Instapaper",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Saved to Instapaper",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "fapat2",
+      "sha256": "3857a605631226559789d953f63a3194999cc9c211b2ede67c83602657368f98",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "Hello world\nSecond line",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "Hello world\nSecond line",
+          "effects": []
+        },
+        {
+          "action": 1,
+          "runtime": "deno",
+          "type": "local",
+          "result": "Hello world Second line",
+          "effects": []
+        },
+        {
+          "action": 1,
+          "runtime": "node",
+          "type": "local",
+          "result": "Hello world Second line",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "fq9d07",
+      "sha256": "2f9390a2d92f62950c89761d195c2d7cbb4367996a6f69d07d7c4bfc77b3c145",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://www.imdb.com/find/?q=a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "frmvjs",
+      "sha256": "13e2f08035b0a02f362d032bc243ba986e7cf6c6b6cc86beb5ee3daf22486000",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://doi.org/a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "g467b2",
+      "sha256": "f21c3d77eacd93a150d4264ed485970a7dad452a2a714c40e594cb67336216cd",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "https://outlook.office.com/mail/deeplink/read/Ab-C-?ItemID=Ab%2FC%2B&exvsurl=1",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "https://outlook.office.com/mail/deeplink/read/Ab-C-?ItemID=Ab%2FC%2B&exvsurl=1",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "g8d8kh",
+      "sha256": "7df5138e45f8ca05419022f19dffdf402e2b11300fed06b476efdeeb86d682ab",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "openUrl",
+              "args": [
+                "https://example.com/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://example.org/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "openUrl",
+              "args": [
+                "https://example.com/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://example.org/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "g9jbde",
+      "sha256": "6167336ed96105c9ace7cda602e371761d1d10d1fa4f05875c11b0a652abe59d",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://www.deepl.com/translator#auto/en-us/a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "g9rfgp",
+      "sha256": "005336d57868e37dec78f3441f0ac2c8f3094c65914ba5c4c42b029a06a5cd5c",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://www.thesaurus.com/browse/a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "gfthdw",
+      "sha256": "42aedf084db36d08667b747a7c161514820e8ef30a8f910a834eb8cb3116c723",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://www.evernote.com/client/web",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into Evernote Web.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://www.evernote.com/client/web",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into Evernote Web.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "hfp7pg",
+      "sha256": "6dbdae5001287fb815d4a3e231416d24ad211e84dd3a51266e970cabd25b9d14",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://www.bing.com/search?q=a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "hmaayn",
+      "sha256": "c90fcc204e02a35feaf8e6c07f60e8329938abc993c5518316318a74fe15ad19",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://i.doit.im/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into a new Doit.im task.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://i.doit.im/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into a new Doit.im task.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "hpx6q6",
+      "sha256": "b7bed3e10b66a30cc2d43fc4b034e5b6c3272df302f25d491149ce889a29af5f",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Idea saved in Buffer",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Idea saved in Buffer",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "htd93q",
+      "sha256": "cb6922286938b87ce2e0e9b1df3b8e085f9b23731d6d0da334d2e724d0fca962",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://ticktick.com/webapp/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into TickTick Web.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://ticktick.com/webapp/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into TickTick Web.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "jha0ze",
+      "sha256": "da2afdfdbbafe544282f09c40807f54a9b0f86dd91b04c960ea452a81ec3a02f",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://matetranslate.com/translator",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into Mate web translator.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://matetranslate.com/translator",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into Mate web translator.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "k50jz6",
+      "sha256": "2dd6479967120ac01abff5f987d2e089cd5d1259e60a782d82d0b428ec0896da",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "nativeAction",
+              "args": [
+                "dns",
+                {}
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "nativeAction",
+              "args": [
+                "dns",
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "m1fa94",
+      "sha256": "5758212c43fade7c3661f30e77b61b5ddc95f234e13603548adc2bfb0ab25ef8",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "Uryyb jbeyq\nFrpbaq yvar",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "Uryyb jbeyq\nFrpbaq yvar",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "mxa673",
+      "sha256": "097f54db27c3a1b9b4a3035c79a81aa8395b0f71f239440f199536241d5c2ed8",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "openUrl",
+              "args": [
+                "https://github.com/test/repo",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "openUrl",
+              "args": [
+                "https://github.com/test/repo",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "nhfcp3",
+      "sha256": "44a2e685d53d7c6e75f79c030b898cddba2850acc6829b176eeb02bc516149b7",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://app.lexibird.com/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into Lexibird web app.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://app.lexibird.com/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into Lexibird web app.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "nv1dks",
+      "sha256": "82fd134b24f31fc76525d88a02d5cf18140b85a1d8bd5cd3fca04665868fcf21",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "openUrl",
+              "args": [
+                "https://www.xiaohongshu.com/search_result?keyword=Hello%20world%0ASecond%20line",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "openUrl",
+              "args": [
+                "https://www.xiaohongshu.com/search_result?keyword=Hello%20world%0ASecond%20line",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "nwcz3b",
+      "sha256": "45a40ea7ea5fe5ed10d1a7c3dcadd8799abe9a0954414689cfb4dac314de6910",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://www.baidu.com/s?wd=a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "p20n16",
+      "sha256": "f951893b6cec41d030cc145b0dd3dad9572f590d1118537ed65add37c6f152fa",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://scholar.google.com/scholar?q=a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "p94cm7",
+      "sha256": "22d0562485cd9b7e9d7fc3a1a06bba51294c0c4083d48cd01772d5b6cbc598f2",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "4",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "4",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "pgh8tr",
+      "sha256": "3fbfc0e9375f3968c5d8945f451e6cdc4974836cf8745cf23bc1fe9c408fdf26",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "pasteText",
+              "args": [
+                "***********************",
+                {
+                  "restore": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "pasteText",
+              "args": [
+                "***********************",
+                {
+                  "restore": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "phq1ch",
+      "sha256": "43092c3e55427c109c923cdba6daf5445e4c7a62da1256ed26f12f50142d55a1",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "ababab",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "ababab",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "pt4k2d",
+      "sha256": "9fad3c0617e219086081af7f65d38e1574708dfa9327e408011c227387c11831",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyTypedText",
+              "args": [
+                "{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0 sans-serif;}{\\f1 monospace;}}\nHello world\\par\nSecond line\\par\n}",
+                {
+                  "mime": "text/rtf"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyTypedText",
+              "args": [
+                "{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0 sans-serif;}{\\f1 monospace;}}\nHello world\\par\nSecond line\\par\n}",
+                {
+                  "mime": "text/rtf"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "px544f",
+      "sha256": "e8960a524ac342434e7b71de48dc259c9f3fd9e8f9567038ccfb53dec99f188e",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://www.discogs.com/search?q=a%20%26%20%23%2F%25%20%C3%BC&type=all"
+        }
+      ]
+    },
+    {
+      "shortcode": "py867z",
+      "sha256": "e14ee072f629cd5f8adaa1f42553ba7e58c1f0edaa17bf3f7e42805f93578590",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "Hello world\nSecond line",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "Hello world\nSecond line",
+          "effects": []
+        },
+        {
+          "action": 1,
+          "runtime": "deno",
+          "type": "local",
+          "result": "Hello world\nSecond line",
+          "effects": []
+        },
+        {
+          "action": 1,
+          "runtime": "node",
+          "type": "local",
+          "result": "Hello world\nSecond line",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "qpdzej",
+      "sha256": "3ccf562e54668be44dc3895b29f80e60fb7a2488e19180f12ece0e9fec626da6",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Task created",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Task created",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "r77xv8",
+      "sha256": "38681acd0d6086b1ef179f578f3b8e619c23e0e88d7eab95961f0be13c77108f",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "Hello **world**",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "Hello **world**",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "r7eape",
+      "sha256": "c7205e10909760f040f5bdd991aad7148ebd4726b748ca3907fb92a4776e391c",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "[\n\"Hello world\",\n\"Second line\"\n]",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "[\n\"Hello world\",\n\"Second line\"\n]",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "rc70x5",
+      "sha256": "f9541e9602d95b84973a59379eaf150b4478543328aa59b5ffaa334e92b76868",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Bookmark saved",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Bookmark saved",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "rn4p5p",
+      "sha256": "6118b8f84587e0520c4cb34d7f76d2fb773ef80d2fc71710819a4aaaf019b0d1",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "openUrl",
+              "args": [
+                "https://example.com/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "openUrl",
+              "args": [
+                "https://example.com/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "rqgjxd",
+      "sha256": "51092c4a1bce081bd4c5820614abadf95c584ded07bc1bd1d04d44f22e3873c9",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "hello-world-second-line",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "hello-world-second-line",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "rzrz9e",
+      "sha256": "6325d9e111e4c9ef701a8c9ea12161f939aaed52ce4eae5e5631d83c80542005",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "helloWorldSecondLine",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "helloWorldSecondLine",
+          "effects": []
+        },
+        {
+          "action": 1,
+          "runtime": "deno",
+          "type": "local",
+          "result": "HelloWorldSecondLine",
+          "effects": []
+        },
+        {
+          "action": 1,
+          "runtime": "node",
+          "type": "local",
+          "result": "HelloWorldSecondLine",
+          "effects": []
+        },
+        {
+          "action": 2,
+          "runtime": "deno",
+          "type": "local",
+          "result": "hello_world_second_line",
+          "effects": []
+        },
+        {
+          "action": 2,
+          "runtime": "node",
+          "type": "local",
+          "result": "hello_world_second_line",
+          "effects": []
+        },
+        {
+          "action": 3,
+          "runtime": "deno",
+          "type": "local",
+          "result": "HELLO_WORLD_SECOND_LINE",
+          "effects": []
+        },
+        {
+          "action": 3,
+          "runtime": "node",
+          "type": "local",
+          "result": "HELLO_WORLD_SECOND_LINE",
+          "effects": []
+        },
+        {
+          "action": 4,
+          "runtime": "deno",
+          "type": "local",
+          "result": "hello-world-second-line",
+          "effects": []
+        },
+        {
+          "action": 4,
+          "runtime": "node",
+          "type": "local",
+          "result": "hello-world-second-line",
+          "effects": []
+        },
+        {
+          "action": 5,
+          "runtime": "deno",
+          "type": "local",
+          "result": "hello.world.second.line",
+          "effects": []
+        },
+        {
+          "action": 5,
+          "runtime": "node",
+          "type": "local",
+          "result": "hello.world.second.line",
+          "effects": []
+        },
+        {
+          "action": 6,
+          "runtime": "deno",
+          "type": "local",
+          "result": "hello/world/second/line",
+          "effects": []
+        },
+        {
+          "action": 6,
+          "runtime": "node",
+          "type": "local",
+          "result": "hello/world/second/line",
+          "effects": []
+        },
+        {
+          "action": 7,
+          "runtime": "deno",
+          "type": "local",
+          "result": "Hello World Second Line",
+          "effects": []
+        },
+        {
+          "action": 7,
+          "runtime": "node",
+          "type": "local",
+          "result": "Hello World Second Line",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "sj4s5m",
+      "sha256": "eadf4efe8d6b59382b759d3f1b772d3d1c15621591f7cf441692084932ad1af3",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "https://bit.ly/test",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "https://bit.ly/test",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "https://bit.ly/test",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "https://bit.ly/test",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "ssavd7",
+      "sha256": "9d5b5c61a864d3984c9f2a6d7ddd5871e58081dae7abcc35d35f50c7836b9193",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "# Heading\n\nA **word**",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "# Heading\n\nA **word**",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "# Heading\n\nA **word**",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "# Heading\n\nA **word**",
+                {
+                  "style": "compact",
+                  "preview": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "tv2c35",
+      "sha256": "707e29bd3cc2a96e610e2dd0efe55031d5eeff74c61d05558454d09fa7c4bc0b",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://s.taobao.com/search?q=a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "tx4q96",
+      "sha256": "33506a5efe0c7900e27a43b45ed248a0a8b673eea9c8b9b602f26ccfa306e51b",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://app.lexibird.com/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into Lexibird web app.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://app.lexibird.com/",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into Lexibird web app.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "v1hh5h",
+      "sha256": "955c236fa68350aa7749bcf327cc626ea203d58c37c32f10b2f4fa4ae0711245",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "==Hello world\nSecond line==",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "==Hello world\nSecond line==",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "v8m6j4",
+      "sha256": "c54229b83ba8b74fd5bb09e41c9874952bbd70a85a8680e304c176024a46f6e7",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://search.jd.com/Search?keyword=a%20%26%20%23%2F%25%20%C3%BC&enc=utf-8"
+        }
+      ]
+    },
+    {
+      "shortcode": "w9pny6",
+      "sha256": "9815708fc16d0f5d51e7cd3b8c10100379d47c8a78f4f5d1eda65d0bb3847e2c",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "Privet Ëž",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "Privet Ëž",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "wcsadc",
+      "sha256": "28d477ddc8d5c27d86f338b4dce85868998c97bae3899addb34132622a52f3a5",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://www.reverso.net/text-translation",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into Reverso web translator.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": null,
+          "effects": [
+            {
+              "call": "copyText",
+              "args": [
+                "Hello world\nSecond line",
+                {
+                  "notify": false
+                }
+              ]
+            },
+            {
+              "call": "openUrl",
+              "args": [
+                "https://www.reverso.net/text-translation",
+                {
+                  "activate": true,
+                  "backgroundTab": false
+                }
+              ]
+            },
+            {
+              "call": "showText",
+              "args": [
+                "Text copied — paste it into Reverso web translator.",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "wdp7x0",
+      "sha256": "740dd134172a9becf21120b7eafe93885a7f699d89892ff6400fa691ab1652c0",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Sent to the configured Slack channel",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Sent to the configured Slack channel",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "wwgbd7",
+      "sha256": "59905bb43254b6ffda1e8826e970eb1bb53171bacaf937c7f0771951447540ff",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "nativeAction",
+              "args": [
+                "browser",
+                {
+                  "browser": "default"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "nativeAction",
+              "args": [
+                "browser",
+                {
+                  "browser": "default"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "wyq4we",
+      "sha256": "31af509013529168c8d81621b0ce63ccce55a183d9d126c69a2b9e69f209347b",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "“Hello world\nSecond line”",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "“Hello world\nSecond line”",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "x9q882",
+      "sha256": "875e1af9a9243be9db9036fb29d623353f04e1bee53d3df40da13a7a977d98c9",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Captured to Tana",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Captured to Tana",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "xh9jan",
+      "sha256": "6b2a912d1521f6239fa18950a37dd4b9e3bf61d2b736b44355132b9650c46f1f",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "keys",
+          "keys": [
+            "control b"
+          ]
+        },
+        {
+          "action": 1,
+          "type": "keys",
+          "keys": [
+            "control i"
+          ]
+        },
+        {
+          "action": 2,
+          "type": "keys",
+          "keys": [
+            "control u"
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "yfcs28",
+      "sha256": "90ec55399984808acff492f7c5e6f9a9a7f568897422150aafe6eb2f308ad5cf",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "Hello world, Second line",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "Hello world, Second line",
+          "effects": []
+        },
+        {
+          "action": 1,
+          "runtime": "deno",
+          "type": "local",
+          "result": "Hello world\nSecond line",
+          "effects": []
+        },
+        {
+          "action": 1,
+          "runtime": "node",
+          "type": "local",
+          "result": "Hello world\nSecond line",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "ykm8zw",
+      "sha256": "187d139a1cff2b6ed738b5b0f876456e046a064dffdad1393a4da950042fec0e",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "nativeAction",
+              "args": [
+                "print",
+                {
+                  "printer": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "native-effect",
+          "result": null,
+          "effects": [
+            {
+              "call": "nativeAction",
+              "args": [
+                "print",
+                {
+                  "printer": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "yw6cpd",
+      "sha256": "fb79696967e53923f3e65848bfc52a8961c897c3297529b8b7a39b4b216090f0",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "local",
+          "result": "3.7 in",
+          "effects": []
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "local",
+          "result": "3.7 in",
+          "effects": []
+        }
+      ]
+    },
+    {
+      "shortcode": "yzf4sx",
+      "sha256": "d145cf12551899a221c8ee96db743a1e2972dc625504fa43a73f7037d828fa35",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "runtime": "deno",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Task created",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "action": 0,
+          "runtime": "node",
+          "type": "mocked-api",
+          "result": null,
+          "effects": [
+            {
+              "call": "showText",
+              "args": [
+                "Task created",
+                {
+                  "style": "compact",
+                  "preview": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "shortcode": "z7bjka",
+      "sha256": "9642771b908f753ae86ee780280f14249aeee9b68a3d3485457d90483db1583e",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://www.amazon.com/s?k=a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    },
+    {
+      "shortcode": "z822bm",
+      "sha256": "178c548c926fcd331b3247ae7cdff519eb6d81bcd158866582df70d5f018f8ce",
+      "ok": true,
+      "checks": [
+        {
+          "action": 0,
+          "type": "url",
+          "url": "https://www.douban.com/search?q=a%20%26%20%23%2F%25%20%C3%BC"
+        }
+      ]
+    }
+  ],
+  "sources": {
+    "ports/src/local.js": "85ff6bc78c3fb63999457ad77d8698c071434856f9f13db24047acba95c2cfdc",
+    "ports/src/api.js": "2e4bbdb9ee6db6c518d52ef722a56573ddcc473a6fe8c48ea8bdedd544dd56c7",
+    "ports/src/web.js": "b4e009a5d2677ff030a4b28923847d20cb8ab9a228e5acd7da689e9f2160631c",
+    "ports/src/markup.js": "042ab2f587fb48c1ad5aff28ab7e63e0f211e2e6ac643bc2a21fabe5c9ed35b9",
+    "bin/omapop-native.py": "0bf799a3ac3e40eba33319ceb87cabb3857e59cdad2a85f9f02bdb087fc5efbc",
+    "bin/omapop-runner.mjs": "d815fbd5dc6215740f1f19de99bdc8c7aa9389dc8b9e3089df2064c17c5e25d4",
+    "bin/omapop-http.mjs": "6ed0e7056991aab3613333a6374112aed410ec1df0a63f8a8461967a8b9fe0d8",
+    "Service.qml": "7198dcf6b992071b3ef6be955e2c4c0327009958137fc3fbbd42bf2d975d7251",
+    "Popup.qml": "8167fcb6660ff255d42bc21b4435b168aa5d8a9a8da59944e9f8783b38db4930",
+    "ConfirmationText.qml": "43c01b3c0c6c94958f1e785aae7aafa19b2de583544f9cbe5860265fd51b2b96",
+    "Actions.js": "92fb2edb2ec05b811936d11046f0a99cea20e5d3b8f9ee7c42710bafdcac0120",
+    "ports/definitions.json": "371b2f5794155d15683a94060785543171a1a6e671befa63564bba9a5779aec8",
+    "tools/build-ports.py": "2c4e059c666bc1655a74ab883424006776bf7655170aaac4535007f0536f4fcd",
+    "tests/ports-local.test.mjs": "494765f6d37b6c16615a46fe1e65da3fa97192f7f6cf1f886f26e853d3a73fdf",
+    "tests/ports-api.test.mjs": "62c9b54e69d437130351632f95fa038821f4cb6918f4671299208103861bf07c",
+    "tests/ports-host.test.mjs": "c3c606bbd08172140ae622a08fd86ca49067abc4b6c24ab5ef33aeb7f05aa9f1",
+    "tests/fixtures/port-api-contracts.mjs": "1f3a4165ee4ba7d933b0a03434297ea75c1eb408c79f1ade2abf7db54e6cb370",
+    "tests/test_ports_native.py": "4f6d138e278077627c305c6c7ca9db2ee983b7aed0b9acda91325f3ea1095485",
+    "tools/check-ports.mjs": "84537f0bbc10b3c3c5f56a3a8beb7fe07cc812626ca2d9f07e56d88eef076c02"
+  }
+}

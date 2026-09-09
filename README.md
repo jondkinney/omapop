@@ -119,7 +119,7 @@ number values; omit it for text values. The available setting keys are:
 | Excluded apps | `excludedApps` | Window classes where the bar never appears. |
 | Terminal window classes | `terminalClasses` | Windows that paste with Ctrl+Shift+V and cannot cut. |
 | Extensions' `command` key maps to | `commandKey` | Global default for synthetic macOS Command shortcuts: Ctrl or Super. Individual extensions can override it. |
-| Allow extension downloads | `extensionDownloads` | Off by default. Allows confirmed installation of exact versions in Omapop's signed approval catalog. |
+| Allow extension installs | `extensionDownloads` | Off by default. Allows confirmed installation of reviewed versions, including bundled Linux ports. |
 | Keep the extension catalogue up to date | `directoryRefresh` | Fetch the published listing weekly. Contacts popclip.app; this refresh cannot approve packages or change pinned versions. |
 | Keyboard shortcut | `shortcut` | A Hyprland bind that shows the bar for the current selection. |
 | Show icon in the bar | `showBarIcon` | Hide the icon if you only want the popup. The settings screen stays reachable through the command above. |
@@ -203,11 +203,13 @@ inline JavaScript action and a module-based extension.
 
 ### From the directory
 
-The bundled [signed catalog](catalog/approved.json) approves **95 exact package
-versions**. The [review ledger](catalog/REVIEW.md) covers all 276 published
-downloads evaluated on 2026-09-08, including Linux ports and excluded packages.
+The bundled [signed catalog](catalog/approved.json) approves **189 exact package
+versions**: 95 upstream releases and 94 Omapop variants. The
+[original review](catalog/REVIEW.md) covers all 276 published downloads evaluated
+on 2026-09-08. The [Linux port report](ports/REPORT.md) resolves the 98 entries
+that needed work: 85 ports, 9 explicit web alternatives, 2 blocked and 2 dropped.
 
-1. Open **Settings → General → Allow extension downloads**. This is off by default.
+1. Open **Settings → General → Allow extension installs**. This is off by default.
 2. Return to **Available extensions** and choose **Install → Confirm install**.
 3. The package appears under installed extensions, **disabled**. Read its
    description and requirements, configure any options, then enable its switch.
@@ -227,6 +229,11 @@ identity/version before publication. If the publisher changes a download at the
 same URL, installation fails until that version is reviewed and approved.
 PopClip's embedded signatures are retained as package data; Omapop does not
 claim to verify them.
+
+Omapop ports install from archives bundled with this plugin and use separate
+identifiers and provenance. Their hashes cover our modified bytes. See the
+[port setup guide](ports/README.md) for personal API tokens, Linux dependencies,
+manual web handoffs and the limits of offline validation.
 
 The explicit terminal installer also works with the shell stopped:
 
@@ -316,6 +323,11 @@ keeps the original colors. There is no tracing step or generated icon cache.
 Not available on Linux: AppleScript, macOS Services, Shortcuts, `share()`,
 Dictionary and Spelling. `runShellScript` from JavaScript is not implemented
 yet; use a shell-script action instead.
+
+Omapop supports `copyContent({"public.rtf": ...})` for RTF clipboard output and
+`nativeAction(kind, options)` with the `native` entitlement. Native actions use
+fixed Linux operations; printing and running selected Bash code require separate
+confirmation. Explicit script previews remain visible until dismissed.
 
 Option values, per-extension key preferences and content-bound enablement are stored in
 `~/.config/omapop/settings.json`:
