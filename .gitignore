@@ -3,3 +3,7 @@ __pycache__/
 
 # The scraped catalogue is a local per-user cache, not a mirror we republish.
 directory.json
+
+# Reproducible staging; signed port archives and their source are versioned.
+ports/build/
+ports/candidates.json

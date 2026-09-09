@@ -1,0 +1,1709 @@
+{
+  "7ccsap": {
+    "description": "Calculate bounded arithmetic and scientific functions; no JavaScript evaluation.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Calculate",
+          "javascript": "return require('./local.js').calculate(popclip.input.text, popclip.options);",
+          "after": "show-result"
+        }
+      ],
+      "options": []
+    }
+  },
+  "4hzjpg": {
+    "description": "Count Unicode characters in the selection.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Character count",
+          "javascript": "return require('./local.js').characters(popclip.input.text, popclip.options);",
+          "after": "show-result"
+        }
+      ],
+      "options": []
+    }
+  },
+  "az0jxd": {
+    "description": "Count lines, including a final blank line.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Line count",
+          "javascript": "return require('./local.js').lines(popclip.input.text, popclip.options);",
+          "after": "show-result"
+        }
+      ],
+      "options": []
+    }
+  },
+  "p94cm7": {
+    "description": "Count words using Unicode word boundaries.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Word count",
+          "javascript": "return require('./local.js').words(popclip.input.text, popclip.options);",
+          "after": "show-result"
+        }
+      ],
+      "options": []
+    }
+  },
+  "1dze64": {
+    "description": "Toggle a literal comment prefix, preserving indentation.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Toggle comments",
+          "javascript": "return require('./local.js').comment(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        }
+      ],
+      "options": [
+        {
+          "identifier": "comment_prefix",
+          "label": "Comment prefix",
+          "type": "string",
+          "default value": "//"
+        }
+      ]
+    }
+  },
+  "yw6cpd": {
+    "description": "Convert metric, US/imperial and temperature units. Supports comma decimals.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Convert quantity",
+          "javascript": "return require('./local.js').convert(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        }
+      ],
+      "options": []
+    }
+  },
+  "w9pny6": {
+    "description": "Transliterate Cyrillic letters using ISO 9-style Latin letters.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Transliterate",
+          "javascript": "return require('./local.js').cyrillic(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        }
+      ],
+      "options": []
+    }
+  },
+  "fapat2": {
+    "description": "Wrap each line or unwrap paragraphs without merging blank lines.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Wrap",
+          "javascript": "return require('./local.js').wrap(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        },
+        {
+          "title": "Unwrap",
+          "javascript": "return require('./local.js').unwrap(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        }
+      ],
+      "options": [
+        {
+          "identifier": "column",
+          "label": "Column",
+          "type": "string",
+          "default value": "80"
+        }
+      ]
+    }
+  },
+  "phq1ch": {
+    "description": "Repeat text with text*COUNT, limited to 1,000 copies and 128 KiB.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Repeat",
+          "javascript": "return require('./local.js').repeat(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        }
+      ],
+      "options": []
+    }
+  },
+  "r7eape": {
+    "description": "Convert lines into an escaped JavaScript or JSON array.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Lines to array",
+          "javascript": "return require('./local.js').array(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        }
+      ],
+      "options": [
+        {
+          "identifier": "quotes",
+          "label": "Quotes",
+          "type": "multiple",
+          "default value": "double",
+          "values": [
+            "double",
+            "single"
+          ]
+        },
+        {
+          "identifier": "remove_empty_line",
+          "label": "remove empty line",
+          "type": "boolean",
+          "default value": true
+        },
+        {
+          "identifier": "trim",
+          "label": "trim",
+          "type": "boolean",
+          "default value": true
+        },
+        {
+          "identifier": "add_brackets",
+          "label": "add brackets",
+          "type": "boolean",
+          "default value": true
+        },
+        {
+          "identifier": "last_comma",
+          "label": "last comma",
+          "type": "boolean",
+          "default value": false
+        },
+        {
+          "identifier": "single_line",
+          "label": "single line",
+          "type": "boolean",
+          "default value": false
+        }
+      ]
+    }
+  },
+  "rzrz9e": {
+    "description": "Convert Unicode words and acronym boundaries into coding naming styles.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "camel",
+          "javascript": "return require('./local.js').case(popclip.input.text,{style:\"camel\"});",
+          "after": "paste-result"
+        },
+        {
+          "title": "pascal",
+          "javascript": "return require('./local.js').case(popclip.input.text,{style:\"pascal\"});",
+          "after": "paste-result"
+        },
+        {
+          "title": "snake",
+          "javascript": "return require('./local.js').case(popclip.input.text,{style:\"snake\"});",
+          "after": "paste-result"
+        },
+        {
+          "title": "constant",
+          "javascript": "return require('./local.js').case(popclip.input.text,{style:\"constant\"});",
+          "after": "paste-result"
+        },
+        {
+          "title": "kebab",
+          "javascript": "return require('./local.js').case(popclip.input.text,{style:\"kebab\"});",
+          "after": "paste-result"
+        },
+        {
+          "title": "dot",
+          "javascript": "return require('./local.js').case(popclip.input.text,{style:\"dot\"});",
+          "after": "paste-result"
+        },
+        {
+          "title": "path",
+          "javascript": "return require('./local.js').case(popclip.input.text,{style:\"path\"});",
+          "after": "paste-result"
+        },
+        {
+          "title": "title",
+          "javascript": "return require('./local.js').case(popclip.input.text,{style:\"title\"});",
+          "after": "paste-result"
+        }
+      ],
+      "options": []
+    }
+  },
+  "41g81p": {
+    "description": "Toggle underscore names to PascalCase, and other names to snake_case.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Convert name",
+          "javascript": "return require('./local.js').variable(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        }
+      ],
+      "options": []
+    }
+  },
+  "rqgjxd": {
+    "description": "Make a lowercase, accent-normalized slug.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Slugify",
+          "javascript": "return require('./local.js').slug(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        }
+      ],
+      "options": []
+    }
+  },
+  "m1fa94": {
+    "description": "Apply ROT13 to Latin letters.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "ROT13",
+          "javascript": "return require('./local.js').rot13(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        }
+      ],
+      "options": []
+    }
+  },
+  "6zqrwd": {
+    "description": "Generate at most 1,000 rows using ##1..5## or ##a,b,c## templates and bounded arithmetic.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Expand template",
+          "javascript": "return require('./local.js').increment(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        }
+      ],
+      "options": []
+    }
+  },
+  "0v6xef": {
+    "description": "Sum selected numbers with exact decimal arithmetic (up to 18 fractional digits).",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Sum",
+          "javascript": "return require('./local.js').sum(popclip.input.text, popclip.options);",
+          "after": "copy-result"
+        }
+      ],
+      "options": [
+        {
+          "identifier": "separator",
+          "label": "Grouping separator",
+          "type": "string",
+          "default value": ","
+        },
+        {
+          "identifier": "delimiter",
+          "label": "Decimal separator",
+          "type": "multiple",
+          "default value": ".",
+          "values": [
+            ".",
+            ","
+          ]
+        },
+        {
+          "identifier": "formatoutput",
+          "label": "Group the result",
+          "type": "boolean",
+          "default value": false
+        }
+      ]
+    }
+  },
+  "yfcs28": {
+    "description": "Join lines with CSV quoting, or split comma-separated values into lines.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Join with commas",
+          "javascript": "return require('./local.js').commaJoin(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        },
+        {
+          "title": "Split into lines",
+          "javascript": "return require('./local.js').commaSplit(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        }
+      ],
+      "options": []
+    }
+  },
+  "29vg9p": {
+    "description": "Format, minify or extract JSON locally using an optional JSON Pointer.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Format JSON",
+          "javascript": "return require('./local.js').json(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        },
+        {
+          "title": "Minify JSON",
+          "javascript": "return require('./local.js').json(popclip.input.text,{...popclip.options,minify:true});",
+          "after": "paste-result"
+        }
+      ],
+      "options": [
+        {
+          "identifier": "pointer",
+          "label": "JSON Pointer (optional)",
+          "type": "string",
+          "default value": ""
+        }
+      ]
+    }
+  },
+  "py867z": {
+    "description": "Encode HTML special characters or decode named and numeric entities.",
+    "files": {
+      "local.js": "local.js",
+      "entities.json": "entities.json"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "HTML encode",
+          "javascript": "return require('./local.js').htmlEncode(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        },
+        {
+          "title": "HTML decode",
+          "javascript": "return require('./local.js').htmlDecode(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        }
+      ],
+      "options": []
+    }
+  },
+  "wyq4we": {
+    "description": "Surround text with the selected quotation style.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Add quotes",
+          "javascript": "return require('./local.js').quote(popclip.input.text, popclip.options);",
+          "after": "paste-result"
+        }
+      ],
+      "options": [
+        {
+          "identifier": "style",
+          "label": "Quotation style",
+          "type": "multiple",
+          "default value": "0",
+          "values": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13"
+          ],
+          "value labels": [
+            "“…”",
+            "‘…’",
+            "\"…\"",
+            "'…'",
+            "`…`",
+            "«…»",
+            "《…》",
+            "‹…›",
+            "»…«",
+            "›…‹",
+            "「…」",
+            "『…』",
+            "„…“",
+            "‚…‘"
+          ]
+        }
+      ]
+    }
+  },
+  "pgh8tr": {
+    "description": "Replace each Unicode character with a mask. Keeping the original on the clipboard is optional.",
+    "files": {
+      "local.js": "local.js"
+    },
+    "config": {
+      "actions": [
+        {
+          "title": "Mask text",
+          "javascript": "const result = require('./local.js').mosaic(popclip.input.text,popclip.options); await popclip.pasteText(result); if(popclip.options.keepOriginal) await popclip.copyText(popclip.input.text,{notify:false});"
+        }
+      ],
+      "options": [
+        {
+          "identifier": "mosaic-code",
+          "label": "Mask",
+          "type": "string",
+          "default value": "*"
+        },
+        {
+          "identifier": "keepOriginal",
+          "label": "Keep original text on clipboard",
+          "type": "boolean",
+          "default value": false
+        }
+      ]
+    }
+  },
+  "8f2t12": {
+    "description": "Append selected text to the clipboard with a configurable separator (128 KiB limit).",
+    "config": {
+      "options": [
+        {
+          "identifier": "separator",
+          "label": "Separator",
+          "type": "string",
+          "default value": "\n"
+        }
+      ],
+      "javascript": "const text = pasteboard.text + String(popclip.options.separator) + popclip.input.text; if(new TextEncoder().encode(text).length>131072) throw new Error('Clipboard result exceeds 128 KiB'); await popclip.copyText(text);"
+    }
+  },
+  "2x5yjg": {
+    "description": "Paste the previous clipboard text, then copy the replaced selection.",
+    "config": {
+      "javascript": "const previous = pasteboard.text; const selected = popclip.input.text; await popclip.pasteText(previous); await popclip.copyText(selected,{notify:false});",
+      "requirements": [
+        "text",
+        "paste"
+      ]
+    }
+  },
+  "xh9jan": {
+    "description": "Bold and italic in Obsidian, Logseq or LibreOffice Writer; underline in Writer. Uses explicit Linux Ctrl shortcuts.",
+    "commandKey": "ctrl",
+    "config": {
+      "actions": [
+        {
+          "title": "Bold",
+          "key combo": "control b",
+          "requirements": [
+            "text",
+            "paste"
+          ],
+          "required apps": [
+            "obsidian",
+            "logseq",
+            "libreoffice-writer"
+          ]
+        },
+        {
+          "title": "Italic",
+          "key combo": "control i",
+          "requirements": [
+            "text",
+            "paste"
+          ],
+          "required apps": [
+            "obsidian",
+            "logseq",
+            "libreoffice-writer"
+          ]
+        },
+        {
+          "title": "Underline",
+          "key combo": "control u",
+          "requirements": [
+            "text",
+            "paste"
+          ],
+          "required apps": [
+            "libreoffice-writer"
+          ]
+        }
+      ]
+    }
+  },
+  "97rvpd": {
+    "description": "Select all in the active application and refresh Omapop’s captured selection.",
+    "commandKey": "ctrl",
+    "config": {
+      "key combo": "control a",
+      "after": "popclip-appear",
+      "requirements": []
+    }
+  },
+  "z7bjka": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://www.{popclip option site}/s?k=***",
+      "clean query": true,
+      "options": [
+        {
+          "identifier": "site",
+          "label": "Amazon market",
+          "type": "multiple",
+          "default value": "amazon.com",
+          "values": [
+            "amazon.com",
+            "amazon.co.uk",
+            "amazon.ca",
+            "amazon.de",
+            "amazon.fr",
+            "amazon.it",
+            "amazon.es",
+            "amazon.co.jp",
+            "amazon.com.au",
+            "amazon.in"
+          ]
+        }
+      ]
+    }
+  },
+  "nwcz3b": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://www.baidu.com/s?wd=***",
+      "clean query": true
+    }
+  },
+  "hfp7pg": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://www.bing.com/search?q=***",
+      "clean query": true
+    }
+  },
+  "frmvjs": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://doi.org/***",
+      "clean query": true
+    }
+  },
+  "px544f": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://www.discogs.com/search?q=***&type=all",
+      "clean query": true
+    }
+  },
+  "z822bm": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://www.douban.com/search?q=***",
+      "clean query": true
+    }
+  },
+  "7xpd57": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://www.{popclip option site}/sch/i.html?_nkw=***",
+      "clean query": true,
+      "options": [
+        {
+          "identifier": "site",
+          "label": "eBay market",
+          "type": "multiple",
+          "default value": "ebay.com",
+          "values": [
+            "ebay.com",
+            "ebay.co.uk",
+            "ebay.ca",
+            "ebay.de",
+            "ebay.fr",
+            "ebay.it",
+            "ebay.es",
+            "ebay.com.au"
+          ]
+        }
+      ]
+    }
+  },
+  "p20n16": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://scholar.google.com/scholar?q=***",
+      "clean query": true
+    }
+  },
+  "fq9d07": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://www.imdb.com/find/?q=***",
+      "clean query": true
+    }
+  },
+  "v8m6j4": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://search.jd.com/Search?keyword=***&enc=utf-8",
+      "clean query": true
+    }
+  },
+  "enc6pz": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://search.naver.com/search.naver?query=***",
+      "clean query": true
+    }
+  },
+  "2ed0xf": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=***",
+      "clean query": true
+    }
+  },
+  "b1cyx8": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://www.rottentomatoes.com/search?search=***",
+      "clean query": true
+    }
+  },
+  "tv2c35": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://s.taobao.com/search?q=***",
+      "clean query": true
+    }
+  },
+  "6n9d0y": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://www.urbandictionary.com/define.php?term=***",
+      "clean query": true
+    }
+  },
+  "by5b30": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://www.wolframalpha.com/input?i=***",
+      "clean query": true
+    }
+  },
+  "ahsn7t": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://www.youtube.com/results?search_query=***",
+      "clean query": true
+    }
+  },
+  "f2tnjr": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://music.apple.com/us/search?term=***",
+      "clean query": true
+    }
+  },
+  "bcjg80": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://www.google.com/maps/search/?api=1&query=***",
+      "clean query": true
+    }
+  },
+  "g9jbde": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://www.deepl.com/translator#auto/{popclip option language}/***",
+      "clean query": true,
+      "options": [
+        {
+          "identifier": "language",
+          "label": "Translate into",
+          "type": "multiple",
+          "default value": "en-us",
+          "values": [
+            "en-us",
+            "en-gb",
+            "de",
+            "fr",
+            "es",
+            "it",
+            "ja",
+            "zh-hans",
+            "pt-br",
+            "nl",
+            "pl"
+          ]
+        }
+      ]
+    }
+  },
+  "8ap4bc": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://dict.eudic.net/dicts/en/***",
+      "clean query": true
+    }
+  },
+  "g9rfgp": {
+    "description": "Open the selected text in the provider’s HTTPS web interface.",
+    "config": {
+      "url": "https://www.thesaurus.com/browse/***",
+      "clean query": true
+    }
+  },
+  "ezfj24": {
+    "description": "Copy the selection and open Antidote Web. Paste into its text field; this replaces the Mac service.",
+    "config": {
+      "javascript": "await popclip.copyText(popclip.input.text,{notify:false}); await popclip.openUrl(\"https://antidote.app/\"); await popclip.showText('Text copied — paste it into Antidote Web.');"
+    },
+    "name": "Copy to Antidote Web"
+  },
+  "jha0ze": {
+    "description": "Copy the selection and open Mate web translator. Paste into its text field; this replaces the Mac service.",
+    "config": {
+      "javascript": "await popclip.copyText(popclip.input.text,{notify:false}); await popclip.openUrl(\"https://matetranslate.com/translator\"); await popclip.showText('Text copied — paste it into Mate web translator.');"
+    },
+    "name": "Copy to Mate Web"
+  },
+  "wcsadc": {
+    "description": "Copy the selection and open Reverso web translator. Paste into its text field; this replaces the Mac service.",
+    "config": {
+      "javascript": "await popclip.copyText(popclip.input.text,{notify:false}); await popclip.openUrl(\"https://www.reverso.net/text-translation\"); await popclip.showText('Text copied — paste it into Reverso web translator.');"
+    },
+    "name": "Copy to Reverso Web"
+  },
+  "nhfcp3": {
+    "description": "Copy the selection and open Lexibird web app. Paste into its text field; this replaces the Mac service.",
+    "config": {
+      "javascript": "await popclip.copyText(popclip.input.text,{notify:false}); await popclip.openUrl(\"https://app.lexibird.com/\"); await popclip.showText('Text copied — paste it into Lexibird web app.');"
+    },
+    "name": "Copy to Lexibird Web"
+  },
+  "tx4q96": {
+    "description": "Copy the selection and open Lexibird web app. Paste into its text field; this replaces the Mac service.",
+    "config": {
+      "javascript": "await popclip.copyText(popclip.input.text,{notify:false}); await popclip.openUrl(\"https://app.lexibird.com/\"); await popclip.showText('Text copied — paste it into Lexibird web app.');"
+    },
+    "name": "Translatium to Lexibird Web"
+  },
+  "sj4s5m": {
+    "description": "Shorten up to five HTTPS links with your personal Bitly token.",
+    "api": "bitly",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "token",
+          "label": "Personal API token",
+          "type": "secret",
+          "default value": "",
+          "description": ""
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"bitly\",popclip);"
+    }
+  },
+  "hpx6q6": {
+    "description": "Save selected text as a Buffer idea using your own API key and organization ID.",
+    "api": "buffer",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "token",
+          "label": "Buffer API key",
+          "type": "secret",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "organizationId",
+          "label": "Organization ID",
+          "type": "string",
+          "default value": "",
+          "description": ""
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"buffer\",popclip);"
+    }
+  },
+  "qpdzej": {
+    "description": "Create a task in your configured ClickUp list.",
+    "api": "clickup",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "token",
+          "label": "Personal API token",
+          "type": "secret",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "listId",
+          "label": "List ID",
+          "type": "string",
+          "default value": "",
+          "description": ""
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"clickup\",popclip);"
+    }
+  },
+  "63wzx3": {
+    "description": "Convert 10 USD to EUR using dated Frankfurter reference rates; no API key.",
+    "api": "currency",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "currency",
+          "label": "Default target currency",
+          "type": "string",
+          "default value": "EUR",
+          "description": ""
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"currency\",popclip);"
+    }
+  },
+  "0qqc31": {
+    "description": "Convert 10 USD to EUR using dated Frankfurter reference rates; no API key.",
+    "api": "currency",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "currency",
+          "label": "Default target currency",
+          "type": "string",
+          "default value": "EUR",
+          "description": ""
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"currency\",popclip);"
+    }
+  },
+  "6tnp73": {
+    "description": "Append selected Markdown to a document exposed by your Craft API connection.",
+    "api": "craft",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "endpoint",
+          "label": "Craft API connection URL",
+          "type": "secret",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "pageId",
+          "label": "Destination page ID",
+          "type": "string",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "token",
+          "label": "Connection token (if required)",
+          "type": "secret",
+          "default value": "",
+          "description": ""
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"craft\",popclip);"
+    }
+  },
+  "mxa673": {
+    "description": "Open owner/repo or owner/repo#123 directly, or search for the first matching GitHub repository.",
+    "api": "github",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [],
+      "javascript": "await require('./api.js').invoke(\"github\",popclip);"
+    }
+  },
+  "f2xzek": {
+    "description": "Save one HTTPS URL with Instapaper’s Simple API using your own account.",
+    "api": "instapaper",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "username",
+          "label": "Instapaper email",
+          "type": "string",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "password",
+          "label": "Instapaper password",
+          "type": "secret",
+          "default value": "",
+          "description": ""
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"instapaper\",popclip);"
+    }
+  },
+  "6p9xq3": {
+    "description": "Ask a local Ollama model about the selection. One prompt per action, without saved chat history.",
+    "api": "ollama",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "endpoint",
+          "label": "Local server",
+          "type": "string",
+          "default value": "http://127.0.0.1:11434",
+          "description": ""
+        },
+        {
+          "identifier": "model",
+          "label": "Installed model name",
+          "type": "string",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "prompt",
+          "label": "Instructions",
+          "type": "string",
+          "default value": "Answer the selected text helpfully.",
+          "description": ""
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"ollama\",popclip);"
+    }
+  },
+  "48f32j": {
+    "description": "Ask an OpenAI model using your own API key. One prompt per action; response storage is disabled.",
+    "api": "openai",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "token",
+          "label": "Personal API token",
+          "type": "secret",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "model",
+          "label": "Model name",
+          "type": "string",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "prompt",
+          "label": "Instructions",
+          "type": "string",
+          "default value": "Answer the selected text helpfully.",
+          "description": ""
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"openai\",popclip);"
+    }
+  },
+  "5zp8bb": {
+    "description": "Save an unread Pinboard bookmark. Existing bookmarks are preserved; new bookmarks default to private.",
+    "api": "pinboard",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "token",
+          "label": "Personal API token",
+          "type": "secret",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "title",
+          "label": "Bookmark title (optional)",
+          "type": "string",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "public",
+          "label": "Make new bookmarks public",
+          "type": "boolean",
+          "default value": false,
+          "description": ""
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"pinboard\",popclip);"
+    }
+  },
+  "rc70x5": {
+    "description": "Save one HTTPS URL to Raindrop.io using your own account’s test token.",
+    "api": "raindrop",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "token",
+          "label": "Personal API token",
+          "type": "secret",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "collectionId",
+          "label": "Collection ID (0 is Unsorted)",
+          "type": "string",
+          "default value": "0",
+          "description": ""
+        },
+        {
+          "identifier": "title",
+          "label": "Bookmark title (optional)",
+          "type": "string",
+          "default value": "",
+          "description": ""
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"raindrop\",popclip);"
+    }
+  },
+  "1zemre": {
+    "description": "Capture a highlight to Readwise, or save a URL to Reader.",
+    "api": "readwise",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "token",
+          "label": "Personal API token",
+          "type": "secret",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "title",
+          "label": "Highlight source title",
+          "type": "string",
+          "default value": "Omapop captures",
+          "description": ""
+        },
+        {
+          "identifier": "mode",
+          "label": "Capture mode",
+          "type": "multiple",
+          "default value": "highlight",
+          "description": "",
+          "values": [
+            "highlight",
+            "reader"
+          ]
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"readwise\",popclip);"
+    }
+  },
+  "4kcy03": {
+    "description": "Append selected text or Markdown to Roam using your graph’s append-only token.",
+    "api": "roam",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "token",
+          "label": "Personal API token",
+          "type": "secret",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "graphName",
+          "label": "Graph name",
+          "type": "string",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "pageTitle",
+          "label": "Page title (blank for today)",
+          "type": "string",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "nestUnder",
+          "label": "Nest under (optional)",
+          "type": "string",
+          "default value": "",
+          "description": ""
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"roam\",popclip);"
+    }
+  },
+  "7yc6g6": {
+    "description": "Create a Markdown link to the first Brave search result. Requires your own Brave Search API key; legacy SearchLink bang commands are not supported.",
+    "api": "searchlink",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "token",
+          "label": "Personal API token",
+          "type": "secret",
+          "default value": "",
+          "description": ""
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"searchlink\",popclip);"
+    }
+  },
+  "6pa6yt": {
+    "description": "Shorten up to five HTTPS links with is.gd. Only explicit action clicks contact the service.",
+    "api": "shorten",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [],
+      "javascript": "await require('./api.js').invoke(\"shorten\",popclip);"
+    }
+  },
+  "wdp7x0": {
+    "description": "Post the selection as plain text to the Slack channel assigned to your incoming webhook.",
+    "api": "slack",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "webhook",
+          "label": "Incoming webhook URL",
+          "type": "secret",
+          "default value": "",
+          "description": ""
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"slack\",popclip);"
+    }
+  },
+  "x9q882": {
+    "description": "Capture escaped text into a Tana node with your workspace token.",
+    "api": "tana",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "token",
+          "label": "Personal API token",
+          "type": "secret",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "nodeId",
+          "label": "Destination node ID",
+          "type": "string",
+          "default value": "INBOX",
+          "description": ""
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"tana\",popclip);"
+    }
+  },
+  "yzf4sx": {
+    "description": "Create a task using the current Todoist API and your personal token.",
+    "api": "todoist",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [
+        {
+          "identifier": "token",
+          "label": "Personal API token",
+          "type": "secret",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "projectId",
+          "label": "Project ID (blank for Inbox)",
+          "type": "string",
+          "default value": "",
+          "description": ""
+        },
+        {
+          "identifier": "due",
+          "label": "Due date, such as tomorrow (optional)",
+          "type": "string",
+          "default value": "",
+          "description": ""
+        }
+      ],
+      "javascript": "await require('./api.js').invoke(\"todoist\",popclip);"
+    }
+  },
+  "1pbpz0": {
+    "description": "Find and open an available archive.org snapshot of the selected HTTPS URL.",
+    "api": "wayback",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [],
+      "javascript": "await require('./api.js').invoke(\"wayback\",popclip);"
+    }
+  },
+  "8rhhk4": {
+    "description": "Check up to five HTTPS links using bounded HEAD requests. Redirects and unavailable links are reported without opening tabs.",
+    "api": "checkurls",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [],
+      "javascript": "await require('./api.js').invoke(\"checkurls\",popclip);"
+    }
+  },
+  "ssavd7": {
+    "description": "Fetch a public HTTPS page and copy its basic Markdown. No login cookies, external images or page scripts.",
+    "api": "webmarkdown",
+    "files": {
+      "api.js": "api.js",
+      "web.js": "web.js",
+      "markup.js": "markup.js",
+      "local.js": "local.js",
+      "entities.json": "entities.json"
+    },
+    "config": {
+      "entitlements": [
+        "network"
+      ],
+      "options": [],
+      "javascript": "await require('./api.js').invoke(\"webmarkdown\",popclip);"
+    }
+  },
+  "g8d8kh": {
+    "description": "Open up to ten selected HTTPS URLs in the default browser.",
+    "files": {
+      "web.js": "web.js"
+    },
+    "config": {
+      "javascript": "await require('./web.js').openAll(popclip.input.text,popclip);"
+    }
+  },
+  "rn4p5p": {
+    "description": "Open one selected HTTPS URL in your browser. This replaces the macOS Quick Look workflow.",
+    "files": {
+      "web.js": "web.js"
+    },
+    "config": {
+      "javascript": "await popclip.openUrl(require('./web.js').https(popclip.input.text.trim()).href);"
+    }
+  },
+  "bqdd6c": {
+    "description": "Copy the page URL first, then select text and run this action to copy its text-fragment link.",
+    "files": {
+      "web.js": "web.js"
+    },
+    "config": {
+      "javascript": "return require('./web.js').highlight(popclip.input.text,pasteboard.text);",
+      "after": "copy-result"
+    }
+  },
+  "g467b2": {
+    "description": "Convert a selected or clipboard Outlook web message URL into a permalink. Automatic browser URL capture is unavailable.",
+    "files": {
+      "web.js": "web.js"
+    },
+    "config": {
+      "javascript": "const text = /^https:\\/\\//.test(popclip.input.text.trim()) ? popclip.input.text : pasteboard.text; return require('./web.js').outlook(text);",
+      "after": "copy-result"
+    }
+  },
+  "nv1dks": {
+    "description": "Open an HTTPS Xiaohongshu shared link, or search the selected text in its web interface.",
+    "files": {
+      "web.js": "web.js"
+    },
+    "config": {
+      "javascript": "await popclip.openUrl(require('./web.js').xiaohongshu(popclip.input.text));"
+    }
+  },
+  "r77xv8": {
+    "description": "Copy rich selected HTML as basic Markdown, with plain-text fallback.",
+    "files": {
+      "markup.js": "markup.js",
+      "web.js": "web.js",
+      "local.js": "local.js",
+      "entities.json": "entities.json"
+    },
+    "config": {
+      "javascript": "return popclip.input.html ? require('./markup.js').markdown(popclip.input.html) : popclip.input.text;",
+      "capture html": true,
+      "after": "copy-result"
+    }
+  },
+  "pt4k2d": {
+    "description": "Copy basic Markdown headings, emphasis and code as RTF. Unsupported Markdown stays literal.",
+    "files": {
+      "markup.js": "markup.js",
+      "web.js": "web.js",
+      "local.js": "local.js",
+      "entities.json": "entities.json"
+    },
+    "config": {
+      "javascript": "await popclip.copyContent({'public.rtf':require('./markup.js').rtf(popclip.input.text)});",
+      "capture html": false
+    }
+  },
+  "v1hh5h": {
+    "description": "Wrap selected text with ==highlight== markup in Obsidian or Logseq on Linux.",
+    "config": {
+      "javascript": "const text=popclip.input.text; return text.startsWith('==') && text.endsWith('==') && text.length>=4 ? text.slice(2,-2) : '=='+text+'==';",
+      "after": "paste-result",
+      "required apps": [
+        "obsidian",
+        "logseq"
+      ]
+    }
+  },
+  "k50jz6": {
+    "description": "Resolve a hostname to at most 32 IP addresses, without a shell.",
+    "native": "dns",
+    "config": {
+      "entitlements": [
+        "native"
+      ],
+      "options": [],
+      "javascript": "await popclip.nativeAction(\"dns\",popclip.options);",
+      "after": "show-result"
+    }
+  },
+  "5y965f": {
+    "description": "Search selected text in Zeal’s installed offline documentation. Requires Zeal and downloaded docsets.",
+    "native": "zeal",
+    "config": {
+      "entitlements": [
+        "native"
+      ],
+      "options": [],
+      "javascript": "await popclip.nativeAction(\"zeal\",popclip.options);"
+    }
+  },
+  "wwgbd7": {
+    "description": "Open one selected HTTPS URL in the chosen installed Linux browser.",
+    "native": "browser",
+    "config": {
+      "entitlements": [
+        "native"
+      ],
+      "options": [
+        {
+          "identifier": "browser",
+          "label": "Browser",
+          "type": "multiple",
+          "default value": "default",
+          "description": "",
+          "values": [
+            "default",
+            "firefox",
+            "chromium",
+            "brave",
+            "chrome"
+          ]
+        }
+      ],
+      "javascript": "await popclip.nativeAction(\"browser\",popclip.options);"
+    }
+  },
+  "emvaxx": {
+    "description": "Speak up to 1,000 characters using espeak-ng, with a 115-second limit.",
+    "native": "speech",
+    "config": {
+      "entitlements": [
+        "native"
+      ],
+      "options": [],
+      "javascript": "await popclip.nativeAction(\"speech\",popclip.options);"
+    }
+  },
+  "ykm8zw": {
+    "description": "Print selected text through CUPS after confirmation.",
+    "native": "print",
+    "config": {
+      "entitlements": [
+        "native"
+      ],
+      "options": [
+        {
+          "identifier": "printer",
+          "label": "Printer name (blank for default)",
+          "type": "string",
+          "default value": "",
+          "description": ""
+        }
+      ],
+      "javascript": "await popclip.nativeAction(\"print\",popclip.options);"
+    }
+  },
+  "a6arrs": {
+    "description": "Save the selection as a private text note in ~/.local/share/omapop/captures. This replaces the Mac Stickies app.",
+    "native": "note",
+    "config": {
+      "entitlements": [
+        "native"
+      ],
+      "options": [],
+      "javascript": "await popclip.nativeAction(\"note\",popclip.options);"
+    }
+  },
+  "34fddp": {
+    "description": "Save selected text privately and open it in your default Linux text editor.",
+    "native": "editor",
+    "config": {
+      "entitlements": [
+        "native"
+      ],
+      "options": [],
+      "javascript": "await popclip.nativeAction(\"editor\",popclip.options);"
+    }
+  },
+  "8jj623": {
+    "description": "Copy text and open a terminal, or explicitly confirm running it as a Bash script.",
+    "native": "terminal",
+    "config": {
+      "entitlements": [
+        "native"
+      ],
+      "actions": [
+        {
+          "title": "Copy and open terminal",
+          "javascript": "await popclip.copyText(popclip.input.text,{notify:false}); await popclip.nativeAction('terminal');"
+        },
+        {
+          "title": "Run as Bash script…",
+          "javascript": "await popclip.nativeAction('execute');"
+        }
+      ]
+    }
+  },
+  "gfthdw": {
+    "description": "Copy text and open Evernote Web; paste into a new note or task. Automatic capture still needs an Omapop OAuth integration.",
+    "config": {
+      "javascript": "await popclip.copyText(popclip.input.text,{notify:false}); await popclip.openUrl(\"https://www.evernote.com/client/web\"); await popclip.showText('Text copied — paste it into Evernote Web.');"
+    },
+    "name": "Copy to Evernote Web"
+  },
+  "0kk4s6": {
+    "description": "Copy text and open OneNote Web; paste into a new note or task. Automatic capture still needs an Omapop OAuth integration.",
+    "config": {
+      "javascript": "await popclip.copyText(popclip.input.text,{notify:false}); await popclip.openUrl(\"https://www.onenote.com/notebooks\"); await popclip.showText('Text copied — paste it into OneNote Web.');"
+    },
+    "name": "Copy to OneNote Web"
+  },
+  "htd93q": {
+    "description": "Copy text and open TickTick Web; paste into a new note or task. Automatic capture still needs an Omapop OAuth integration.",
+    "config": {
+      "javascript": "await popclip.copyText(popclip.input.text,{notify:false}); await popclip.openUrl(\"https://ticktick.com/webapp/\"); await popclip.showText('Text copied — paste it into TickTick Web.');"
+    },
+    "name": "Copy to TickTick Web"
+  },
+  "hmaayn": {
+    "description": "Copy text and open Doit.im Web; paste into a new task. The Mac service is replaced by an explicit web handoff.",
+    "name": "Copy to Doit.im Web",
+    "config": {
+      "javascript": "await popclip.copyText(popclip.input.text,{notify:false}); await popclip.openUrl('https://i.doit.im/'); await popclip.showText('Text copied — paste it into a new Doit.im task.');"
+    }
+  }
+}
