@@ -503,6 +503,8 @@ node tests/http.test.mjs                            # request deadlines and stre
 node tests/runner-http.test.mjs                     # fetch, XHR and Axios through the restricted runner
 node tests/runner-modules.test.mjs                  # TypeScript, defaults and dynamic population
 python3 tests/check_settings_ui.py                   # controls in an isolated, offscreen Quickshell
+python3 tests/check_settings_ui.py --ports           # confirmation controls
+python3 tests/check_plugin_load.py                  # full plugin QML loading; requires a Wayland session, shows no windows
 lua tests/engine.test.lua                          # modified mouse input and engine reloads
 QT_QUICK_BACKEND=rhi QSG_RHI_BACKEND=opengl /usr/lib/qt6/bin/qmltestrunner -platform offscreen -input tests
 omarchy restart shell

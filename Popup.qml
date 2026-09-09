@@ -470,8 +470,7 @@ PanelWindow {
                 Column {
                     id: confirmRow
                     visible: win.mode === "confirm"
-                    implicitWidth: Math.min(win.screenW * 0.65, Style.space(600))
-                    width: implicitWidth
+                    width: Math.min(win.screenW * 0.65, Style.space(600))
                     spacing: Style.spacing.sm
                     ConfirmationText {
                         width: parent.width

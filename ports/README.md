@@ -94,7 +94,8 @@ binds results to archive and tested source hashes. Tests cover local semantics,
 resource limits, successful mocked API contracts, credential/redirect rejection,
 private files and symlinks, fixed native arguments, confirmation cancellation,
 stale sessions, and persistent previews. The confirmation text control is also
-rendered and tested in offscreen Quickshell.
+rendered and tested in offscreen Quickshell. A separate Wayland check loads the
+full popup, service and bar-widget QML to catch errors outside those controls.
 
 The [installer record](../catalog/port-installation.json) covers all 189 signed
 versions: every package installs disabled, explicit enabling succeeds, and
