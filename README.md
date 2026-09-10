@@ -120,6 +120,8 @@ Under **Excluded apps**, choose **Add from running windows…** and search for
 an app or window title. Selecting a window ignores its whole application;
 click **×** beside an entry to remove it, even after that app has closed.
 The terminal list remains an advanced text field with common terminals filled in.
+Interactive panels above a window use their layer namespace (`layer:<namespace>`)
+as the app identity, so a terminal behind a panel does not require Shift there.
 
 If you hide the bar icon, you can still open the settings screen with
 `omarchy-shell io.github.jondkinney.omapop settings` and turn the icon back on.
@@ -518,7 +520,8 @@ processes. The boundaries, and the contract at each:
   It turns on the session accessibility flag, which is what makes
   toolkits expose their widget trees to assistive technology; that is a
   same-user surface, and the setting **Detect editable fields via
-  accessibility** turns the helper off.
+  accessibility** turns the helper off. If the bus becomes unavailable, the helper
+  retries every three seconds at first, then every 30 seconds until it recovers.
 - **Display**: every `Text` showing external strings uses `Text.PlainText`
   after control and bidi characters are stripped and the length is capped.
 
@@ -543,6 +546,7 @@ python3 -m unittest discover -s tests -p 'test_*.py'   # helpers, directory
 node tests/actions.test.mjs
 node tests/gestures.test.mjs                        # click timing and stale read callbacks
 node tests/settings.test.mjs                        # typed settings and preservation of other preferences
+node tests/context-recovery.test.mjs                 # helper recovery after an accessibility bus outage
 node tests/engine-config.test.mjs                    # settings updates in the running Lua engine
 node tests/extension-policy.test.mjs                # ordered effects, opt-in, per-extension preferences
 node tests/http.test.mjs                            # request deadlines and streamed byte limits

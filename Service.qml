@@ -493,16 +493,16 @@ Item {
         }
         onExited: function (code, status) {
             root.contextFailures += 1
-            if (root.accessibilityProbe && root.contextFailures < 5)
+            if (root.accessibilityProbe)
                 contextRestart.restart()
-            else if (root.contextFailures >= 5)
-                log("accessibility helper keeps exiting; editable-field detection is off")
+            if (root.contextFailures === 5)
+                log("accessibility helper is unavailable; retrying every 30 seconds")
         }
     }
 
     Timer {
         id: contextRestart
-        interval: 3000
+        interval: root.contextFailures < 5 ? 3000 : 30000
         onTriggered: if (root.accessibilityProbe && !contextProc.running) contextProc.running = true
     }
 
@@ -540,6 +540,7 @@ Item {
         var msg = parseJson(line, 4096)
         if (!msg || typeof msg !== "object" || msg.id === undefined || msg.id === null)
             return
+        root.contextFailures = 0
         var w = contextWaiters[msg.id]
         if (!w)
             return
