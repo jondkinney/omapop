@@ -1,19 +1,21 @@
 #!/usr/bin/python3 -I
-"""Long-lived AT-SPI helper: is the focused widget of a given window editable?
+"""Long-lived AT-SPI helper: editability and selection evidence at a gesture.
 
 Protocol (one JSON object per line, both directions):
-  request:  {"id": 1, "pid": 4242, "class": "chromium"}
+  request:  {"id": 1, "pid": 4242, "x": 100, "y": 200,
+             "windowX": 50, "windowY": 100}
   reply:    {"id": 1, "onBus": true, "editable": true|false|null, "role": "text",
-             "multiline": false, "app": "Firefox"}
+             "selection": true|false|null, "multiline": false, "app": "Firefox"}
   request:  {"id": 2, "op": "ping"}   ->  {"id": 2, "ok": true, "available": true}
 
-`editable` is null when the app is not on the accessibility bus (browsers and
-Electron apps only join it when accessibility was enabled before they started;
-terminals never do). The shell then falls back to window-class heuristics.
+`selection` is true only for a nonempty Text selection containing the gesture's
+starting point in an active window. It is false for a hit-tested text control
+with no selection, and null if unsupported or inconclusive. We read offsets,
+states and geometry, never widget text. `editable` is null when unavailable.
 
 Runs until stdin closes. Every AT-SPI call has a short timeout so an unresponsive
 app cannot stall the shell; the focus tracker keeps the last focused object per
-process so answering needs no tree walk.
+process to avoid searching the whole widget tree on each gesture.
 """
 import json
 import os
@@ -21,6 +23,8 @@ import sys
 import time
 
 MAX_LINE = 4096
+QUERY_SECONDS = 0.24
+MAX_FOCUSED = 256
 available = False
 Atspi = None
 GLib = None
@@ -57,6 +61,12 @@ def on_focus(event):
         if src is None:
             return
         pid = src.get_process_id()
+        if event.type == "object:state-changed:focused" and not event.detail1:
+            if focused_by_pid.get(pid) == src:
+                focused_by_pid.pop(pid, None)
+            return
+        if pid not in focused_by_pid and len(focused_by_pid) >= MAX_FOCUSED:
+            focused_by_pid.pop(next(iter(focused_by_pid)))
         focused_by_pid[pid] = src
     except Exception:  # noqa: BLE001
         pass
@@ -76,13 +86,13 @@ def a11y_start():
     return listener
 
 
-def find_focused(pid):
+def find_focused(pid, deadline):
     """Locate the focused object for pid, via the tracker or a bounded walk."""
     cached = focused_by_pid.get(pid)
     if cached is not None:
         try:
             st = cached.get_state_set()
-            if st.contains(Atspi.StateType.FOCUSED):
+            if st.contains(Atspi.StateType.FOCUSED) and cached.get_process_id() == pid:
                 return cached, True
         except Exception:  # noqa: BLE001
             pass
@@ -90,6 +100,8 @@ def find_focused(pid):
     try:
         desktop = Atspi.get_desktop(0)
         for i in range(min(desktop.get_child_count(), 200)):
+            if time.monotonic() >= deadline:
+                break
             app = desktop.get_child_at_index(i)
             if app is None:
                 continue
@@ -101,6 +113,8 @@ def find_focused(pid):
             on_bus = True
             budget = [400]
             for w in range(min(app.get_child_count(), 50)):
+                if time.monotonic() >= deadline:
+                    break
                 win = app.get_child_at_index(w)
                 if win is None:
                     continue
@@ -109,7 +123,7 @@ def find_focused(pid):
                         continue
                 except Exception:  # noqa: BLE001
                     continue
-                found = walk(win, 0, budget)
+                found = walk(win, 0, budget, deadline)
                 if found is not None:
                     return found, True
             return None, True
@@ -118,8 +132,8 @@ def find_focused(pid):
     return None, on_bus
 
 
-def walk(node, depth, budget):
-    if depth > 25 or budget[0] <= 0:
+def walk(node, depth, budget, deadline):
+    if depth > 25 or budget[0] <= 0 or time.monotonic() >= deadline:
         return None
     budget[0] -= 1
     try:
@@ -129,10 +143,12 @@ def walk(node, depth, budget):
         if not st.contains(Atspi.StateType.SHOWING) and depth > 0:
             return None
         for i in range(min(node.get_child_count(), 100)):
+            if time.monotonic() >= deadline or budget[0] <= 0:
+                break
             child = node.get_child_at_index(i)
             if child is None:
                 continue
-            r = walk(child, depth + 1, budget)
+            r = walk(child, depth + 1, budget, deadline)
             if r is not None:
                 return r
     except Exception:  # noqa: BLE001
@@ -140,13 +156,99 @@ def walk(node, depth, budget):
     return None
 
 
-def describe(pid):
+def active_window(node, deadline):
+    """A cached FOCUSED child in an inactive window is not current evidence."""
+    for _ in range(25):
+        if node is None or time.monotonic() >= deadline:
+            return None
+        if node.get_role_name() in ("frame", "dialog", "window"):
+            st = node.get_state_set()
+            return node if st.contains(Atspi.StateType.ACTIVE) and st.contains(Atspi.StateType.SHOWING) else None
+        node = node.get_parent()
+    return None
+
+
+def point_path(window, x, y, deadline, coordinates=None):
+    """Hit-test down from the active window, never search unrelated fields."""
+    path = []
+    node = window
+    coordinates = Atspi.CoordType.SCREEN if coordinates is None else coordinates
+    for _ in range(25):
+        if node is None or time.monotonic() >= deadline or node in path:
+            return None
+        st = node.get_state_set()
+        component = node.get_component_iface()
+        if not st.contains(Atspi.StateType.SHOWING) or component is None:
+            return None
+        # GetExtents works in WINDOW space even on toolkits whose Contains
+        # implementation only handles SCREEN coordinates correctly.
+        rect = component.get_extents(coordinates)
+        if rect is None or not (0 < rect.width <= 1000000 and 0 < rect.height <= 1000000
+                                and rect.x <= x < rect.x + rect.width and rect.y <= y < rect.y + rect.height):
+            return None
+        path.append(node)
+        child = component.get_accessible_at_point(x, y, coordinates)
+        if child is None or child == node:
+            return path
+        node = child
+    return None
+
+
+def selection_at_point(path, x, y, deadline, coordinates=None):
+    """Text selections are distinct from selected canvas objects/list items.
+
+    A browser may expose a leaf text node while storing its selection on the
+    document ancestor, so check the hit path from leaf to root. Offsets also
+    prevent a scrollbar/blank area beside an old highlight from qualifying.
+    """
+    empty = None
+    coordinates = Atspi.CoordType.SCREEN if coordinates is None else coordinates
+    for node in reversed(path):
+        if time.monotonic() >= deadline:
+            return None
+        text = node.get_text_iface()
+        if text is None:
+            continue
+        count = text.get_n_selections()
+        if count < 0 or count > 16:
+            return None
+        if count == 0:
+            empty = False
+            continue
+        offset = text.get_offset_at_point(x, y, coordinates)
+        if offset < 0:
+            continue
+        for i in range(count):
+            if time.monotonic() >= deadline:
+                return None
+            # Accessible.get_selection() is a deprecated interface accessor;
+            # use the Text method explicitly to avoid that GI name collision.
+            selected = Atspi.Text.get_selection(text, i)
+            if selected is None:
+                continue
+            start, end = selected.start_offset, selected.end_offset
+            if 0 <= start < end and start <= offset <= end:
+                return True
+        # There is selected text, but the gesture isn't on it. Do not reuse it.
+        empty = False
+    return empty
+
+
+def unknown(on_bus=False):
+    return {"onBus": on_bus, "editable": None, "selection": None, "role": "", "multiline": False, "app": ""}
+
+
+def describe(pid, point=None, origin=None):
     if not available:
-        return {"onBus": False, "editable": None, "role": "", "multiline": False, "app": ""}
-    node, on_bus = find_focused(pid)
+        return unknown()
+    deadline = time.monotonic() + QUERY_SECONDS
+    node, on_bus = find_focused(pid, deadline)
     if node is None:
-        return {"onBus": on_bus, "editable": None, "role": "", "multiline": False, "app": ""}
+        return unknown(on_bus)
     try:
+        window = active_window(node, deadline)
+        if window is None:
+            return unknown(on_bus)
         st = node.get_state_set()
         role = node.get_role_name() or ""
         editable = st.contains(Atspi.StateType.EDITABLE)
@@ -158,12 +260,30 @@ def describe(pid):
             app = (a.get_name() or "")[:64] if a else ""
         except Exception:  # noqa: BLE001
             pass
-        return {"onBus": True, "editable": bool(editable), "role": role[:32], "multiline": st.contains(Atspi.StateType.MULTI_LINE), "app": app}
+        selection = None
+        if point is not None:
+            coordinates = Atspi.CoordType.SCREEN
+            if origin is not None:
+                point = (point[0] - origin[0], point[1] - origin[1])
+                coordinates = Atspi.CoordType.WINDOW
+            path = point_path(window, *point, deadline, coordinates)
+            if path is None:
+                editable = None
+            else:
+                # A field retaining keyboard focus elsewhere in the window
+                # must not offer Paste for a long press on a canvas or toolbar.
+                editable = bool(editable) if node in path else False
+                try:
+                    selection = selection_at_point(path, *point, deadline, coordinates)
+                except Exception:  # noqa: BLE001 - selection support is independent of editability
+                    selection = None
+        return {"onBus": True, "editable": editable, "selection": selection, "role": role[:32], "multiline": st.contains(Atspi.StateType.MULTI_LINE), "app": app}
     except Exception:  # noqa: BLE001
-        return {"onBus": on_bus, "editable": None, "role": "", "multiline": False, "app": ""}
+        return unknown(on_bus)
 
 
 stdin_buffer = b""
+discarding_line = False
 
 
 def handle_line(raw):
@@ -178,24 +298,51 @@ def handle_line(raw):
     if not isinstance(req, dict):
         return
     rid = req.get("id")
+    if type(rid) is not int or not 0 <= rid <= 2147483647:
+        out({"id": None, "error": "bad id"})
+        return
     if req.get("op") == "ping":
         out({"id": rid, "ok": True, "available": available})
         return
     pid = req.get("pid")
-    if not isinstance(pid, int) or pid <= 0:
-        out({"id": rid, "onBus": False, "editable": None, "role": "", "multiline": False, "app": ""})
+    if type(pid) is not int or not 0 < pid <= 2147483647:
+        out({"id": rid, **unknown()})
         return
+    x, y = req.get("x"), req.get("y")
+    point = (x, y) if all(type(v) is int and -1000000 <= v <= 1000000 for v in (x, y)) else None
+    wx, wy = req.get("windowX"), req.get("windowY")
+    origin = (wx, wy) if all(type(v) is int and -1000000 <= v <= 1000000 for v in (wx, wy)) else None
     started = time.monotonic()
-    result = describe(pid)
+    result = describe(pid, point, origin)
     result["id"] = rid
     result["ms"] = int((time.monotonic() - started) * 1000)
     out(result)
 
 
+def feed_stdin(chunk):
+    """Bound partial frames and recover at newline after an oversized request."""
+    global stdin_buffer, discarding_line
+    parts = chunk.split(b"\n")
+    for index, part in enumerate(parts):
+        terminated = index < len(parts) - 1
+        if discarding_line:
+            if terminated:
+                discarding_line = False
+            continue
+        if len(stdin_buffer) + len(part) > MAX_LINE:
+            out({"id": None, "error": "request too long"})
+            stdin_buffer = b""
+            discarding_line = not terminated
+            continue
+        stdin_buffer += part
+        if terminated:
+            handle_line(stdin_buffer)
+            stdin_buffer = b""
+
+
 def on_stdin(fd, condition):
-    global stdin_buffer
     try:
-        chunk = os.read(fd, 65536)
+        chunk = os.read(fd, MAX_LINE)
     except BlockingIOError:
         return True
     except OSError:
@@ -203,22 +350,17 @@ def on_stdin(fd, condition):
     if not chunk:
         Atspi.event_quit()
         return False
-    stdin_buffer += chunk
-    if len(stdin_buffer) > MAX_LINE * 4:
-        out({"id": None, "error": "request too long"})
-        stdin_buffer = b""
-        return True
-    while b"\n" in stdin_buffer:
-        line, stdin_buffer = stdin_buffer.split(b"\n", 1)
-        handle_line(line)
+    feed_stdin(chunk)
     return True
 
 
 def main():
     if not available:
         # Answer every request with "unknown" until stdin closes.
-        for raw in sys.stdin.buffer:
-            handle_line(raw.rstrip(b"\n"))
+        while chunk := sys.stdin.buffer.read1(MAX_LINE):
+            feed_stdin(chunk)
+        if stdin_buffer and not discarding_line:
+            handle_line(stdin_buffer)
         return
     enable_bus()
     listener = a11y_start()  # noqa: F841 - keep the listener alive

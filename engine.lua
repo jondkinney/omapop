@@ -1,4 +1,4 @@
-local ENGINE_VERSION = 3
+local ENGINE_VERSION = 4
 local BIND_KEYS = { "mouse:272", "mouse:273", "mouse:274", "mouse_up", "mouse_down" }
 
 local previous = rawget(_G, "__omapop")
@@ -16,6 +16,9 @@ if type(previous) == "table" and type(previous.configure) == "function" then
   -- bind on that key without dereferencing stale handles, unlike
   -- HL.Keybind:remove(); the event subscription handle is safe to remove.
   for _, key in ipairs(BIND_KEYS) do pcall(hl.unbind, key) end
+  if previous.cfg and type(previous.cfg.shortcut) == "string" and previous.cfg.shortcut ~= "" then
+    pcall(hl.unbind, previous.cfg.shortcut)
+  end
   if previous.key_handle then pcall(function() previous.key_handle:remove() end) end
   previous.generation = (previous.generation or 0) + 1
   previous.armed = false
@@ -104,7 +107,7 @@ local function context_fields(x, y)
       m.scale = scale
     end
   end)
-  local w = { class = "", title = "", address = "", pid = 0 }
+  local w = { class = "", title = "", address = "", pid = 0, x = "", y = "" }
   pcall(function()
     local win = hl.get_active_window()
     if win then
@@ -112,9 +115,14 @@ local function context_fields(x, y)
       w.title = win.title or ""
       w.address = win.address or ""
       w.pid = num(win.pid, 0)
+      local at = win.at
+      if type(at) == "table" then
+        w.x = num(at.x, "")
+        w.y = num(at.y, "")
+      end
     end
   end)
-  return { x, y, mods(), m.name, m.x, m.y, m.w, m.h, m.scale, w.class, w.title, w.address, w.pid }
+  return { x, y, mods(), m.name, m.x, m.y, m.w, m.h, m.scale, w.class, w.title, w.address, w.pid, w.x, w.y }
 end
 
 local function inside_rect(x, y)

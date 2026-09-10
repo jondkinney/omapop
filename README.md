@@ -59,6 +59,11 @@ reloads its configuration (`hyprctl reload`), or immediately with
   turn off **Settings → Selection → Require Shift in terminals** to opt out.
   The bar appears promptly after a
   double-click and updates in place if a third click extends the selection.
+  A drag or multi-click alone is not enough: Omapop needs a fresh primary
+  selection from this gesture, or accessibility confirmation of a nonempty
+  text-selection range at its starting point. Drawing, resizing and moving
+  objects cannot reuse older clipboard text to open the bar. An accessibility
+  report that the text selection is empty suppresses the popup too.
 - **Hover** a button to see its name. **Click** to run it. Hold **Shift**,
   **Ctrl**, **Alt** or **Super** while clicking for an action's alternate
   behaviour (Alt on Search means an exact-phrase search, Alt on Open Link
@@ -78,7 +83,9 @@ reloads its configuration (`hyprctl reload`), or immediately with
   `SUPER + SHIFT + P`): click **Record**, press the combination, and release
   the keys to save. **Escape** cancels recording; **Clear** disables the shortcut.
   The shortcut shows the bar for the current selection, useful in apps
-  that do not update the selection until you release the mouse. A bar opened
+  that do not publish a fresh primary selection and cannot confirm it through
+  accessibility. Reselecting identical text in those apps may need the shortcut.
+  A bar opened
   this way takes keyboard focus: Left/Right or Tab move, Return runs, Down opens
   a submenu, Up or Backspace goes back, 1 to 9 run a button directly, Escape
   hides. Focus returns to the app before the action runs so pastes land in it.
@@ -92,6 +99,9 @@ The default Shift requirement applies to recognized terminal windows, including
 other terminal programs and plain shells. Add custom window classes under
 **Settings → Advanced → Terminal apps**. Normal browser and editor windows
 continue to open Omapop without Shift.
+Terminal selections also need a fresh primary-selection event; Shift alone
+does not authorize reusing older text. Omapop waits up to half a second after
+mouse-up for delayed events and rereads if the selection changes during a read.
 
 Open **Omapop's bar icon → Settings** to change selection behavior, search,
 and other preferences. Switches and dropdowns save immediately; text fields
@@ -124,7 +134,7 @@ number values; omit it for text values. The available setting keys are:
 | Drag threshold | `dragThreshold` | How far the pointer must move between press and release to count as a drag. |
 | Bar position | `position` | `auto` (above the pointer, below when the drag went downwards), `above` or `below`. |
 | Assume unknown fields are editable | `assumeEditable` | Off by default. See "When each button appears". |
-| Detect editable fields via accessibility | `accessibilityProbe` | Keeps a small AT-SPI helper running and turns on the session accessibility flag. |
+| Detect editable fields via accessibility | `accessibilityProbe` | Checks editability and text-selection ranges at the gesture; enables the session accessibility flag. Without it, automatic popups require a fresh primary selection. |
 | Hide when pointer moves away | `hideDistance` | Distance in pixels. |
 | Show on long press | `longPress` | Off by default. When enabled, hold the left button half a second to show the bar without a selection. |
 | Require Shift in terminals | `requireTerminalShift` | On by default. Hold Shift throughout terminal selections or long presses; explicit keyboard invocation is unaffected. Uses the Terminal apps list under Advanced. |
@@ -485,9 +495,15 @@ processes. The boundaries, and the contract at each:
   shell decodes, length-caps and strips control and bidi characters from each.
   Key presses go out as structured `hl.dsp.send_shortcut` calls whose
   modifiers, keysym and window address are filtered to fixed alphabets.
-- **The accessibility helper** reads only the focus state, role and editable
-  flag of the focused widget, never its text, and answers within 300 ms or not
-  at all. It turns on the session accessibility flag, which is what makes
+- **The accessibility helper** reads focus, role, editability, widget bounds
+  and text-selection offsets, never widget text. A bounded hit-test starts at
+  the gesture's position in the active window, with desktop coordinates
+  converted using the compositor's window position. A stale focused field
+  elsewhere cannot confirm a selection or offer Paste on a canvas. Tree walks
+  have a 240 ms work budget and each AT-SPI call has a short timeout; the shell
+  treats replies taking more than 300 ms as unknown. Requests are capped at
+  4 KiB, selection ranges at 16, and the focus cache at 256 entries.
+  It turns on the session accessibility flag, which is what makes
   toolkits expose their widget trees to assistive technology; that is a
   same-user surface, and the setting **Detect editable fields via
   accessibility** turns the helper off.
@@ -518,6 +534,7 @@ node tests/runner-modules.test.mjs                  # TypeScript, defaults and d
 python3 tests/check_settings_ui.py                   # controls in an isolated, offscreen Quickshell
 python3 tests/check_settings_ui.py --ports           # confirmation controls
 python3 tests/check_plugin_load.py                  # full plugin QML loading; requires a Wayland session, shows no windows
+python3 tests/check_context_ui.py                   # live GTK/AT-SPI check; opens a temporary window and selects fixture text
 lua tests/engine.test.lua                          # modified mouse input and engine reloads
 QT_QUICK_BACKEND=rhi QSG_RHI_BACKEND=opengl /usr/lib/qt6/bin/qmltestrunner -platform offscreen -input tests
 omarchy restart shell

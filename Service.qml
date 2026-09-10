@@ -46,7 +46,7 @@ Item {
     readonly property string contextHelper: pluginDir + "/bin/omapop-context.py"
     readonly property string nativeHelper: pluginDir + "/bin/omapop-native.py"
     readonly property string directoryHelper: pluginDir + "/bin/omapop-directory.py"
-    readonly property int engineVersion: 3
+    readonly property int engineVersion: 4
 
     // Children get only what they need to reach the compositor and the display.
     readonly property var childEnv: ({
@@ -186,9 +186,9 @@ Item {
     property var busyTask: null
 
     // Gesture bookkeeping (times are Date.now() ms).
-    property real lastPressAt: 0
     property int lastPressMods: 0
-    property real selectionChangedAt: 0
+    property real selectionSerial: 0
+    property real lastPressSelectionSerial: 0
     property var pendingRelease: null
     property var lastReleaseInfo: null
     property int clickCount: 0
@@ -459,9 +459,10 @@ Item {
         onTriggered: if (!watchProc.running) watchProc.running = true
     }
 
-    // ------------------------------------------------------------ editable-field probe
+    // ------------------------------------------------------------ accessibility probe
 
-    // Long-lived AT-SPI helper: "is the focused widget of window <pid> editable?"
+    // Long-lived AT-SPI helper: editability and text-selection ranges at the
+    // gesture's starting point, in the active window of the requested process.
     // One JSON line per request and reply; a request that gets no answer within
     // 300 ms is treated as unknown so a stuck app never delays the bar.
     Process {
@@ -495,7 +496,8 @@ Item {
     property int contextSeq: 0
     property var contextWaiters: ({})
 
-    function queryContext(pid, done) {
+    function queryContext(ctx, done) {
+        var pid = ctx.app ? ctx.app.pid : 0
         if (!accessibilityProbe || !contextProc.running || !(pid > 0)) {
             done(undefined)
             return
@@ -513,7 +515,10 @@ Item {
             timer.destroy()
         })
         timer.start()
-        contextProc.write(JSON.stringify({ id: id, pid: pid }) + "\n")
+        contextProc.write(JSON.stringify({ id: id, pid: pid,
+            x: Number.isFinite(ctx.pressX) ? ctx.pressX : ctx.x,
+            y: Number.isFinite(ctx.pressY) ? ctx.pressY : ctx.y,
+            windowX: ctx.app.windowX, windowY: ctx.app.windowY }) + "\n")
     }
 
     function onContextLine(line) {
@@ -526,7 +531,10 @@ Item {
         delete contextWaiters[msg.id]
         w.timer.stop()
         w.timer.destroy()
-        w.done(msg.editable === true ? true : msg.editable === false ? false : undefined)
+        w.done({
+            editable: msg.editable === true ? true : msg.editable === false ? false : undefined,
+            selection: msg.selection === true ? true : msg.selection === false ? false : undefined
+        })
     }
 
     onAccessibilityProbeChanged: {
@@ -595,7 +603,9 @@ Item {
                 appClass: Actions.sanitizeDisplay(decodeField(f[offset + 9]), 256),
                 title: Actions.sanitizeDisplay(decodeField(f[offset + 10]), 256),
                 address: Actions.sanitizeDisplay(decodeField(f[offset + 11]), 32),
-                pid: Number(f[offset + 12]) || 0
+                pid: Number(f[offset + 12]) || 0,
+                windowX: f[offset + 13] !== undefined && f[offset + 13] !== "" ? Number(f[offset + 13]) : undefined,
+                windowY: f[offset + 14] !== undefined && f[offset + 14] !== "" ? Number(f[offset + 14]) : undefined
             }
         }
     }
@@ -614,10 +624,10 @@ Item {
             onPress(Number(f[1]) || 0, Number(f[2]) || 0, Number(f[3]) || 0, Number(f[4]) || 0, f[5] === "1")
         } else if (kind === "release") {
             var ctx = parseContext(f, 1)
-            ctx.pressX = Number(f[14]) || ctx.x
-            ctx.pressY = Number(f[15]) || ctx.y
-            ctx.pressInside = f[16] === "1"
-            ctx.wasLongPress = f[17] === "1"
+            ctx.pressX = Number.isFinite(Number(f[16])) ? Number(f[16]) : ctx.x
+            ctx.pressY = Number.isFinite(Number(f[17])) ? Number(f[17]) : ctx.y
+            ctx.pressInside = f[18] === "1"
+            ctx.wasLongPress = f[19] === "1"
             onRelease(ctx)
         } else if (kind === "longpress") {
             var longCtx = parseContext(f, 1)
@@ -650,8 +660,8 @@ Item {
         // selection. Its actions stay disabled until that update completes.
         if (!inside)
             cancelSelection()
-        lastPressAt = Date.now()
         lastPressMods = mods
+        lastPressSelectionSerial = selectionSerial
         if (button !== 272 || inside) {
             lastReleaseInfo = null
             clickCount = 0
@@ -685,26 +695,30 @@ Item {
         else
             clickCount = 1
         lastReleaseInfo = { t: now, x: ctx.x, y: ctx.y, dragged: dragged, address: address }
-        if (selectionUpdating && (dragged || clickCount === 1))
+        if ((selectionUpdating || popup.visible) && (dragged || clickCount === 1))
             hidePopup()
         ctx.dragged = dragged
         ctx.clicks = clickCount
         ctx.time = now
+        ctx.selectionSerial = lastPressSelectionSerial
         ctx.downward = ctx.y > ctx.pressY + 4
         pendingRelease = ctx
-        // A completed drag or multi-click can reselect the same primary text
-        // without another watcher notification. Plain clicks need a change
-        // belonging to this press, rather than one from an earlier selection.
-        if (dragged || clickCount >= 2 || (selectionChangedAt >= lastPressAt && selectionChangedAt <= now + 1)) {
+        pendingExpiry.interval = 500
+        pendingExpiry.restart()
+        // Movement and multi-clicks are only candidates. The read must still
+        // have a fresh PRIMARY offer or an accessibility-confirmed selection.
+        if (dragged || clickCount >= 2 || hasFreshSelection(ctx)) {
             scheduleSelectionRead()
-        } else {
-            pendingExpiry.restart()
         }
+    }
+
+    function hasFreshSelection(ctx) {
+        return typeof ctx.selectionSerial === "number" && selectionSerial > ctx.selectionSerial
     }
 
     function onSelectionChanged() {
         var now = Date.now()
-        selectionChangedAt = now
+        selectionSerial += 1
         if (pendingRelease && now - pendingRelease.time <= 500) {
             scheduleSelectionRead()
         }
@@ -713,7 +727,10 @@ Item {
     function scheduleSelectionRead() {
         if (!pendingRelease)
             return
-        pendingExpiry.stop()
+        // An offer received within the wait window remains eligible even if
+        // the settling delay ends just after that window.
+        if (hasFreshSelection(pendingRelease))
+            pendingExpiry.stop()
         // Read promptly. A later click in the same sequence updates the visible
         // bar in place, so this need not wait for the full multi-click interval.
         readSoon.interval = pendingRelease.dragged ? 40 : clickSettleInterval
@@ -731,7 +748,12 @@ Item {
     Timer {
         id: pendingExpiry
         interval: 500
-        onTriggered: root.pendingRelease = null
+        onTriggered: {
+            var unconfirmed = root.pendingRelease && !root.hasFreshSelection(root.pendingRelease)
+            root.pendingRelease = null
+            if (unconfirmed && root.selectionUpdating)
+                root.hidePopup()
+        }
     }
 
     Timer {
@@ -777,9 +799,24 @@ Item {
             return
         }
         var generation = readGeneration
+        var readSelectionSerial = selectionSerial
+        // Keep listening while the helpers work. If an app publishes PRIMARY
+        // late, rerun the read instead of presenting its earlier contents.
+        if (kind === "selection" && typeof ctx.time === "number" && Date.now() - ctx.time < 500) {
+            pendingRelease = ctx
+            pendingExpiry.interval = Math.max(1, 500 - (Date.now() - ctx.time))
+            pendingExpiry.restart()
+        }
         var discard = function () {
-            if (generation === readGeneration && selectionUpdating)
+            if (generation === readGeneration && selectionUpdating) {
+                var waiting = pendingRelease
                 hidePopup()
+                if (waiting && Date.now() - waiting.time < 500) {
+                    pendingRelease = waiting
+                    pendingExpiry.interval = Math.max(1, 500 - (Date.now() - waiting.time))
+                    pendingExpiry.restart()
+                }
+            }
         }
         var wantHtml = extensionsWantHtml()
         var argv = ["/usr/bin/python3", "-I", selectionHelper, "--max-bytes", String(maxSelectionBytes), "--clipboard-text"]
@@ -791,14 +828,32 @@ Item {
         var finish = function () {
             if (generation !== readGeneration || paused || join.presented || !join.probeDone || !join.readDone || !join.read)
                 return
+            if (kind === "selection" && readSelectionSerial !== selectionSerial) {
+                if (!pendingRelease)
+                    discard()
+                return
+            }
             join.presented = true
+            var selected = join.probe ? join.probe.selection : undefined
+            if (kind === "selection" && (selected === false || (!hasFreshSelection(ctx) && selected !== true))) {
+                discard()
+                return
+            }
+            pendingRelease = null
+            pendingExpiry.stop()
             var r = join.read
+            // A deliberate long press may offer Paste, but old PRIMARY text
+            // must not turn a hold on an empty field/canvas into a selection.
+            if (kind === "longpress" && (selected === false
+                    || (selected !== true && !hasFreshSelection({ selectionSerial: lastPressSelectionSerial })))) {
+                r = { text: "", parsed: { clipboard: r.parsed.clipboard } }
+            }
             var input = buildInput(r.text, r.parsed)
-            var context = buildContext(ctx, r.parsed, join.probe)
+            var context = buildContext(ctx, r.parsed, join.probe ? join.probe.editable : undefined)
             present(ctx, input, context, kind)
         }
-        queryContext(ctx.app ? ctx.app.pid : 0, function (editable) {
-            join.probe = editable
+        queryContext(ctx, function (probe) {
+            join.probe = probe
             join.probeDone = true
             finish()
         })

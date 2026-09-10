@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "io.github.jondkinney.omapop",
   "name": "Omapop",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "author": "Jon Kinney",
   "license": "MIT",
   "description": "Select text with the mouse and a small bar of actions appears beside it: cut, copy, paste, search, open links, reveal paths, and extensions written as YAML snippets, shell scripts or JavaScript. Supports a reviewed subset of the PopClip Extensions Directory (https://www.popclip.app/extensions/).",
@@ -107,7 +107,7 @@
         "type": "boolean",
         "label": "Detect editable fields via accessibility",
         "defaultValue": true,
-        "description": "Keeps a small AT-SPI helper running and turns on the session accessibility flag so GTK, Qt and (after a restart) Chromium, Electron and Firefox report whether the focused field is editable."
+        "description": "Keeps a small AT-SPI helper running and turns on the session accessibility flag. It checks editable fields and text-selection ranges at the gesture's starting point, so selecting the same text can work without a fresh primary-selection event. Browser and Electron apps may need a restart."
       },
       {
         "key": "hideDistance",

@@ -12,7 +12,7 @@ hl = {
   dispatch = function(event) events[#events + 1] = event end,
   get_cursor_pos = function() return { x = x, y = y } end,
   get_monitor_at_cursor = function() return { name = "test", width = 1920, height = 1080, scale = 1 } end,
-  get_active_window = function() return { class = "foot", title = "test", address = "0x1", pid = 1 } end,
+  get_active_window = function() return { class = "foot", title = "test", address = "0x1", pid = 1, at = { x = -1920, y = 38 } } end,
   is_key_down = function(key) return (mask & (modifier_masks[key] or 0)) ~= 0 end,
   timer = function(callback) timers[#timers + 1] = callback end,
   bind = function(key, callback, options)
@@ -58,6 +58,7 @@ for _, held in ipairs({ 0, 1, 4, 8, 64, 5 }) do
   assert(events[before + 1] == "omapop|press|100|100|272|" .. held .. "|0")
   assert(events[before + 2]:find("omapop|release|180|100|" .. held .. "|", 1, true) == 1)
   assert(events[before + 2]:sub(-12) == "|100|100|0|0", "release must preserve the drag origin")
+  assert(events[before + 2]:find("|0x1|1|-1920|38|", 1, true), "release must include the active window origin")
 end
 
 -- Modified clicks still dismiss the bar, and Shift does not get consumed.
@@ -76,7 +77,8 @@ assert(__omapop == installed and #bindings == 6)
 
 -- An engine upgrade must retire old callbacks, including a held long press.
 mask, x, y = 1, 100, 100
-installed.configure({ long_press = true })
+installed.configure({ long_press = true, shortcut = "SUPER + F12" })
+assert(#bindings == 7, "old engine shortcut must be present before the upgrade")
 dispatch_mouse("mouse:272", false)
 installed.version = installed.version - 1
 dofile(path)
