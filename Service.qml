@@ -691,7 +691,7 @@ Item {
         // multi-click sequence after the modifier has been released.
         if (ctx.pressInside || ctx.wasLongPress || paused || ((ctx.mods | lastPressMods) & 64) !== 0
                 || !automaticAllowed) {
-            if ((selectionUpdating || (!automaticAllowed && popup.visible)) && !ctx.pressInside)
+            if ((selectionUpdating || (!automaticAllowed && !ctx.wasLongPress && popup.visible)) && !ctx.pressInside)
                 hidePopup()
             lastReleaseInfo = null
             clickCount = 0
@@ -800,7 +800,7 @@ Item {
     }
 
     function automaticTriggerAllowed(ctx, kind) {
-        if (kind === "shortcut" || !requireTerminalShift
+        if (kind !== "selection" || !requireTerminalShift
                 || !Actions.isTerminalClass(ctx.app ? ctx.app.appClass : "", terminalClasses))
             return true
         // A TUI can copy on mouse-up and remove its highlight while PRIMARY
@@ -870,7 +870,7 @@ Item {
                 r = { text: "", parsed: { clipboard: r.parsed.clipboard } }
             }
             var input = buildInput(r.text, r.parsed)
-            var context = buildContext(ctx, r.parsed, join.probe ? join.probe.editable : undefined)
+            var context = buildContext(ctx, r.parsed, join.probe ? join.probe.editable : undefined, kind)
             present(ctx, input, context, kind)
         }
         queryContext(ctx, function (probe) {
@@ -954,7 +954,7 @@ Item {
     // The context every action is filtered against. Editability comes from the
     // accessibility probe when the app is on the bus, else from the window
     // class (terminals and viewers), else from the assumeEditable setting.
-    function buildContext(ctx, parsed, probe) {
+    function buildContext(ctx, parsed, probe, kind) {
         var appClass = ctx.app ? ctx.app.appClass : ""
         var terminal = Actions.isTerminalClass(appClass, terminalClasses)
         var clip = parsed && parsed.clipboard && typeof parsed.clipboard === "object" ? parsed.clipboard : {}
@@ -970,7 +970,10 @@ Item {
             canReplace: edit.editable && !terminal,
             canCopy: true,
             canCut: edit.editable && !terminal,
-            canPaste: clip.hasText === true && edit.canPaste,
+            // An enabled long press deliberately requests actions. Missing
+            // accessibility support must not hide Paste, but it still cannot
+            // authorize Cut/replacement or override a confirmed read-only hit.
+            canPaste: clip.hasText === true && (edit.canPaste || (kind === "longpress" && probe !== false)),
             clipboardText: typeof clip.text === "string" ? clip.text : "",
             hasFormatting: false,
             browserUrl: "",

@@ -69,8 +69,8 @@ function harness(autoComplete = true) {
     },
     spawn(_spec, done) {
       const task = { cancelled: false, cancel() { this.cancelled = true; },
-        complete(text = "selected text") {
-          done({ ok: !this.cancelled, stdout: JSON.stringify({ ok: true, text }) });
+        complete(text = "selected text", extra = {}) {
+          done({ ok: !this.cancelled, stdout: JSON.stringify({ ...extra, ok: true, text }) });
         } };
       reads.push(task);
       if (autoComplete) later(10, () => task.complete());
@@ -319,11 +319,9 @@ test("terminal Shift policy applies to custom terminal classes and can be disabl
 test("terminal mouse policy blocks direct automatic triggers but preserves the keyboard shortcut", () => {
   const h = harness();
   const ctx = h.context({ app: { appClass: "foot", address: "0x1", pid: 1 } });
-  for (const kind of ["selection", "longpress"]) {
-    h.c.trigger(ctx, kind);
-    h.advance(100);
-    assert.equal(h.reads.length, 0);
-  }
+  h.c.trigger(ctx, "selection");
+  h.advance(100);
+  assert.equal(h.reads.length, 0);
   h.c.trigger(ctx, "shortcut");
   h.advance(100);
   assert.equal(h.presentations.length, 1);
@@ -633,6 +631,73 @@ test("long press discards unconfirmed PRIMARY text before building actions", () 
     h.advance(100);
     assert.equal(h.c.current.input.text, selection === true ? "selected text" : "");
   }
+});
+
+// These cases use the actual context and button filters as well as the gesture
+// code. A stub button would hide the failure where long press has no actions.
+function actionHarness() {
+  const h = harness(false);
+  h.c.assumeEditable = false;
+  h.c.builtinGlyphs = { search: "search" };
+  const actual = new Set(["buildInput", "stringList", "buildContext", "builtinButtons"]);
+  vm.runInContext([...source.matchAll(/^    function (\w+)\([^]*?^    \}/gm)]
+    .filter(match => actual.has(match[1])).map(match => match[0]).join("\n"), h.c);
+  return h;
+}
+
+test("long press offers Paste when field support is unknown without reusing old PRIMARY", () => {
+  for (const appClass of ["chromium", "gimp", "Zoom"]) {
+    const h = actionHarness();
+    h.c.trigger(h.context({ app: { appClass, address: "0x1" } }), "longpress");
+    h.probes[0](undefined);
+    h.reads[0].complete("old PRIMARY", { clipboard: { hasText: true, text: "clipboard" } });
+    assert.equal(h.c.popup.visible, true);
+    assert.deepEqual(Array.from(h.c.popup.buttons, button => button.builtin), ["paste"]);
+    assert.equal(h.c.current.input.text, "");
+    assert.equal(h.c.current.context.editable, false);
+    assert.equal(h.c.current.context.canReplace, false);
+    assert.equal(h.c.current.context.canCut, false);
+  }
+});
+
+test("long press still respects confirmed read-only targets and empty clipboards", () => {
+  for (const scenario of [
+    { probe: { editable: false, selection: false }, hasText: true, appClass: "chromium" },
+    { probe: { editable: false, selection: false }, hasText: true, appClass: "gimp" },
+    { probe: undefined, hasText: false, appClass: "chromium" },
+  ]) {
+    const h = actionHarness();
+    h.c.trigger(h.context({ app: { appClass: scenario.appClass, address: "0x1" } }), "longpress");
+    h.probes[0](scenario.probe);
+    h.reads[0].complete("old PRIMARY", { clipboard: { hasText: scenario.hasText } });
+    assert.equal(h.c.popup.visible, false);
+  }
+});
+
+test("the long-press Paste fallback does not enable editing for automatic selections", () => {
+  const h = actionHarness();
+  h.c.onSelectionChanged();
+  h.c.trigger(h.context({ dragged: true }), "selection");
+  h.probes[0](undefined);
+  h.reads[0].complete("current selection", { clipboard: { hasText: true, text: "clipboard" } });
+  assert.deepEqual(Array.from(h.c.popup.buttons, button => button.builtin), ["copy", "search"]);
+  assert.equal(h.c.current.context.canPaste, false);
+  assert.equal(h.c.current.context.editable, false);
+});
+
+test("an explicit terminal long press offers Paste without Shift and survives mouse-up", () => {
+  const h = actionHarness();
+  const ctx = h.context({ app: { appClass: "foot", address: "0x1", pid: 1 } });
+  h.c.onPress(100, 100, 272, 0, false);
+  h.c.trigger(ctx, "longpress");
+  assert.equal(h.reads.length, 1);
+  h.probes[0](undefined);
+  h.reads[0].complete("old PRIMARY", { clipboard: { hasText: true, text: "clipboard" } });
+  assert.deepEqual(Array.from(h.c.popup.buttons, button => button.builtin), ["paste"]);
+  h.c.onRelease({ ...ctx, wasLongPress: true });
+  h.advance(600);
+  assert.equal(h.c.popup.visible, true);
+  assert.equal(h.c.current.input.text, "");
 });
 
 test("accessibility replies accept only strict selection and editability booleans", () => {

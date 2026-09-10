@@ -26,8 +26,8 @@ ColumnLayout {
         terminalClasses: "Terminal apps", commandKey: "Extension Command key"
     })
     readonly property var descriptions: ({
-        longPress: "Hold the left mouse button for half a second to open the action bar, even without a selection.",
-        requireTerminalShift: "Hold Shift throughout selection in terminal windows, including plain shell prompts. Avoids stale popups from Herdr, tmux and other terminal apps that copy and clear their selection. The keyboard shortcut still works.",
+        longPress: "Hold the left mouse button for half a second to offer Paste, even without a selection or field detection. No Shift is needed in terminals.",
+        requireTerminalShift: "Hold Shift throughout selection in terminal windows, including plain shell prompts. Avoids stale popups from Herdr, tmux and other terminal apps that copy and clear their selection. Long press and the keyboard shortcut still work.",
         position: "Auto places the bar above or below the pointer to leave your selection visible.",
         shortcut: "Record a key combination to open the action bar. Clear it to disable.",
         excludedApps: "Omapop stays hidden in these apps. Choose a running window to ignore its whole application.",

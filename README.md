@@ -74,7 +74,9 @@ reloads its configuration (`hyprctl reload`), or immediately with
 - **Long-press** is off by default. Enable **Show on long press** in Settings,
   then hold the left button for half a second without moving to show the bar
   with no selection, for example to Paste. Changes take effect without restarting
-  the shell.
+  the shell. A long press can offer Paste when field detection is unavailable,
+  and does not require Shift in terminals. It never reuses unconfirmed old
+  selection text for Copy, Search or text-processing actions.
 - The bar hides when you click elsewhere, press a key, scroll, move the pointer
   away, or switch window or workspace. Hold **Super** while selecting to keep
   it away.
@@ -140,7 +142,7 @@ number values; omit it for text values. The available setting keys are:
 | Detect editable fields via accessibility | `accessibilityProbe` | Checks editability and text-selection ranges at the gesture; enables the session accessibility flag. Without it, automatic popups require a fresh primary selection. |
 | Hide when pointer moves away | `hideDistance` | Distance in pixels. |
 | Show on long press | `longPress` | Off by default. When enabled, hold the left button half a second to show the bar without a selection. |
-| Require Shift in terminals | `requireTerminalShift` | On by default. Hold Shift throughout terminal selections or long presses; explicit keyboard invocation is unaffected. Uses the Terminal apps list under Advanced. |
+| Require Shift in terminals | `requireTerminalShift` | On by default. Hold Shift throughout terminal selections; long press and explicit keyboard invocation are unaffected. Uses the Terminal apps list under Advanced. |
 | Largest selection read | `maxSelectionKiB` | Selections larger than this (KiB) are ignored. |
 | Excluded apps | `excludedApps` | Window classes where the bar never appears. |
 | Terminal window classes | `terminalClasses` | Windows that paste with Ctrl+Shift+V and cannot cut. |
@@ -180,7 +182,7 @@ they report "unknown" until restarted; terminals never report.
 |---|---|
 | Cut | text selected, field editable, not a terminal |
 | Copy | text selected |
-| Paste | clipboard holds text, and somewhere to paste: an editable field, or a terminal |
+| Paste | clipboard holds text, and somewhere to paste: an editable field, a terminal, or an explicit long press where field detection is unavailable |
 | Search | text selected (up to 4000 characters) |
 | Open Link(s) | the text contains a URL, or a `spotify:`/`ftp:`-style link |
 | Reveal in Files | the whole text is one existing path |
@@ -195,8 +197,11 @@ terminal window class (pastes work, replacing does not); a list of read-only
 viewers and file managers; then the **Assume unknown fields are editable**
 setting, which is off by default: text on a web page, in a mail viewer or in
 any other app that cannot report its focused field never offers Cut, Paste or
-text-replacing actions. The price is that an editable field in an app that is
-not on the accessibility bus is treated as read-only too, so:
+text-replacing actions during automatic selection. An enabled long press still
+offers Paste with text on the clipboard when field detection is unavailable;
+a confirmed read-only field or canvas suppresses it. The price is that an
+editable field in an app that is not on the accessibility bus is otherwise
+treated as read-only, so:
 
 - Restart Chromium, Electron apps and Firefox once after enabling Omapop. The
   helper turns the session accessibility flag on and they pick it up at start.
@@ -522,6 +527,10 @@ a URL, or a network-entitled extension sends it.
 
 ## Development
 
+Run live accessibility and mouse checks in a disposable Omarchy VM. They open
+temporary fixture windows and change selections; the mouse checks also require
+long press enabled and text on the VM's clipboard.
+
 ```bash
 ln -s "$PWD" ~/.config/omarchy/plugins/io.github.jondkinney.omapop
 omarchy plugin validate .
@@ -541,8 +550,9 @@ python3 tests/check_plugin_load.py                  # full plugin QML loading; r
 python3 tests/check_context_ui.py                   # live GTK/AT-SPI check; opens a temporary window and selects fixture text
 python3 tests/check_context_ui.py --popup           # also checks real Omapop popups; requires the running plugin
 python3 tests/check_context_ui.py --long-press      # also checks held-button popups; requires Show on long press enabled
+python3 tests/check_context_ui.py --mouse           # real mouse button/motion checks in GTK; needs /dev/uinput, python-evdev and clipboard text
 lua tests/engine.test.lua                          # modified mouse input and engine reloads
-QT_QUICK_BACKEND=rhi QSG_RHI_BACKEND=opengl /usr/lib/qt6/bin/qmltestrunner -platform offscreen -input tests
+QT_QUICK_BACKEND=rhi QSG_RHI_BACKEND=opengl /usr/lib/qt6/bin/qmltestrunner -platform wayland -input tests
 omarchy restart shell
 omarchy-shell io.github.jondkinney.omapop status
 ```

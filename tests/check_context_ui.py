@@ -26,6 +26,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--popup", action="store_true", help="Also check the running Omapop service with compositor events")
     parser.add_argument("--long-press", action="store_true", help="Also check long press; requires Show on long press enabled")
+    parser.add_argument("--mouse", action="store_true", help="Test real mouse input; requires writable /dev/uinput, python-evdev, enabled long press and text on the clipboard")
     args = parser.parse_args()
     helper = subprocess.Popen(
         ["/usr/bin/python3", "-I", str(ROOT / "bin/omapop-context.py")],
@@ -96,6 +97,9 @@ def main():
                 probe("read-only selection", 10, True, False)
                 if args.popup or args.long_press:
                     check_popups(active, field, on_gui, passed, args.long_press)
+                if args.mouse:
+                    on_gui(lambda: (field.set_editable(True), field.get_buffer().place_cursor(field.get_buffer().get_start_iter())))
+                    check_mouse(active, passed)
             except Exception as error:  # noqa: BLE001 - surface worker failures on the main thread
                 errors.append(repr(error))
             finally:
@@ -109,13 +113,14 @@ def main():
         GLib.timeout_add(700, ready)
 
     app.connect("activate", activate)
-    GLib.timeout_add(10000 if args.long_press else 7000, app.quit)
+    GLib.timeout_add(20000 if args.mouse else 10000 if args.long_press else 7000, app.quit)
     try:
         app.run([])
     finally:
         helper.terminate()
         helper.wait(timeout=2)
-    assert not errors and len(passed) == (8 if args.long_press else 7 if args.popup else 4), errors or passed
+    expected = (8 if args.long_press else 7 if args.popup else 4) + (4 if args.mouse else 0)
+    assert not errors and len(passed) == expected, errors or passed
     print(f"{len(passed)} live accessibility checks passed")
 
 
@@ -192,6 +197,130 @@ def check_popups(active, field, on_gui, passed, long_press=False):
             passed.append("long press while held")
     finally:
         subprocess.run(["omarchy-shell", target, "hide"], stdout=subprocess.DEVNULL, timeout=2)
+
+
+def check_mouse(active, passed, content_y=0):
+    """Send button input through uinput into this fixture, exercising the actual
+    compositor bindings and timer instead of replaying Omapop events.
+    """
+    import socket
+    from evdev import UInput, ecodes
+
+    target = "io.github.jondkinney.omapop"
+
+    def ipc(method):
+        return json.loads(subprocess.check_output(["omarchy-shell", target, method], timeout=2))
+
+    initial = ipc("debug")
+    assert initial["longPressEnabled"], "Enable Show on long press before this check"
+    selection = json.loads(subprocess.check_output(
+        ["python3", str(ROOT / "bin/omapop-selection.py"), "--clipboard-text"], timeout=8))
+    assert selection.get("clipboard", {}).get("hasText"), "The normal clipboard must contain text for the Paste check"
+    wx, wy = active["at"]
+    wy += content_y
+    trace = []
+    connection = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    connection.connect(f"{os.environ['XDG_RUNTIME_DIR']}/hypr/{os.environ['HYPRLAND_INSTANCE_SIGNATURE']}/.socket2.sock")
+    connection.setblocking(False)
+    buffer = b""
+
+    def read_events():
+        nonlocal buffer
+        try:
+            data = connection.recv(65536)
+        except BlockingIOError:
+            return
+        buffer = (buffer + data)[-65536:]
+        while b"\n" in buffer:
+            line, buffer = buffer.split(b"\n", 1)
+            if line.startswith(b"custom>>omapop|"):
+                fields = line.decode("utf-8", "replace").split("|")[1:]
+                event = {"kind": fields[0], "fields": len(fields)}
+                if fields[0] == "press" and len(fields) == 6:
+                    event.update(x=fields[1], y=fields[2], inside=fields[5])
+                if fields[0] == "release" and len(fields) == 20:
+                    event.update(dx=float(fields[1])-float(fields[16]), dy=float(fields[2])-float(fields[17]), held=fields[19])
+                trace.append(event)
+
+    def move(x, y):
+        subprocess.run(["hyprctl", "dispatch", f"hl.dsp.cursor.move({{ x = {wx+x}, y = {wy+y} }})"],
+                       stdout=subprocess.DEVNULL, check=True, timeout=2)
+
+    def observe(seconds):
+        seen = set()
+        until = time.monotonic() + seconds
+        while time.monotonic() < until:
+            state = ipc("status")
+            if state["visible"]:
+                seen.update(state["buttons"])
+            read_events()
+            time.sleep(.02)
+        return seen
+
+    def hide():
+        subprocess.run(["omarchy-shell", target, "hide"], stdout=subprocess.DEVNULL, check=True, timeout=2)
+
+    with UInput({ecodes.EV_KEY: [ecodes.BTN_LEFT], ecodes.EV_REL: [ecodes.REL_X, ecodes.REL_Y]},
+                name="Omapop fixture mouse") as mouse:
+        def button(down):
+            if down:
+                current = json.loads(subprocess.check_output(["hyprctl", "activewindow", "-j"], timeout=2))
+                assert current.get("pid") == active["pid"], "Only the fixture may receive test presses"
+            mouse.write(ecodes.EV_KEY, ecodes.BTN_LEFT, int(down))
+            mouse.syn()
+
+        try:
+            time.sleep(.5)
+            move(10, 10)
+            button(True)
+            time.sleep(.08)
+            button(False)
+            seen = observe(.7)
+            assert not seen, ("ordinary click", seen, trace)
+            passed.append("real ordinary click")
+            trace.clear()
+
+            move(10, 10)
+            before_hold = json.loads(subprocess.check_output(["hyprctl", "cursorpos", "-j"], timeout=2))
+            button(True)
+            seen = observe(1.2)
+            after_hold = json.loads(subprocess.check_output(["hyprctl", "cursorpos", "-j"], timeout=2))
+            button(False)
+            assert "Paste" in seen, ("real long press Paste", seen, trace, before_hold, after_hold, ipc("debug"))
+            assert "Paste" in observe(.2), "Long-press Paste disappeared on release"
+            passed.append("real long press Paste")
+            hide()
+            time.sleep(.1)
+            trace.clear()
+
+            move(10, 10)
+            button(True)
+            time.sleep(.08)
+            mouse.write(ecodes.EV_REL, ecodes.REL_X, 40)
+            mouse.syn()
+            time.sleep(.08)
+            button(False)
+            seen = observe(.7)
+            assert "Copy" in seen, ("real drag selection", seen, trace)
+            passed.append("real drag selection")
+            hide()
+            time.sleep(.1)
+            trace.clear()
+
+            move(10, 150)
+            button(True)
+            time.sleep(.08)
+            mouse.write(ecodes.EV_REL, ecodes.REL_X, 40)
+            mouse.syn()
+            time.sleep(.08)
+            button(False)
+            seen = observe(.7)
+            assert not seen, ("real canvas drag", seen, trace)
+            passed.append("real canvas drag")
+        finally:
+            button(False)
+            hide()
+            connection.close()
 
 
 if __name__ == "__main__":
