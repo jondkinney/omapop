@@ -12,7 +12,7 @@ const wanted = new Set([
   "onPress", "onRelease", "onSelectionChanged", "scheduleSelectionRead",
   "takePendingSelection", "cancelSelection", "trigger", "hidePopup",
   "handleEngineEvent", "parseContext", "decodeField",
-  "isClickContinuation", "present", "handleClick",
+  "isClickContinuation", "present", "handleClick", "clickModifiers",
   "automaticTriggerAllowed", "hasFreshSelection", "isSelectionGesture", "onContextLine",
 ]);
 const functions = [...source.matchAll(/^    function (\w+)\([^]*?^    \}/gm)]
@@ -20,6 +20,9 @@ const functions = [...source.matchAll(/^    function (\w+)\([^]*?^    \}/gm)]
 const popupSource = readFileSync(new URL("../Popup.qml", import.meta.url), "utf8");
 const popupFunctions = [...popupSource.matchAll(/^    function (\w+)\([^]*?^    \}/gm)]
   .filter(match => ["present", "dismiss"].includes(match[1])).map(match => match[0]).join("\n");
+// Read click state from QML so the harness cannot hide a removed property.
+const pressState = Object.fromEntries([...source.matchAll(/^    property (?:real|int) (lastPressAt|lastPressMods): (\d+)$/gm)]
+  .map(match => [match[1], Number(match[2])]));
 
 function harness(autoComplete = true) {
   let now = 10000;
@@ -48,7 +51,7 @@ function harness(autoComplete = true) {
   };
   const c = vm.createContext({
     Date: { now: () => now },
-    lastPressAt: 0, lastPressMods: 0, selectionSerial: 0, lastPressSelectionSerial: 0,
+    ...pressState, selectionSerial: 0, lastPressSelectionSerial: 0,
     pendingRelease: null, lastReleaseInfo: null, clickCount: 0,
     multiClickInterval: 450, clickSettleInterval: 80, dragThreshold: 6, paused: false,
     longPressEnabled: false, requireTerminalShift: true, terminalClasses: [], Actions: actions,
@@ -62,7 +65,7 @@ function harness(autoComplete = true) {
     buildInput: text => ({ text }), buildContext: (_ctx, _parsed, editable) => ({ editable }),
     builtinButtons: () => [{ builtin: true }], extensionButtons: () => [],
     screenForName: () => screen, paginate: buttons => buttons,
-    clickModifiers: () => ({}), runBuiltin() { activations.push(c.current.input.text); },
+    runBuiltin() { activations.push(c.current.input.text); },
     queryContext(_ctx, done) {
       probes.push(done);
       if (autoComplete) later(1, () => done(c.probeResult));
@@ -139,6 +142,44 @@ function test(name, run) {
   try { run(); passed++; }
   catch (error) { console.error("FAIL", name, "\n", error); process.exitCode = 1; }
 }
+
+test("keyboard activation works before any mouse press", () => {
+  const h = harness();
+  assert.equal(h.c.clickModifiers(0x02000000).shift, true);
+});
+
+test("Copy dispatches with the modifiers from the button press", () => {
+  const h = harness();
+  h.select();
+  h.advance(100);
+  h.c.onPress(100, 100, 272, 1, true);
+  h.advance(10);
+  let received;
+  h.c.runBuiltin = (button, mods) => { received = { button, mods }; };
+  h.c.handleClick({ builtin: "copy" }, 0);
+  assert.equal(received.button.builtin, "copy");
+  assert.equal(received.mods.shift, true);
+});
+
+test("expired mouse modifiers do not leak into keyboard activation", () => {
+  const h = harness();
+  h.c.onPress(100, 100, 272, 1, false);
+  h.advance(600);
+  assert.equal(h.c.clickModifiers(0).shift, false);
+  assert.equal(h.c.clickModifiers(0x04000000).control, true);
+});
+
+test("the latest press replaces earlier modifiers and retains right clicks", () => {
+  const h = harness();
+  h.c.onPress(100, 100, 272, 1, false);
+  h.advance(10);
+  h.c.onPress(100, 100, 273, 8, true);
+  const mods = h.c.clickModifiers(0x40000000 | 0x10000000);
+  assert.equal(mods.shift, false);
+  assert.equal(mods.option, true);
+  assert.equal(mods.command, true);
+  assert.equal(mods.rightClick, true);
+});
 
 for (const count of [2, 3]) {
   for (const gap of [40, 100, 300, 430]) {

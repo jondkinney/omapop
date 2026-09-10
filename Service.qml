@@ -196,6 +196,7 @@ Item {
     property var busyTask: null
 
     // Gesture bookkeeping (times are Date.now() ms).
+    property real lastPressAt: 0
     property int lastPressMods: 0
     property real selectionSerial: 0
     property var lastSelectionDecision: null
@@ -683,6 +684,7 @@ Item {
         // selection. Its actions stay disabled until that update completes.
         if (!inside)
             cancelSelection()
+        lastPressAt = Date.now()
         lastPressMods = mods
         lastPressSelectionSerial = selectionSerial
         if (button !== 272 || inside) {
