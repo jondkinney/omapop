@@ -199,7 +199,8 @@ def check_popups(active, field, on_gui, passed, long_press=False):
         subprocess.run(["omarchy-shell", target, "hide"], stdout=subprocess.DEVNULL, timeout=2)
 
 
-def check_mouse(active, passed, content_y=0, check_long_press=True, selection_check=None):
+def check_mouse(active, passed, content_y=0, check_long_press=True, selection_check=None,
+                selection_cases=()):
     """Send button input through uinput into this fixture, exercising the actual
     compositor bindings and timer instead of replaying Omapop events.
     """
@@ -314,6 +315,45 @@ def check_mouse(active, passed, content_y=0, check_long_press=True, selection_ch
             time.sleep(.1)
             trace.clear()
 
+            failures = []
+            for case in selection_cases:
+                # A click on the canvas leaves Chromium's old highlight in
+                # place. Collapse it in the text before starting each case,
+                # so the next drag selects instead of moving that highlight.
+                move(10, 10)
+                button(True)
+                time.sleep(.08)
+                button(False)
+                hide()
+                time.sleep(.5)
+                if selection_check:
+                    selection_check(False)
+                trace.clear()
+                move(case["x"], case.get("y", 10))
+                for click in range(case.get("clicks", 1)):
+                    button(True)
+                    time.sleep(case.get("hold", .08))
+                    for code, delta in [(ecodes.REL_X, case.get("dx", 0)), (ecodes.REL_Y, case.get("dy", 0))]:
+                        if delta:
+                            mouse.write(ecodes.EV_REL, code, round(delta * monitor["scale"]))
+                    mouse.syn()
+                    time.sleep(case.get("settle", .08))
+                    button(False)
+                    time.sleep(.08)
+                seen = observe(.7)
+                try:
+                    if selection_check:
+                        selection_check(True, case)
+                    assert "Copy" in seen, ("Copy did not appear", seen, trace)
+                    passed.append(case["name"])
+                    print("PASS", case["name"], flush=True)
+                except AssertionError as error:
+                    failures.append((case["name"], str(error)))
+                    print("FAIL", case["name"], str(error), "debug:", ipc("debug"), flush=True)
+                hide()
+                time.sleep(.1)
+                trace.clear()
+
             move(10, 150)
             button(True)
             time.sleep(.08)
@@ -324,6 +364,7 @@ def check_mouse(active, passed, content_y=0, check_long_press=True, selection_ch
             seen = observe(.7)
             assert not seen, ("real canvas drag", seen, trace)
             passed.append("real canvas drag")
+            assert not failures, failures
         finally:
             button(False)
             hide()

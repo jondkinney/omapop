@@ -77,6 +77,8 @@ reloads its configuration (`hyprctl reload`), or immediately with
   the shell. A long press can offer Paste when field detection is unavailable,
   and does not require Shift in terminals. It never reuses unconfirmed old
   selection text for Copy, Search or text-processing actions.
+  If you start dragging after the hold, releasing the button evaluates the new
+  selection normally, including on read-only page text.
 - The bar hides when you click elsewhere, press a key, scroll, move the pointer
   away, or switch window or workspace. Hold **Super** while selecting to keep
   it away.
@@ -552,7 +554,7 @@ python3 tests/check_context_ui.py --popup           # also checks real Omapop po
 python3 tests/check_context_ui.py --long-press      # also checks held-button popups; requires Show on long press enabled
 python3 tests/check_context_ui.py --mouse           # real mouse button/motion checks in GTK; needs /dev/uinput, python-evdev and clipboard text
 python3 tests/check_browser_mouse.py               # native Wayland Chromium, accessibility enabled, isolated profile
-python3 tests/check_browser_mouse.py --webpage --normal-window # regular page text, with tabs and an address bar
+python3 tests/check_browser_mouse.py --webpage --normal-window # read-only text: holds then drags, reverse/multiline drags and multi-clicks
 python3 tests/check_browser_mouse.py --webpage --normal-window --second-window # multiple windows sharing one browser process
 python3 tests/check_browser_mouse.py --without-accessibility # explicit Paste when field detection is unavailable
 lua tests/engine.test.lua                          # modified mouse input and engine reloads
@@ -565,6 +567,9 @@ omarchy-shell io.github.jondkinney.omapop status
 selection; `settings` opens preferences; `hide`, `pause`, `resume` and `toggle`
 control its visibility. `status` and `debug` inspect the current state. Rescan
 and action execution are available from the UI, not IPC.
+The debug response includes the last completed selection probe's gesture,
+freshness and accessibility booleans, plus whether the selection watcher is
+running. It does not include selected text or clipboard contents.
 
 See [catalog maintenance](catalog/README.md) for source collection, review
 decisions, offline compatibility checks and signing a new approval revision.

@@ -198,6 +198,7 @@ Item {
     // Gesture bookkeeping (times are Date.now() ms).
     property int lastPressMods: 0
     property real selectionSerial: 0
+    property var lastSelectionDecision: null
     property real lastPressSelectionSerial: 0
     property var pendingRelease: null
     property var lastReleaseInfo: null
@@ -696,20 +697,25 @@ Item {
 
     function onRelease(ctx) {
         var now = Date.now()
+        var dx = ctx.x - ctx.pressX
+        var dy = ctx.y - ctx.pressY
+        var dragged = Math.sqrt(dx * dx + dy * dy) >= dragThreshold
+        // A hold can become a selection drag. Supersede any in-flight Paste
+        // read and evaluate the final selection normally on mouse-up.
+        var longPressOnly = ctx.wasLongPress && !dragged
+        if (ctx.wasLongPress && dragged)
+            cancelSelection()
         var automaticAllowed = automaticTriggerAllowed(ctx, "selection")
         // Super suppresses selection, including its contribution to a later
         // multi-click sequence after the modifier has been released.
-        if (ctx.pressInside || ctx.wasLongPress || paused || ((ctx.mods | lastPressMods) & 64) !== 0
+        if (ctx.pressInside || longPressOnly || paused || ((ctx.mods | lastPressMods) & 64) !== 0
                 || !automaticAllowed) {
-            if ((selectionUpdating || (!automaticAllowed && !ctx.wasLongPress && popup.visible)) && !ctx.pressInside)
+            if ((selectionUpdating || (!automaticAllowed && !longPressOnly && popup.visible)) && !ctx.pressInside)
                 hidePopup()
             lastReleaseInfo = null
             clickCount = 0
             return
         }
-        var dx = ctx.x - ctx.pressX
-        var dy = ctx.y - ctx.pressY
-        var dragged = Math.sqrt(dx * dx + dy * dy) >= dragThreshold
         var address = ctx.app ? ctx.app.address : ""
         if (!dragged && isClickContinuation(ctx.x, ctx.y, now) && lastReleaseInfo.address === address)
             clickCount += 1
@@ -866,6 +872,14 @@ Item {
             }
             join.presented = true
             var selected = join.probe ? join.probe.selection : undefined
+            lastSelectionDecision = {
+                trigger: kind, fresh: hasFreshSelection(ctx),
+                pressSerial: ctx.selectionSerial, readSerial: readSelectionSerial, currentSerial: selectionSerial,
+                selection: selected === undefined ? null : selected,
+                editable: join.probe && join.probe.editable !== undefined ? join.probe.editable : null,
+                dragged: ctx.dragged === true, clicks: ctx.clicks || 0,
+                wasLongPress: ctx.wasLongPress === true
+            }
             if (kind === "selection" && (selected === false || (!hasFreshSelection(ctx) && selected !== true))) {
                 discard()
                 return
@@ -2524,8 +2538,9 @@ Item {
             return JSON.stringify({
                 busy: root.busy, hasCurrent: !!root.current, reading: !!root.readTask, pending: !!root.pendingRelease,
                 mode: popup.mode, visible: popup.visible, screen: popup.screen ? String(popup.screen.name) : "",
-                keyboard: popup.keyboardMode, probeRunning: contextProc.running,
+                keyboard: popup.keyboardMode, probeRunning: contextProc.running, watchRunning: watchProc.running,
                 longPressEnabled: root.longPressEnabled, requireTerminalShift: root.requireTerminalShift,
+                selectionDecision: root.lastSelectionDecision,
                 gesture: { clicks: root.clickCount, settleMs: root.clickSettleInterval, multiClickMs: root.multiClickInterval,
                     readDelayMs: readSoon.interval, generation: root.readGeneration, updating: root.selectionUpdating },
                 context: root.current ? { app: root.current.context.appIdentifier, editable: root.current.context.editable, source: root.current.context.editSource, canPaste: root.current.context.canPaste, canReplace: root.current.context.canReplace } : null,

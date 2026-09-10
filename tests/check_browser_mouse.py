@@ -28,13 +28,15 @@ def main():
     with tempfile.TemporaryDirectory(prefix="omapop-browser-mouse-") as directory:
         root = Path(directory)
         page = root / "fixture.html"
-        field = "<div class='content'>Omapop selection <em>test</em> only</div>" if args.webpage else "<textarea class='content' autofocus>Omapop selection test only</textarea>"
+        field = "<div class='content'>Omapop selection <em>test</em> only<br><span>Another readable line</span></div>" if args.webpage else "<textarea class='content' autofocus>Omapop selection test only</textarea>"
         page.write_text('''<!doctype html><html><head><meta charset="utf-8">
 <style>html,body{margin:0}.content{box-sizing:border-box;display:block;width:100%;height:100px;
 border:0;padding:0;resize:none;font:20px monospace}canvas{display:block;width:100%;height:300px;background:#dde5f2}</style>
 </head><body>''' + field + '''<canvas></canvas>
-<script>function report(){const f=document.querySelector('textarea'),s=getSelection();document.title='Omapop mouse fixture '+
+<script>function report(){const f=document.querySelector('textarea'),s=getSelection(),nodes=[],walker=document.createTreeWalker(document.querySelector('.content'),NodeFilter.SHOW_TEXT);
+while(walker.nextNode())nodes.push(walker.currentNode);document.title='Omapop mouse fixture '+
 JSON.stringify({viewportHeight:innerHeight,deviceScale:devicePixelRatio,start:f?f.selectionStart:s.anchorOffset,end:f?f.selectionEnd:s.focusOffset,
+startNode:nodes.indexOf(s.anchorNode),endNode:nodes.indexOf(s.focusNode),
 selected:f?f.selectionStart!==f.selectionEnd:!s.isCollapsed});}
 addEventListener('resize',report);document.addEventListener('selectionchange',report);setTimeout(report,300);</script>
 </body></html>''')
@@ -84,18 +86,34 @@ addEventListener('resize',report);document.addEventListener('selectionchange',re
             content_y = round(window["size"][1] - geometry["viewportHeight"] * geometry["deviceScale"] / monitor["scale"])
             assert 0 <= content_y < window["size"][1], "Browser viewport must fit its window"
 
-            def check_selection():
+            def check_selection(expected=True, case=None):
                 current = json.loads(subprocess.check_output(["hyprctl", "activewindow", "-j"], timeout=2))
                 assert current.get("address") == window["address"], "The fixture must still have focus"
                 selection = json.JSONDecoder().raw_decode(current["title"].removeprefix("Omapop mouse fixture "))[0]
-                assert selection["selected"], ("The native drag must actually select fixture text", selection)
-                if args.capture_dir:
+                assert selection["selected"] is expected, ("The native gesture must change the fixture selection", expected, selection)
+                if expected and case and case.get("cross_node"):
+                    assert selection["startNode"] != selection["endNode"], ("The selection must cross text nodes", selection)
+                if expected and args.webpage:
+                    state = json.loads(subprocess.check_output(["omarchy-shell", "io.github.jondkinney.omapop", "status"], timeout=2))
+                    assert not {"Cut", "Paste"}.intersection(state["buttons"]), "Read-only selections must not offer editing actions"
+                if expected and args.capture_dir:
                     args.capture_dir.mkdir(parents=True, exist_ok=True)
                     subprocess.run(["grim", str(args.capture_dir / "selection.png")], check=True, timeout=3)
 
             passed = []
             try:
-                check_mouse(window, passed, content_y, check_long_press=not args.webpage, selection_check=check_selection)
+                cases = [
+                    {"name": "drag after a hold", "x": 10, "dx": 50, "hold": .65},
+                    {"name": "slow drag", "x": 10, "dx": 50, "settle": .65},
+                    {"name": "backwards drag", "x": 90, "dx": -65},
+                    {"name": "across text elements", "x": 10, "dx": 290, "cross_node": True},
+                    {"name": "across lines", "x": 10, "dx": 100, "dy": 26, "cross_node": True},
+                    {"name": "double click", "x": 10, "clicks": 2},
+                    {"name": "triple click", "x": 10, "clicks": 3},
+                    {"name": "drag from line whitespace", "x": 360, "dx": -340},
+                ] if args.webpage else []
+                check_mouse(window, passed, content_y, check_long_press=not args.webpage,
+                            selection_check=check_selection, selection_cases=cases)
             except AssertionError:
                 current = json.loads(subprocess.check_output(["hyprctl", "activewindow", "-j"], timeout=2))
                 if current.get("pid") == process.pid:

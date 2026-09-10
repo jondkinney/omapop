@@ -700,6 +700,64 @@ test("an explicit terminal long press offers Paste without Shift and survives mo
   assert.equal(h.c.current.input.text, "");
 });
 
+test("a hold followed by a drag presents read-only text actions on release", () => {
+  const h = actionHarness();
+  const ctx = h.context();
+  h.c.onPress(ctx.x, ctx.y, 272, 0, false);
+  h.c.trigger(ctx, "longpress");
+  h.probes[0]({ editable: false, selection: false });
+  h.reads[0].complete("old PRIMARY", { clipboard: { hasText: true } });
+  assert.equal(h.c.popup.visible, false);
+  h.c.onSelectionChanged();
+  h.c.onRelease({ ...ctx, x: 180, wasLongPress: true });
+  h.advance(50);
+  assert.equal(h.reads.length, 2);
+  h.probes[1]({ editable: false });
+  h.reads[1].complete("new selection");
+  assert.deepEqual(Array.from(h.c.popup.buttons, button => button.builtin), ["copy", "search"]);
+  assert.equal(h.c.current.input.text, "new selection");
+});
+
+test("a drag cancels the unfinished long-press read before it can show stale actions", () => {
+  const h = harness(false);
+  const ctx = h.context();
+  h.c.onPress(ctx.x, ctx.y, 272, 0, false);
+  h.c.trigger(ctx, "longpress");
+  h.c.onSelectionChanged();
+  h.c.onRelease({ ...ctx, x: 180, wasLongPress: true });
+  assert.equal(h.reads[0].cancelled, true);
+  h.probes[0]({ editable: true });
+  h.reads[0].complete("old PRIMARY");
+  assert.equal(h.presentations.length, 0);
+  h.advance(50);
+  h.probes[1]({ editable: false });
+  h.reads[1].complete("new selection");
+  assert.equal(h.presentations.length, 1);
+  assert.equal(h.c.current.trigger, "selection");
+});
+
+test("a terminal hold becoming a drag still requires Shift", () => {
+  for (const mods of [0, 1]) {
+    const h = actionHarness();
+    const ctx = h.context({ mods, app: { appClass: "foot", address: "0x1", pid: 1 } });
+    h.c.onPress(ctx.x, ctx.y, 272, mods, false);
+    h.c.trigger(ctx, "longpress");
+    h.probes[0](undefined);
+    h.reads[0].complete("old PRIMARY", { clipboard: { hasText: true } });
+    assert.equal(h.c.popup.visible, true);
+    h.c.onSelectionChanged();
+    h.c.onRelease({ ...ctx, x: 180, wasLongPress: true });
+    assert.equal(h.c.popup.visible, false);
+    h.advance(50);
+    assert.equal(h.reads.length, mods ? 2 : 1);
+    if (mods) {
+      h.probes[1](undefined);
+      h.reads[1].complete("terminal selection");
+      assert.equal(h.c.popup.visible, true);
+    }
+  }
+});
+
 test("accessibility replies accept only strict selection and editability booleans", () => {
   for (const value of [true, false, null, "true", 1, {}, []]) {
     const h = harness();
