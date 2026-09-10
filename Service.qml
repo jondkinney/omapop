@@ -531,7 +531,8 @@ Item {
         contextProc.write(JSON.stringify({ id: id, pid: pid,
             x: Number.isFinite(ctx.pressX) ? ctx.pressX : ctx.x,
             y: Number.isFinite(ctx.pressY) ? ctx.pressY : ctx.y,
-            windowX: ctx.app.windowX, windowY: ctx.app.windowY }) + "\n")
+            windowX: ctx.app.windowX, windowY: ctx.app.windowY,
+            scale: ctx.monitor ? ctx.monitor.scale : 1 }) + "\n")
     }
 
     function onContextLine(line) {

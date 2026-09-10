@@ -21,21 +21,27 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--without-accessibility", action="store_true", help="Also exercise the unknown-field Paste fallback")
     parser.add_argument("--webpage", action="store_true", help="Select regular web-page text instead of a textarea")
+    parser.add_argument("--dense-page", action="store_true", help="Select separate paragraphs farther down the page (also enables --webpage)")
     parser.add_argument("--normal-window", action="store_true", help="Include Chromium's tabs and address bar")
     parser.add_argument("--second-window", action="store_true", help="Leave an editable window open in the same browser process")
     parser.add_argument("--capture-dir", type=Path, help="Save the selected text and popup for visual inspection")
     args = parser.parse_args()
+    args.webpage = args.webpage or args.dense_page
     with tempfile.TemporaryDirectory(prefix="omapop-browser-mouse-") as directory:
         root = Path(directory)
         page = root / "fixture.html"
         field = "<div class='content'>Omapop selection <em>test</em> only<br><span>Another readable line</span></div>" if args.webpage else "<textarea class='content' autofocus>Omapop selection test only</textarea>"
+        if args.dense_page:
+            field += "".join(f"<p class='paragraph' style='top:{y}px'>Omapop regular selectable text in paragraph number {i} on this page.</p>"
+                             for i, y in enumerate((100, 220, 320, 440)))
         page.write_text('''<!doctype html><html><head><meta charset="utf-8">
 <style>html,body{margin:0}.content{box-sizing:border-box;display:block;width:100%;height:100px;
-border:0;padding:0;resize:none;font:20px monospace}canvas{display:block;width:100%;height:300px;background:#dde5f2}</style>
+border:0;padding:0;resize:none;font:20px monospace}.paragraph{position:absolute;left:32px;margin:0;width:85%;font:20px/26px monospace}
+canvas{display:block;width:100%;height:300px;background:#dde5f2}body:has(.paragraph) canvas{margin-top:460px}</style>
 </head><body>''' + field + '''<canvas></canvas>
 <script>function report(){const f=document.querySelector('textarea'),s=getSelection(),nodes=[],walker=document.createTreeWalker(document.querySelector('.content'),NodeFilter.SHOW_TEXT);
 while(walker.nextNode())nodes.push(walker.currentNode);document.title='Omapop mouse fixture '+
-JSON.stringify({viewportHeight:innerHeight,deviceScale:devicePixelRatio,start:f?f.selectionStart:s.anchorOffset,end:f?f.selectionEnd:s.focusOffset,
+JSON.stringify({viewportHeight:innerHeight,viewportWidth:innerWidth,deviceScale:devicePixelRatio,start:f?f.selectionStart:s.anchorOffset,end:f?f.selectionEnd:s.focusOffset,
 startNode:nodes.indexOf(s.anchorNode),endNode:nodes.indexOf(s.focusNode),
 selected:f?f.selectionStart!==f.selectionEnd:!s.isCollapsed});}
 addEventListener('resize',report);document.addEventListener('selectionchange',report);setTimeout(report,300);</script>
@@ -84,7 +90,12 @@ addEventListener('resize',report);document.addEventListener('selectionchange',re
             monitors = json.loads(subprocess.check_output(["hyprctl", "monitors", "-j"], timeout=2))
             monitor = next(m for m in monitors if m["id"] == window["monitor"])
             content_y = round(window["size"][1] - geometry["viewportHeight"] * geometry["deviceScale"] / monitor["scale"])
+            content_x = round(window["size"][0] - geometry["viewportWidth"] * geometry["deviceScale"] / monitor["scale"])
             assert 0 <= content_y < window["size"][1], "Browser viewport must fit its window"
+            assert 0 <= content_x < window["size"][0], "Browser viewport must fit its window"
+            if args.dense_page:
+                assert geometry["viewportHeight"] > 610, "Dense-page checks need a viewport at least 611 pixels tall"
+                assert geometry["viewportWidth"] > 450, "Dense-page checks need a viewport at least 451 pixels wide"
 
             def check_selection(expected=True, case=None):
                 current = json.loads(subprocess.check_output(["hyprctl", "activewindow", "-j"], timeout=2))
@@ -112,15 +123,21 @@ addEventListener('resize',report);document.addEventListener('selectionchange',re
                     {"name": "triple click", "x": 10, "clicks": 3},
                     {"name": "drag from line whitespace", "x": 360, "dx": -340},
                 ] if args.webpage else []
+                if args.dense_page:
+                    cases += [{"name": f"paragraph at y={y}", "x": 292, "y": y + 10, "dx": 90}
+                              for y in (100, 220, 320, 440)]
+                    cases += [{"name": "double click farther down", "x": 292, "y": 330, "clicks": 2},
+                              {"name": "triple click farther down", "x": 292, "y": 450, "clicks": 3}]
                 check_mouse(window, passed, content_y, check_long_press=not args.webpage,
-                            selection_check=check_selection, selection_cases=cases)
+                            selection_check=check_selection, selection_cases=cases, content_x=content_x,
+                            canvas_y=600 if args.dense_page else 150)
             except AssertionError:
                 current = json.loads(subprocess.check_output(["hyprctl", "activewindow", "-j"], timeout=2))
                 if current.get("pid") == process.pid:
                     fixture = json.JSONDecoder().raw_decode(current["title"].removeprefix("Omapop mouse fixture "))[0]
                     wx, wy = current["at"]
                     request = {"id": 1, "pid": process.pid, "x": wx + 10, "y": wy + content_y + 10,
-                               "windowX": wx, "windowY": wy}
+                               "windowX": wx, "windowY": wy, "scale": monitor["scale"]}
                     helper = Path(__file__).resolve().parents[1] / "bin/omapop-context.py"
                     result = subprocess.run(["python3", "-I", str(helper)], input=json.dumps(request) + "\n",
                                             stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, timeout=4)

@@ -508,7 +508,9 @@ processes. The boundaries, and the contract at each:
 - **The accessibility helper** reads focus, role, editability, widget bounds
   and text-selection offsets, never widget text. A bounded hit-test starts at
   the gesture's position in the active window, with desktop coordinates
-  converted using the compositor's window position. A stale focused field
+  converted using the compositor's window position and monitor scale.
+  Chromium's web accessibility tree uses physical pixels while its browser
+  controls report logical bounds, so the probe accounts for both. A stale focused field
   elsewhere cannot confirm a selection or offer Paste on a canvas. Tree walks
   have a 240 ms work budget and each AT-SPI call has a short timeout; the shell
   treats replies taking more than 300 ms as unknown. Requests are capped at
@@ -556,6 +558,7 @@ python3 tests/check_context_ui.py --mouse           # real mouse button/motion c
 python3 tests/check_browser_mouse.py               # native Wayland Chromium, accessibility enabled, isolated profile
 python3 tests/check_browser_mouse.py --webpage --normal-window # read-only text: holds then drags, reverse/multiline drags and multi-clicks
 python3 tests/check_browser_mouse.py --webpage --normal-window --second-window # multiple windows sharing one browser process
+python3 tests/check_browser_mouse.py --dense-page --normal-window # lower paragraphs; repeat at 100% and 200% monitor scale
 python3 tests/check_browser_mouse.py --without-accessibility # explicit Paste when field detection is unavailable
 lua tests/engine.test.lua                          # modified mouse input and engine reloads
 QT_QUICK_BACKEND=rhi QSG_RHI_BACKEND=opengl /usr/lib/qt6/bin/qmltestrunner -platform wayland -input tests

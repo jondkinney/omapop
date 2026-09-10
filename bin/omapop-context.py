@@ -3,7 +3,7 @@
 
 Protocol (one JSON object per line, both directions):
   request:  {"id": 1, "pid": 4242, "x": 100, "y": 200,
-             "windowX": 50, "windowY": 100}
+             "windowX": 50, "windowY": 100, "scale": 2}
   reply:    {"id": 1, "onBus": true, "editable": true|false|null, "role": "text",
              "selection": true|false|null, "multiline": false, "app": "Firefox"}
   request:  {"id": 2, "op": "ping"}   ->  {"id": 2, "ok": true, "available": true}
@@ -172,10 +172,38 @@ def active_window(node, deadline):
     return None
 
 
-def point_path(window, x, y, deadline, coordinates=None):
+def point_path(window, x, y, deadline, coordinates=None, chromium_scale=1, node_points=None):
     """Hit-test down from the active window, never search unrelated fields."""
     path = []
     node = window
+    web_nodes = {}
+    node_points = {} if node_points is None else node_points
+    hit_x, hit_y = round(x * chromium_scale), round(y * chromium_scale)
+
+    def point_for(current):
+        if chromium_scale == 1:
+            return x, y
+        # Chromium hit-tests in physical pixels. Its browser UI reports
+        # logical bounds, while its web accessibility tree reports physical
+        # bounds, including text offsets. Keep those coordinate spaces apart.
+        ancestry = []
+        while current not in web_nodes:
+            if current is None or current in ancestry or len(ancestry) >= 25 or time.monotonic() >= deadline:
+                return None
+            ancestry.append(current)
+            role = current.get_role_name()
+            if role == "document web":
+                web_nodes[current] = True
+                break
+            if role in ("frame", "dialog", "window", "application"):
+                web_nodes[current] = False
+                break
+            current = current.get_parent()
+        web = web_nodes[current]
+        for ancestor in ancestry:
+            web_nodes[ancestor] = web
+        return (hit_x, hit_y) if web else (x, y)
+
     coordinates = Atspi.CoordType.SCREEN if coordinates is None else coordinates
     for _ in range(25):
         if node is None or time.monotonic() >= deadline or node in path:
@@ -184,21 +212,26 @@ def point_path(window, x, y, deadline, coordinates=None):
         component = node.get_component_iface()
         if not st.contains(Atspi.StateType.SHOWING) or component is None:
             return None
+        point = point_for(node)
+        if point is None:
+            return None
+        px, py = point
         # GetExtents works in WINDOW space even on toolkits whose Contains
         # implementation only handles SCREEN coordinates correctly.
         rect = component.get_extents(coordinates)
         if rect is None or not (0 < rect.width <= 1000000 and 0 < rect.height <= 1000000
-                                and rect.x <= x < rect.x + rect.width and rect.y <= y < rect.y + rect.height):
+                                and rect.x <= px < rect.x + rect.width and rect.y <= py < rect.y + rect.height):
             return None
+        node_points[node] = point
         path.append(node)
-        child = component.get_accessible_at_point(x, y, coordinates)
+        child = component.get_accessible_at_point(hit_x, hit_y, coordinates)
         if child is None or child == node:
             return path
         node = child
     return None
 
 
-def selection_at_point(path, x, y, deadline, coordinates=None):
+def selection_at_point(path, x, y, deadline, coordinates=None, node_points=None):
     """Text selections are distinct from selected canvas objects/list items.
 
     A browser may expose a leaf text node while storing its selection on the
@@ -220,7 +253,8 @@ def selection_at_point(path, x, y, deadline, coordinates=None):
         if count == 0:
             empty = False
             continue
-        offset = text.get_offset_at_point(x, y, coordinates)
+        point = node_points.get(node, (x, y)) if node_points is not None else (x, y)
+        offset = text.get_offset_at_point(*point, coordinates)
         for i in range(count):
             if time.monotonic() >= deadline:
                 return None
@@ -254,7 +288,7 @@ def unknown(on_bus=False):
     return {"onBus": on_bus, "editable": None, "selection": None, "role": "", "multiline": False, "app": ""}
 
 
-def describe(pid, point=None, origin=None):
+def describe(pid, point=None, origin=None, scale=1):
     if not available:
         return unknown()
     deadline = time.monotonic() + QUERY_SECONDS
@@ -271,18 +305,24 @@ def describe(pid, point=None, origin=None):
         if role in ("terminal",):
             editable = False
         app = ""
+        chromium_scale = 1
         try:
             a = node.get_application()
             app = (a.get_name() or "")[:64] if a else ""
+            if a and (a.get_toolkit_name() or "")[:64].lower() == "chromium":
+                chromium_scale = scale
         except Exception:  # noqa: BLE001
             pass
         selection = None
         if point is not None:
+            if chromium_scale != 1 and origin is None:
+                return unknown(on_bus)
             coordinates = Atspi.CoordType.SCREEN
             if origin is not None:
                 point = (point[0] - origin[0], point[1] - origin[1])
                 coordinates = Atspi.CoordType.WINDOW
-            path = point_path(window, *point, deadline, coordinates)
+            node_points = {}
+            path = point_path(window, *point, deadline, coordinates, chromium_scale, node_points)
             if path is None:
                 editable = None
             else:
@@ -290,7 +330,7 @@ def describe(pid, point=None, origin=None):
                 # must not offer Paste for a long press on a canvas or toolbar.
                 editable = bool(editable) if node in path else False
                 try:
-                    selection = selection_at_point(path, *point, deadline, coordinates)
+                    selection = selection_at_point(path, *point, deadline, coordinates, node_points)
                 except Exception:  # noqa: BLE001 - selection support is independent of editability
                     selection = None
         return {"onBus": True, "editable": editable, "selection": selection, "role": role[:32], "multiline": st.contains(Atspi.StateType.MULTI_LINE), "app": app}
@@ -328,8 +368,12 @@ def handle_line(raw):
     point = (x, y) if all(type(v) is int and -1000000 <= v <= 1000000 for v in (x, y)) else None
     wx, wy = req.get("windowX"), req.get("windowY")
     origin = (wx, wy) if all(type(v) is int and -1000000 <= v <= 1000000 for v in (wx, wy)) else None
+    scale = req.get("scale", 1)
+    if type(scale) not in (int, float) or not .25 <= scale <= 8:
+        out({"id": rid, **unknown()})
+        return
     started = time.monotonic()
-    result = describe(pid, point, origin)
+    result = describe(pid, point, origin, scale)
     result["id"] = rid
     result["ms"] = int((time.monotonic() - started) * 1000)
     out(result)

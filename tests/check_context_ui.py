@@ -200,7 +200,7 @@ def check_popups(active, field, on_gui, passed, long_press=False):
 
 
 def check_mouse(active, passed, content_y=0, check_long_press=True, selection_check=None,
-                selection_cases=()):
+                selection_cases=(), content_x=0, canvas_y=150):
     """Send button input through uinput into this fixture, exercising the actual
     compositor bindings and timer instead of replaying Omapop events.
     """
@@ -218,6 +218,7 @@ def check_mouse(active, passed, content_y=0, check_long_press=True, selection_ch
         ["python3", str(ROOT / "bin/omapop-selection.py"), "--clipboard-text"], timeout=8))
     assert selection.get("clipboard", {}).get("hasText"), "The normal clipboard must contain text for the Paste check"
     wx, wy = active["at"]
+    wx += content_x
     wy += content_y
     monitors = json.loads(subprocess.check_output(["hyprctl", "monitors", "-j"], timeout=2))
     monitor = next(m for m in monitors if m["id"] == active["monitor"])
@@ -354,7 +355,7 @@ def check_mouse(active, passed, content_y=0, check_long_press=True, selection_ch
                 time.sleep(.1)
                 trace.clear()
 
-            move(10, 150)
+            move(10, canvas_y)
             button(True)
             time.sleep(.08)
             mouse.write(ecodes.EV_REL, ecodes.REL_X, relative_drag)

@@ -97,7 +97,7 @@ class ContextTests(unittest.TestCase):
         self.canvas = Node(role="drawing area", bounds=(50, 0, 50, 100))
         self.window = Node(role="frame", states=("ACTIVE",), children=(self.field, self.canvas))
         self.focus = patch.object(context, "find_focused", return_value=(self.field, True))
-        self.focus.start()
+        self.focus_mock = self.focus.start()
         self.addCleanup(self.focus.stop)
 
     def describe(self, point=(10, 10)):
@@ -195,6 +195,86 @@ class ContextTests(unittest.TestCase):
             with patch.object(self.window, "get_accessible_at_point", wraps=self.window.get_accessible_at_point) as hit:
                 self.assertIs(context.describe(123, point, origin)["selection"], True)
                 hit.assert_called_once_with(10, 10, "window")
+
+    def chromium_tree(self, scale):
+        # Native Wayland Chromium mixes logical browser UI bounds with
+        # physical web bounds. The frame's hit test can skip the document.
+        upper = Node(role="static", bounds=(0, 100 * scale, 600 * scale, 90 * scale), text=Text())
+        lower = Node(role="static", bounds=(0, 200 * scale, 600 * scale, 90 * scale),
+                     text=Text([(22, 37)], offset=25))
+        document = Node(role="document web", states=("FOCUSED",), bounds=(0, 80 * scale, 600 * scale, 500 * scale),
+                        children=(upper, lower))
+        window = Node(role="frame", states=("ACTIVE",), bounds=(0, 0, 600, 600), children=(document,), text=Text())
+        window.get_accessible_at_point = lambda x, y, coord: document.get_accessible_at_point(x, y, coord)
+        document.get_application = lambda: SimpleNamespace(get_name=lambda: "Chromium", get_toolkit_name=lambda: "Chromium")
+        self.focus_mock.return_value = (document, True)
+        return window, document, upper, lower
+
+    def test_scaled_chromium_hits_the_selected_paragraph_instead_of_the_previous_one(self):
+        for scale in (1, 1.25, 1.5, 2):
+            with self.subTest(scale=scale):
+                window, _, _, lower = self.chromium_tree(scale)
+                origin = (-1200, 38)
+                # At 200%, the logical point falls in the physical bounds of
+                # the unselected paragraph above. That used to veto fresh PRIMARY.
+                with patch.object(lower.text, "get_offset_at_point", wraps=lower.text.get_offset_at_point) as offset:
+                    result = context.describe(123, (-880, 278), origin, scale)
+                    self.assertIs(result["selection"], True)
+                    self.assertIs(result["editable"], False)
+                    offset.assert_called_once_with(round(320 * scale), round(240 * scale), "window")
+                lower.text.offset = -1
+                self.assertIsNone(context.describe(123, (-880, 278), origin, scale)["selection"])
+
+    def test_scaled_chromium_keeps_browser_ui_bounds_and_text_coordinates_logical(self):
+        window, document, _, _ = self.chromium_tree(2)
+        toolbar = Node(role="entry", states=("FOCUSED", "EDITABLE"), bounds=(0, 0, 600, 80),
+                       text=Text([(1, 5)], offset=3))
+        toolbar.parent = window
+        toolbar.get_application = document.get_application
+        self.focus_mock.return_value = (toolbar, True)
+        window.get_accessible_at_point = Mock(return_value=toolbar)
+        with patch.object(toolbar.text, "get_offset_at_point", wraps=toolbar.text.get_offset_at_point) as offset:
+            result = context.describe(123, (750, 98), (200, 38), 2)
+            self.assertIs(result["selection"], True)
+            self.assertIs(result["editable"], True)
+            window.get_accessible_at_point.assert_called_once_with(1100, 120, "window")
+            offset.assert_called_once_with(550, 60, "window")
+
+    def test_scaled_chromium_cannot_reuse_selection_elsewhere_or_on_canvas(self):
+        window, document, upper, lower = self.chromium_tree(2)
+        self.assertIs(context.describe(123, (320, 120), (0, 0), 2)["selection"], False)
+        canvas = Node(role="drawing area", bounds=lower.bounds)
+        canvas.parent = document
+        window.get_accessible_at_point = lambda *_: canvas
+        self.assertIs(context.describe(123, (320, 240), (0, 0), 2)["selection"], False)
+
+    def test_other_toolkits_keep_logical_coordinates_on_scaled_monitors(self):
+        self.field.get_application = lambda: SimpleNamespace(get_name=lambda: "GTK app", get_toolkit_name=lambda: "gtk")
+        with patch.object(self.window, "get_accessible_at_point", wraps=self.window.get_accessible_at_point) as hit:
+            self.assertIs(context.describe(123, (210, 48), (200, 38), 2)["selection"], True)
+            hit.assert_called_once_with(10, 10, "window")
+
+    def test_scaled_chromium_requires_window_origin(self):
+        self.chromium_tree(2)
+        result = context.describe(123, (320, 240), scale=2)
+        self.assertIsNone(result["selection"])
+        self.assertIsNone(result["editable"])
+
+    def test_chromium_web_ancestry_is_bounded_and_must_be_complete(self):
+        for failure in ("missing parent", "cycle", "too deep"):
+            with self.subTest(failure=failure):
+                _, _, _, lower = self.chromium_tree(2)
+                lower.parent = None
+                if failure == "cycle":
+                    lower.parent = lower
+                elif failure == "too deep":
+                    current = lower
+                    for _ in range(30):
+                        current.parent = Node(role="section")
+                        current = current.parent
+                result = context.describe(123, (320, 240), (0, 0), 2)
+                self.assertIsNone(result["selection"])
+                self.assertIsNone(result["editable"])
 
     def test_incomplete_hit_testing_and_atspi_exceptions_are_unknown(self):
         with patch.object(self.window, "get_accessible_at_point", side_effect=RuntimeError("bus unavailable")):
@@ -295,6 +375,18 @@ class ProtocolTests(unittest.TestCase):
         with patch.object(context, "describe", return_value=context.unknown()) as describe:
             self.reply(b'{"id":1,"pid":123,"x":-200,"y":10}')
             self.assertEqual(describe.call_args.args[1], (-200, 10))
+
+    def test_invalid_scales_do_not_query_accessibility(self):
+        for value in (True, None, "2", 0, -1, .24, 8.1, float("nan"), float("inf")):
+            with self.subTest(scale=value), patch.object(context, "describe") as describe:
+                self.assertIsNone(self.reply(json.dumps({"id": 1, "pid": 123, "scale": value}).encode())["selection"])
+                describe.assert_not_called()
+
+    def test_monitor_scale_is_optional_and_supports_fractional_values(self):
+        for settings, expected in (({}, 1), ({"scale": 2}, 2), ({"scale": 1.25}, 1.25)):
+            with patch.object(context, "describe", return_value=context.unknown()) as describe:
+                self.reply(json.dumps({"id": 1, "pid": 123, **settings}).encode())
+                self.assertEqual(describe.call_args.args[3], expected)
 
     def test_exact_limit_frame_and_stream_overflow_resynchronize(self):
         base = b'{"id":1,"pid":0,"pad":""}'
