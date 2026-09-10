@@ -129,6 +129,16 @@ class ContextTests(unittest.TestCase):
         self.field.text.offset = 25
         self.assertIs(self.describe()["selection"], False)
 
+    def test_browser_caret_after_clicked_character_is_a_selection_boundary(self):
+        self.field.text = Text([(1, 3)], offset=0)
+        self.assertIs(self.describe()["selection"], True)
+
+    def test_caret_boundary_tolerance_does_not_accept_more_distant_text(self):
+        for offset in (0, 5):
+            with self.subTest(offset=offset):
+                self.field.text = Text([(2, 4)], offset=offset)
+                self.assertIs(self.describe()["selection"], False)
+
     def test_unmapped_text_coordinates_are_unknown(self):
         self.field.text.offset = -1
         self.assertIsNone(self.describe()["selection"])

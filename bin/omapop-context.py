@@ -227,7 +227,11 @@ def selection_at_point(path, x, y, deadline, coordinates=None):
             if selected is None:
                 continue
             start, end = selected.start_offset, selected.end_offset
-            if 0 <= start < end and start <= offset <= end:
+            # Browsers place the caret after a character when its right half
+            # is clicked, while GetOffsetAtPoint still reports that character.
+            # The press can therefore hit start-1 for a real selection that
+            # begins at start. Include this caret boundary, as we do for end.
+            if 0 <= start < end and start - 1 <= offset <= end:
                 return True
         # There is selected text, but the gesture isn't on it. Do not reuse it.
         empty = False
