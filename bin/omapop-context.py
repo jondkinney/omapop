@@ -78,7 +78,11 @@ def a11y_start():
     libatspi aborts the process (g_error) if the bus is unreachable, and it is
     not thread-safe, so everything happens on the main thread.
     """
-    Atspi.init()
+    # Failed initialization leaves libatspi marked as initialized but without
+    # a bus. Registering a listener then calls g_error(), aborting the process.
+    # Exit normally so the shell can retry and use fresh PRIMARY meanwhile.
+    if Atspi.init() not in (0, 1):
+        return None
     Atspi.set_timeout(150, 300)
     listener = Atspi.EventListener.new(on_focus)
     listener.register("object:state-changed:focused")
@@ -376,6 +380,9 @@ def main():
         return
     enable_bus()
     listener = a11y_start()  # noqa: F841 - keep the listener alive
+    if listener is None:
+        sys.stderr.write("accessibility bus unavailable\n")
+        return 1
     os.set_blocking(0, False)
     GLib.io_add_watch(0, GLib.PRIORITY_DEFAULT, GLib.IOCondition.IN | GLib.IOCondition.HUP, on_stdin)
     Atspi.event_main()
@@ -383,6 +390,6 @@ def main():
 
 if __name__ == "__main__":
     try:
-        main()
+        sys.exit(main() or 0)
     except (BrokenPipeError, KeyboardInterrupt):
         pass

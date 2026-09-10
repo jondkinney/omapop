@@ -2,10 +2,14 @@
 import importlib.util
 import io
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
+import tempfile
 from types import SimpleNamespace
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 spec = importlib.util.spec_from_file_location("context", Path(__file__).resolve().parents[1] / "bin/omapop-context.py")
 context = importlib.util.module_from_spec(spec)
@@ -223,6 +227,37 @@ class ContextTests(unittest.TestCase):
     def test_missing_accessibility_is_unknown(self):
         with patch.object(context, "available", False):
             self.assertIsNone(self.describe()["selection"])
+
+
+class StartupTests(unittest.TestCase):
+    def test_unavailable_bus_never_registers_a_listener(self):
+        spi = SimpleNamespace(init=Mock(return_value=2), set_timeout=Mock(), EventListener=SimpleNamespace(new=Mock()))
+        with patch.object(context, "Atspi", spi):
+            self.assertIsNone(context.a11y_start())
+        spi.set_timeout.assert_not_called()
+        spi.EventListener.new.assert_not_called()
+
+    def test_initialized_bus_registers_both_focus_events(self):
+        for result in (0, 1):
+            listener = SimpleNamespace(register=Mock())
+            spi = SimpleNamespace(init=Mock(return_value=result), set_timeout=Mock(),
+                                  EventListener=SimpleNamespace(new=Mock(return_value=listener)))
+            with patch.object(context, "Atspi", spi):
+                self.assertIs(context.a11y_start(), listener)
+            self.assertEqual([call.args[0] for call in listener.register.call_args_list],
+                             ["object:state-changed:focused", "focus:"])
+
+    @unittest.skipUnless(context.available, "Requires the native AT-SPI library")
+    def test_disconnected_bus_exits_cleanly_instead_of_aborting(self):
+        with tempfile.TemporaryDirectory(prefix="omapop-missing-bus-") as directory:
+            # Neither the fixture's session bus nor accessibility bus exists;
+            # this cannot change the real session's accessibility settings.
+            address = "unix:path=" + str(Path(directory) / "missing")
+            result = subprocess.run([sys.executable, "-I", context.__file__], input="",
+                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=8,
+                                    env={**os.environ, "DBUS_SESSION_BUS_ADDRESS": address, "AT_SPI_BUS_ADDRESS": address})
+        self.assertEqual(result.returncode, 1, result.stderr)
+        self.assertIn("accessibility bus unavailable", result.stderr)
 
 
 class ProtocolTests(unittest.TestCase):
