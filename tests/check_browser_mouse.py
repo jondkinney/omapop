@@ -20,25 +20,48 @@ from check_context_ui import check_mouse
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--without-accessibility", action="store_true", help="Also exercise the unknown-field Paste fallback")
+    parser.add_argument("--webpage", action="store_true", help="Select regular web-page text instead of a textarea")
+    parser.add_argument("--normal-window", action="store_true", help="Include Chromium's tabs and address bar")
+    parser.add_argument("--second-window", action="store_true", help="Leave an editable window open in the same browser process")
+    parser.add_argument("--capture-dir", type=Path, help="Save the selected text and popup for visual inspection")
     args = parser.parse_args()
     with tempfile.TemporaryDirectory(prefix="omapop-browser-mouse-") as directory:
         root = Path(directory)
         page = root / "fixture.html"
+        field = "<div class='content'>Omapop selection <em>test</em> only</div>" if args.webpage else "<textarea class='content' autofocus>Omapop selection test only</textarea>"
         page.write_text('''<!doctype html><html><head><meta charset="utf-8">
-<style>html,body{margin:0}textarea{box-sizing:border-box;display:block;width:100%;height:100px;
+<style>html,body{margin:0}.content{box-sizing:border-box;display:block;width:100%;height:100px;
 border:0;padding:0;resize:none;font:20px monospace}canvas{display:block;width:100%;height:300px;background:#dde5f2}</style>
-</head><body><textarea autofocus>Omapop selection test only</textarea><canvas></canvas>
-<script>function report(){const f=document.querySelector('textarea');document.title='Omapop mouse fixture '+
-JSON.stringify({contentY:outerHeight-innerHeight,start:f.selectionStart,end:f.selectionEnd});}
+</head><body>''' + field + '''<canvas></canvas>
+<script>function report(){const f=document.querySelector('textarea'),s=getSelection();document.title='Omapop mouse fixture '+
+JSON.stringify({viewportHeight:innerHeight,deviceScale:devicePixelRatio,start:f?f.selectionStart:s.anchorOffset,end:f?f.selectionEnd:s.focusOffset,
+selected:f?f.selectionStart!==f.selectionEnd:!s.isCollapsed});}
 addEventListener('resize',report);document.addEventListener('selectionchange',report);setTimeout(report,300);</script>
 </body></html>''')
-        command = ["chromium", "--user-data-dir=" + str(root / "profile"), "--app=" + page.as_uri(),
+        command = ["chromium", "--user-data-dir=" + str(root / "profile"), ("" if args.normal_window else "--app=") + page.as_uri(),
+                   "--ozone-platform=wayland",
                    "--no-first-run", "--no-default-browser-check", "--disable-background-networking",
                    "--disable-component-update", "--disable-sync"]
         if args.without_accessibility:
             command.append("--disable-renderer-accessibility")
+        else:
+            command.append("--force-renderer-accessibility")
+        if args.second_window:
+            warmup = root / "other.html"
+            warmup.write_text("<title>Omapop other fixture</title><textarea autofocus>Other window selection</textarea>")
+            command[2] = ("" if args.normal_window else "--app=") + warmup.as_uri()
         process = subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
         try:
+            if args.second_window:
+                deadline = time.monotonic() + 10
+                while time.monotonic() < deadline:
+                    clients = json.loads(subprocess.check_output(["hyprctl", "clients", "-j"], timeout=2))
+                    if any(c.get("pid") == process.pid for c in clients):
+                        break
+                    time.sleep(.1)
+                time.sleep(.7)
+                subprocess.run(["chromium", "--user-data-dir=" + str(root / "profile"), "--new-window", page.as_uri()],
+                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True, timeout=10)
             deadline = time.monotonic() + 10
             window = None
             while time.monotonic() < deadline:
@@ -49,14 +72,44 @@ addEventListener('resize',report);document.addEventListener('selectionchange',re
                     break
                 time.sleep(.1)
             assert window, "Browser fixture did not open"
-            subprocess.run(["hyprctl", "dispatch", 'hl.dsp.focus({ window = "pid:%d" })' % process.pid],
+            subprocess.run(["hyprctl", "dispatch", 'hl.dsp.focus({ window = "address:%s" })' % window["address"]],
                            check=True, stdout=subprocess.DEVNULL, timeout=2)
             time.sleep(.7)
             window = json.loads(subprocess.check_output(["hyprctl", "activewindow", "-j"], timeout=2))
             assert window.get("pid") == process.pid, "Browser fixture must have focus"
-            geometry = json.loads(window["title"].removeprefix("Omapop mouse fixture "))
+            assert window.get("xwayland") is False, "Test the native Wayland backend used by Omarchy"
+            geometry = json.JSONDecoder().raw_decode(window["title"].removeprefix("Omapop mouse fixture "))[0]
+            monitors = json.loads(subprocess.check_output(["hyprctl", "monitors", "-j"], timeout=2))
+            monitor = next(m for m in monitors if m["id"] == window["monitor"])
+            content_y = round(window["size"][1] - geometry["viewportHeight"] * geometry["deviceScale"] / monitor["scale"])
+            assert 0 <= content_y < window["size"][1], "Browser viewport must fit its window"
+
+            def check_selection():
+                current = json.loads(subprocess.check_output(["hyprctl", "activewindow", "-j"], timeout=2))
+                assert current.get("address") == window["address"], "The fixture must still have focus"
+                selection = json.JSONDecoder().raw_decode(current["title"].removeprefix("Omapop mouse fixture "))[0]
+                assert selection["selected"], ("The native drag must actually select fixture text", selection)
+                if args.capture_dir:
+                    args.capture_dir.mkdir(parents=True, exist_ok=True)
+                    subprocess.run(["grim", str(args.capture_dir / "selection.png")], check=True, timeout=3)
+
             passed = []
-            check_mouse(window, passed, geometry["contentY"])
+            try:
+                check_mouse(window, passed, content_y, check_long_press=not args.webpage, selection_check=check_selection)
+            except AssertionError:
+                current = json.loads(subprocess.check_output(["hyprctl", "activewindow", "-j"], timeout=2))
+                if current.get("pid") == process.pid:
+                    fixture = json.JSONDecoder().raw_decode(current["title"].removeprefix("Omapop mouse fixture "))[0]
+                    wx, wy = current["at"]
+                    request = {"id": 1, "pid": process.pid, "x": wx + 10, "y": wy + content_y + 10,
+                               "windowX": wx, "windowY": wy}
+                    helper = Path(__file__).resolve().parents[1] / "bin/omapop-context.py"
+                    result = subprocess.run(["python3", "-I", str(helper)], input=json.dumps(request) + "\n",
+                                            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, timeout=4)
+                    print("Fixture selection:", json.dumps(fixture), "probe:", result.stdout.strip(), flush=True)
+                    print("Geometry:", json.dumps({"window": current["size"], "at": current["at"], "contentY": content_y,
+                                                     "monitor": {k: monitor[k] for k in ("width", "height", "scale")}}), flush=True)
+                raise
             print(f"{len(passed)} real Chromium mouse checks passed")
         finally:
             try:

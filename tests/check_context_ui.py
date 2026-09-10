@@ -199,7 +199,7 @@ def check_popups(active, field, on_gui, passed, long_press=False):
         subprocess.run(["omarchy-shell", target, "hide"], stdout=subprocess.DEVNULL, timeout=2)
 
 
-def check_mouse(active, passed, content_y=0):
+def check_mouse(active, passed, content_y=0, check_long_press=True, selection_check=None):
     """Send button input through uinput into this fixture, exercising the actual
     compositor bindings and timer instead of replaying Omapop events.
     """
@@ -218,6 +218,9 @@ def check_mouse(active, passed, content_y=0):
     assert selection.get("clipboard", {}).get("hasText"), "The normal clipboard must contain text for the Paste check"
     wx, wy = active["at"]
     wy += content_y
+    monitors = json.loads(subprocess.check_output(["hyprctl", "monitors", "-j"], timeout=2))
+    monitor = next(m for m in monitors if m["id"] == active["monitor"])
+    relative_drag = round(40 * monitor["scale"])
     trace = []
     connection = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     connection.connect(f"{os.environ['XDG_RUNTIME_DIR']}/hypr/{os.environ['HYPRLAND_INSTANCE_SIGNATURE']}/.socket2.sock")
@@ -245,6 +248,7 @@ def check_mouse(active, passed, content_y=0):
     def move(x, y):
         subprocess.run(["hyprctl", "dispatch", f"hl.dsp.cursor.move({{ x = {wx+x}, y = {wy+y} }})"],
                        stdout=subprocess.DEVNULL, check=True, timeout=2)
+        time.sleep(.05)
 
     def observe(seconds):
         seen = set()
@@ -265,7 +269,7 @@ def check_mouse(active, passed, content_y=0):
         def button(down):
             if down:
                 current = json.loads(subprocess.check_output(["hyprctl", "activewindow", "-j"], timeout=2))
-                assert current.get("pid") == active["pid"], "Only the fixture may receive test presses"
+                assert current.get("pid") == active["pid"] and current.get("address") == active["address"], "Only the fixture may receive test presses"
             mouse.write(ecodes.EV_KEY, ecodes.BTN_LEFT, int(down))
             mouse.syn()
 
@@ -280,27 +284,30 @@ def check_mouse(active, passed, content_y=0):
             passed.append("real ordinary click")
             trace.clear()
 
-            move(10, 10)
-            before_hold = json.loads(subprocess.check_output(["hyprctl", "cursorpos", "-j"], timeout=2))
-            button(True)
-            seen = observe(1.2)
-            after_hold = json.loads(subprocess.check_output(["hyprctl", "cursorpos", "-j"], timeout=2))
-            button(False)
-            assert "Paste" in seen, ("real long press Paste", seen, trace, before_hold, after_hold, ipc("debug"))
-            assert "Paste" in observe(.2), "Long-press Paste disappeared on release"
-            passed.append("real long press Paste")
-            hide()
-            time.sleep(.1)
-            trace.clear()
+            if check_long_press:
+                move(10, 10)
+                before_hold = json.loads(subprocess.check_output(["hyprctl", "cursorpos", "-j"], timeout=2))
+                button(True)
+                seen = observe(1.2)
+                after_hold = json.loads(subprocess.check_output(["hyprctl", "cursorpos", "-j"], timeout=2))
+                button(False)
+                assert "Paste" in seen, ("real long press Paste", seen, trace, before_hold, after_hold, ipc("debug"))
+                assert "Paste" in observe(.2), "Long-press Paste disappeared on release"
+                passed.append("real long press Paste")
+                hide()
+                time.sleep(.1)
+                trace.clear()
 
             move(10, 10)
             button(True)
             time.sleep(.08)
-            mouse.write(ecodes.EV_REL, ecodes.REL_X, 40)
+            mouse.write(ecodes.EV_REL, ecodes.REL_X, relative_drag)
             mouse.syn()
             time.sleep(.08)
             button(False)
             seen = observe(.7)
+            if selection_check:
+                selection_check()
             assert "Copy" in seen, ("real drag selection", seen, trace)
             passed.append("real drag selection")
             hide()
@@ -310,7 +317,7 @@ def check_mouse(active, passed, content_y=0):
             move(10, 150)
             button(True)
             time.sleep(.08)
-            mouse.write(ecodes.EV_REL, ecodes.REL_X, 40)
+            mouse.write(ecodes.EV_REL, ecodes.REL_X, relative_drag)
             mouse.syn()
             time.sleep(.08)
             button(False)

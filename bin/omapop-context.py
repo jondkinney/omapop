@@ -202,6 +202,7 @@ def selection_at_point(path, x, y, deadline, coordinates=None):
     prevent a scrollbar/blank area beside an old highlight from qualifying.
     """
     empty = None
+    unmapped_selection = False
     coordinates = Atspi.CoordType.SCREEN if coordinates is None else coordinates
     for node in reversed(path):
         if time.monotonic() >= deadline:
@@ -216,8 +217,6 @@ def selection_at_point(path, x, y, deadline, coordinates=None):
             empty = False
             continue
         offset = text.get_offset_at_point(x, y, coordinates)
-        if offset < 0:
-            continue
         for i in range(count):
             if time.monotonic() >= deadline:
                 return None
@@ -227,15 +226,24 @@ def selection_at_point(path, x, y, deadline, coordinates=None):
             if selected is None:
                 continue
             start, end = selected.start_offset, selected.end_offset
+            if not 0 <= start < end:
+                continue
+            if offset < 0:
+                # Chromium's static text can expose a selection without
+                # supporting character hit-testing. An empty Text interface
+                # on the surrounding frame cannot disprove that selection.
+                unmapped_selection = True
+                continue
             # Browsers place the caret after a character when its right half
             # is clicked, while GetOffsetAtPoint still reports that character.
             # The press can therefore hit start-1 for a real selection that
             # begins at start. Include this caret boundary, as we do for end.
-            if 0 <= start < end and start - 1 <= offset <= end:
+            if start - 1 <= offset <= end:
                 return True
-        # There is selected text, but the gesture isn't on it. Do not reuse it.
+        # No mapped range matched this node. An unmapped selection elsewhere
+        # on the hit path still leaves the overall answer inconclusive.
         empty = False
-    return empty
+    return None if unmapped_selection else empty
 
 
 def unknown(on_bus=False):

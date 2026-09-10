@@ -551,7 +551,9 @@ python3 tests/check_context_ui.py                   # live GTK/AT-SPI check; ope
 python3 tests/check_context_ui.py --popup           # also checks real Omapop popups; requires the running plugin
 python3 tests/check_context_ui.py --long-press      # also checks held-button popups; requires Show on long press enabled
 python3 tests/check_context_ui.py --mouse           # real mouse button/motion checks in GTK; needs /dev/uinput, python-evdev and clipboard text
-python3 tests/check_browser_mouse.py               # same mouse checks in an isolated Chromium web app
+python3 tests/check_browser_mouse.py               # native Wayland Chromium, accessibility enabled, isolated profile
+python3 tests/check_browser_mouse.py --webpage --normal-window # regular page text, with tabs and an address bar
+python3 tests/check_browser_mouse.py --webpage --normal-window --second-window # multiple windows sharing one browser process
 python3 tests/check_browser_mouse.py --without-accessibility # explicit Paste when field detection is unavailable
 lua tests/engine.test.lua                          # modified mouse input and engine reloads
 QT_QUICK_BACKEND=rhi QSG_RHI_BACKEND=opengl /usr/lib/qt6/bin/qmltestrunner -platform wayland -input tests

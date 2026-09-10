@@ -143,6 +143,22 @@ class ContextTests(unittest.TestCase):
         self.field.text.offset = -1
         self.assertIsNone(self.describe()["selection"])
 
+    def test_empty_frame_cannot_disprove_an_unmapped_browser_text_selection(self):
+        self.window.text = Text()
+        self.field.role = "static"
+        self.field.text = Text([(1, 3)], offset=-1)
+        self.assertIsNone(self.describe()["selection"])
+
+    def test_unmapped_child_selection_can_still_be_confirmed_by_its_ancestor(self):
+        leaf = Node(role="static", text=Text([(1, 3)], offset=-1))
+        self.field.children = [leaf]
+        leaf.parent = self.field
+        self.assertIs(self.describe()["selection"], True)
+
+    def test_unmapped_coordinates_do_not_make_a_collapsed_selection_unknown(self):
+        self.field.text = Text([(3, 3)], offset=-1)
+        self.assertIs(self.describe()["selection"], False)
+
     def test_noncontiguous_selection_checks_all_bounded_ranges(self):
         self.field.text.ranges = [(0, 1), (3, 8)]
         self.assertIs(self.describe()["selection"], True)
