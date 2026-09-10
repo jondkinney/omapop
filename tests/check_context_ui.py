@@ -25,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--popup", action="store_true", help="Also check the running Omapop service with compositor events")
+    parser.add_argument("--long-press", action="store_true", help="Also check long press; requires Show on long press enabled")
     args = parser.parse_args()
     helper = subprocess.Popen(
         ["/usr/bin/python3", "-I", str(ROOT / "bin/omapop-context.py")],
@@ -66,7 +67,14 @@ def main():
 
         def check():
             try:
-                active = json.loads(subprocess.check_output(["hyprctl", "activewindow", "-j"], timeout=2))
+                subprocess.run(["hyprctl", "dispatch", 'hl.dsp.focus({ window = "pid:%d" })' % os.getpid()],
+                               stdout=subprocess.DEVNULL, check=True, timeout=2)
+                until = time.monotonic() + 2
+                while True:
+                    active = json.loads(subprocess.check_output(["hyprctl", "activewindow", "-j"], timeout=2))
+                    if active.get("pid") == os.getpid() or time.monotonic() >= until:
+                        break
+                    time.sleep(.02)
                 assert active.get("pid") == os.getpid(), "The fixture must have focus"
                 wx, wy = active["at"]
 
@@ -86,8 +94,8 @@ def main():
                 probe("cleared selection", 10, False, True)
                 on_gui(lambda: (field.set_editable(False), select_text()))
                 probe("read-only selection", 10, True, False)
-                if args.popup:
-                    check_popups(active, field, on_gui, passed)
+                if args.popup or args.long_press:
+                    check_popups(active, field, on_gui, passed, args.long_press)
             except Exception as error:  # noqa: BLE001 - surface worker failures on the main thread
                 errors.append(repr(error))
             finally:
@@ -101,17 +109,17 @@ def main():
         GLib.timeout_add(700, ready)
 
     app.connect("activate", activate)
-    GLib.timeout_add(7000, app.quit)
+    GLib.timeout_add(10000 if args.long_press else 7000, app.quit)
     try:
         app.run([])
     finally:
         helper.terminate()
         helper.wait(timeout=2)
-    assert not errors and len(passed) == (7 if args.popup else 4), errors or passed
+    assert not errors and len(passed) == (8 if args.long_press else 7 if args.popup else 4), errors or passed
     print(f"{len(passed)} live accessibility checks passed")
 
 
-def check_popups(active, field, on_gui, passed):
+def check_popups(active, field, on_gui, passed, long_press=False):
     """Replay the compositor protocol into the real service while GTK publishes
     fresh selection offers. No physical input or popup actions are injected.
     """
@@ -132,10 +140,13 @@ def check_popups(active, field, on_gui, passed):
         result = subprocess.check_output(["hyprctl", "eval", "hl.dispatch(hl.dsp.event(" + json.dumps(payload) + "))"], timeout=2)
         assert result.strip() == b"ok", result
 
-    def release(drag):
-        emit(["release", x + (60 if drag else 0), y, 0, monitor["name"], monitor["x"], monitor["y"],
+    def context(at_x):
+        return [at_x, y, 0, monitor["name"], monitor["x"], monitor["y"],
               round(monitor["width"] / monitor["scale"]), round(monitor["height"] / monitor["scale"]), monitor["scale"],
-              active["class"], active["title"], active["address"], active["pid"], wx, wy, x, y, 0, 0])
+              active["class"], active["title"], active["address"], active["pid"], wx, wy]
+
+    def release(drag, held=False):
+        emit(["release", *context(x + (60 if drag else 0)), x, y, 0, int(held)])
 
     def selection(end):
         buffer = field.get_buffer()
@@ -162,6 +173,23 @@ def check_popups(active, field, on_gui, passed):
             assert seen is drag, (label, "popup appeared" if seen else "popup never appeared")
             passed.append(label)
             subprocess.run(["omarchy-shell", target, "hide"], stdout=subprocess.DEVNULL, check=True, timeout=2)
+        if long_press:
+            result = subprocess.run(["hyprctl", "eval", "assert(__omapop.cfg.long_press == true)"],
+                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=2)
+            assert result.returncode == 0, "Long press must be enabled in the running engine"
+            on_gui(lambda: selection(6))
+            time.sleep(.1)
+            emit(["press", x, y, 272, 0, 0])
+            time.sleep(.5)
+            emit(["longpress", *context(x)])
+            seen = False
+            until = time.monotonic() + .75
+            while time.monotonic() < until:
+                seen = status()["visible"] or seen
+                time.sleep(.02)
+            release(False, held=True)
+            assert seen, "Long press never opened the popup while the button was held"
+            passed.append("long press while held")
     finally:
         subprocess.run(["omarchy-shell", target, "hide"], stdout=subprocess.DEVNULL, timeout=2)
 

@@ -388,7 +388,9 @@ Item {
         // hyprctl treats an argument starting with "-" as a flag; the file starts with `local`.
         var configure = "\n__omapop.configure({ far = " + hideDistance + ", long_press = " + (longPressEnabled ? "true" : "false")
             + ", shortcut = " + luaString(shortcut) + " })\n"
-        return code + configure
+        // Reusing the installed engine returns early. Keep that return inside
+        // its own function so the new settings are always applied afterwards.
+        return "local function installEngine()\n" + code + "\nend\ninstallEngine()\n" + configure
     }
 
     property var applyTask: null
@@ -2515,7 +2517,7 @@ Item {
                 busy: root.busy, hasCurrent: !!root.current, reading: !!root.readTask, pending: !!root.pendingRelease,
                 mode: popup.mode, visible: popup.visible, screen: popup.screen ? String(popup.screen.name) : "",
                 keyboard: popup.keyboardMode, probeRunning: contextProc.running,
-                requireTerminalShift: root.requireTerminalShift,
+                longPressEnabled: root.longPressEnabled, requireTerminalShift: root.requireTerminalShift,
                 gesture: { clicks: root.clickCount, settleMs: root.clickSettleInterval, multiClickMs: root.multiClickInterval,
                     readDelayMs: readSoon.interval, generation: root.readGeneration, updating: root.selectionUpdating },
                 context: root.current ? { app: root.current.context.appIdentifier, editable: root.current.context.editable, source: root.current.context.editSource, canPaste: root.current.context.canPaste, canReplace: root.current.context.canReplace } : null,

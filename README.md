@@ -73,7 +73,8 @@ reloads its configuration (`hyprctl reload`), or immediately with
   makes lowercase).
 - **Long-press** is off by default. Enable **Show on long press** in Settings,
   then hold the left button for half a second without moving to show the bar
-  with no selection, for example to Paste.
+  with no selection, for example to Paste. Changes take effect without restarting
+  the shell.
 - The bar hides when you click elsewhere, press a key, scroll, move the pointer
   away, or switch window or workspace. Hold **Super** while selecting to keep
   it away.
@@ -529,6 +530,7 @@ python3 -m unittest discover -s tests -p 'test_*.py'   # helpers, directory
 node tests/actions.test.mjs
 node tests/gestures.test.mjs                        # click timing and stale read callbacks
 node tests/settings.test.mjs                        # typed settings and preservation of other preferences
+node tests/engine-config.test.mjs                    # settings updates in the running Lua engine
 node tests/extension-policy.test.mjs                # ordered effects, opt-in, per-extension preferences
 node tests/http.test.mjs                            # request deadlines and streamed byte limits
 node tests/runner-http.test.mjs                     # fetch, XHR and Axios through the restricted runner
@@ -538,6 +540,7 @@ python3 tests/check_settings_ui.py --ports           # confirmation controls
 python3 tests/check_plugin_load.py                  # full plugin QML loading; requires a Wayland session, shows no windows
 python3 tests/check_context_ui.py                   # live GTK/AT-SPI check; opens a temporary window and selects fixture text
 python3 tests/check_context_ui.py --popup           # also checks real Omapop popups; requires the running plugin
+python3 tests/check_context_ui.py --long-press      # also checks held-button popups; requires Show on long press enabled
 lua tests/engine.test.lua                          # modified mouse input and engine reloads
 QT_QUICK_BACKEND=rhi QSG_RHI_BACKEND=opengl /usr/lib/qt6/bin/qmltestrunner -platform offscreen -input tests
 omarchy restart shell
