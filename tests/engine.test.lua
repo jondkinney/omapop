@@ -75,6 +75,17 @@ local installed = __omapop
 dofile(path)
 assert(__omapop == installed and #bindings == 6)
 
+-- Reapplying a shortcut after a shell reload must not accumulate handlers or
+-- dereference a stale native handle. Clearing it removes the last handler.
+for _ = 1, 3 do
+  installed.configure({ shortcut = "SUPER + F12" })
+  assert(#bindings == 7, "repeated configuration must keep one shortcut bind")
+end
+installed.configure({ shortcut = "SUPER + F11" })
+assert(#bindings == 7, "changing shortcuts must retire the old key")
+installed.configure({ shortcut = "" })
+assert(#bindings == 6, "clearing the shortcut must remove its handler")
+
 -- An engine upgrade must retire old callbacks, including a held long press.
 mask, x, y = 1, 100, 100
 installed.configure({ long_press = true, shortcut = "SUPER + F12" })

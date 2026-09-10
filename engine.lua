@@ -237,12 +237,13 @@ end
 bind("mouse_up", on_scroll, { non_consuming = true, description = "Omapop dismiss (scroll)" })
 bind("mouse_down", on_scroll, { non_consuming = true, description = "Omapop dismiss (scroll)" })
 
-local shortcut_handle = nil
 function E.set_shortcut(spec)
-  if shortcut_handle then
-    pcall(function() shortcut_handle:remove() end)
-    shortcut_handle = nil
+  -- As with mouse watchers, remove by key rather than dereferencing a handle
+  -- retained across shell reloads. Reapplying settings must leave one bind.
+  if type(E.cfg.shortcut) == "string" and E.cfg.shortcut ~= "" then
+    pcall(hl.unbind, E.cfg.shortcut)
   end
+  E.shortcut_handle = nil
   E.cfg.shortcut = spec or ""
   if type(spec) ~= "string" or spec == "" then return end
   local ok, handle = pcall(hl.bind, spec, function()
@@ -250,8 +251,7 @@ function E.set_shortcut(spec)
     emit("shortcut", context_fields(x, y))
   end, { description = "Omapop: show the selection bar" })
   if ok and handle then
-    shortcut_handle = handle
-    E.handles[#E.handles + 1] = handle
+    E.shortcut_handle = handle
   end
 end
 
