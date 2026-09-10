@@ -1,4 +1,4 @@
-local ENGINE_VERSION = 4
+local ENGINE_VERSION = 5
 local BIND_KEYS = { "mouse:272", "mouse:273", "mouse:274", "mouse_up", "mouse_down" }
 
 local previous = rawget(_G, "__omapop")
@@ -120,6 +120,32 @@ local function context_fields(x, y)
         w.x = num(at.x, "")
         w.y = num(at.y, "")
       end
+    end
+  end)
+  -- A keyboard-interactive top/overlay panel receives the selection even
+  -- while get_active_window() still identifies a terminal underneath it.
+  -- Keep layer identities distinct from window addresses: action dispatchers
+  -- must use the focused surface, never target the underlying window.
+  pcall(function()
+    local layers = hl.get_layers({ monitor = m.name })
+    if type(layers) ~= "table" or #layers > 256 then return end
+    local chosen, level = nil, -1
+    for _, layer in ipairs(layers) do
+      local kind = tonumber(layer.layer) or -1
+      local interactive = tonumber(layer.keyboard_interactivity or layer.interactivity) or 0
+      local lx, ly, lw, lh = tonumber(layer.x), tonumber(layer.y), tonumber(layer.w), tonumber(layer.h)
+      if layer.mapped == true and kind >= 2 and kind >= level and interactive > 0
+          and layer.namespace ~= "omapop" and lx and ly and lw and lh and lw > 0 and lh > 0
+          and x >= lx and x < lx + lw and y >= ly and y < ly + lh then
+        chosen, level = layer, kind
+      end
+    end
+    if chosen then
+      w.class = "layer:" .. tostring(chosen.namespace or "")
+      w.title = tostring(chosen.namespace or "")
+      w.address = "layer:" .. tostring(chosen.address or "")
+      w.pid = num(chosen.pid, 0)
+      w.x, w.y = num(chosen.x, ""), num(chosen.y, "")
     end
   end)
   return { x, y, mods(), m.name, m.x, m.y, m.w, m.h, m.scale, w.class, w.title, w.address, w.pid, w.x, w.y }

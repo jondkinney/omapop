@@ -46,7 +46,7 @@ Item {
     readonly property string contextHelper: pluginDir + "/bin/omapop-context.py"
     readonly property string nativeHelper: pluginDir + "/bin/omapop-native.py"
     readonly property string directoryHelper: pluginDir + "/bin/omapop-directory.py"
-    readonly property int engineVersion: 4
+    readonly property int engineVersion: 5
 
     // Children get only what they need to reach the compositor and the display.
     readonly property var childEnv: ({
