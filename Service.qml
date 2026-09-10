@@ -623,6 +623,15 @@ Item {
         } else if (kind === "press") {
             onPress(Number(f[1]) || 0, Number(f[2]) || 0, Number(f[3]) || 0, Number(f[4]) || 0, f[5] === "1")
         } else if (kind === "release") {
+            // A release from a different engine layout must not turn its
+            // flags into a (0, 0) drag origin and make every click a drag.
+            if (f.length !== 20 || f[16] === "" || f[17] === ""
+                    || !Number.isFinite(Number(f[16])) || !Number.isFinite(Number(f[17]))) {
+                cancelSelection()
+                lastReleaseInfo = null
+                clickCount = 0
+                return
+            }
             var ctx = parseContext(f, 1)
             ctx.pressX = Number.isFinite(Number(f[16])) ? Number(f[16]) : ctx.x
             ctx.pressY = Number.isFinite(Number(f[17])) ? Number(f[17]) : ctx.y
@@ -702,6 +711,11 @@ Item {
         ctx.time = now
         ctx.selectionSerial = lastPressSelectionSerial
         ctx.downward = ctx.y > ctx.pressY + 4
+        // PRIMARY may be reoffered on focus/caret changes or restored by a
+        // clipboard manager. Even a fresh offer cannot make a plain click a
+        // selection gesture. Keep click history so the second click qualifies.
+        if (!isSelectionGesture(ctx))
+            return
         pendingRelease = ctx
         pendingExpiry.interval = 500
         pendingExpiry.restart()
@@ -714,6 +728,10 @@ Item {
 
     function hasFreshSelection(ctx) {
         return typeof ctx.selectionSerial === "number" && selectionSerial > ctx.selectionSerial
+    }
+
+    function isSelectionGesture(ctx) {
+        return ctx.dragged === true || ctx.clicks >= 2 || ((ctx.mods & lastPressMods) & 1) !== 0
     }
 
     function onSelectionChanged() {
@@ -793,6 +811,7 @@ Item {
     function trigger(ctx, kind) {
         cancelSelection()
         if (paused || (excludedApps.length && Actions.classMatches(excludedApps, ctx.app.appClass))
+                || (kind === "selection" && !isSelectionGesture(ctx))
                 || !automaticTriggerAllowed(ctx, kind)) {
             if (selectionUpdating)
                 hidePopup()

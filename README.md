@@ -59,9 +59,11 @@ reloads its configuration (`hyprctl reload`), or immediately with
   turn off **Settings → Selection → Require Shift in terminals** to opt out.
   The bar appears promptly after a
   double-click and updates in place if a third click extends the selection.
-  A drag or multi-click alone is not enough: Omapop needs a fresh primary
-  selection from this gesture, or accessibility confirmation of a nonempty
-  text-selection range at its starting point. Drawing, resizing and moving
+  Automatic popups require a drag, multi-click or Shift-click, followed by
+  either a fresh primary selection from this gesture or accessibility
+  confirmation of a nonempty text-selection range at its starting point.
+  An ordinary single click never opens Omapop, even when the clipboard is
+  reoffered. Drawing, resizing and moving
   objects cannot reuse older clipboard text to open the bar. An accessibility
   report that the text selection is empty suppresses the popup too.
 - **Hover** a button to see its name. **Click** to run it. Hold **Shift**,
@@ -535,6 +537,7 @@ python3 tests/check_settings_ui.py                   # controls in an isolated, 
 python3 tests/check_settings_ui.py --ports           # confirmation controls
 python3 tests/check_plugin_load.py                  # full plugin QML loading; requires a Wayland session, shows no windows
 python3 tests/check_context_ui.py                   # live GTK/AT-SPI check; opens a temporary window and selects fixture text
+python3 tests/check_context_ui.py --popup           # also checks real Omapop popups; requires the running plugin
 lua tests/engine.test.lua                          # modified mouse input and engine reloads
 QT_QUICK_BACKEND=rhi QSG_RHI_BACKEND=opengl /usr/lib/qt6/bin/qmltestrunner -platform offscreen -input tests
 omarchy restart shell

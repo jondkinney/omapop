@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "io.github.jondkinney.omapop",
   "name": "Omapop",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "author": "Jon Kinney",
   "license": "MIT",
   "description": "Select text with the mouse and a small bar of actions appears beside it: cut, copy, paste, search, open links, reveal paths, and extensions written as YAML snippets, shell scripts or JavaScript. Supports a reviewed subset of the PopClip Extensions Directory (https://www.popclip.app/extensions/).",

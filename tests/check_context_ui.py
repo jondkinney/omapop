@@ -4,12 +4,15 @@
 Unlike the unit tests, this selects fixture text on the real desktop. It checks
 the production helper across D-Bus, including GI method names and coordinates.
 """
+import argparse
 import json
 import os
 from pathlib import Path
 import select
 import subprocess
 import threading
+import time
+from urllib.parse import quote
 
 import gi
 
@@ -20,6 +23,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--popup", action="store_true", help="Also check the running Omapop service with compositor events")
+    args = parser.parse_args()
     helper = subprocess.Popen(
         ["/usr/bin/python3", "-I", str(ROOT / "bin/omapop-context.py")],
         stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
@@ -80,6 +86,8 @@ def main():
                 probe("cleared selection", 10, False, True)
                 on_gui(lambda: (field.set_editable(False), select_text()))
                 probe("read-only selection", 10, True, False)
+                if args.popup:
+                    check_popups(active, field, on_gui, passed)
             except Exception as error:  # noqa: BLE001 - surface worker failures on the main thread
                 errors.append(repr(error))
             finally:
@@ -99,8 +107,63 @@ def main():
     finally:
         helper.terminate()
         helper.wait(timeout=2)
-    assert not errors and len(passed) == 4, errors or passed
+    assert not errors and len(passed) == (7 if args.popup else 4), errors or passed
     print(f"{len(passed)} live accessibility checks passed")
+
+
+def check_popups(active, field, on_gui, passed):
+    """Replay the compositor protocol into the real service while GTK publishes
+    fresh selection offers. No physical input or popup actions are injected.
+    """
+    target = "io.github.jondkinney.omapop"
+
+    def status():
+        return json.loads(subprocess.check_output(["omarchy-shell", target, "status"], timeout=2))
+
+    initial = status()
+    assert initial["engineReady"] and not initial["paused"], "Omapop must be running and unpaused"
+    monitors = json.loads(subprocess.check_output(["hyprctl", "monitors", "-j"], timeout=2))
+    monitor = next(m for m in monitors if m["id"] == active["monitor"])
+    wx, wy = active["at"]
+    x, y = wx + 10, wy + 10
+
+    def emit(fields):
+        payload = "omapop|" + "|".join(quote(str(f), safe="-._~") for f in fields)
+        result = subprocess.check_output(["hyprctl", "eval", "hl.dispatch(hl.dsp.event(" + json.dumps(payload) + "))"], timeout=2)
+        assert result.strip() == b"ok", result
+
+    def release(drag):
+        emit(["release", x + (60 if drag else 0), y, 0, monitor["name"], monitor["x"], monitor["y"],
+              round(monitor["width"] / monitor["scale"]), round(monitor["height"] / monitor["scale"]), monitor["scale"],
+              active["class"], active["title"], active["address"], active["pid"], wx, wy, x, y, 0, 0])
+
+    def selection(end):
+        buffer = field.get_buffer()
+        buffer.select_range(buffer.get_iter_at_offset(0), buffer.get_iter_at_offset(end))
+
+    try:
+        for label, late, drag in (("single click with fresh PRIMARY", False, False),
+                                  ("single click with delayed PRIMARY", True, False),
+                                  ("drag with fresh PRIMARY", False, True)):
+            on_gui(lambda: selection(5))
+            time.sleep(.1)
+            emit(["press", x, y, 272, 0, 0])
+            if late:
+                release(False)
+            on_gui(lambda: selection(6))
+            time.sleep(.05)
+            if not late:
+                release(drag)
+            seen = False
+            until = time.monotonic() + .75
+            while time.monotonic() < until:
+                seen = status()["visible"] or seen
+                time.sleep(.02)
+            assert seen is drag, (label, "popup appeared" if seen else "popup never appeared")
+            passed.append(label)
+            subprocess.run(["omarchy-shell", target, "hide"], stdout=subprocess.DEVNULL, check=True, timeout=2)
+    finally:
+        subprocess.run(["omarchy-shell", target, "hide"], stdout=subprocess.DEVNULL, timeout=2)
 
 
 if __name__ == "__main__":

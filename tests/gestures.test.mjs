@@ -13,7 +13,7 @@ const wanted = new Set([
   "takePendingSelection", "cancelSelection", "trigger", "hidePopup",
   "handleEngineEvent", "parseContext", "decodeField",
   "isClickContinuation", "present", "handleClick",
-  "automaticTriggerAllowed", "hasFreshSelection", "onContextLine",
+  "automaticTriggerAllowed", "hasFreshSelection", "isSelectionGesture", "onContextLine",
 ]);
 const functions = [...source.matchAll(/^    function (\w+)\([^]*?^    \}/gm)]
   .filter(match => wanted.has(match[1])).map(match => match[0]).join("\n");
@@ -125,7 +125,12 @@ function harness(autoComplete = true) {
     c.onRelease(ctx);
     return ctx;
   }
-  return { c, advance, context, click, reads, probes, presentations, activations, engineCalls,
+  function select(overrides = {}) {
+    click({ ...overrides, changed: false });
+    advance(100);
+    return click(overrides);
+  }
+  return { c, advance, context, click, select, reads, probes, presentations, activations, engineCalls,
     openings: () => openings, entrances: () => entrances };
 }
 
@@ -177,7 +182,7 @@ test("a slower third click updates the existing bar promptly", () => {
 
 test("clicking elsewhere still dismisses the previous selection bar", () => {
   const h = harness();
-  h.click();
+  h.select();
   h.advance(300);
   h.c.onPress(400, 400, 272, 0, false);
   assert.equal(h.c.popup.visible, false);
@@ -185,7 +190,7 @@ test("clicking elsewhere still dismisses the previous selection bar", () => {
 
 test("actions wait for the extended selection instead of using the previous word", () => {
   const h = harness(false);
-  h.click();
+  h.select();
   h.advance(100);
   h.reads[0].complete("word");
   h.probes[0]({ editable: true });
@@ -202,7 +207,7 @@ test("actions wait for the extended selection instead of using the previous word
 
 test("an empty refreshed selection dismisses the old bar", () => {
   const h = harness(false);
-  h.click();
+  h.select();
   h.advance(100);
   h.reads[0].complete("word");
   h.probes[0]({ editable: true });
@@ -216,7 +221,7 @@ test("an empty refreshed selection dismisses the old bar", () => {
 
 test("a failed refresh dismisses the old bar", () => {
   const h = harness(false);
-  h.click();
+  h.select();
   h.advance(100);
   h.reads[0].complete("word");
   h.probes[0]({ editable: true });
@@ -231,11 +236,11 @@ test("a failed refresh dismisses the old bar", () => {
 
 test("a new selection after dismissal gets its own entrance animation", () => {
   const h = harness();
-  h.click();
+  h.select();
   h.advance(100);
   h.c.hidePopup();
   h.advance(500);
-  h.click();
+  h.select();
   h.advance(100);
   assert.equal(h.openings(), 2);
   assert.equal(h.entrances(), 2);
@@ -425,6 +430,84 @@ test("a plain click cannot reuse an old highlighted field through accessibility"
   assert.equal(h.presentations.length, 0);
 });
 
+for (const selection of [true, false, undefined]) {
+  for (const when of ["during press", "on release", "after release"]) {
+    test(`ordinary clicks stay quiet with PRIMARY reoffers ${when} (accessibility selection: ${selection})`, () => {
+      const h = harness();
+      h.c.probeResult = { editable: true, selection };
+      for (let i = 0; i < 5; i++) {
+        const ctx = h.context({ x: 100 + i * 30, pressX: 100 + i * 30 });
+        h.c.onPress(ctx.x, ctx.y, 272, 0, false);
+        h.advance(10);
+        if (when === "during press") h.c.onSelectionChanged();
+        h.c.onRelease(ctx);
+        if (when === "after release") h.advance(150);
+        if (when !== "during press") h.c.onSelectionChanged();
+        h.advance(600);
+      }
+      assert.equal(h.reads.length, 0);
+      assert.equal(h.probes.length, 0);
+      assert.equal(h.presentations.length, 0);
+      assert.equal(h.c.pendingRelease, null);
+    });
+  }
+}
+
+test("a caret-placement click dismisses the previous popup without reopening on a reoffer", () => {
+  const h = harness();
+  h.select();
+  h.advance(100);
+  assert(h.c.popup.visible);
+  h.click({ x: 300, pressX: 300 });
+  h.c.onSelectionChanged();
+  h.advance(600);
+  assert.equal(h.c.popup.visible, false);
+  assert.equal(h.presentations.length, 1);
+});
+
+test("Shift-click can extend a text selection with fresh evidence", () => {
+  const h = harness();
+  h.click({ mods: 1 });
+  h.advance(100);
+  assert.equal(h.presentations.length, 1);
+});
+
+test("the automatic trigger cannot bypass the selection-gesture requirement", () => {
+  const h = harness();
+  h.c.onSelectionChanged();
+  h.c.probeResult = { editable: true, selection: true };
+  h.c.trigger(h.context(), "selection");
+  h.advance(100);
+  assert.equal(h.reads.length, 0);
+  assert.equal(h.presentations.length, 0);
+});
+
+test("old or malformed release layouts cannot turn a click into a drag from zero", () => {
+  const releases = [
+    "release|180|100|0|test|0|0|1920|1080|1|chromium|test|0x1|1|180|100|0|0",
+    "release|180|100|0|test|0|0|1920|1080|1|chromium|test|0x1|1|-1920|38||100|0|0",
+    "release|180|100|0|test|0|0|1920|1080|1|chromium|test|0x1|1|-1920|38|bad|100|0|0",
+  ];
+  for (const release of releases) {
+    const h = harness();
+    h.c.handleEngineEvent("press|180|100|272|0|0");
+    h.c.onSelectionChanged();
+    h.c.handleEngineEvent(release);
+    h.advance(600);
+    assert.equal(h.c.clickCount, 0);
+    assert.equal(h.reads.length, 0);
+  }
+});
+
+test("a full current-engine single click stays quiet even with a fresh offer", () => {
+  const h = harness();
+  h.c.handleEngineEvent("press|180|100|272|0|0");
+  h.c.onSelectionChanged();
+  h.c.handleEngineEvent("release|180|100|0|test|0|0|1920|1080|1|chromium|test|0x1|1|-1920|38|180|100|0|0");
+  h.advance(600);
+  assert.equal(h.reads.length, 0);
+});
+
 test("an explicitly empty text selection vetoes even a fresh PRIMARY offer", () => {
   const h = harness();
   h.c.probeResult = { editable: true, selection: false };
@@ -464,7 +547,7 @@ test("a late PRIMARY event cannot revive an expired gesture", () => {
 
 test("a PRIMARY offer near the wait deadline still gets its settling delay and read", () => {
   const h = harness();
-  h.click({ changed: false });
+  h.click({ x: 180, changed: false });
   h.advance(490);
   h.c.onSelectionChanged();
   h.advance(100);
@@ -509,7 +592,7 @@ test("a changed PRIMARY offer while helpers run cannot present the earlier read"
 
 test("an inconclusive continuation hides the old bar but can still receive a late selection", () => {
   const h = harness();
-  h.click();
+  h.select();
   h.advance(100);
   h.click({ changed: false });
   h.advance(100);
@@ -522,7 +605,7 @@ test("an inconclusive continuation hides the old bar but can still receive a lat
 
 test("an inconclusive continuation never leaves old actions disabled on screen", () => {
   const h = harness(false);
-  h.click();
+  h.select();
   h.advance(100);
   h.reads[0].complete("old word");
   h.probes[0]({ editable: true });
@@ -575,7 +658,7 @@ test("a plain click does not reuse a selection notification from before its pres
 
 test("a new press cancels a pending presentation while the button stays down", () => {
   const h = harness();
-  h.click();
+  h.select();
   h.advance(20);
   h.c.onPress(100, 100, 272, 0, false);
   h.advance(600);
@@ -584,7 +667,7 @@ test("a new press cancels a pending presentation while the button stays down", (
 
 test("right-click cancels pending selection work", () => {
   const h = harness();
-  h.click();
+  h.select();
   h.advance(20);
   h.c.onPress(100, 100, 273, 0, false);
   h.advance(600);
@@ -593,7 +676,7 @@ test("right-click cancels pending selection work", () => {
 
 test("late primary-selection notification still schedules the current release", () => {
   const h = harness();
-  h.click({ changed: false });
+  h.click({ x: 180, changed: false });
   h.advance(200);
   h.c.onSelectionChanged();
   h.advance(500);
@@ -633,7 +716,7 @@ test("Super suppresses long press while Shift still permits it", () => {
 test("a delayed accessibility reply cannot show an older selection after a new press", () => {
   const h = harness(false);
   h.c.onSelectionChanged();
-  h.c.trigger(h.context(), "selection");
+  h.c.trigger(h.context({ dragged: true }), "selection");
   h.reads[0].complete("old word");
   h.c.onPress(100, 100, 272, 0, false);
   h.probes[0]({ editable: true });
@@ -643,8 +726,8 @@ test("a delayed accessibility reply cannot show an older selection after a new p
 test("a cancelled read cannot clear a newer read's task handle", () => {
   const h = harness(false);
   h.c.onSelectionChanged();
-  h.c.trigger(h.context(), "selection");
-  h.c.trigger(h.context(), "selection");
+  h.c.trigger(h.context({ dragged: true }), "selection");
+  h.c.trigger(h.context({ dragged: true }), "selection");
   h.reads[0].complete();
   assert.equal(h.c.readTask, h.reads[1]);
   h.reads[1].complete("new line");
@@ -657,7 +740,7 @@ test("a cancelled read cannot clear a newer read's task handle", () => {
 test("dismissal invalidates a selection whose accessibility reply is still pending", () => {
   const h = harness(false);
   h.c.onSelectionChanged();
-  h.c.trigger(h.context(), "selection");
+  h.c.trigger(h.context({ dragged: true }), "selection");
   h.reads[0].complete();
   h.c.hidePopup();
   h.probes[0]({ editable: true });
