@@ -35,6 +35,17 @@ Panel {
         open()
     }
 
+    function syncServiceSettings() {
+        if (service) service.widgetSettings = settings
+    }
+    onSettingsChanged: syncServiceSettings()
+    onServiceChanged: syncServiceSettings()
+
+    Connections {
+        target: root.service
+        function onSettingsRequested() { root.settingsOpen = true }
+    }
+
     component RowSeparator: Rectangle {
         Layout.fillWidth: true
         implicitHeight: 1

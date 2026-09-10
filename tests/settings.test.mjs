@@ -7,12 +7,12 @@ import test from "node:test";
 const source = readFileSync(new URL("../Service.qml", import.meta.url), "utf8");
 const manifest = JSON.parse(readFileSync(new URL("../manifest.json", import.meta.url), "utf8"));
 const functions = [...source.matchAll(/^    function (\w+)\([^]*?^    \}/gm)]
-  .filter(match => ["setting", "setSetting"].includes(match[1])).map(match => match[0]).join("\n");
+  .filter(match => ["configuredSettings", "setting", "setSetting", "openSettings"].includes(match[1])).map(match => match[0]).join("\n");
 
 function harness() {
   const writes = [];
   const c = vm.createContext({
-    pluginId: manifest.id, settingsSchema: manifest.barWidget.schema,
+    pluginId: manifest.id, settingsSchema: manifest.barWidget.schema, widgetSettings: null,
     settings: { id: manifest.id, searchEngine: "kagi", futureSetting: { keep: true } },
     shell: { updateEntryInline(id, entry) {
       assert.equal(id, manifest.id);
@@ -24,6 +24,54 @@ function harness() {
   vm.runInContext(functions, c, { filename: "Service.qml" });
   return { c, writes };
 }
+
+test("saved settings follow the scoped bar snapshot and its updates", () => {
+  const { c } = harness();
+  const entry = { id: manifest.id, longPress: true, shortcut: "SUPER ALT P" };
+  c.shell.barConfig = { layout: { right: [{ id: "another.plugin", longPress: false }, entry] } };
+  assert.equal(c.configuredSettings(), entry);
+  const updated = { ...entry, longPress: false };
+  c.shell.barConfig = { layout: { left: [updated] } };
+  assert.equal(c.configuredSettings(), updated);
+  c.shell.barConfig = { layout: {} };
+  assert.equal(Object.keys(c.configuredSettings()).length, 0);
+});
+
+test("legacy shell settings still work in bar and service entries", () => {
+  const { c } = harness();
+  const entry = { id: manifest.id, longPress: true };
+  c.shell.shellConfig = { bar: { layout: { center: [entry] } } };
+  assert.equal(c.configuredSettings(), entry);
+  c.shell.shellConfig = { plugins: [entry] };
+  assert.equal(c.configuredSettings(), entry);
+  c.shell = null;
+  assert.equal(Object.keys(c.configuredSettings()).length, 0);
+});
+
+test("the live widget entry takes precedence over an older scoped snapshot", () => {
+  const { c } = harness();
+  const stale = { id: manifest.id, longPress: false };
+  c.shell.barConfig = { layout: { right: [stale] } };
+  c.widgetSettings = { id: manifest.id, longPress: true, searchEngine: "kagi" };
+  assert.equal(c.configuredSettings(), c.widgetSettings);
+  c.widgetSettings = { ...c.widgetSettings, longPress: false };
+  assert.equal(c.configuredSettings(), c.widgetSettings);
+  c.shell.shellConfig = { plugins: [stale] };
+  assert.equal(c.configuredSettings(), stale, "legacy shells keep their direct configuration binding");
+});
+
+test("settings IPC selects the page before asking the shell to open our widget", () => {
+  const { c } = harness();
+  const calls = [];
+  c.settingsRequested = () => calls.push("settings page");
+  c.shell.summon = (id, payload) => { calls.push([id, payload]); return true; };
+  assert.equal(c.openSettings(), "ok");
+  assert.deepEqual(calls, ["settings page", [manifest.id, ""]]);
+  c.shell.summon = () => false;
+  assert.equal(c.openSettings(), "No Omapop widget is available.");
+  c.shell = null;
+  assert.equal(c.openSettings(), "No Omapop widget is available.");
+});
 
 test("saving a preference preserves current and unknown settings", () => {
   const { c, writes } = harness();

@@ -66,8 +66,18 @@ Item {
 
     // A plugin with a bar widget is enabled from bar.layout rather than
     // plugins[], so look for our entry in both.
-    readonly property var settings: {
-        var cfg = shell && shell.shellConfig ? shell.shellConfig : null
+    property var widgetSettings: null
+    readonly property var settings: configuredSettings()
+
+    function configuredSettings() {
+        // The widget receives its live inline entry from the bar. Prefer it
+        // on scoped shells, whose barConfig snapshot can lag a settings write.
+        if (shell && !shell.shellConfig && widgetSettings)
+            return widgetSettings
+        // Newer shells expose a scoped barConfig snapshot instead of the
+        // host's complete shellConfig. Keep the older service API working.
+        var cfg = shell && shell.shellConfig ? shell.shellConfig
+                : shell && shell.barConfig ? { bar: shell.barConfig } : null
         if (!cfg)
             return ({})
         var pools = [cfg.plugins]
@@ -2477,20 +2487,15 @@ Item {
         })
     }
 
+    signal settingsRequested()
+
     function openSettings() {
-        if (!shell || !shell.bar || typeof shell.bar.moduleWidgets !== "function")
+        if (!shell || typeof shell.summon !== "function")
             return "No Omapop widget is available."
-        var widgets = shell.bar.moduleWidgets(pluginId)
-        var screenName = Hyprland.focusedMonitor ? Hyprland.focusedMonitor.name : ""
-        var chosen = null
-        for (var i = 0; i < widgets.length; i++) {
-            if (typeof widgets[i].openSettings !== "function") continue
-            if (!chosen || widgets[i].panelScreenName === screenName) chosen = widgets[i]
-            if (widgets[i].panelScreenName === screenName) break
-        }
-        if (!chosen) return "No Omapop widget is available."
-        chosen.openSettings()
-        return "ok"
+        // Each of our widgets selects its settings page; the shell chooses
+        // which monitor to open through the public, self-scoped API.
+        settingsRequested()
+        return shell.summon(pluginId, "") ? "ok" : "No Omapop widget is available."
     }
 
     // `omarchy-shell io.github.jondkinney.omapop <method>` from scripts and binds.
