@@ -187,7 +187,7 @@ they report "unknown" until restarted; terminals never report.
 | Cut | text selected, field editable, not a terminal |
 | Copy | text selected |
 | Paste | clipboard holds text, and somewhere to paste: an editable field, a terminal, or an explicit long press where field detection is unavailable |
-| Search | text selected (up to 4000 characters) |
+| Search | text selected (up to 4000 characters), unless the whole selection is a web address |
 | Open Link(s) | the text contains a URL, or a `spotify:`/`ftp:`-style link |
 | Reveal in Files | the whole text is one existing path |
 | Install Extension | the text is an extension snippet of at most 5000 characters |
@@ -195,6 +195,13 @@ they report "unknown" until restarted; terminals never report.
 | Extension: pastes (`after: paste`, `before: paste`, `requirements: [paste]`) | clipboard target available (editable field or terminal) |
 | Extension: `url`, `show-result`, `copy-result`, key combos | its own `requirements` and `regex` only |
 | Long press (no selection) | only buttons that need no text: Paste and extensions with `requirements: [paste]` or `[]` |
+
+Select a whole web address and **Open Link** replaces **Search**. Bare domains
+such as `example.com` or `example.photography` open with `https://` added;
+ports, paths, query strings and fragments are preserved. Bare-domain detection
+uses a bundled [IANA TLD list](https://data.iana.org/TLD/tlds-alpha-by-domain.txt),
+without making a network request. Select surrounding words too (for example,
+`reviews of example.com`) to keep both Search and Open Link available.
 
 Editability is resolved in this order: AT-SPI answer for the focused widget;
 terminal window class (pastes work, replacing does not); a list of read-only
@@ -544,6 +551,7 @@ omarchy plugin validate .
 /usr/lib/qt6/bin/qmllint -I /usr/share/omarchy/shell *.qml
 python3 -m unittest discover -s tests -p 'test_*.py'   # helpers, directory
 node tests/actions.test.mjs
+node tests/links.test.mjs                           # URL detection, button choice and opening/copying links
 node tests/gestures.test.mjs                        # click timing and stale read callbacks
 node tests/settings.test.mjs                        # typed settings and preservation of other preferences
 node tests/context-recovery.test.mjs                 # helper recovery after an accessibility bus outage

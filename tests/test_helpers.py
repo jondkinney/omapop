@@ -50,6 +50,49 @@ class DetectTests(unittest.TestCase):
         data, _ = selection.detect("open report.txt or version 1.2.3 today")
         self.assertEqual(data["urls"], [])
 
+    def test_bare_web_addresses_preserve_the_complete_target(self):
+        for address in (
+            "example.com", "www.example.com", "news.example.co.uk",
+            "example.photography", "example.solutions", "example.xn--p1ai",
+            "EXAMPLE.COM/CaseSensitive", "example.com:8", "example.com:65535/path",
+            "example.com?x=1&y=2", "example.com#section",
+            "example.com:8443/path?x=1#section",
+        ):
+            with self.subTest(address=address):
+                data, is_url = selection.detect(" \t" + address + "\n")
+                self.assertEqual(data["urls"], ["https://" + address])
+                self.assertTrue(is_url)
+
+    def test_bare_domain_validation_does_not_open_partial_addresses(self):
+        for text in (
+            "report.txt", "photo.png", "v1.2.3", "localhost", "person@example.com",
+            "example.notatld", "example.com-invalid", "-example.com", "a..example.com",
+            "example.com:65536", "example.com:123456", "example.com:0", "example.com:abc",
+            "a" * 64 + ".com", ("a" * 63 + ".") * 4 + "com",
+            "example.com/" + "x" * 8192,
+        ):
+            with self.subTest(text=text[:100]):
+                data, is_url = selection.detect(text)
+                self.assertEqual(data["urls"], [])
+                self.assertFalse(is_url)
+
+    def test_bare_links_in_prose_preserve_search_and_trim_punctuation(self):
+        data, is_url = selection.detect("Reviews of example.photography?sort=new, please.")
+        self.assertEqual(data["urls"], ["https://example.photography?sort=new"])
+        self.assertFalse(is_url)
+        data, is_url = selection.detect("example.com.")
+        self.assertEqual(data["urls"], ["https://example.com"])
+        self.assertTrue(is_url)
+
+    def test_inferred_scheme_counts_toward_the_url_length_limit(self):
+        address = "example.com/" + "x" * (selection.MAX_URL_LENGTH - len("https://example.com/"))
+        data, is_url = selection.detect(address)
+        self.assertEqual(data["urls"], ["https://" + address])
+        self.assertTrue(is_url)
+        data, is_url = selection.detect(address + "x")
+        self.assertEqual(data["urls"], [])
+        self.assertFalse(is_url)
+
     def test_non_http_schemes(self):
         data, _ = selection.detect("play spotify:track:abc123 now")
         self.assertEqual(data["nonHttpUrls"], ["spotify:track:abc123"])

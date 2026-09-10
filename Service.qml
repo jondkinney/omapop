@@ -1037,7 +1037,7 @@ Item {
             list.push({ id: "builtin.copy", title: "Copy", showAs: "text", textLabel: "Copy", builtin: "copy", wantsPrimaryDisplay: true })
         if (context.canPaste)
             list.push({ id: "builtin.paste", title: "Paste", showAs: "text", textLabel: "Paste", builtin: "paste", wantsPrimaryDisplay: true })
-        if (hasText && input.text.length <= 4000)
+        if (hasText && input.text.length <= 4000 && !input.isUrl)
             list.push({ id: "builtin.search", title: "Search", glyph: builtinGlyphs.search, builtin: "search" })
         if (input.data.urls.length || input.data.nonHttpUrls.length)
             list.push({ id: "builtin.openlink", title: input.data.urls.length + input.data.nonHttpUrls.length > 1 ? "Open Links" : "Open Link", glyph: builtinGlyphs.link, builtin: "openlink" })
