@@ -349,7 +349,7 @@ PanelWindow {
                 id: body
                 anchors.centerIn: parent
                 implicitWidth: buttonRow.visible ? buttonRow.implicitWidth : resultRow.visible ? resultRow.implicitWidth : statusItem.visible ? statusItem.implicitWidth : busyItem.visible ? busyItem.implicitWidth : confirmRow.implicitWidth
-                implicitHeight: confirmRow.visible ? confirmRow.implicitHeight : win.buttonSize
+                implicitHeight: confirmRow.visible ? confirmRow.implicitHeight : resultRow.visible ? resultRow.height : win.buttonSize
 
                 Row {
                     id: buttonRow
@@ -381,7 +381,7 @@ PanelWindow {
                     id: resultRow
                     visible: win.mode === "result"
                     implicitWidth: Math.min(Math.round(win.screenW * 0.6), resultLabel.implicitWidth + Style.spacing.md * 2 + (win.resultPreview ? win.buttonSize : 0))
-                    height: win.buttonSize
+                    height: Math.max(win.buttonSize, resultLabel.implicitHeight + Style.spacing.sm * 2)
                     Text {
                         id: resultLabel
                         anchors.left: parent.left
@@ -391,8 +391,9 @@ PanelWindow {
                         anchors.verticalCenter: parent.verticalCenter
                         text: win.resultText
                         textFormat: Text.PlainText
+                        wrapMode: Text.Wrap
+                        maximumLineCount: 8
                         elide: Text.ElideRight
-                        maximumLineCount: 1
                         color: win.fg
                         font.family: win.fontFamily
                         font.pixelSize: Style.font.body
