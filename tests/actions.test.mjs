@@ -177,7 +177,12 @@ test("editing actions and editability", () => {
 });
 
 test("misc", () => {
-  assert.equal(A.truncateResult("x".repeat(200)).length, 160);
+  // Multi-line results keep their line structure; long single lines are no
+  // longer hard-capped at 160 chars (the popup wraps and elides visually).
+  assert.equal(A.truncateResult("a\n\n\n b \n c "), "a\n\nb\nc");
+  assert.equal(A.truncateResult("x".repeat(200)).length, 200);
+  assert.equal(A.truncateResult("x".repeat(2500)).length, 2000);
+  assert.equal(A.truncateResult("x".repeat(2500)).endsWith("…"), true);
   assert.equal(A.isTerminalClass("Alacritty", []), true);
   assert.equal(A.isTerminalClass("chromium", []), false);
   assert.equal(A.isTerminalClass("MyTerm", ["myterm"]), true);

@@ -570,8 +570,17 @@ function resolveEditable(probe, appClass, terminal, assumeEditable, terminalList
 // ------------------------------------------------------------- misc
 
 function truncateResult(text) {
-    var s = oneLine(text, 4096)
-    return s.length > 160 ? s.slice(0, 159) + "…" : s
+    // Keep line structure (unlike oneLine) so show-result can wrap multi-line
+    // results; collapse runs of spaces/blank lines and cap the total length.
+    var lines = sanitizeDisplay(text, 4096).split("\n")
+    var out = []
+    for (var i = 0; i < lines.length; i++) {
+        var l = lines[i].replace(/[ \t]+/g, " ").trim()
+        if (l !== "" || (out.length > 0 && out[out.length - 1] !== ""))
+            out.push(l)
+    }
+    var s = out.join("\n").trim()
+    return s.length > 2000 ? s.slice(0, 1999) + "…" : s
 }
 
 function isTerminalClass(appClass, list) {
