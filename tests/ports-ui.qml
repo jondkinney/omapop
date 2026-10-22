@@ -3,6 +3,7 @@ import QtQuick.Window
 import QtTest
 import Quickshell
 import qs.Commons
+import qs.Commons as OmarchyTheme
 import ".." as Plugin
 
 TestCase {
@@ -16,7 +17,7 @@ TestCase {
         id: canvas
         width: 420
         height: prompt.implicitHeight
-        color: Color.popups.background
+        color: OmarchyTheme.Color.popups.background
         Plugin.ConfirmationText { id: prompt; width: 420; maxDetailsHeight: 300 }
     }
     onCompletedChanged: if (completed) console.log("OMAPOP_PORT_TESTS " + JSON.stringify({passed:qtest_results.passCount,failed:qtest_results.failCount}))

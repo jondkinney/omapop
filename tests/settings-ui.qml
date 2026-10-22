@@ -4,6 +4,7 @@ import QtQuick.Window
 import Quickshell
 import Quickshell.Io
 import qs.Commons
+import qs.Commons as OmarchyTheme
 import ".." as Plugin
 
 TestCase {
@@ -39,7 +40,7 @@ TestCase {
     Rectangle {
         id: canvas
         anchors.fill: parent
-        color: Color.popups.background
+        color: OmarchyTheme.Color.popups.background
         Plugin.Settings {
             id: page
             anchors.fill: parent

@@ -563,6 +563,7 @@ node tests/runner-modules.test.mjs                  # TypeScript, defaults and d
 python3 tests/check_settings_ui.py                   # controls in an isolated, offscreen Quickshell
 python3 tests/check_settings_ui.py --ports           # confirmation controls
 python3 tests/check_plugin_load.py                  # full plugin QML loading; requires a Wayland session, shows no windows
+python3 tests/check_plugin_load.py --theme-colors   # instantiate themed components and verify the Omarchy palette
 python3 tests/check_context_ui.py                   # live GTK/AT-SPI check; opens a temporary window and selects fixture text
 python3 tests/check_context_ui.py --popup           # also checks real Omapop popups; requires the running plugin
 python3 tests/check_context_ui.py --long-press      # also checks held-button popups; requires Show on long press enabled

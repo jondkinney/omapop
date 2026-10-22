@@ -17,11 +17,16 @@ import tempfile
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--plugin-dir', type=Path, default=Path(__file__).resolve().parents[1])
+    parser.add_argument('--theme-colors', action='store_true',
+                        help='Instantiate themed components and check their colors against Omarchy')
     args = parser.parse_args()
     if not os.environ.get('WAYLAND_DISPLAY'):
         parser.error('Run this check in a Wayland session; the offscreen backend cannot load PanelWindow')
     plugin = args.plugin_dir.resolve()
-    files = [str((plugin / name).as_uri()) for name in ('Popup.qml', 'Service.qml', 'BarWidget.qml')]
+    names = ('Popup.qml', 'BarWidget.qml', 'Settings.qml', 'ExcludedApps.qml',
+             'ShortcutRecorder.qml', 'ConfirmationText.qml') if args.theme_colors else (
+                 'Popup.qml', 'Service.qml', 'BarWidget.qml')
+    files = [str((plugin / name).as_uri()) for name in names]
     shell = Path(os.environ.get('OMARCHY_PATH', '/usr/share/omarchy')) / 'shell'
     with tempfile.TemporaryDirectory(prefix='omapop-plugin-load-') as directory:
         root = Path(directory)
@@ -31,15 +36,47 @@ def main():
         config = root / 'shell.qml'
         config.write_text('''import QtQuick
 import Quickshell
+import qs.Commons as OmarchyTheme
 ShellRoot {
+    id: testRoot
     Component.onCompleted: Qt.callLater(checkComponents)
+    function checkColors(file, component, failures) {
+        var object = component.createObject(testRoot)
+        if (!object) {
+            failures.push(file + ": could not instantiate component")
+            return false
+        }
+        var name = file.slice(file.lastIndexOf("/") + 1)
+        var fg = OmarchyTheme.Color.popups.text
+        var expected
+        if (name === "Popup.qml") {
+            expected = { bg: OmarchyTheme.Color.popups.background, fg: fg,
+                borderColor: OmarchyTheme.Color.popups.border,
+                hoverFill: OmarchyTheme.Style.hoverFillFor(fg, OmarchyTheme.Color.accent, OmarchyTheme.Color.urgent) }
+        } else if (name === "ConfirmationText.qml") {
+            expected = { foreground: fg }
+        } else {
+            expected = { secondaryText: Qt.rgba(fg.r, fg.g, fg.b, 0.68 * (name === "BarWidget.qml" ? fg.a : 1)) }
+        }
+        var passed = true
+        for (var property in expected) {
+            if (!Qt.colorEqual(object[property], expected[property])) {
+                failures.push(name + "." + property + ": expected " + expected[property] + ", got " + object[property])
+                passed = false
+            }
+        }
+        return passed
+    }
     function checkComponents() {
         var files = %s
+        var themeColors = %s
         var passed = 0
         var failures = []
         for (var i = 0; i < files.length; i++) {
             var component = Qt.createComponent(files[i])
-            if (component.status === Component.Ready) passed++
+            if (component.status === Component.Ready) {
+                if (!themeColors || checkColors(files[i], component, failures)) passed++
+            }
             else failures.push(component.errorString() || (files[i] + ": load did not complete"))
             component.destroy()
         }
@@ -47,7 +84,7 @@ ShellRoot {
         Qt.quit()
     }
 }
-''' % json.dumps(files))
+''' % (json.dumps(files), json.dumps(args.theme_colors)))
         env = dict(os.environ, QT_QPA_PLATFORM='wayland', QT_QPA_PLATFORMTHEME='basic',
                    QT_QUICK_BACKEND='software', QML_IMPORT_PATH=str(imports))
         try:
