@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Quickshell
 import qs.Commons
+import qs.Commons as Commons
 import qs.Ui
 import "Actions.js" as Actions
 
@@ -22,7 +23,7 @@ Panel {
     readonly property bool engineReady: service ? service.engineReady : false
     readonly property var extensions: service ? service.extensions : []
     readonly property string fontFamily: bar ? bar.fontFamily : Style.font.family
-    readonly property color secondaryText: Qt.rgba(Color.popups.text.r, Color.popups.text.g, Color.popups.text.b, Color.popups.text.a * 0.68)
+    readonly property color secondaryText: Qt.rgba(Commons.Color.popups.text.r, Commons.Color.popups.text.g, Commons.Color.popups.text.b, Commons.Color.popups.text.a * 0.68)
     readonly property bool showIcon: service ? service.setting("showBarIcon", true) !== false : setting("showBarIcon", true) !== false
     property string expandedId: ""
     property bool directorySeeded: false
@@ -49,7 +50,7 @@ Panel {
     component RowSeparator: Rectangle {
         Layout.fillWidth: true
         implicitHeight: 1
-        color: Qt.rgba(Color.popups.text.r, Color.popups.text.g, Color.popups.text.b, Color.popups.text.a * 0.12)
+        color: Qt.rgba(Commons.Color.popups.text.r, Commons.Color.popups.text.g, Commons.Color.popups.text.b, Commons.Color.popups.text.a * 0.12)
     }
 
     component SectionHeading: RowLayout {
@@ -65,7 +66,7 @@ Panel {
             Layout.fillWidth: true
             text: heading.title
             textFormat: Text.PlainText
-            color: Color.popups.text
+            color: Commons.Color.popups.text
             font.family: root.fontFamily
             font.pixelSize: Style.font.title
             font.weight: Font.DemiBold
@@ -75,7 +76,7 @@ Panel {
             implicitWidth: countLabel.implicitWidth + Style.spacing.xxl
             implicitHeight: countLabel.implicitHeight + Style.spacing.md
             radius: height / 2
-            color: Qt.rgba(Color.popups.text.r, Color.popups.text.g, Color.popups.text.b, Color.popups.text.a * 0.07)
+            color: Qt.rgba(Commons.Color.popups.text.r, Commons.Color.popups.text.g, Commons.Color.popups.text.b, Commons.Color.popups.text.a * 0.07)
             Text {
                 id: countLabel
                 anchors.centerIn: parent
@@ -159,14 +160,14 @@ Panel {
                 BarIcon {
                     Layout.preferredWidth: Math.round(Style.space(24))
                     Layout.preferredHeight: Math.round(Style.space(24))
-                    color: root.paused ? root.secondaryText : Color.accent
+                    color: root.paused ? root.secondaryText : Commons.Color.accent
                     paused: root.paused
                 }
                 Text {
                     Layout.fillWidth: true
                     text: "Omapop"
                     textFormat: Text.PlainText
-                    color: Color.popups.text
+                    color: Commons.Color.popups.text
                     font.family: root.fontFamily
                     font.pixelSize: Math.round(Style.font.heading * 1.25)
                     font.weight: Font.DemiBold
@@ -190,7 +191,7 @@ Panel {
                     : "Connecting to Hyprland."
                 titleSize: Style.font.bodySmall
                 fontFamily: root.fontFamily
-                foreground: Color.popups.text
+                foreground: Commons.Color.popups.text
                 checked: !root.paused
                 enabled: !!root.service
                 onClicked: root.service.paused = !root.service.paused
@@ -202,7 +203,7 @@ Panel {
                 text: root.service ? Actions.oneLine(root.service.lastError, 300) : ""
                 textFormat: Text.PlainText
                 wrapMode: Text.WordWrap
-                color: Color.urgent
+                color: Commons.Color.urgent
                 font.family: root.fontFamily
                 font.pixelSize: Style.font.caption
             }
@@ -216,7 +217,7 @@ Panel {
                 text: "No JavaScript runtime found. Install deno (or nodejs) to run JavaScript extensions; every other kind still works."
                 textFormat: Text.PlainText
                 wrapMode: Text.WordWrap
-                color: Color.urgent
+                color: Commons.Color.urgent
                 font.family: root.fontFamily
                 font.pixelSize: Style.font.caption
             }
@@ -271,8 +272,8 @@ Panel {
                             spec: modelData.icon || ""
                             filePath: modelData.iconPath || ""
                             fallbackText: modelData.name || ""
-                            color: modelData.error ? Color.urgent : Color.popups.text
-                            background: Color.popups.background
+                            color: modelData.error ? Commons.Color.urgent : Commons.Color.popups.text
+                            background: Commons.Color.popups.background
                             fontFamily: root.fontFamily
                         }
 
@@ -285,7 +286,7 @@ Panel {
                                 textFormat: Text.PlainText
                                 wrapMode: Text.WordWrap
                                 // Unusable here (every action needs macOS): present, but dimmed.
-                                color: modelData.usable === false ? root.secondaryText : Color.popups.text
+                                color: modelData.usable === false ? root.secondaryText : Commons.Color.popups.text
                                 font.family: root.fontFamily
                                 font.pixelSize: Style.font.body
                                 font.weight: Font.DemiBold
@@ -306,7 +307,7 @@ Panel {
                                 }
                                 textFormat: Text.PlainText
                                 wrapMode: Text.WordWrap
-                                color: modelData.error ? Color.urgent : root.secondaryText
+                                color: modelData.error ? Commons.Color.urgent : root.secondaryText
                                 font.family: root.fontFamily
                                 font.pixelSize: Style.font.caption
                             }
@@ -371,7 +372,7 @@ Panel {
                                     text: Actions.oneLine(modelData.label || modelData.identifier || "", 200)
                                     textFormat: Text.PlainText
                                     wrapMode: Text.WordWrap
-                                    color: Color.popups.text
+                                    color: Commons.Color.popups.text
                                     font.family: root.fontFamily
                                     font.pixelSize: modelData.type === "heading" ? Style.font.subtitle : Style.font.bodySmall
                                     font.bold: modelData.type === "heading"
@@ -549,7 +550,7 @@ Panel {
                                 text: modelData.name
                                 textFormat: Text.PlainText
                                 wrapMode: Text.WordWrap
-                                color: modelData.needsMac ? root.secondaryText : Color.popups.text
+                                color: modelData.needsMac ? root.secondaryText : Commons.Color.popups.text
                                 font.family: root.fontFamily
                                 font.pixelSize: Style.font.body
                                 font.weight: Font.DemiBold
@@ -626,7 +627,7 @@ Panel {
                 text: root.service ? "JavaScript extensions run under " + root.service.runtimeName + "." : ""
                 textFormat: Text.PlainText
                 wrapMode: Text.WordWrap
-                color: Qt.darker(Color.popups.text, 1.6)
+                color: Qt.darker(Commons.Color.popups.text, 1.6)
                 font.family: root.fontFamily
                 font.pixelSize: Style.font.caption
             }

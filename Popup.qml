@@ -3,6 +3,7 @@ import Quickshell
 import Quickshell.Wayland
 import QtQuick.Shapes
 import qs.Commons
+import qs.Commons as Commons
 import "Actions.js" as Actions
 
 // The action bar. A layer-shell surface that never takes keyboard focus, placed
@@ -49,10 +50,10 @@ PanelWindow {
     signal keyActivate(int index)
     signal keyDismiss()
 
-    readonly property color bg: Color.popups.background
-    readonly property color fg: Color.popups.text
-    readonly property color borderColor: Color.popups.border
-    readonly property color hoverFill: Style.hoverFillFor(Color.popups.text, Color.accent, Color.urgent)
+    readonly property color bg: Commons.Color.popups.background
+    readonly property color fg: Commons.Color.popups.text
+    readonly property color borderColor: Commons.Color.popups.border
+    readonly property color hoverFill: Style.hoverFillFor(Commons.Color.popups.text, Commons.Color.accent, Commons.Color.urgent)
     readonly property int radius: Style.cornerRadius > 0 ? Math.min(Style.cornerRadius, Math.round(buttonSize / 2)) : Math.round(Style.space(8))
     readonly property int screenW: screen ? screen.width : 0
     readonly property int screenH: screen ? screen.height : 0
@@ -302,8 +303,8 @@ PanelWindow {
             width: implicitWidth
             height: implicitHeight
             radius: Math.round(height / 2)
-            color: Color.tooltip.background
-            border.color: Color.tooltip.border
+            color: Commons.Color.tooltip.background
+            border.color: Commons.Color.tooltip.border
             border.width: 1
             Text {
                 id: labelText
@@ -312,7 +313,7 @@ PanelWindow {
                 textFormat: Text.PlainText
                 elide: Text.ElideRight
                 maximumLineCount: 1
-                color: Color.tooltip.text
+                color: Commons.Color.tooltip.text
                 font.family: win.fontFamily
                 font.pixelSize: Style.font.caption
                 renderType: Text.NativeRendering
@@ -428,7 +429,7 @@ PanelWindow {
                         anchors.centerIn: parent
                         text: win.statusOk ? "\u{F012C}" : "\u{F0156}"
                         textFormat: Text.PlainText
-                        color: win.statusOk ? win.fg : Color.urgent
+                        color: win.statusOk ? win.fg : Commons.Color.urgent
                         font.family: win.fontFamily
                         font.pixelSize: win.iconSize
                         renderType: Text.NativeRendering
@@ -524,7 +525,7 @@ PanelWindow {
             anchors.centerIn: parent
             text: ab.label
             textFormat: Text.PlainText
-            color: ab.button && ab.button.accent ? Color.accent : win.fg
+            color: ab.button && ab.button.accent ? Commons.Color.accent : win.fg
             font.family: win.fontFamily
             font.pixelSize: Style.font.body
             font.bold: !!(ab.button && ab.button.accent)

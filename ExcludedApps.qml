@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC
 import qs.Commons
+import qs.Commons as Commons
 import qs.Ui
 import "Actions.js" as Actions
 
@@ -15,7 +16,7 @@ ColumnLayout {
     readonly property bool editable: value.length <= 4096
     readonly property var entries: Actions.excludedAppList(value)
     readonly property var options: visible ? Actions.runningWindowOptions(windows, entries) : []
-    readonly property color secondaryText: Qt.rgba(Color.popups.text.r, Color.popups.text.g, Color.popups.text.b, 0.68)
+    readonly property color secondaryText: Qt.rgba(Commons.Color.popups.text.r, Commons.Color.popups.text.g, Commons.Color.popups.text.b, 0.68)
     signal edited(string value)
 
     spacing: Style.spacing.sm
@@ -77,7 +78,7 @@ ColumnLayout {
                 textFormat: Text.PlainText
                 wrapMode: Text.NoWrap
                 elide: Text.ElideRight
-                color: Color.popups.text
+                color: Commons.Color.popups.text
                 font.family: Style.font.family
                 font.pixelSize: Style.font.bodySmall
             }
@@ -86,7 +87,7 @@ ColumnLayout {
                 iconText: "×"
                 tooltipText: "Remove " + Actions.oneLine(entryRow.modelData, 256)
                 foreground: root.secondaryText
-                hoverColor: Color.popups.text
+                hoverColor: Commons.Color.popups.text
                 focusable: true
                 enabled: root.editable
                 onClicked: root.remove(entryRow.modelData)
@@ -100,7 +101,7 @@ ColumnLayout {
         text: root.editable ? "No apps ignored." : "This list is too long to edit here."
         textFormat: Text.PlainText
         wrapMode: Text.WordWrap
-        color: root.editable ? root.secondaryText : Color.urgent
+        color: root.editable ? root.secondaryText : Commons.Color.urgent
         font.family: Style.font.family
         font.pixelSize: Style.font.caption
     }

@@ -4,6 +4,7 @@ import QtQuick.Window
 import Quickshell
 import Quickshell.Wayland
 import qs.Commons
+import qs.Commons as Commons
 import qs.Ui
 import "Actions.js" as Actions
 
@@ -16,7 +17,7 @@ ColumnLayout {
     property string pendingCombo: ""
     property var heldKeys: []
     property string hint: ""
-    readonly property color secondaryText: Qt.rgba(Color.popups.text.r, Color.popups.text.g, Color.popups.text.b, 0.68)
+    readonly property color secondaryText: Qt.rgba(Commons.Color.popups.text.r, Commons.Color.popups.text.g, Commons.Color.popups.text.b, 0.68)
     signal edited(string value)
 
     spacing: Style.spacing.sm
@@ -155,8 +156,8 @@ ColumnLayout {
             Layout.fillWidth: true
             implicitHeight: recordButton.implicitHeight
             radius: Style.cornerRadius
-            color: Style.controlFill(root.recording, false, Color.popups.text, Color.accent)
-            borderSpec: Border.controlSpec(root.recording ? "focus" : "normal", Color.popups.text, Color.accent)
+            color: Style.controlFill(root.recording, false, Commons.Color.popups.text, Commons.Color.accent)
+            borderSpec: Border.controlSpec(root.recording ? "focus" : "normal", Commons.Color.popups.text, Commons.Color.accent)
             onActiveFocusChanged: if (root.recording && !activeFocus) root.cancel()
             Keys.priority: Keys.BeforeItem
             Keys.onPressed: function (event) { root.press(event) }
@@ -168,7 +169,7 @@ ColumnLayout {
                 text: root.recording ? (root.pendingCombo || "Press keys…") : (Actions.oneLine(root.value, 64) || "Not set")
                 textFormat: Text.PlainText
                 elide: Text.ElideRight
-                color: root.value || root.recording ? Color.popups.text : root.secondaryText
+                color: root.value || root.recording ? Commons.Color.popups.text : root.secondaryText
                 font.family: Style.font.family
                 font.pixelSize: Style.font.bodySmall
             }
@@ -197,7 +198,7 @@ ColumnLayout {
         text: root.hint || (root.pendingCombo ? "Release the keys to save. Esc cancels." : "Press your shortcut. Esc cancels.")
         textFormat: Text.PlainText
         wrapMode: Text.WordWrap
-        color: root.hint ? Color.urgent : root.secondaryText
+        color: root.hint ? Commons.Color.urgent : root.secondaryText
         font.family: Style.font.family
         font.pixelSize: Style.font.caption
     }
