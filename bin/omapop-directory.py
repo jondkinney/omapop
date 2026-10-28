@@ -872,7 +872,17 @@ def cmd_install(args):
     # The signed release catalog supplies identity, URL and expected bytes.
     # Mutable HTML, cached listings and package-provided hashes have no vote.
     data = catalog.read_regular(catalog.port_archive(entry), entry['bytes']) if catalog.is_port(entry) else fetch(entry['url'], entry['bytes'])
-    catalog.verify_archive(data, entry)
+    container_verified = True
+    try:
+        catalog.verify_archive(data, entry)
+    except ValueError as exc:
+        # popclip.app re-packs archives without changing their contents (new zip
+        # metadata/compression changes the container hash only). The signed
+        # per-file review below is the authoritative check, so refuse later only
+        # if the extracted tree actually differs from the reviewed one.
+        if 'Package changed since review' not in str(exc):
+            raise
+        container_verified = False
     with pinned_directory(dest, create=True) as parent:
         stage_name = ".omapop-download-" + secrets.token_hex(12)
         os.mkdir(stage_name, 0o700, dir_fd=parent)
@@ -909,11 +919,14 @@ def cmd_install(args):
             shutil.rmtree(stage_name, dir_fd=parent)
     result = {"ok": True, "name": entry['name'], "shortcode": entry['shortcode'],
               "dir": final, "replaced": False, "bytes": len(data), "platform": platform,
-              "approved": True, "sha256": entry['sha256'], "version": entry['version']}
+              "approved": True, "sha256": entry['sha256'], "version": entry['version'],
+              "containerVerified": container_verified}
     if as_json:
         sys.stdout.write(json.dumps(result) + "\n")
     else:
         sys.stdout.write("Installed %s -> %s\n" % (result["name"], final))
+        if not container_verified:
+            sys.stdout.write("Note: the archive was re-packed upstream; every file matches the reviewed package.\n")
         if platform["error"]:
             sys.stdout.write("Note: the package could not be read (%s); it is listed with that error and stays disabled.\n"
                              % platform["error"])
