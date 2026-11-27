@@ -181,6 +181,12 @@ test("misc", () => {
   assert.equal(A.isTerminalClass("Alacritty", []), true);
   assert.equal(A.isTerminalClass("chromium", []), false);
   assert.equal(A.isTerminalClass("MyTerm", ["myterm"]), true);
+  // A trailing * matches a class prefix (per-window suffixes); no other glob.
+  assert.equal(A.isTerminalClass("sidebar.agent.s0ee3879e", ["foot", "sidebar.agent.*"]), true);
+  assert.equal(A.isTerminalClass("sidebar.agentx", ["sidebar.agent.*"]), false);
+  assert.equal(A.isTerminalClass("anything", ["*"]), false);
+  assert.equal(A.classMatches(["Sidebar.Agent.*"], "sidebar.agent.s1"), true);
+  assert.equal(A.classMatches(["sidebar.*.x"], "sidebar.a.x"), false);
   assert.deepEqual(A.splitList(" a, b ,,c "), ["a", "b", "c"]);
 });
 

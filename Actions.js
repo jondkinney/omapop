@@ -67,6 +67,15 @@ var BUNDLE_TO_CLASSES = {
     "org.libreoffice.script": ["libreoffice-writer", "libreoffice-calc", "libreoffice-impress", "soffice"],
 }
 
+// One entry of a class list against a window class (both lower case). An entry
+// ending in "*" matches every class that starts with the rest, for apps whose
+// class carries a per-window suffix (e.g. "sidebar.agent.*").
+function classPatternMatches(entry, cls) {
+    if (entry.length > 1 && entry.charAt(entry.length - 1) === "*")
+        return cls.indexOf(entry.slice(0, -1)) === 0
+    return entry === cls
+}
+
 function classMatches(appList, appClass) {
     if (!appList || !appList.length)
         return false
@@ -75,7 +84,7 @@ function classMatches(appList, appClass) {
         var entry = String(appList[i] || "").toLowerCase()
         if (!entry)
             continue
-        if (entry === cls)
+        if (classPatternMatches(entry, cls))
             return true
         var mapped = BUNDLE_TO_CLASSES[entry]
         if (mapped && mapped.indexOf(cls) !== -1)
@@ -580,7 +589,7 @@ function isTerminalClass(appClass, list) {
         return false
     var names = (list && list.length ? list : TERMINAL_DEFAULTS)
     for (var i = 0; i < names.length; i++) {
-        if (String(names[i]).trim().toLowerCase() === cls)
+        if (classPatternMatches(String(names[i]).trim().toLowerCase(), cls))
             return true
     }
     return false
