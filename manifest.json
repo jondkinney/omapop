@@ -146,14 +146,14 @@
         "type": "string",
         "label": "Excluded apps",
         "defaultValue": "",
-        "description": "Comma-separated window classes where the bar never appears (see hyprctl clients)."
+        "description": "Comma-separated window classes where the bar never appears (see hyprctl clients). End an entry with * to match every class starting with it."
       },
       {
         "key": "terminalClasses",
         "type": "string",
         "label": "Terminal window classes",
         "defaultValue": "Alacritty,kitty,foot,footclient,com.mitchellh.ghostty,Ghostty,org.wezfurlong.wezterm,xterm,konsole,org.kde.konsole,org.gnome.Terminal,gnome-terminal-server,Terminal,st-256color,tilix,wezterm",
-        "description": "Windows whose paste shortcut is Ctrl+Shift+V and which cannot cut."
+        "description": "Windows whose paste shortcut is Ctrl+Shift+V and which cannot cut. End an entry with * to match every class starting with it (e.g. sidebar.agent.*)."
       },
       {
         "key": "commandKey",
